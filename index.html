@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–7 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–8 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -51,6 +51,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#reporting-reproducibility">7 · Reporting and reproducibility</a><ol>
 <li><a href="#locate-results">Locate results</a></li><li><a href="#download-results">Download outputs</a></li><li><a href="#dafni-provenance">Record provenance</a></li><li><a href="#preserve-parameters">Preserve parameter sets</a></li><li><a href="#local-archive">Local archive</a></li><li><a href="#compare-scenarios">Compare scenarios</a></li><li><a href="#further-analysis">Further analysis</a></li><li><a href="#share-results">Share through DAFNI</a></li><li><a href="#prepare-report">Prepare a report</a></li><li><a href="#recovery-status">Recovery status</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#limitations-support">8 · Limitations and support</a><ol>
+<li><a href="#appropriate-use">Appropriate use</a></li><li><a href="#hydrodynamic-limitations">Hydrodynamic limitations</a></li><li><a href="#decision-space-limitations">Decision space</a></li><li><a href="#objective-limitations">Objective limitations</a></li><li><a href="#optimisation-limitations">Optimisation limitations</a></li><li><a href="#implementation-issues">Known issues</a></li><li><a href="#decision-assurance">Decision assurance</a></li><li><a href="#sources-of-help">Sources of help</a></li><li><a href="#report-issue">Report an issue</a></li><li><a href="#future-development">Future development</a></li><li><a href="#guide-maintenance">Keep the guide current</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -1280,7 +1283,242 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </section>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 8</p><h3>Limitations, support and future development</h3><p>Understand the present scope of the tool, recognise when specialist review is needed and find the right route for technical or DAFNI platform support.</p></aside>
+<section class="section chapter" id="limitations-support">
+<p class="label">Section 8 · Limitations, support and future development</p>
+<h2>Using the tool within its intended evidence limits</h2>
+<hr class="rule">
+<div class="prose">
+<p>The hydrodynamic optimisation tool supports early-stage investigation of blue-green infrastructure and flood-management strategies. It can reveal useful cost–performance trade-offs, but its results remain conditional on the supplied data, modelling assumptions, intervention candidates and optimisation settings.</p>
+<p>The tool should be treated as decision support rather than an automated decision-maker. A non-dominated solution is not automatically feasible, affordable, equitable or suitable for detailed design.</p>
+</div>
+<div class="note plan"><strong>Decision-support boundary</strong><p>The tool helps identify strategies worth investigating. It does not remove the need for engineering judgement, local knowledge, stakeholder engagement and detailed appraisal.</p></div>
+
+<section class="subsection" id="appropriate-use">
+<p class="label">Intended scope</p>
+<h3>8.1 Appropriate uses of the tool</h3>
+<div class="grid">
+<article class="card"><h4>Appropriate uses</h4><p>Strategic optioneering, comparing intervention portfolios, exploring trade-offs, identifying promising candidates, sensitivity studies, research and stakeholder discussion.</p></article>
+<article class="card"><h4>Insufficient on its own</h4><p>Construction design, regulatory approval, model calibration, final business cases, operational flood warning or guaranteed performance under untested events.</p></article>
+</div>
+<div class="prose"><p>The tool can support a shortlist for further study, but should not be used alone to confirm land availability, ownership, utility clearance, geotechnical suitability, regulatory compliance or acceptable residual risk.</p></div>
+</section>
+
+<section class="subsection" id="hydrodynamic-limitations">
+<p class="label">Conditional evidence</p>
+<h3>8.2 Hydrodynamic and data limitations</h3>
+<div class="prose"><p>Every result is conditional on the CityCAT model and its inputs. Errors or uncertainty in the DEM, topography, rainfall, building data or hydraulic parameters propagate into the objective values and solution maps.</p></div>
+<ul class="checks">
+<li>One rainfall event is processed during each optimisation run.</li>
+<li>The return-period parameter labels the event but does not independently verify its statistical rarity.</li>
+<li>Results apply to the supplied storm profile and simulation duration.</li>
+<li>Maximum-depth maps do not show velocity, flood duration, arrival time or hazard rating.</li>
+<li>Small elevation errors can alter predicted surface-flow paths.</li>
+<li>Missing walls, kerbs, underpasses or drainage features may change local behaviour.</li>
+<li>Surface roughness and infiltration parameters may be spatially simplified.</li>
+<li>Boundary and no-data behaviour can influence results near the model edge.</li>
+<li>A technically successful simulation is not evidence that the model has been calibrated or validated.</li>
+</ul>
+<div class="prose"><p>A do-nothing simulation provides a baseline for comparison within the experiment. It is not a substitute for comparison with observed flood extents, depths, hydrographs or other validation evidence.</p></div>
+<h4 class="minor-heading">Checks for a competent modeller</h4>
+<ul class="checks">
+<li>Terrain levels and buildings are represented at an appropriate resolution.</li>
+<li>Known flow paths and storage areas are reproduced.</li>
+<li>Rainfall units, timing and total depth are correct.</li>
+<li>The simulation continues long enough to capture the relevant response.</li>
+<li>Hydraulic parameters have a defensible evidence basis.</li>
+<li>Outlet lines intersect the intended flow pathways.</li>
+<li>Predicted baseline flooding is plausible.</li>
+</ul>
+</section>
+
+<section class="subsection" id="decision-space-limitations">
+<p class="label">Candidate interventions</p>
+<h3>8.3 Intervention and decision-space limitations</h3>
+<div class="prose"><p>The optimiser can only select from the candidate interventions supplied by the user. It does not independently search the study area for every physically buildable location. If a potentially valuable site is absent from the candidate dataset, it cannot appear in an optimised strategy. Inclusion as a candidate does not establish that a site is deliverable.</p></div>
+<div class="grid">
+<article class="card"><h4>Physical constraints</h4><p>Land ownership, underground utilities, contamination, groundwater, geotechnical stability, structural requirements and construction access.</p></article>
+<article class="card"><h4>Environmental constraints</h4><p>Ecology, biodiversity, heritage, planning and environmental permissions.</p></article>
+<article class="card"><h4>Delivery constraints</h4><p>Traffic management, phasing, detailed maintenance arrangements and community acceptance.</p></article>
+<article class="card"><h4>Wider outcomes</h4><p>Amenity, cooling, water quality, carbon and other benefits not represented by the selected objectives.</p></article>
+</div>
+<div class="prose"><p>Exclusion zones can remove known unsuitable areas, but their quality depends on the information used to create them.</p></div>
+<div class="note"><strong>Candidate-data principle</strong><p>Treat the intervention datasets as a documented hypothesis about the feasible design space—not as proof that every included option can be constructed.</p></div>
+</section>
+
+<section class="subsection" id="objective-limitations">
+<p class="label">What is measured</p>
+<h3>8.4 Objective limitations</h3>
+<div class="prose"><p>The tool minimises intervention cost together with one flood-performance objective per run.</p></div>
+<h4 class="minor-heading">Property flood risk</h4>
+<div class="prose"><p>The risk objective counts buildings that meet the current high-risk depth classification. It does not represent individual occupants, social vulnerability, building criticality, flood duration, velocity, internal floor level, indirect loss or infrastructure disruption. Describe it as the number of buildings meeting the tool’s high-risk classification, not as a complete measure of societal flood risk.</p></div>
+<h4 class="minor-heading">Outlet hydrograph</h4>
+<div class="prose"><p>The hydrograph objective sums the separately calculated peak discharges from all configured outlets. This aggregation can conceal different behaviour at individual locations. One outlet may improve while another worsens even if the summed objective decreases. Time to peak, discharge volume and duration are useful for interpretation but are not separate objectives.</p></div>
+<h4 class="minor-heading">Economic damages</h4>
+<div class="prose"><p>The damages objective is not currently available for routine use. Although damage-calculation components exist, a reliable automated method for assigning building types has not yet been integrated. Do not select or report this objective until the required building-classification workflow has been completed and validated.</p></div>
+<h4 class="minor-heading">Cost</h4>
+<div class="prose"><p>The cost objective is an estimate based on the configured unit costs, maintenance assumptions, design lives, discount rate, professional fees and decommissioning terms. It is not a supplier quotation or detailed cost plan. Site-specific land, utility, ground, inflation, optimism-bias, consenting or construction-risk costs are omitted unless they have been incorporated explicitly.</p></div>
+</section>
+
+<section class="subsection" id="optimisation-limitations">
+<p class="label">Search uncertainty</p>
+<h3>8.5 Optimisation limitations</h3>
+<div class="prose"><p>The ε-MOEA searches a large design space without simulating every possible intervention combination. Its final archive approximates the non-dominated trade-off boundary found within the available computational budget.</p></div>
+<ul class="checks">
+<li>The globally best strategies may not have been discovered.</li>
+<li>Repeated runs can produce different archives.</li>
+<li>The result depends on the simulation budget and stopping criteria.</li>
+<li>Epsilon-box dimensions influence archive density and diversity.</li>
+<li>A small maximum front size can remove distinctions important to a decision-maker.</li>
+<li>A large design space may require substantially more simulations.</li>
+<li>Apparent convergence does not prove global optimality.</li>
+<li>One intervention’s benefit may depend on the presence of others.</li>
+<li>Increasing intervention provision does not guarantee monotonic improvement.</li>
+</ul>
+<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. The final number of unique simulations can therefore exceed the specified value slightly while the active generation completes.</p></div>
+<h4 class="minor-heading">When the precise archive matters</h4>
+<ul class="checks">
+<li>Repeat the optimisation with the same configuration.</li>
+<li>Compare regions of objective space found consistently.</li>
+<li>Increase the simulation budget where justified.</li>
+<li>Test alternative maximum-front sizes.</li>
+<li>Undertake sensitivity analysis.</li>
+<li>Re-simulate shortlisted strategies independently where practical.</li>
+</ul>
+</section>
+
+<section class="subsection" id="implementation-issues">
+<p class="label">Version-specific notes</p>
+<h3>8.6 Current implementation and presentation issues</h3>
+<div class="prose"><p>The following points apply to the current deployed version.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Current issue</th><th scope="col">User implication</th></tr></thead>
+<tbody>
+<tr><td>Rainfall, DEM and topography may not all appear as required in the DAFNI interface.</td><td>They remain functionally mandatory and the run will fail without valid files.</td></tr>
+<tr><td><code>BINARY_CODING</code> is exposed as a parameter.</td><td>Keep it set to <code>gray</code>; alternative coding is not supported by this guide.</td></tr>
+<tr><td>The damages objective appears in parts of the code.</td><td>It is not currently available for routine DAFNI studies.</td></tr>
+<tr><td>Recovery modules exist but are not fully integrated.</td><td>A stopped or completed run cannot yet be selected as a supported restart source.</td></tr>
+<tr><td>Objective-space plots say <code>Installation Cost (£)</code>.</td><td>Interpret the value according to the configured whole-life cost calculation.</td></tr>
+<tr><td>Hydrograph objective-space plots say <code>Peak flow (m³)</code>.</td><td>The underlying peak-discharge objective is a rate and should be interpreted in m³/s.</td></tr>
+<tr><td>The final comparison legend includes objective vectors and a reference Pareto front.</td><td>Those datasets are not populated; the blue ε-MOEA archive is the operative result.</td></tr>
+<tr><td>The final table column is named <code>Risk</code>.</td><td>It stores the selected flood-objective value, including summed peak discharge.</td></tr>
+<tr><td>Final solution numbering begins at zero.</td><td>Match <code>Solution N.png</code> to row <code>N</code> of <code>Solutions.txt</code>.</td></tr>
+<tr><td>Generation labels are temporary archive indices.</td><td>Do not use them as persistent solution identifiers.</td></tr>
+<tr><td>High-risk buildings are not highlighted in final maps.</td><td>Do not estimate the objective by visually counting grey building polygons.</td></tr>
+<tr><td>The simulation limit is evaluated between generations.</td><td>The completed run can contain slightly more unique simulations than <code>MAX_SIMS</code>.</td></tr>
+</tbody>
+</table></div>
+<div class="note"><strong>Interpret rather than ignore</strong><p>These issues do not necessarily invalidate a run, but they must be understood when configuring, interpreting and reporting it.</p></div>
+</section>
+
+<section class="subsection" id="decision-assurance">
+<p class="label">Before use in practice</p>
+<h3>8.7 Assurance before supporting a decision</h3>
+<div class="grid">
+<article class="card"><h4>Model assurance</h4><p>Validate the baseline, review rainfall and runtime, investigate warnings and inspect boundaries and missing features.</p></article>
+<article class="card"><h4>Intervention assurance</h4><p>Confirm geometry, feasibility, transferred impacts, hydraulic representation and maintenance assumptions.</p></article>
+<article class="card"><h4>Economic assurance</h4><p>Update the price basis, review whole-life assumptions, add relevant allowances and test cost sensitivity.</p></article>
+<article class="card"><h4>Optimisation assurance</h4><p>Review convergence, repeat important runs, verify distinct strategies and test preferred solutions independently.</p></article>
+</div>
+<h4 class="minor-heading">Decision assurance</h4>
+<ul class="checks">
+<li>Document the selection criteria and residual risk.</li>
+<li>Consult affected stakeholders.</li>
+<li>Consider benefits and impacts not represented by the objectives.</li>
+<li>Record why one strategy was preferred over other non-dominated alternatives.</li>
+<li>Obtain independent technical review proportionate to the decision.</li>
+</ul>
+<div class="note warn"><strong>Stop and investigate</strong><p>Do not proceed directly to a decision if the baseline is implausible, interventions consistently worsen flooding, objective values conflict with the maps, flooding accumulates artificially at boundaries, or results change substantially under small parameter variations.</p></div>
+</section>
+
+<section class="subsection" id="sources-of-help">
+<p class="label">Support routes</p>
+<h3>8.8 Finding the right source of help</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Issue</th><th scope="col">First source of help</th></tr></thead>
+<tbody>
+<tr><td>DAFNI account, authentication or platform access</td><td>DAFNI support.</td></tr>
+<tr><td>Workflow scheduling, platform status or an unexplained instance failure</td><td>DAFNI support, with the instance details.</td></tr>
+<tr><td>Missing published output despite a completed model</td><td>Check the publisher step, then contact the workflow owner or DAFNI support.</td></tr>
+<tr><td>Input-data content, licence or spatial quality</td><td>Dataset owner or study-data lead.</td></tr>
+<tr><td>Tool parameters, optimisation behaviour or output interpretation</td><td>The model contact listed on the DAFNI asset page.</td></tr>
+<tr><td>CityCAT setup or hydrodynamic plausibility</td><td>An experienced CityCAT or flood-modelling practitioner.</td></tr>
+<tr><td>Cost assumptions</td><td>A suitably qualified cost consultant or project economist.</td></tr>
+<tr><td>Intervention feasibility and detailed design</td><td>Relevant engineering, planning and environmental specialists.</td></tr>
+<tr><td>Suspected security or credential compromise</td><td>DAFNI’s security contact immediately.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>DAFNI provides task-focused documentation, release notes, training resources and technical support. The official administrative and security contact currently listed in the platform terms is <a href="mailto:info@dafni.ac.uk">info@dafni.ac.uk</a>. See the <a href="https://docs.secure.dafni.rl.ac.uk/">DAFNI documentation</a>, <a href="https://www.dafni.ac.uk/who-we-are/dafni-platform/">platform support overview</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/terms-and-conditions">terms and contacts</a>.</p><p>For accessibility problems with the public DAFNI website, use the separate contact given in <a href="https://www.dafni.ac.uk/accessibility/">DAFNI’s accessibility statement</a>.</p></div>
+</section>
+
+<section class="subsection" id="report-issue">
+<p class="label">Diagnostic evidence</p>
+<h3>8.9 Reporting a useful technical issue</h3>
+<div class="prose"><p>A well-prepared issue report reduces the time needed to reproduce and diagnose a problem.</p></div>
+<h4 class="minor-heading">Include</h4>
+<ul class="checks">
+<li>A concise description of the expected and observed behaviour.</li>
+<li>Workflow and model names and version IDs.</li>
+<li>Parameter-set name and workflow-instance name or ID.</li>
+<li>Date, approximate failure time, failed step and DAFNI status.</li>
+<li>Exact error text and relevant excerpts from <code>execution_log.txt</code>.</li>
+<li>Input dataset and version IDs.</li>
+<li>Objective and principal optimisation settings.</li>
+<li>The last successful stage recorded in the log.</li>
+<li>Whether the problem occurs in a small validation run.</li>
+<li>Whether the same configuration has worked previously.</li>
+<li>Screenshots where they materially clarify the platform state.</li>
+</ul>
+<h4 class="minor-heading">Do not include</h4>
+<ul class="checks">
+<li>Passwords, tokens or authentication details.</li>
+<li>Personal or sensitive information.</li>
+<li>Restricted datasets as email attachments.</li>
+<li>Large archives unless requested.</li>
+<li>Unnecessary copies of licensed spatial data.</li>
+</ul>
+<div class="prose"><p>If the failure concerns model behaviour, retain the complete output package and parameter record. If it concerns DAFNI, provide the instance identifier so the support team can distinguish the relevant execution.</p></div>
+</section>
+
+<section class="subsection" id="future-development">
+<p class="label">Development path</p>
+<h3>8.10 Future development</h3>
+<div class="grid">
+<article class="card"><h4>Damages objective</h4><p>Future work will automate or standardise the assignment of building types required by the damage calculation. This must be validated before routine use.</p></article>
+<article class="card"><h4>Restart and recovery</h4><p>The recovery components will be integrated so that compatible solutions from an earlier run can be supplied safely to a new DAFNI instance.</p></article>
+</div>
+<div class="prose"><p>Restart integration will require a defined input format, model- and workflow-version compatibility checks, validation of genotype lengths and candidate ordering, preservation of the original parameter and dataset context, a clear distinction between continuation and a new experiment, and dedicated user guidance.</p></div>
+<h4 class="minor-heading">Possible enhancements</h4>
+<div class="prose"><p>The following are potential directions rather than commitments of the current version.</p></div>
+<ul class="checks">
+<li>Corrected and more explicit objective-axis labels.</li>
+<li>Stable identifiers linking generation plots, final archives and simulations.</li>
+<li>Maps that highlight calculated building-risk classes.</li>
+<li>Clearer final comparison legends.</li>
+<li>Automated baseline and relative-improvement tables.</li>
+<li>Scenario and sensitivity-analysis support.</li>
+<li>Multi-event robustness assessment.</li>
+<li>Additional decision objectives and wider-benefit measures.</li>
+<li>Improved provenance and reporting exports.</li>
+</ul>
+</section>
+
+<section class="subsection" id="guide-maintenance">
+<p class="label">Version awareness</p>
+<h3>8.11 Keeping the guide current</h3>
+<div class="prose"><p>DAFNI, CityCAT and the optimisation tool will continue to evolve. Interface labels, workflow versions, parameter definitions and available functionality may change after this guide is published.</p></div>
+<ul class="checks">
+<li>Confirm that the guide describes the selected workflow and model versions.</li>
+<li>Review the <a href="https://docs.secure.dafni.rl.ac.uk/">official DAFNI documentation</a>.</li>
+<li>Check the <a href="https://docs.secure.dafni.rl.ac.uk/release-notes">DAFNI release notes</a>.</li>
+<li>Review the model’s current DAFNI metadata and contact details.</li>
+<li>Record any differences between the guide and the deployed interface.</li>
+<li>Use a validation run after every material version change.</li>
+</ul>
+<div class="key-point"><p class="label">Key point</p><p><strong>The tool is most valuable when optimisation is combined with credible hydrodynamic modelling, transparent assumptions, spatial review and professional judgement.</strong> Its archive narrows the field of possibilities; it does not replace the appraisal needed to turn a modelled strategy into a defensible intervention plan.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Guide completion"><p>Sections 1–8 complete</p><h3>Ready to begin a validation study</h3><p>Return to Section 3 to prepare the required datasets, then work through configuration, execution, interpretation and reporting while preserving the complete DAFNI evidence chain.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
