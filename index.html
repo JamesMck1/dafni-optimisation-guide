@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–5 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–6 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -45,6 +45,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#running-optimisation">5 · Running and monitoring</a><ol>
 <li><a href="#before-launch">Before launching</a></li><li><a href="#launch-workflow">Launch the workflow</a></li><li><a href="#instance-status">Instance status</a></li><li><a href="#run-stages">Stages of a run</a></li><li><a href="#monitor-progress">Monitor progress</a></li><li><a href="#common-failures">Common failures</a></li><li><a href="#stop-run">Stopping a run</a></li><li><a href="#successful-outputs">Expected outputs</a></li><li><a href="#check-validation">Check validation</a></li><li><a href="#production-run">Move to production</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#interpreting-results">6 · Interpreting the results</a><ol>
+<li><a href="#results-files">Supporting files</a></li><li><a href="#reading-objective-space">Objective-space plots</a></li><li><a href="#generation-plots">Generation plots</a></li><li><a href="#solution-comparison">Final comparison</a></li><li><a href="#match-solutions">Match points to solutions</a></li><li><a href="#solution-maps">Flood maps</a></li><li><a href="#hydrograph-panel">Hydrograph panel</a></li><li><a href="#select-shortlist">Select a shortlist</a></li><li><a href="#report-results">Report responsibly</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -150,7 +153,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="note warn"><strong>Lower values are preferred</strong><p>Both objectives are minimised. Cost values are planning estimates used to compare strategies consistently, not contractor quotations. The economic-damages objective is not currently available because automated building-type assignment has not yet been integrated.</p></div>
 </section>
 
-<section class="subsection" id="objective-space">
+<section class="subsection" id="reading-objective-space">
 <p class="label">Initial boundaries</p>
 <h3>2.6 Establishing the objective space</h3>
 <div class="prose"><p>At the beginning of a run, the tool evaluates two boundary strategies. The <strong>do-minimum strategy</strong> excludes the encoded interventions. The <strong>do-maximum strategy</strong> represents the maximum encoded intervention state.</p><p>These simulations provide initial estimates of the cost and flood-performance ranges. The tool uses these bounds to divide the objective space into an epsilon grid. If later solutions extend or dominate the initial boundaries, the grid is recalculated and the archive is checked again.</p></div>
@@ -852,7 +855,205 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </section>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 6</p><h3>Understanding and interpreting the results</h3><p>Read the Pareto front, compare individual strategies, inspect spatial outputs and communicate cost-performance trade-offs without overstating the evidence.</p></aside>
+<section class="section chapter" id="interpreting-results">
+<p class="label">Section 6 · Understanding and interpreting the results</p>
+<h2>From objective-space trade-offs to spatially credible strategies</h2>
+<hr class="rule">
+<div class="prose">
+<p>The optimisation produces a set of alternative intervention strategies rather than a single prescribed answer. Each strategy represents a different compromise between whole-life intervention cost and the selected flood-performance objective.</p>
+<p>Both objectives are minimised. Movement towards the lower-left of an objective-space plot therefore represents lower cost and better flood performance. A strategy should not be selected from its position on this plot alone: its intervention layout, flood-depth pattern and, where applicable, outlet hydrographs must also be examined.</p>
+</div>
+<div class="note warn"><strong>The archive is an approximation</strong><p>The final archive is an approximate set of non-dominated solutions found by the ε-MOEA. It should not be described as the complete or globally optimal Pareto front.</p></div>
+
+<section class="subsection" id="results-files">
+<p class="label">Evidence package</p>
+<h3>6.1 Start with the supporting files</h3>
+<div class="prose"><p>Use the plots together with their accompanying numerical outputs.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Output</th><th scope="col">Use when interpreting the run</th></tr></thead>
+<tbody>
+<tr><td><code>plots/Generation N.png</code></td><td>Examine how the ε-MOEA archive developed during the search.</td></tr>
+<tr><td><code>plots/Solution Comparison.png</code></td><td>Compare the final cost–performance trade-offs.</td></tr>
+<tr><td><code>plots/Solution N.png</code></td><td>Inspect the intervention layout and maximum flood depths for a final strategy. Hydrograph runs also include an outlet-discharge panel.</td></tr>
+<tr><td><code>summary/Solutions.txt</code></td><td>Obtain the authoritative genotype, cost, objective value and decoded intervention characteristics for each final strategy.</td></tr>
+<tr><td><code>summary/Generation_N_Solutions.txt</code></td><td>Identify the archive members present during a particular generation.</td></tr>
+<tr><td><code>summary/parameters.txt</code></td><td>Confirm the physical, economic and optimisation assumptions used.</td></tr>
+<tr><td><code>summary/unique_simulations.txt</code></td><td>Check the cumulative number of distinct CityCAT simulations.</td></tr>
+<tr><td><code>execution_log.txt</code></td><td>Review progress, convergence messages, warnings and completion status.</td></tr>
+<tr><td><code>CityCAT_setup.zip</code></td><td>Inspect the underlying CityCAT inputs and retained simulation results where further investigation is required.</td></tr>
+</tbody>
+</table></div>
+<div class="note plan"><strong>Interpret plots in context</strong><p>Before comparing strategies, confirm that <code>parameters.txt</code>, the input datasets and the selected objective correspond to the intended experiment.</p></div>
+</section>
+
+<section class="subsection" id="objective-space">
+<p class="label">Cost and performance</p>
+<h3>6.2 Reading the objective-space plots</h3>
+<div class="prose">
+<p>The horizontal axis presents intervention cost and the vertical axis presents the selected flood-performance objective.</p>
+<p>Although the current horizontal-axis label is <strong>Installation Cost (£)</strong>, the plotted value is produced by the tool’s cost objective and incorporates the economic assumptions described in Section 4. Interpret it according to the configured whole-life cost calculation rather than as an unqualified construction estimate.</p>
+<p>The vertical axis depends on the selected objective:</p>
+</div>
+<div class="grid">
+<article class="card"><h4>Property flood risk</h4><p>The value is the number of buildings classified as being at high flood risk.</p></article>
+<article class="card"><h4>Outlet hydrograph</h4><p>The value is the sum of the peak discharges calculated separately at all configured outlets.</p></article>
+</div>
+<div class="prose">
+<p>For the risk objective, a building is classified as high risk when both its mean buffered flood depth is at least 0.10 m and its 90th-percentile buffered depth is at least 0.30 m. The objective is therefore not simply the number of building polygons that appear to touch blue cells on the flood map.</p>
+<p>For a hydrograph study, the underlying discharge values are rates measured in m³/s. The current generation and comparison plots label the vertical axis as <code>Peak flow (m³)</code>, whereas the individual hydrograph panel correctly uses <code>Discharge (m³/s)</code>. Treat the objective as peak discharge in m³/s; the objective-space unit label is a current presentation inconsistency.</p>
+</div>
+<h4 class="minor-heading">Dominance and trade-offs</h4>
+<div class="prose"><p>A solution dominates another when it is no more expensive, performs no worse against the flood objective and is strictly better in at least one of those measures. A dominated strategy would not normally be selected because another available strategy provides equal or better performance at equal or lower cost.</p><p>Non-dominated points express genuine trade-offs. A low-cost strategy may provide a modest flood reduction; a balanced or “knee” strategy may provide a substantial reduction before costs rise steeply; and a high-performance strategy may provide the lowest flood objective at a much greater cost.</p></div>
+<div class="note"><strong>A knee point is not an automatic answer</strong><p>Budget limits, acceptable residual risk, intervention practicality and wider benefits remain decision-maker choices.</p></div>
+</section>
+
+<section class="subsection" id="generation-plots">
+<p class="label">Search development</p>
+<h3>6.3 Understanding the generational plots</h3>
+<div class="prose">
+<p><code>Generation N.png</code> shows the ε-MOEA archive at a particular stage of the search. Each blue cross is an archive solution. The number printed beside a point is its position within that generation’s archive; it is not a permanent solution identifier. Archive membership and ordering can change, so a point labelled <code>3</code> in one generation should not be assumed to be the same strategy as point <code>3</code> in another.</p>
+<p>The title reports the generation number, cumulative number of unique simulations, archive size and population size.</p>
+<p>When the configured maximum front size is 18 or fewer, the plot also shows a dotted epsilon grid. Labels such as <code>(2, 4)</code> identify the cost and flood-performance epsilon box occupied by a solution. They are grid indices, not solution numbers, ranks or uncertainty ranges. The grid and its labels are suppressed for larger fronts to preserve readability.</p>
+</div>
+<h4 class="minor-heading">What to look for</h4>
+<ul class="checks">
+<li>Discovery of archive members farther towards the lower-left.</li>
+<li>Expansion of the available cost–performance trade-off range.</li>
+<li>Replacement of existing points by lower-cost or better-performing strategies.</li>
+<li>Retention of diverse solutions across the front.</li>
+<li>A gradual slowing of improvement as the run proceeds.</li>
+</ul>
+<div class="prose"><p>Apparent disappearance of a point does not necessarily indicate regression. It may have been dominated, replaced by a better representative of its epsilon box or removed when the archive was updated.</p><p>The objective bounds and epsilon grid can be recalculated during a run. Axis limits may therefore differ between generations. Compare the numerical values in <code>Generation_N_Solutions.txt</code> as well as the visual positions of points.</p></div>
+<div class="note warn"><strong>Do not assess convergence from one plot</strong><p>Review several consecutive generations together with hypervolume and convergence messages in <code>execution_log.txt</code>. A visually stable archive provides evidence of stabilisation, not proof that the global Pareto front has been found.</p></div>
+</section>
+
+<section class="subsection" id="solution-comparison">
+<p class="label">Final archive</p>
+<h3>6.4 Understanding <code>Solution Comparison.png</code></h3>
+<div class="prose">
+<p><code>Solution Comparison.png</code> displays the final ε-MOEA archive. Each blue cross is a final cost–performance trade-off available for further examination.</p>
+<p>In the current implementation, this figure displays the final archive only. The legend also contains entries for grey <strong>Objective Vectors</strong> and a red <strong>Pareto-Optimal Front</strong>, but the corresponding comparison datasets are not currently populated. Treat these legend entries as placeholders: the figure does not show every evaluated strategy or a known reference Pareto front.</p>
+<p>Use the figure to identify a shortlist rather than immediately choosing one point. Useful candidates commonly include the least-cost non-dominated strategy, one or more intermediate strategies around the bend in the curve, the best-performing strategy, and any strategy close to an explicit budget or performance threshold.</p>
+</div>
+<h4 class="minor-heading">Compare with the baseline</h4>
+<div class="prose"><p>Where the do-nothing objective value is greater than zero, relative improvement can be calculated as:</p></div>
+<code class="code-block">Improvement (%) = 100 × (do-nothing objective − solution objective)
+                          ÷ do-nothing objective</code>
+<div class="prose"><p>When comparing two increasingly expensive strategies, also consider the additional flood benefit gained for the additional cost. A very small improvement associated with a large cost increase may indicate diminishing returns.</p></div>
+</section>
+
+<section class="subsection" id="match-solutions">
+<p class="label">Traceability</p>
+<h3>6.5 Matching objective-space points to individual solutions</h3>
+<div class="prose"><p>The final plot does not label each point with its corresponding spatial-plot number. Use <code>summary/Solutions.txt</code> as the link between the numerical trade-off and the individual solution image.</p></div>
+<ul class="checks">
+<li><code>Solution N.png</code> corresponds to row <code>N</code> of <code>Solutions.txt</code>.</li>
+<li>Solution numbering begins at zero in the current output.</li>
+<li>The number in parentheses in the image title is the integer identifier derived from the solution genotype.</li>
+<li>That identifier also corresponds to the associated <code>CityCAT_setup/Sim_&lt;identifier&gt;</code> directory.</li>
+<li><code>Cost</code> records the cost-objective value.</li>
+<li><code>Risk</code> records the selected flood-objective value, even when the selected objective is peak discharge.</li>
+<li>The remaining columns describe the selected zones and decoded characteristics of individual interventions.</li>
+</ul>
+<div class="note warn"><strong>Two different numbering systems</strong><p>Do not use the numbered labels in a generation plot to locate a final <code>Solution N.png</code>. Generation-archive labels and final solution numbers have different purposes.</p></div>
+</section>
+
+<section class="subsection" id="solution-maps">
+<p class="label">Spatial interpretation</p>
+<h3>6.6 Reading an individual solution flood map</h3>
+<div class="prose">
+<p>Each <code>Solution N.png</code> is titled with the solution number, simulation identifier, cost and objective value. The map covers the full DEM extent and combines maximum simulated flood depth with the intervention layout.</p>
+<p>Flood depth is displayed in blue using boundaries of 0.01, 0.05, 0.10, 0.15, 0.30, 0.50 and 0.80 m. The darkest category represents depths greater than 0.80 m.</p>
+<p>The map represents maximum water depth over the simulated event. It is not a snapshot at a particular time and does not directly show velocity, duration, arrival time or hazard rating.</p>
+</div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Map symbol</th><th scope="col">Meaning</th></tr></thead>
+<tbody>
+<tr><td>Grey polygons</td><td>Buildings and the base pavement surface.</td></tr>
+<tr><td>Translucent red area</td><td>Exclusion zone.</td></tr>
+<tr><td>Spring-green polygons</td><td>Selected permeable-paving zones.</td></tr>
+<tr><td>Brown-orange polygons</td><td>Selected rain gardens.</td></tr>
+<tr><td>Dark olive-green polygons</td><td>Selected green areas.</td></tr>
+<tr><td>Black circular outline with a red centre marker</td><td>Flexible feature footprint, decoded radius and shifted centre.</td></tr>
+<tr><td>Purple dashed polygon with an elevation label</td><td>Fixed feature and its decoded elevation change.</td></tr>
+<tr><td>Dark-blue dash-dot circle and centre marker</td><td>Offline storage basin.</td></tr>
+<tr><td>Dark-blue triangle joined to the basin by a dotted line</td><td>Offline-feature inlet and its connection to the basin.</td></tr>
+<tr><td>Coloured semi-transparent squares</td><td>Hydrograph outlet cells.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Flexible, fixed and offline candidates whose decoded height is zero are omitted because they are inactive in that strategy.</p></div>
+<h4 class="minor-heading">Questions to ask</h4>
+<ul class="checks">
+<li>Are the selected interventions located where expected?</li>
+<li>Do their sizes, offsets and elevation changes appear credible?</li>
+<li>Has flooding reduced in the intended area?</li>
+<li>Has water been displaced towards another neighbourhood, boundary or critical asset?</li>
+<li>Are isolated depth cells or abrupt patterns physically plausible?</li>
+<li>Does the strategy rely excessively on one intervention?</li>
+<li>Are the spatial changes substantial enough to explain the objective improvement?</li>
+</ul>
+<div class="note warn"><strong>Risk-map limitation</strong><p>For a risk-objective run, buildings remain grey on the final solution map. The map does not colour buildings according to their calculated risk class. Use the objective value and retained exposure outputs, where available, rather than attempting to count high-risk buildings visually.</p></div>
+</section>
+
+<section class="subsection" id="hydrograph-panel">
+<p class="label">Outlet response</p>
+<h3>6.7 Interpreting the hydrograph panel</h3>
+<div class="prose">
+<p>For a hydrograph-objective run, each solution image contains a flood map on the left and a discharge-timeseries plot on the right.</p>
+<p>Each outlet is assigned a distinct colour. The same colour is used for its outlet cells on the map and its hydrograph in the adjacent panel. The dashed, semi-transparent line is the do-nothing baseline from <code>Sim_1</code>; the solid line is the selected intervention strategy. Time is shown in minutes and discharge in m³/s.</p>
+<p>The optimisation objective is calculated by finding the maximum discharge in each outlet hydrograph and summing those separate peaks. The individual outlet peaks do not have to occur at the same time.</p>
+</div>
+<h4 class="minor-heading">Compare each outlet</h4>
+<ul class="checks">
+<li>Peak discharge at each outlet.</li>
+<li>The time at which each peak occurs.</li>
+<li>The shape and duration of the response.</li>
+<li>Whether the strategy attenuates one outlet while worsening another.</li>
+<li>Whether delayed discharge could create a later operational problem.</li>
+<li>Whether the mapped flood-depth changes are consistent with the outlet response.</li>
+</ul>
+<div class="note"><strong>Only summed peak discharge is optimised</strong><p>Changes in time to peak, hydrograph volume or duration provide valuable context, but they are not separate optimisation objectives in the current implementation.</p></div>
+<div class="note warn"><strong>Missing discharge data</strong><p>If the panel reports <code>No discharge data found</code>, do not infer performance from an empty graph. Check the relevant simulation directory and <code>discharge_timeseries.txt</code>.</p></div>
+</section>
+
+<section class="subsection" id="select-shortlist">
+<p class="label">Decision support</p>
+<h3>6.8 Selecting a shortlist</h3>
+<div class="prose"><p>A defensible shortlist should combine quantitative performance with spatial and practical review.</p></div>
+<ol class="process">
+<li><strong>Identify contrasting candidates.</strong> Include the least-cost, balanced and highest-performing parts of the final archive.</li>
+<li><strong>Match the records.</strong> Link candidate points to their rows in <code>Solutions.txt</code>.</li>
+<li><strong>Inspect each map.</strong> Review every corresponding <code>Solution N.png</code>.</li>
+<li><strong>Check the interventions.</strong> Confirm that the decoded features are technically and spatially credible.</li>
+<li><strong>Compare with do-nothing.</strong> Examine flood-depth changes or outlet hydrographs against the baseline.</li>
+<li><strong>Look for transferred impacts.</strong> Check for deterioration elsewhere in the domain or at individual outlets.</li>
+<li><strong>Review the economics.</strong> Revisit cost assumptions, maintenance periods and intervention lifetimes.</li>
+<li><strong>Retain meaningful alternatives.</strong> Keep several strategies where different decision priorities remain reasonable.</li>
+</ol>
+<div class="prose"><p>A strategy with a slightly worse aggregate objective may still merit consideration if it avoids an unacceptable local impact, uses more deliverable interventions or performs more consistently across important locations.</p></div>
+</section>
+
+<section class="subsection" id="report-results">
+<p class="label">Responsible communication</p>
+<h3>6.9 Communicating the results responsibly</h3>
+<div class="prose"><p>Report the output as a set of modelled trade-offs for the specified rainfall event, datasets, parameters and candidate interventions. Avoid presenting one archive member as universally optimal.</p></div>
+<ul class="checks">
+<li>The DAFNI workflow, model and dataset versions.</li>
+<li>The rainfall event and simulation duration.</li>
+<li>The selected flood objective and how it was aggregated.</li>
+<li>The intervention types and cost assumptions.</li>
+<li>The optimisation budget and stopping criteria.</li>
+<li>The number of unique CityCAT simulations.</li>
+<li>The range of cost and flood-performance values in the final archive.</li>
+<li>The rationale used to select any shortlisted strategies.</li>
+<li>Relevant spatial impacts, limitations and anomalies.</li>
+</ul>
+<div class="prose"><p>The results do not by themselves demonstrate performance under other storms, future climate conditions, alternative cost assumptions or uncertain hydraulic parameters. Where decisions depend on robustness, shortlisted strategies should be tested through additional rainfall events and sensitivity analyses. Repeated optimisation runs can also help assess the influence of the algorithm’s stochastic search.</p></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>A point on the lower-left trade-off boundary is only the beginning of interpretation.</strong> A credible strategy must also have an understandable intervention layout, physically plausible hydrodynamic effects, acceptable local consequences and assumptions that can be traced back to the completed DAFNI run.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 7</p><h3>Reporting, reproducibility and further analysis</h3><p>Preserve the evidence behind a run, compare scenarios and prepare optimisation results for technical review and stakeholder communication.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
