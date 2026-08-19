@@ -15,7 +15,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.4rem;gap:1rem}.card{padding:1.35rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);box-shadow:0 8px 24px rgba(18,61,58,.05)}.card h4{margin:0 0 .45rem;color:var(--dark)}.card p{margin:0;color:var(--muted);font-size:.94rem}.number{display:grid;width:2.2rem;height:2.2rem;margin-bottom:.8rem;place-items:center;border-radius:.65rem;background:var(--soft);font-size:.8rem;font-weight:850}.checks{display:grid;margin:1.2rem 0 0;padding:0;gap:.7rem;list-style:none}.checks li{position:relative;padding:.85rem 1rem .85rem 2.8rem;border:1px solid var(--line);border-radius:.75rem;background:#fff}.checks li:before{position:absolute;left:1rem;color:var(--teal);content:"✓";font-weight:900}
 .note{margin-top:1.5rem;padding:1.2rem 1.35rem;border-left:4px solid #226d8a;border-radius:0 var(--radius) var(--radius) 0;background:#e8f3f7}.note.warn{border-color:#9b6419;background:var(--amber)}.note.plan{border-color:var(--teal);background:var(--soft)}.note strong{display:block;color:var(--dark)}.note p{margin:0}.status{display:inline-flex;margin-bottom:.6rem;padding:.25rem .55rem;border-radius:99px;background:var(--soft);font-size:.72rem;font-weight:800;text-transform:uppercase}.status.off{background:var(--amber);color:#74480e}
 .next{margin-top:4.5rem;padding:clamp(1.5rem,4vw,2.5rem);border-radius:var(--radius);background:var(--dark);color:#fff}.next p{margin:0;color:#cfe8e3}.next h3{margin:.35rem 0 .7rem;color:#fff;font-size:clamp(1.5rem,3vw,2rem)}footer{border-top:1px solid var(--line);background:#f4f7f3}.footer-inner{display:flex;justify-content:space-between;padding:2rem 0;gap:2rem;color:var(--muted);font-size:.88rem}.footer-inner p{margin:0}
-.contents{max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}.toc-heading{display:block;margin:.5rem 0 .2rem;padding:.45rem .6rem;border-radius:.45rem;background:var(--soft);color:var(--dark)!important;font-weight:800}.toc-group ol{margin-bottom:1rem}.chapter{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--line)}.subsection{padding-top:3.5rem;scroll-margin-top:5rem}.process{display:grid;margin:1.5rem 0 0;padding:0;gap:.8rem;list-style:none;counter-reset:steps}.process li{position:relative;min-height:4.2rem;padding:1rem 1rem 1rem 4.15rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}.process li:before{position:absolute;top:.85rem;left:1rem;display:grid;width:2.25rem;height:2.25rem;place-items:center;border-radius:50%;background:var(--dark);color:#fff;content:counter(steps);counter-increment:steps;font-size:.8rem;font-weight:800}.process li:not(:last-child):after{position:absolute;bottom:-.85rem;left:2.08rem;width:2px;height:.85rem;background:var(--line);content:""}.loop-back{margin:.85rem 0 0;color:var(--teal);font-weight:750}.table-wrap{margin-top:1.4rem;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.guide-table{width:100%;border-collapse:collapse}.guide-table th,.guide-table td{padding:.85rem 1rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.guide-table th{background:var(--soft);color:var(--dark);font-size:.85rem}.guide-table tr:last-child td{border-bottom:0}.example-code{display:block;margin:.75rem 0;padding:.8rem 1rem;border-radius:.55rem;background:#edf3f1;color:var(--dark);font-size:1.05rem;font-weight:750;letter-spacing:.18em}.code-block{display:block;margin:1rem 0;overflow-x:auto;padding:1rem;border-radius:.65rem;background:#edf3f1;color:var(--dark);font:500 .9rem/1.65 Consolas,"Courier New",monospace;white-space:pre}.key-point{margin-top:3.5rem;padding:1.5rem;border:1px solid #add7cf;border-radius:var(--radius);background:linear-gradient(135deg,#e5f2ef,#f4faf7)}
+.contents{max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}.toc-heading{display:block;margin:.5rem 0 .2rem;padding:.45rem .6rem;border-radius:.45rem;background:var(--soft);color:var(--dark)!important;font-weight:800}.toc-group ol{margin-bottom:1rem}.chapter{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--line)}.subsection{padding-top:3.5rem;scroll-margin-top:5rem}.minor-heading{margin:2.2rem 0 .8rem;color:var(--dark);font-size:1.15rem}.process{display:grid;margin:1.5rem 0 0;padding:0;gap:.8rem;list-style:none;counter-reset:steps}.process li{position:relative;min-height:4.2rem;padding:1rem 1rem 1rem 4.15rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}.process li:before{position:absolute;top:.85rem;left:1rem;display:grid;width:2.25rem;height:2.25rem;place-items:center;border-radius:50%;background:var(--dark);color:#fff;content:counter(steps);counter-increment:steps;font-size:.8rem;font-weight:800}.process li:not(:last-child):after{position:absolute;bottom:-.85rem;left:2.08rem;width:2px;height:.85rem;background:var(--line);content:""}.loop-back{margin:.85rem 0 0;color:var(--teal);font-weight:750}.table-wrap{margin-top:1.4rem;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.guide-table{width:100%;border-collapse:collapse}.guide-table th,.guide-table td{padding:.85rem 1rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.guide-table th{background:var(--soft);color:var(--dark);font-size:.85rem}.guide-table tr:last-child td{border-bottom:0}.example-code{display:block;margin:.75rem 0;padding:.8rem 1rem;border-radius:.55rem;background:#edf3f1;color:var(--dark);font-size:1.05rem;font-weight:750;letter-spacing:.18em}.code-block{display:block;margin:1rem 0;overflow-x:auto;padding:1rem;border-radius:.65rem;background:#edf3f1;color:var(--dark);font:500 .9rem/1.65 Consolas,"Courier New",monospace;white-space:pre}.key-point{margin-top:3.5rem;padding:1.5rem;border:1px solid #add7cf;border-radius:var(--radius);background:linear-gradient(135deg,#e5f2ef,#f4faf7)}
 @media(max-width:860px){.hero-inner,.shell{grid-template-columns:1fr}.contents{position:static;max-height:none;overflow:visible;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.contents ol{columns:2}nav a:not(.button){display:none}}@media(max-width:580px){.grid{grid-template-columns:1fr}.contents ol{columns:1}.brand span:last-child{display:none}.footer-inner{flex-direction:column}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{header,.contents{display:none}.hero{background:#fff;color:#000}.lead,.eyebrow{color:#333}.shell,.hero-inner{display:block;width:100%}}
 </style>
 </head>
@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–3 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–4 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -39,6 +39,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#preparing-input-data">3 · Preparing input data</a><ol>
 <li><a href="#dafni-data-flow">How DAFNI supplies data</a></li><li><a href="#mandatory-datasets">Mandatory datasets</a></li><li><a href="#rainfall-data">Rainfall</a></li><li><a href="#dem-data">Digital elevation model</a></li><li><a href="#topography-data">Topography</a></li><li><a href="#base-surfaces">Base surface data</a></li><li><a href="#candidate-data">Candidate interventions</a></li><li><a href="#packaging-data">Packaging spatial data</a></li><li><a href="#upload-to-dafni">Upload and assignment</a></li><li><a href="#pre-run-checklist">Pre-run checklist</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#configuring-workflow">4 · Configuring the workflow</a><ol>
+<li><a href="#create-parameter-set">Create a parameter set</a></li><li><a href="#validation-run">Begin with validation</a></li><li><a href="#select-objective">Select the objective</a></li><li><a href="#pavement-zones">Pavement zones</a></li><li><a href="#search-controls">Search controls</a></li><li><a href="#simulation-controls">Simulation controls</a></li><li><a href="#hydraulic-properties">Hydraulic properties</a></li><li><a href="#cost-configuration">Cost configuration</a></li><li><a href="#unused-parameters">Unused interventions</a></li><li><a href="#review-configuration">Review and save</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -387,7 +390,271 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </section>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 4</p><h3>Configuring the DAFNI workflow</h3><p>Choose the objective, simulation limits, convergence settings, hydraulic properties and intervention-cost assumptions for a test run.</p></aside>
+<section class="section chapter" id="configuring-workflow">
+<p class="label">Section 4 · Configuring the DAFNI workflow</p>
+<h2>Turn study assumptions into a reproducible run</h2>
+<hr class="rule">
+<div class="prose">
+<p>Once the datasets have been prepared, the next step is to create a DAFNI parameter set. This records the optimisation settings, CityCAT configuration, hydraulic assumptions and intervention costs used for a run.</p>
+<p>A parameter set should be treated as part of the study record. Give it a descriptive name, retain the selected dataset versions and avoid changing it after results have been generated.</p>
+</div>
+
+<section class="subsection" id="create-parameter-set">
+<p class="label">DAFNI setup</p>
+<h3>4.1 Creating a parameter set</h3>
+<div class="prose">
+<p>Open the CityCAT optimisation workflow and select <strong>Create</strong> in the parameter-set area. Enter a concise display name and description identifying the study area, rainfall event, objective and purpose of the run.</p>
+</div>
+<div class="grid">
+<article class="card"><h4>Validation</h4><p><code>ouseburn-100yr-validation</code></p></article>
+<article class="card"><h4>Hydrograph study</h4><p><code>ouseburn-100yr-hydrograph-v1</code></p></article>
+<article class="card"><h4>Property-risk study</h4><p><code>ouseburn-100yr-property-risk-v1</code></p></article>
+<article class="card"><h4>Display name</h4><p>Use a readable title that distinguishes the study from other parameter sets.</p></article>
+</div>
+<div class="prose"><p>DAFNI parameter-set names must use lower-case letters, numbers and hyphens. Select the optimisation model step to access its parameters and data slots. DAFNI shows only the first ten parameters by default, so use the table navigation controls to review every page before saving. Editing an existing parameter set overwrites it; create a new parameter set where the original configuration must remain reproducible.</p><p>See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">DAFNI parameter-set guidance</a> for the current platform interface.</p></div>
+<div class="note plan"><strong>Recommended practice</strong><p>Use a separate parameter set for each validation run, rainfall event, objective or sensitivity test. Record the reason for any departure from the defaults in the description.</p></div>
+</section>
+
+<section class="subsection" id="validation-run">
+<p class="label">Start small</p>
+<h3>4.2 Begin with a validation run</h3>
+<div class="prose"><p>Do not begin with a full production optimisation. First configure a small run that is sufficient to test the complete workflow.</p></div>
+<ol class="process">
+<li><strong>Confirm preprocessing.</strong> Check that every assigned input dataset is processed successfully.</li>
+<li><strong>Test the boundaries.</strong> Confirm that the do-minimum and do-maximum simulations complete.</li>
+<li><strong>Inspect CityCAT results.</strong> Review depths and flows for obvious errors or implausible behaviour.</li>
+<li><strong>Check the objective.</strong> Confirm that the selected hydrograph or property-risk value can be calculated.</li>
+<li><strong>Review costs and records.</strong> Check intervention costs, encoded solutions and summary files.</li>
+<li><strong>Estimate runtime.</strong> Use the observed time per unique simulation to plan the production budget.</li>
+</ol>
+<div class="prose"><p>A validation run is intended to reveal configuration problems, not produce a reliable Pareto front. A starting configuration might use a maximum front size of 4–8 and approximately 20–30 maximum simulations, alongside a restricted candidate-intervention set.</p><p>The appropriate values depend on the model size and runtime. Initialisation evaluates several candidates, and stopping is checked between generations, so the final unique-simulation count may not equal the specified maximum exactly.</p></div>
+<div class="note warn"><strong>Do not interpret validation results as a completed optimisation</strong><p>A deliberately small search budget is useful for checking the workflow, but it is unlikely to characterise the full cost-risk trade-off.</p></div>
+</section>
+
+<section class="subsection" id="select-objective">
+<p class="label">Flood-performance metric</p>
+<h3>4.3 Selecting the objective</h3>
+<div class="prose"><p>The <code>OBJECTIVE</code> parameter selects the second optimisation objective. Intervention whole-life cost is always the first objective.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Value</th><th scope="col">Meaning</th><th scope="col">Additional requirement</th></tr></thead>
+<tbody>
+<tr><td><code>hydrograph</code></td><td>Minimises the simulated peak flow associated with the supplied outlet or outlets.</td><td>A valid Outlet Lines dataset must be assigned.</td></tr>
+<tr><td><code>risk</code></td><td>Minimises the number of buildings classified as being at high flood risk.</td><td>Valid building polygons must be derived from the topography.</td></tr>
+<tr><td><code>damages</code></td><td>Intended to minimise estimated economic flood damages.</td><td><strong>Not currently available.</strong></td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Enter the keyword exactly as shown. Use either <code>hydrograph</code> or <code>risk</code>.</p></div>
+<div class="grid">
+<article class="card"><h4>Property buffer · <code>BUFFER_VAL</code></h4><p>Controls the distance around each building used by the property-risk calculation. It is a percentage of one DEM cell: <code>50</code> is half a cell, <code>100</code> is one cell and <code>200</code> is two cells. The default is <code>100</code>.</p></article>
+<article class="card"><h4>Return period · <code>RETURN_PERIOD</code></h4><p>Records the nominal return period of the supplied event. The default is 30 years. It labels the processed rainfall and results; it does not generate, scale or modify the uploaded rainfall.</p></article>
+</div>
+<div class="note warn"><strong>Objective-data compatibility</strong><p>A hydrograph run will stop during preprocessing if no valid outlet geometry is supplied. Do not select <code>damages</code> until automated building-type assignment has been integrated.</p></div>
+</section>
+
+<section class="subsection" id="pavement-zones">
+<p class="label">Spatial decisions</p>
+<h3>4.4 Configuring permeable-pavement zones</h3>
+<div class="prose"><p><code>NO_ZONES</code> specifies the requested number of permeable-pavement decision zones.</p></div>
+<ul class="checks">
+<li>Set it to <code>0</code> to exclude permeable paving from the optimisation.</li>
+<li>Set it to a positive integer to divide the available pavement surface into approximately grid-based zones.</li>
+<li>If an odd number is entered, the current routine increases it by one.</li>
+<li>Empty zones and zones smaller than <code>PAV_MIN_ZONE_AREA</code> are removed, so the final number may be lower than requested.</li>
+</ul>
+<div class="prose"><p>More zones give the optimiser finer spatial control but increase the chromosome length and search space. Each zone should represent a useful planning decision rather than an arbitrary subdivision.</p><p><code>PAV_MIN_ZONE_AREA</code> has a deployed default of 10 m². Increasing it removes small pavement fragments that may be impractical or contribute little to the study.</p></div>
+</section>
+
+<section class="subsection" id="search-controls">
+<p class="label">Optimisation budget</p>
+<h3>4.5 Optimisation and stopping controls</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th><th scope="col">Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>LAG</code></td><td>2</td><td>Number of generations across which improvement is assessed.</td></tr>
+<tr><td><code>DELTA_K</code></td><td>0.1</td><td>Convergence tolerance applied to improvement in normalised archive hypervolume.</td></tr>
+<tr><td><code>MAX_FRONT_SIZE</code></td><td>16</td><td>Controls the target density of the epsilon-grid approximation.</td></tr>
+<tr><td><code>MIN_SIMS</code></td><td>10</td><td>Minimum number of unique simulations before convergence-based termination is allowed.</td></tr>
+<tr><td><code>MAX_SIMS</code></td><td>1000</td><td>Upper stopping threshold for unique simulations.</td></tr>
+<tr><td><code>BINARY_CODING</code></td><td><code>gray</code></td><td>Displays the chromosome coding scheme; Gray coding is fixed in the deployed implementation.</td></tr>
+</tbody>
+</table></div>
+<div class="grid">
+<article class="card"><h4>Lag and threshold</h4><p>A larger <code>LAG</code> examines progress over a longer period. A smaller <code>DELTA_K</code> imposes a stricter stopping condition and will generally allow the search to continue longer; a larger value makes termination easier to satisfy.</p></article>
+<article class="card"><h4>Maximum front size</h4><p>A larger value can retain a more detailed front approximation, but can increase the initial population, number of evaluations and runtime. Use a small value for workflow validation.</p></article>
+<article class="card"><h4>Simulation limits</h4><p><code>MIN_SIMS</code> prevents very early self-termination. <code>MAX_SIMS</code> provides the principal computational budget. Both must be positive and the maximum should exceed the minimum.</p></article>
+<article class="card"><h4>Production budget</h4><p>Choose the budget using validation-run timings, design-space complexity and the number of trade-off solutions required. Convergence does not prove that the global Pareto front has been found.</p></article>
+</div>
+<div class="note warn"><strong>Gray coding is not currently user-configurable</strong><p>Although <code>BINARY_CODING</code> is visible in the DAFNI form, the current container does not read this value from the environment. Leave it set to <code>gray</code>.</p></div>
+</section>
+
+<section class="subsection" id="simulation-controls">
+<p class="label">CityCAT timing</p>
+<h3>4.6 Simulation controls</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th><th scope="col">Unit</th><th scope="col">Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>SIM_RUNTIME</code></td><td>3600</td><td>seconds</td><td>Total duration of each CityCAT simulation.</td></tr>
+<tr><td><code>OUTPUT_FREQUENCY</code></td><td>300</td><td>seconds</td><td>Interval between hydrodynamic outputs.</td></tr>
+<tr><td><code>IMPERMEABLE_ROUGHNESS</code></td><td>0.02</td><td>Manning’s n</td><td>Surface roughness for impermeable areas.</td></tr>
+<tr><td><code>PERMEABLE_ROUGHNESS</code></td><td>0.035</td><td>Manning’s n</td><td>Surface roughness for permeable areas.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p><code>SIM_RUNTIME</code> must cover the full rainfall event and enough time for the relevant flood response or hydrograph to develop. Ending a simulation too early can truncate the peak flow or maximum flood extent.</p><p><code>OUTPUT_FREQUENCY</code> controls temporal output resolution. A shorter interval provides more detailed results but creates more data and can increase processing and storage requirements.</p></div>
+<ul class="checks">
+<li>Use positive values and make output frequency shorter than or equal to simulation runtime.</li>
+<li>Extend the runtime beyond the final rainfall timestep where the flood response requires it.</li>
+<li>Use an output interval short enough to capture the expected hydrograph peak.</li>
+<li>Remember that every extra second of simulation is repeated across the optimisation.</li>
+</ul>
+</section>
+
+<section class="subsection" id="hydraulic-properties">
+<p class="label">Infiltration assumptions</p>
+<h3>4.7 Hydraulic properties</h3>
+<div class="prose"><p>The workflow uses Green–Ampt infiltration parameters for existing permeable areas, permeable paving and rain gardens.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Surface</th><th scope="col">Hydraulic conductivity</th><th scope="col">Suction head</th><th scope="col">Effective porosity</th><th scope="col">Effective saturation</th></tr></thead>
+<tbody>
+<tr><td>Existing permeable areas</td><td>1.09 cm/hr</td><td>11.01 cm</td><td>0.412</td><td>0.30</td></tr>
+<tr><td>Permeable paving</td><td>4.421 cm/hr</td><td>19.123 cm</td><td>0.345</td><td>0.30</td></tr>
+<tr><td>Rain gardens</td><td>10.8 cm/hr</td><td>4.55 cm</td><td>0.34</td><td>0.20</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The parameter prefixes are <code>PERMEABLE_...</code> for baseline permeable areas, <code>PAV_...</code> for permeable paving and <code>RG_...</code> for rain gardens. These defaults provide an initial model configuration; they are not universal values. Where possible, use site-specific information, calibrated CityCAT parameters, soil data or defensible literature values.</p><p>Effective porosity and saturation are ratios rather than percentages. For example, enter <code>0.30</code>, not <code>30</code>.</p></div>
+<div class="note"><strong>Maintain model consistency</strong><p>A change to a hydraulic parameter alters every simulation containing the relevant surface type. Complete hydraulic calibration or sensitivity testing outside the production optimisation where possible.</p></div>
+</section>
+
+<section class="subsection" id="cost-configuration">
+<p class="label">Whole-life comparison</p>
+<h3>4.8 Configuring intervention costs</h3>
+<div class="prose"><p>The first optimisation objective is the present-value whole-life cost of the selected interventions. Depending on intervention type, the calculation can include initial installation or excavation, professional fees, annual operation and maintenance, scheduled maintenance, decommissioning and discounting.</p><p>The calculation provides a consistent basis for comparing strategies. It is not a contractor quotation or a substitute for detailed cost appraisal. Use a common price basis and document the source year, inflation treatment, regional adjustment and whether values include contingency or tax.</p></div>
+
+<h4 class="minor-heading">Global economic and feature parameters</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th><th scope="col">Interpretation</th></tr></thead>
+<tbody>
+<tr><td><code>DISCOUNT_RATE</code></td><td>0.035</td><td>Annual discount rate entered as a decimal ratio.</td></tr>
+<tr><td><code>PROFESSIONAL_FEES</code></td><td>0.12</td><td>Professional fees as a proportion of construction cost.</td></tr>
+<tr><td><code>DECOMM_RATE</code></td><td>0.385</td><td>End-of-life cost as a proportion of construction cost.</td></tr>
+<tr><td><code>EXCAVATION_RATE</code></td><td>33.6</td><td>Excavation cost in £/m³ for flexible and offline basins.</td></tr>
+<tr><td><code>INLET_DROP</code></td><td>0.15</td><td>Depth in metres applied at an offline-storage inlet to help capture overland flow.</td></tr>
+</tbody>
+</table></div>
+<div class="note warn"><strong>Use decimal ratios</strong><p><code>0.035</code> means 3.5%, not 0.035%. <code>INLET_DROP</code> is a hydraulic construction setting rather than a financial assumption and should be reviewed against the DEM resolution and intended inlet design.</p></div>
+
+<h4 class="minor-heading">Green areas</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Installation · <code>GA_INSTALL_COST</code></td><td>50 £/m²</td></tr>
+<tr><td>Annual maintenance · <code>GA_ANN_MAINT_RATE</code></td><td>0.15 £/m²/year</td></tr>
+<tr><td>Minor / major maintenance · <code>GA_MIN_MAINT_COST</code> / <code>GA_MAJ_MAINT_COST</code></td><td>0 / 0 £/m²/event</td></tr>
+<tr><td>Minor / major periods · <code>GA_MIN_MAINT_PERIOD</code> / <code>GA_MAJ_MAINT_PERIOD</code></td><td>10 / 25 years</td></tr>
+<tr><td>Design life · <code>GA_DESIGN_LIFE</code></td><td>40 years</td></tr>
+</tbody>
+</table></div>
+
+<h4 class="minor-heading">Flexible detention features</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Annual maintenance · <code>FEAT_ANN_MAINT_RATE</code></td><td>1.14375 £/m³/year</td></tr>
+<tr><td>Minor / major maintenance · <code>FEAT_MIN_MAINT_COST</code> / <code>FEAT_MAJ_MAINT_COST</code></td><td>840 / 8400 £/active feature/event</td></tr>
+<tr><td>Minor / major periods · <code>FEAT_MIN_MAINT_PERIOD</code> / <code>FEAT_MAJ_MAINT_PERIOD</code></td><td>3 / 10 years</td></tr>
+<tr><td>Design life · <code>FEAT_DESIGN_LIFE</code></td><td>50 years</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Flexible-feature construction cost is calculated from excavation volume using <code>EXCAVATION_RATE</code>.</p></div>
+
+<h4 class="minor-heading">Fixed features</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Construction rate · <code>FF_UNIT_COST</code></td><td>33.6 £/m³ of calculated volume</td></tr>
+<tr><td>Annual maintenance · <code>FF_ANN_MAINT_COST</code></td><td>280 £/active feature/year</td></tr>
+<tr><td>Minor / major maintenance · <code>FF_MIN_MAINT_COST</code> / <code>FF_MAJ_MAINT_COST</code></td><td>840 / 8400 £/active feature/event</td></tr>
+<tr><td>Minor / major periods · <code>FF_MIN_MAINT_PERIOD</code> / <code>FF_MAJ_MAINT_PERIOD</code></td><td>3 / 10 years</td></tr>
+<tr><td>Design life · <code>FF_DESIGN_LIFE</code></td><td>50 years</td></tr>
+</tbody>
+</table></div>
+
+<h4 class="minor-heading">Offline storage</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Annual volume-based maintenance · <code>OFF_ANN_MAINT_RATE</code></td><td>1.14375 £/m³/year</td></tr>
+<tr><td>Minor / major maintenance · <code>OFF_MIN_MAINT_COST</code> / <code>OFF_MAJ_MAINT_COST</code></td><td>840 / 8400 £/active feature/event</td></tr>
+<tr><td>Minor / major periods · <code>OFF_MIN_MAINT_PERIOD</code> / <code>OFF_MAJ_MAINT_PERIOD</code></td><td>3 / 10 years</td></tr>
+<tr><td>Design life · <code>OFF_DESIGN_LIFE</code></td><td>50 years</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Offline construction cost is calculated from excavation volume using <code>EXCAVATION_RATE</code>. <code>OFF_ANN_MAINT_COST</code> is also displayed in the DAFNI form with a default of £280, but the current cost calculation does not use it. Retain its default value; changing it will not affect the optimisation objective at present.</p></div>
+
+<h4 class="minor-heading">Permeable paving</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Installation · <code>PAV_INSTALL_COST</code></td><td>90 £/m²</td></tr>
+<tr><td>Annual maintenance · <code>PAV_ANN_MAINT_RATE</code></td><td>1.5 £/m³ of attenuation/year</td></tr>
+<tr><td>Attenuation volume · <code>PAV_ATTENUATION_VOL</code></td><td>0.15 m³/m²</td></tr>
+<tr><td>Minor / major maintenance · <code>PAV_MIN_MAINT_COST</code> / <code>PAV_MAJ_MAINT_COST</code></td><td>0 / 1.5 £/m²/event</td></tr>
+<tr><td>Minor / major periods · <code>PAV_MIN_MAINT_PERIOD</code> / <code>PAV_MAJ_MAINT_PERIOD</code></td><td>10 / 25 years</td></tr>
+<tr><td>Design life · <code>PAV_DESIGN_LIFE</code></td><td>50 years</td></tr>
+</tbody>
+</table></div>
+
+<h4 class="minor-heading">Rain gardens</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
+<tbody>
+<tr><td>Installation · <code>RG_INSTALL_COST</code></td><td>250 £/m²</td></tr>
+<tr><td>Annual maintenance · <code>RG_ANN_MAINT_RATE</code></td><td>2 £/m²/year</td></tr>
+<tr><td>Minor / major maintenance · <code>RG_MIN_MAINT_COST</code> / <code>RG_MAJ_MAINT_COST</code></td><td>0 / 50 £/m²/event</td></tr>
+<tr><td>Minor / major periods · <code>RG_MIN_MAINT_PERIOD</code> / <code>RG_MAJ_MAINT_PERIOD</code></td><td>5 / 10 years</td></tr>
+<tr><td>Design life · <code>RG_DESIGN_LIFE</code></td><td>50 years</td></tr>
+</tbody>
+</table></div>
+<div class="note warn"><strong>Periods and design lives must be positive</strong><p>A zero maintenance period will cause the cost calculation to fail. Review every cost value for the study context before using it in a production optimisation.</p></div>
+</section>
+
+<section class="subsection" id="unused-parameters">
+<p class="label">Required fields</p>
+<h3>4.9 Parameters for unused intervention types</h3>
+<div class="prose"><p>DAFNI currently marks all numerical parameters as required, including those belonging to intervention types that are absent from the study.</p></div>
+<ul class="checks">
+<li>Retain the displayed defaults for any intervention type that has no candidate dataset.</li>
+<li>Do not interpret those values as adding the intervention to the study.</li>
+<li>The corresponding assumptions do not affect solutions when no candidates of that type exist.</li>
+</ul>
+<div class="note"><strong>Why the fields still need values</strong><p>Keeping the defaults avoids unnecessary configuration changes while ensuring the parameter set passes DAFNI validation.</p></div>
+</section>
+
+<section class="subsection" id="review-configuration">
+<p class="label">Final review</p>
+<h3>4.10 Saving and reviewing the configuration</h3>
+<div class="prose"><p>Before saving, work through every page of the parameter table and every data slot. Select <strong>Set parameters and datasets</strong>, then save or upload the parameter set.</p></div>
+<ul class="checks">
+<li>The parameter-set name identifies the study, rainfall event and purpose.</li>
+<li>Rainfall, DEM and topography datasets are assigned.</li>
+<li>The objective matches the available supporting data.</li>
+<li><code>BINARY_CODING</code> remains <code>gray</code>.</li>
+<li>Return period matches the uploaded rainfall event.</li>
+<li>Simulation runtime covers the event and flood response.</li>
+<li>Output frequency is appropriate for the selected objective.</li>
+<li>Minimum simulations are lower than maximum simulations.</li>
+<li>Pavement zoning is intentional and proportionate.</li>
+<li>Hydraulic parameters use the correct units.</li>
+<li>Percentages have been entered as decimal ratios.</li>
+<li>Maintenance periods and design lives are positive.</li>
+<li>Cost assumptions share a consistent and documented price basis.</li>
+<li>A small validation run will be completed before production.</li>
+</ul>
+<div class="prose"><p>After saving, select the parameter set and execute the workflow. DAFNI creates an instance whose step status can be monitored from the workflow details page. The official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">DAFNI execution guidance</a> explains the current platform controls.</p></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>A parameter set defines the scientific and economic assumptions of the study, not merely its computational settings.</strong> Preserve it alongside the input versions and results so that every Pareto front can be traced to the configuration that produced it.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 5</p><h3>Running and monitoring an optimisation</h3><p>Launch a validation instance, interpret its status and logs, recognise common failure modes, and decide whether the study is ready for a production run.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
