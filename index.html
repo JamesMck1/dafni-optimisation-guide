@@ -15,7 +15,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.4rem;gap:1rem}.card{padding:1.35rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);box-shadow:0 8px 24px rgba(18,61,58,.05)}.card h4{margin:0 0 .45rem;color:var(--dark)}.card p{margin:0;color:var(--muted);font-size:.94rem}.number{display:grid;width:2.2rem;height:2.2rem;margin-bottom:.8rem;place-items:center;border-radius:.65rem;background:var(--soft);font-size:.8rem;font-weight:850}.checks{display:grid;margin:1.2rem 0 0;padding:0;gap:.7rem;list-style:none}.checks li{position:relative;padding:.85rem 1rem .85rem 2.8rem;border:1px solid var(--line);border-radius:.75rem;background:#fff}.checks li:before{position:absolute;left:1rem;color:var(--teal);content:"✓";font-weight:900}
 .note{margin-top:1.5rem;padding:1.2rem 1.35rem;border-left:4px solid #226d8a;border-radius:0 var(--radius) var(--radius) 0;background:#e8f3f7}.note.warn{border-color:#9b6419;background:var(--amber)}.note.plan{border-color:var(--teal);background:var(--soft)}.note strong{display:block;color:var(--dark)}.note p{margin:0}.status{display:inline-flex;margin-bottom:.6rem;padding:.25rem .55rem;border-radius:99px;background:var(--soft);font-size:.72rem;font-weight:800;text-transform:uppercase}.status.off{background:var(--amber);color:#74480e}
 .next{margin-top:4.5rem;padding:clamp(1.5rem,4vw,2.5rem);border-radius:var(--radius);background:var(--dark);color:#fff}.next p{margin:0;color:#cfe8e3}.next h3{margin:.35rem 0 .7rem;color:#fff;font-size:clamp(1.5rem,3vw,2rem)}footer{border-top:1px solid var(--line);background:#f4f7f3}.footer-inner{display:flex;justify-content:space-between;padding:2rem 0;gap:2rem;color:var(--muted);font-size:.88rem}.footer-inner p{margin:0}
-.contents{max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}.toc-heading{display:block;margin:.5rem 0 .2rem;padding:.45rem .6rem;border-radius:.45rem;background:var(--soft);color:var(--dark)!important;font-weight:800}.toc-group ol{margin-bottom:1rem}.chapter{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--line)}.subsection{padding-top:3.5rem;scroll-margin-top:5rem}.process{display:grid;margin:1.5rem 0 0;padding:0;gap:.8rem;list-style:none;counter-reset:steps}.process li{position:relative;min-height:4.2rem;padding:1rem 1rem 1rem 4.15rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}.process li:before{position:absolute;top:.85rem;left:1rem;display:grid;width:2.25rem;height:2.25rem;place-items:center;border-radius:50%;background:var(--dark);color:#fff;content:counter(steps);counter-increment:steps;font-size:.8rem;font-weight:800}.process li:not(:last-child):after{position:absolute;bottom:-.85rem;left:2.08rem;width:2px;height:.85rem;background:var(--line);content:""}.loop-back{margin:.85rem 0 0;color:var(--teal);font-weight:750}.table-wrap{margin-top:1.4rem;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.guide-table{width:100%;border-collapse:collapse}.guide-table th,.guide-table td{padding:.85rem 1rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.guide-table th{background:var(--soft);color:var(--dark);font-size:.85rem}.guide-table tr:last-child td{border-bottom:0}.example-code{display:block;margin:.75rem 0;padding:.8rem 1rem;border-radius:.55rem;background:#edf3f1;color:var(--dark);font-size:1.05rem;font-weight:750;letter-spacing:.18em}.key-point{margin-top:3.5rem;padding:1.5rem;border:1px solid #add7cf;border-radius:var(--radius);background:linear-gradient(135deg,#e5f2ef,#f4faf7)}
+.contents{max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}.toc-heading{display:block;margin:.5rem 0 .2rem;padding:.45rem .6rem;border-radius:.45rem;background:var(--soft);color:var(--dark)!important;font-weight:800}.toc-group ol{margin-bottom:1rem}.chapter{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--line)}.subsection{padding-top:3.5rem;scroll-margin-top:5rem}.process{display:grid;margin:1.5rem 0 0;padding:0;gap:.8rem;list-style:none;counter-reset:steps}.process li{position:relative;min-height:4.2rem;padding:1rem 1rem 1rem 4.15rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}.process li:before{position:absolute;top:.85rem;left:1rem;display:grid;width:2.25rem;height:2.25rem;place-items:center;border-radius:50%;background:var(--dark);color:#fff;content:counter(steps);counter-increment:steps;font-size:.8rem;font-weight:800}.process li:not(:last-child):after{position:absolute;bottom:-.85rem;left:2.08rem;width:2px;height:.85rem;background:var(--line);content:""}.loop-back{margin:.85rem 0 0;color:var(--teal);font-weight:750}.table-wrap{margin-top:1.4rem;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.guide-table{width:100%;border-collapse:collapse}.guide-table th,.guide-table td{padding:.85rem 1rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.guide-table th{background:var(--soft);color:var(--dark);font-size:.85rem}.guide-table tr:last-child td{border-bottom:0}.example-code{display:block;margin:.75rem 0;padding:.8rem 1rem;border-radius:.55rem;background:#edf3f1;color:var(--dark);font-size:1.05rem;font-weight:750;letter-spacing:.18em}.code-block{display:block;margin:1rem 0;overflow-x:auto;padding:1rem;border-radius:.65rem;background:#edf3f1;color:var(--dark);font:500 .9rem/1.65 Consolas,"Courier New",monospace;white-space:pre}.key-point{margin-top:3.5rem;padding:1.5rem;border:1px solid #add7cf;border-radius:var(--radius);background:linear-gradient(135deg,#e5f2ef,#f4faf7)}
 @media(max-width:860px){.hero-inner,.shell{grid-template-columns:1fr}.contents{position:static;max-height:none;overflow:visible;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.contents ol{columns:2}nav a:not(.button){display:none}}@media(max-width:580px){.grid{grid-template-columns:1fr}.contents ol{columns:1}.brand span:last-child{display:none}.footer-inner{flex-direction:column}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{header,.contents{display:none}.hero{background:#fff;color:#000}.lead,.eyebrow{color:#333}.shell,.hero-inner{display:block;width:100%}}
 </style>
 </head>
@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–2 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–3 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -36,6 +36,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#how-tool-works">2 · How the tool works</a><ol>
 <li><a href="#optimisation-loop">Optimisation loop</a></li><li><a href="#strategy-representation">Strategy representation</a></li><li><a href="#candidate-evaluation">Candidate evaluation</a></li><li><a href="#two-objectives">The two objectives</a></li><li><a href="#epsilon-archive">Epsilon archive</a></li><li><a href="#new-strategies">Generating strategies</a></li><li><a href="#stopping">Stopping the run</a></li><li><a href="#user-controls">What the user controls</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#preparing-input-data">3 · Preparing input data</a><ol>
+<li><a href="#dafni-data-flow">How DAFNI supplies data</a></li><li><a href="#mandatory-datasets">Mandatory datasets</a></li><li><a href="#rainfall-data">Rainfall</a></li><li><a href="#dem-data">Digital elevation model</a></li><li><a href="#topography-data">Topography</a></li><li><a href="#base-surfaces">Base surface data</a></li><li><a href="#candidate-data">Candidate interventions</a></li><li><a href="#packaging-data">Packaging spatial data</a></li><li><a href="#upload-to-dafni">Upload and assignment</a></li><li><a href="#pre-run-checklist">Pre-run checklist</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -199,7 +202,192 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="key-point"><p class="label">Key point</p><p><strong>The tool is an iterative learning process.</strong> It proposes an intervention strategy, evaluates it using a fully dynamic CityCAT simulation, retains useful results and uses those results to guide subsequent simulations. The final output is a diverse set of cost-risk trade-offs for decision-makers to examine, not a single prescribed design.</p></div>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 3</p><h3>Preparing your input data</h3><p>The required files, accepted formats, coordinate system, data slots and checks to complete before configuring a DAFNI run.</p></aside>
+<section class="section chapter" id="preparing-input-data">
+<p class="label">Section 3 · Preparing your input data</p>
+<h2>Build a reliable foundation for the optimisation</h2>
+<hr class="rule">
+<div class="prose">
+<p>Good input preparation is essential. The optimiser may run CityCAT hundreds or thousands of times, so an error in the rainfall, terrain, topography or candidate-intervention data can be repeated throughout an expensive study. Prepare and check a small, valid CityCAT setup before launching the optimisation.</p>
+<p>This section describes the inputs accepted by the deployed workflow. It reflects the current data-processing code and container configuration rather than the older repository README.</p>
+</div>
+
+<section class="subsection" id="dafni-data-flow">
+<p class="label">Platform data flow</p>
+<h3>3.1 How DAFNI supplies data to the tool</h3>
+<div class="prose">
+<p>On DAFNI, inputs are managed as datasets. After uploading and publishing a dataset, assign a specific version of it to the corresponding workflow data slot through a parameter set. When an instance starts, DAFNI mounts the selected datasets inside the container under <code>/data/inputs/</code>.</p>
+<p>The mounted inputs are read-only. The tool therefore validates and converts them into working files beneath <code>/data/outputs/CityCAT_setup</code> and <code>/data/outputs/alg_inputs</code>. These working directories, together with the optimisation results, are collected as run outputs.</p>
+</div>
+<div class="note"><strong>Use one dataset per data slot</strong><p>Keep each input type in a clearly named DAFNI dataset. This makes parameter sets easier to audit, update and reuse across studies.</p></div>
+</section>
+
+<section class="subsection" id="mandatory-datasets">
+<p class="label">Minimum requirements</p>
+<h3>3.2 Mandatory datasets</h3>
+<div class="prose"><p>Every run requires rainfall, terrain and topography data. The workflow definition may display these data slots as optional, but the current processing pipeline cannot construct a valid CityCAT model without them.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">DAFNI data slot</th><th scope="col">Purpose</th><th scope="col">Accepted inputs</th></tr></thead>
+<tbody>
+<tr><td><strong>Rainfall Data</strong></td><td>Defines rainfall through time for the simulated event.</td><td><code>.csv</code> or CityCAT <code>.txt</code></td></tr>
+<tr><td><strong>Terrain Data (DEM)</strong></td><td>Defines ground elevation across the CityCAT domain.</td><td><code>.tif</code> or <code>.asc</code>; zipped tiles are accepted</td></tr>
+<tr><td><strong>Topography Data</strong></td><td>Identifies buildings, roads, paths and permeable areas.</td><td><code>.shp</code>, <code>.gpkg</code> or <code>.gdb</code>; archives are accepted</td></tr>
+</tbody>
+</table></div>
+<div class="note warn"><strong>Do not rely on the optional marker</strong><p>Assign all three mandatory datasets before launching an instance. Missing or invalid inputs will cause preprocessing to stop before the optimisation begins.</p></div>
+</section>
+
+<section class="subsection" id="rainfall-data">
+<p class="label">Mandatory input</p>
+<h3>3.3 Rainfall data</h3>
+<div class="prose">
+<p>The rainfall dataset may contain a two-column CSV file or a rainfall text file already formatted for CityCAT. For CSV input, the first column is elapsed time in seconds and the second is rainfall intensity in millimetres per hour.</p>
+<pre class="code-block" aria-label="Example rainfall CSV">time_seconds,rainfall_mm_hr
+0,0
+300,18.5
+600,31.2
+900,24.7
+1200,0</pre>
+<p>The values must be numeric and complete. Time must increase strictly from one row to the next, and rainfall intensity cannot be negative. The preprocessing stage converts intensity from millimetres per hour to metres per second for CityCAT.</p>
+</div>
+<ul class="checks">
+<li>Include exactly two columns: time and rainfall intensity.</li>
+<li>Use seconds for time and millimetres per hour for intensity.</li>
+<li>Remove blank cells, duplicate times and non-numeric values.</li>
+<li>Check that the event duration and timestep are appropriate for the study.</li>
+</ul>
+<div class="note warn"><strong>Only one rainfall file is used</strong><p>If a dataset contains several valid rainfall files, the first file discovered by the preprocessing routine is selected. Use a separate, clearly named dataset for each event. The workflow’s return-period parameter labels the run; it does not scale or otherwise modify the supplied rainfall values.</p></div>
+</section>
+
+<section class="subsection" id="dem-data">
+<p class="label">Mandatory input</p>
+<h3>3.4 Digital elevation model</h3>
+<div class="prose">
+<p>The terrain dataset may contain an ESRI ASCII raster (<code>.asc</code>) or GeoTIFF (<code>.tif</code>). A single raster can be supplied directly, or several tiles can be packaged together in an archive. When multiple tiles are present, the tool mosaics them using the highest available resolution and bilinear resampling.</p>
+<p>The raster must include valid coordinate-reference-system metadata. During preprocessing, it is converted to British National Grid (<strong>EPSG:27700</strong>), assigned a NoData value of <code>-99999</code>, and written as the ESRI ASCII terrain file required by CityCAT.</p>
+</div>
+<ul class="checks">
+<li>Cover the complete model domain, including all candidate interventions and outlets.</li>
+<li>Use elevation units of metres and confirm that NoData cells do not cut through the study area.</li>
+<li>Ensure that every tile has valid and compatible coordinate metadata.</li>
+<li>Check for seams, duplicated coverage and unexpected resolution changes before upload.</li>
+</ul>
+<div class="note"><strong>Reprojection is automatic, quality control is not</strong><p>The tool standardises the coordinate system and output format, but it cannot determine whether the surface is hydrologically suitable. Review sinks, bridges, walls, buildings and other elevation treatments as part of the CityCAT model setup.</p></div>
+</section>
+
+<section class="subsection" id="topography-data">
+<p class="label">Mandatory input</p>
+<h3>3.5 Topography data</h3>
+<div class="prose">
+<p>Topography is supplied as vector data in Shapefile, GeoPackage or File Geodatabase format. The preprocessing routine uses descriptive attributes to separate buildings, potential permeable-pavement surfaces, roads and paths, and baseline permeable land.</p>
+</div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Derived feature</th><th scope="col">Classification used by the tool</th></tr></thead>
+<tbody>
+<tr><td><strong>Buildings</strong></td><td><code>theme</code> is “Buildings”, or <code>descriptivegroup</code> contains “building”.</td></tr>
+<tr><td><strong>Potential permeable paving</strong></td><td><code>theme</code> is “Roads Tracks And Paths” and <code>descriptivegroup</code> is “Roadside” or “Path”.</td></tr>
+<tr><td><strong>Roads and tracks</strong></td><td><code>theme</code> is “Roads Tracks And Paths” and <code>descriptivegroup</code> is “Road Or Track”.</td></tr>
+<tr><td><strong>Baseline permeable areas</strong></td><td><code>make</code> is “Natural” and <code>theme</code> is “Land” or “Roads Tracks And Paths”.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The fields <code>theme</code> and <code>descriptivegroup</code> are required. The <code>make</code> field is also required when a separate Permeable Areas dataset is not provided. Attribute names and values should be checked carefully after any GIS export or conversion.</p></div>
+<div class="note warn"><strong>Buildings and permeable areas cannot be empty</strong><p>The current workflow expects both a usable building layer and a usable baseline permeable-area layer. If the topography cannot supply permeable areas, provide them through the dedicated Permeable Areas data slot.</p></div>
+</section>
+
+<section class="subsection" id="base-surfaces">
+<p class="label">Optional overrides</p>
+<h3>3.6 Base permeable areas and pavement candidates</h3>
+<div class="grid">
+<article class="card"><h4>Permeable Areas</h4><p>A polygon dataset describing the existing baseline infiltration surface used in every simulation. If it is omitted, the tool derives this surface from the topography attributes.</p></article>
+<article class="card"><h4>Permeable Pavements</h4><p>A polygon dataset defining surfaces that the optimiser may convert to permeable paving. If it is omitted, candidates are derived from roadside and path features in the topography.</p></article>
+</div>
+<div class="note"><strong>Baseline is different from an intervention</strong><p><strong>Permeable Areas</strong> describe existing conditions and are always included. <strong>Green Areas</strong> are optional candidate interventions that the optimiser may select. Keep these datasets conceptually separate.</p></div>
+</section>
+
+<section class="subsection" id="candidate-data">
+<p class="label">Optimisation design space</p>
+<h3>3.7 Candidate intervention datasets</h3>
+<div class="prose"><p>The optional candidate datasets define the choices available to the optimiser. Supply only the intervention types required for the study. Spatial inputs should use British National Grid where possible and must have a defined coordinate system.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">DAFNI data slot</th><th scope="col">Geometry and key requirements</th></tr></thead>
+<tbody>
+<tr><td><strong>Green Areas</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Overlaps are merged and multipart areas are separated into valid candidate zones.</td></tr>
+<tr><td><strong>Rain Gardens</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Each processed area becomes a selectable zonal intervention.</td></tr>
+<tr><td><strong>Flexible</strong></td><td>Polygon, MultiPolygon, Point or MultiPoint in <code>.shp</code> or <code>.gpkg</code>. Defines flexible detention features whose dimensions or location may be encoded.</td></tr>
+<tr><td><strong>Fixed</strong></td><td>Polygon, MultiPolygon or line geometry in <code>.shp</code> or <code>.gpkg</code>. Defines features with a fixed footprint and an optimisable height or depth.</td></tr>
+<tr><td><strong>Offline</strong></td><td>A basin polygon or point linked to an inlet point. Basins require <code>basin_id</code>; inlets require a matching <code>target_id</code>.</td></tr>
+<tr><td><strong>Outlets</strong></td><td>LineString or MultiLineString in <code>.shp</code> or <code>.gpkg</code>. Required for the hydrograph objective; <code>outlet_id</code> is recommended.</td></tr>
+</tbody>
+</table></div>
+<div class="prose">
+<p>Flexible and fixed features can use <code>h_min</code>, <code>h_max</code> and <code>h_len</code> to define the encoded vertical range and number of bits. If these fields are absent, the current defaults are 0 metres, 1.5 metres and 2 bits. For point-based flexible features, optional fields can also define rotation, radius and allowable x- and y-translation ranges.</p>
+<p>For offline storage, the tool joins each inlet to its basin where <code>target_id</code> equals <code>basin_id</code>. Inlet features must be Point or MultiPoint geometry. Translation of offline storage locations is not currently enabled.</p>
+</div>
+<div class="note warn"><strong>The uploaded data define the search space</strong><p>Check candidate locations for ownership, physical feasibility and meaningful separation before upload. The optimiser selects and configures the supplied candidates; it does not determine whether a location is buildable.</p></div>
+</section>
+
+<section class="subsection" id="packaging-data">
+<p class="label">File preparation</p>
+<h3>3.8 Packaging spatial data</h3>
+<div class="prose"><p>A GeoPackage is often the simplest exchange format because its geometry, attributes and coordinate reference system are stored in one file. If using a Shapefile, package its component files together in a ZIP archive.</p></div>
+<ul class="checks">
+<li>Include at least <code>.shp</code>, <code>.shx</code>, <code>.dbf</code> and <code>.prj</code> for each Shapefile.</li>
+<li>Keep related component files together and give them the same base filename.</li>
+<li>Use clear filenames without ambiguous duplicates or unnecessary old versions.</li>
+<li>Confirm that geometry types, required attributes and coordinate metadata survive export.</li>
+<li>Do not package unrelated study inputs in the same data-slot archive.</li>
+</ul>
+</section>
+
+<section class="subsection" id="upload-to-dafni">
+<p class="label">DAFNI setup</p>
+<h3>3.9 Uploading and assigning datasets</h3>
+<div class="prose"><p>Upload each prepared input through DAFNI’s data interface, supply suitable metadata and publish it. Clear dataset names such as <code>StudyArea_DEM_1m</code>, <code>StudyArea_Rainfall_1in100</code> and <code>StudyArea_GreenAreas_v1</code> make later configuration and auditing easier.</p></div>
+<ol class="process">
+<li><strong>Add the dataset.</strong> In DAFNI, open <em>Data</em>, choose <em>Add Data</em>, browse to the prepared file or archive, and complete its metadata.</li>
+<li><strong>Publish it.</strong> Confirm that the dataset and intended version are available for use in workflows.</li>
+<li><strong>Open the optimisation workflow.</strong> Create a new parameter set, or edit a deliberately chosen existing set.</li>
+<li><strong>Assign each data slot.</strong> Select the appropriate dataset and version for rainfall, DEM, topography and every optional intervention input.</li>
+<li><strong>Save and review.</strong> Check the complete mapping before creating a workflow instance.</li>
+</ol>
+<div class="note warn"><strong>Editing overwrites a parameter set</strong><p>If an existing parameter set must remain reproducible, create a new one rather than changing its dataset assignments. Record dataset versions alongside the optimisation settings.</p></div>
+<div class="prose"><p>For platform-specific guidance, see DAFNI’s official instructions for <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-upload-data-and-use">uploading and using data</a>, <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">creating a parameter set</a>, and <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">executing a model</a>.</p></div>
+</section>
+
+<section class="subsection" id="container-preprocessing">
+<p class="label">Automatic preparation</p>
+<h3>3.10 What happens when the workflow starts?</h3>
+<div class="prose"><p>Before optimisation begins, the container prepares a consistent CityCAT model and algorithm input set from the assigned datasets.</p></div>
+<ol class="process">
+<li><strong>Locate the mounted datasets.</strong> The tool reads the assigned files from the DAFNI input directories.</li>
+<li><strong>Extract archives.</strong> Supported ZIP packages and geodatabases are unpacked into the output workspace.</li>
+<li><strong>Validate and standardise.</strong> Rainfall, raster and vector inputs are checked, converted and reprojected where required.</li>
+<li><strong>Derive CityCAT layers.</strong> Buildings, infiltration areas, intervention candidates and outlet points are constructed.</li>
+<li><strong>Write working inputs.</strong> The CityCAT setup and optimiser configuration are saved beneath <code>/data/outputs/</code>.</li>
+<li><strong>Start the optimisation.</strong> Boundary strategies are created and the first CityCAT simulations begin.</li>
+</ol>
+<div class="note"><strong>Preprocessing is part of the run record</strong><p>The prepared setup is retained with the outputs, helping users understand which standardised files were actually supplied to CityCAT.</p></div>
+</section>
+
+<section class="subsection" id="pre-run-checklist">
+<p class="label">Final quality check</p>
+<h3>3.11 Pre-run checklist</h3>
+<ul class="checks">
+<li>Rainfall, DEM and topography datasets are assigned to the correct mandatory slots.</li>
+<li>The rainfall file contains valid, increasing times and non-negative intensities in the required units.</li>
+<li>The DEM covers the full domain and has valid coordinate and NoData information.</li>
+<li>Topography includes usable buildings and baseline permeable areas, with the required attributes.</li>
+<li>All spatial datasets have a defined coordinate system and align when inspected together.</li>
+<li>Candidate datasets contain only feasible, study-relevant intervention locations.</li>
+<li>Offline basins and inlets use matching identifiers; outlets are supplied for a hydrograph objective.</li>
+<li>Shapefile packages contain every required component file.</li>
+<li>The selected DAFNI parameter set records the intended dataset versions.</li>
+<li>A small validation run will be completed before committing to a production simulation budget.</li>
+</ul>
+<div class="key-point"><p class="label">Key point</p><p><strong>Treat input preparation as part of the modelling study, not merely a file-upload task.</strong> A successful DAFNI launch confirms that the files can be processed; it does not confirm that the rainfall scenario, terrain representation, topographic classification or intervention choices are appropriate. Review the prepared model and a small test run before beginning a full optimisation.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 4</p><h3>Configuring the DAFNI workflow</h3><p>Choose the objective, simulation limits, convergence settings, hydraulic properties and intervention-cost assumptions for a test run.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
