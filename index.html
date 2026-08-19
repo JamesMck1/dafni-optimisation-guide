@@ -58,6 +58,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="toc-group"><a class="toc-heading" href="#quick-start-tutorial">9 · Quick-start tutorial</a><ol>
 <li><a href="#quick-start-outcomes">Learning outcomes</a></li><li><a href="#reference-study">Reference study</a></li><li><a href="#tutorial-route">Choose a route</a></li><li><a href="#tutorial-assets">Locate DAFNI assets</a></li><li><a href="#tutorial-parameters">Create parameter set</a></li><li><a href="#tutorial-preflight">Preflight check</a></li><li><a href="#tutorial-execution">Execute and monitor</a></li><li><a href="#tutorial-outputs">Validate outputs</a></li><li><a href="#tutorial-interpretation">Interpret solutions</a></li><li><a href="#tutorial-shortlist">Create a shortlist</a></li><li><a href="#tutorial-record">Save the record</a></li><li><a href="#tutorial-checklist">Completion checklist</a></li>
 </ol></div>
+<div class="toc-group"><a class="toc-heading" href="#troubleshooting-faq">10 · Troubleshooting and FAQs</a><ol>
+<li><a href="#troubleshooting-evidence">Begin with evidence</a></li><li><a href="#diagnostic-layer">Identify the layer</a></li><li><a href="#dafni-problems">DAFNI access</a></li><li><a href="#parameter-problems">Parameter sets</a></li><li><a href="#rainfall-problems">Rainfall data</a></li><li><a href="#spatial-problems">Spatial data</a></li><li><a href="#intervention-problems">Interventions and outlets</a></li><li><a href="#citycat-problems">CityCAT execution</a></li><li><a href="#optimisation-problems">Optimisation behaviour</a></li><li><a href="#publication-problems">Plots and publication</a></li><li><a href="#troubleshooting-faqs">Frequently asked questions</a></li><li><a href="#request-support">Request support</a></li>
+</ol></div>
 </aside>
 <main id="main-content">
 <section class="section" id="introduction"><p class="label">Section 1 · Introduction</p><h2>What is the hydrodynamic optimisation tool?</h2><hr class="rule"><div class="prose">
@@ -1771,7 +1774,238 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </section>
 </section>
 
-<aside class="next" aria-label="Guide completion"><p>Sections 1–9 complete</p><h3>Ready to begin a validation study</h3><p>Follow Section 9 for a complete reference exercise, or return to Section 3 to prepare your own datasets and work through configuration, execution, interpretation and reporting while preserving the complete DAFNI evidence chain.</p></aside>
+<section class="section chapter" id="troubleshooting-faq">
+<p class="label">Section 10 · Troubleshooting and frequently asked questions</p>
+<h2>Diagnose problems before changing the study</h2>
+<hr class="rule">
+<div class="prose">
+<p>A failed or unexpected optimisation can originate at several different stages: DAFNI access, parameter configuration, dataset preparation, CityCAT execution, optimisation, plotting or result publication. Begin with the earliest meaningful warning or error rather than the final failure message, which may only describe a consequence of an earlier problem.</p>
+<p>Do not repeatedly execute an unchanged configuration. First preserve the evidence from the failed instance, identify the stage at which normal progress stopped and correct the underlying cause.</p>
+</div>
+<section class="subsection" id="troubleshooting-evidence">
+<p class="label">First response</p>
+<h3>10.1 Begin with the instance evidence</h3>
+<div class="prose"><p>Before changing anything, record:</p></div>
+<ul class="checks">
+<li>The DAFNI instance identifier.</li><li>The workflow and model versions.</li><li>The parameter-set name.</li><li>The input dataset names and versions.</li><li>The execution date and approximate failure time.</li><li>The status of each workflow step.</li><li>The last successful message in the model log.</li><li>The first meaningful warning or error.</li><li>Whether any files were produced.</li>
+</ul>
+<div class="prose"><p>Download or copy the available log before launching another instance. The following sequence is usually more useful than starting from the final line:</p></div>
+<ol class="process">
+<li><strong>Find the last milestone.</strong> Identify the last recognisable stage that completed normally.</li>
+<li><strong>Find the first departure.</strong> Read forward to the first warning or error after that milestone.</li>
+<li><strong>Classify the problem.</strong> Determine which diagnostic layer it belongs to.</li>
+<li><strong>Correct one cause.</strong> Avoid changing several datasets or parameters simultaneously.</li>
+<li><strong>Validate the correction.</strong> Perform a small test before returning to the production configuration.</li>
+</ol>
+</section>
+
+<section class="subsection" id="diagnostic-layer">
+<p class="label">Triage</p>
+<h3>10.2 Identify the diagnostic layer</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Where progress stopped</th><th scope="col">Likely diagnostic layer</th><th scope="col">Begin by checking</th></tr></thead>
+<tbody>
+<tr><td>Before the model starts</td><td>DAFNI access or workflow configuration</td><td>Permissions, workflow version, parameter set and dataset assignments</td></tr>
+<tr><td>While inputs are being located</td><td>Dataset assignment or packaging</td><td>Dataslot, dataset version, archive contents and filename extensions</td></tr>
+<tr><td>During input processing</td><td>Data validity</td><td>CRS, attributes, geometries, rainfall structure and DEM metadata</td></tr>
+<tr><td>During baseline preparation</td><td>CityCAT setup</td><td>Processed DEM, rainfall duration, topography and configuration</td></tr>
+<tr><td>During a candidate simulation</td><td>CityCAT or intervention modification</td><td>Generated simulation files and the affected intervention</td></tr>
+<tr><td>During the optimisation loop</td><td>Search configuration or objective calculation</td><td>Candidate counts, objective range and simulation budget</td></tr>
+<tr><td>After optimisation terminates</td><td>Plotting or packaging</td><td>Final solution records and expected intermediate files</td></tr>
+<tr><td>After the model step succeeds</td><td>DAFNI publishing</td><td>Publisher-step status and configured output paths</td></tr>
+</tbody>
+</table></div>
+<div class="note"><strong>Find the first cause</strong><p>A plotting or publishing error does not necessarily mean the optimisation itself failed. Conversely, completed hydraulic simulations do not make the overall workflow successful if its final results cannot be plotted or retrieved.</p></div>
+</section>
+
+<section class="subsection" id="dafni-problems">
+<p class="label">Platform and permissions</p>
+<h3>10.3 DAFNI access and execution problems</h3>
+<h4 class="minor-heading">The workflow cannot be executed</h4>
+<div class="prose"><p>Check that:</p></div>
+<ul class="checks">
+<li>You have permission to view and execute the selected workflow.</li><li>The intended workflow version has been saved.</li><li>A parameter set has been selected.</li><li>You can access every assigned dataset version.</li><li>The selected model versions have completed ingestion.</li><li>Required dataslots are not empty.</li>
+</ul>
+<div class="prose"><p>If another user created the parameter set, duplicate it where possible and give the copy a unique name. DAFNI parameter-set names use lower-case alphanumeric characters and hyphens. Review the official guidance on <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">creating parameter sets</a> if the configuration cannot be saved or selected.</p></div>
+<h4 class="minor-heading">A dataset appears in the catalogue but cannot be selected</h4>
+<div class="prose"><p>The dataset may not be shared with your user or group, or the required version may have different permissions. Confirm access to the specific dataset version rather than only its catalogue record.</p><p>Datasets assigned to a model are made available through its configured input dataslots and are read-only during execution. The model therefore creates processed copies beneath its working and output directories rather than editing the catalogue data. <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-dafni-ready-model/">DAFNI’s model guidance</a> explains this input arrangement.</p></div>
+<h4 class="minor-heading">The instance remains queued or no model log appears</h4>
+<div class="prose"><p>If the model has not begun producing log messages, the problem is unlikely to be caused by rainfall or spatial geometry. Record the instance identifier and check the status of each workflow step. Avoid submitting several identical instances, as this may consume additional resources without providing new diagnostic evidence.</p></div>
+</section>
+
+<section class="subsection" id="parameter-problems">
+<p class="label">Configuration</p>
+<h3>10.4 Parameter-set problems</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Message or symptom</th><th scope="col">Likely cause</th><th scope="col">Corrective action</th></tr></thead>
+<tbody>
+<tr><td>Environment-variable type casting failed</td><td>A numeric parameter contains text, is empty or uses an invalid format.</td><td>Review every page of the parameter table.</td></tr>
+<tr><td>Unknown objective or objective setup fails</td><td>An unsupported objective was entered.</td><td>Use exactly <code>hydrograph</code> or <code>risk</code>.</td></tr>
+<tr><td>Unknown binary coding method</td><td>The coding value is incorrect.</td><td>Set <code>BINARY_CODING</code> to <code>gray</code>.</td></tr>
+<tr><td>No interventions are represented</td><td>Candidate datasets are absent or their configured counts are zero.</td><td>Check dataslot assignments and preprocessing summaries.</td></tr>
+<tr><td>Costs are unexpectedly zero</td><td>No active candidates exist or applicable unit costs are zero.</td><td>Review candidate counts and cost parameters.</td></tr>
+<tr><td>Run ends much sooner than expected</td><td>Validation limits or convergence settings were retained.</td><td>Check <code>MIN_SIMS</code>, <code>MAX_SIMS</code>, <code>LAG</code> and <code>DELTA_K</code>.</td></tr>
+<tr><td>Run is much larger than intended</td><td>Production settings or an excessive front size were selected.</td><td>Review <code>MAX_FRONT_SIZE</code> and <code>MAX_SIMS</code>.</td></tr>
+</tbody>
+</table></div>
+<div class="note warn"><strong>Unsupported objective</strong><p>The <code>damages</code> objective must not currently be selected because automated building-type assignment is not yet available.</p></div>
+<div class="prose"><p>Parameters for an unused intervention type may remain present in the model definition, but they do not activate that intervention. Activation is determined by the supplied candidate data and relevant configuration.</p></div>
+</section>
+
+<section class="subsection" id="rainfall-problems">
+<p class="label">Time-series inputs</p>
+<h3>10.5 Rainfall-data problems</h3>
+<h4 class="minor-heading">No valid rainfall data found</h4>
+<ul class="checks">
+<li>Confirm that the rainfall dataset is assigned to the rainfall dataslot.</li><li>Check that the selected version contains the expected file.</li><li>Use a <code>.csv</code> or <code>.txt</code> rainfall file.</li><li>Confirm that any ZIP archive is valid and contains the rainfall file.</li><li>Check that the file is not empty.</li>
+</ul>
+<h4 class="minor-heading">CSV must contain exactly two columns</h4>
+<div class="prose"><p>The CSV reader expects time in seconds followed by rainfall intensity. Remove index columns, explanatory text and additional metadata columns from the data table.</p></div>
+<h4 class="minor-heading">Non-numeric or missing data</h4>
+<div class="prose"><p>Every time and intensity value must be numeric. Check for blank cells, unit text inside data rows, thousands separators, repeated header rows, spreadsheet error values and trailing notes below the time series.</p></div>
+<h4 class="minor-heading">Time steps must strictly increase</h4>
+<div class="prose"><p>Sort the rainfall rows into chronological order and remove duplicate time values. A zero starting time is acceptable, but every subsequent value must be greater than the previous one.</p></div>
+<h4 class="minor-heading">Rainfall intensity cannot be negative</h4>
+<div class="prose"><p>Correct negative values in the source rainfall series. Do not use negative values to represent abstraction or drainage.</p></div>
+<h4 class="minor-heading">The rainfall event is cut short</h4>
+<div class="prose"><p>Check that <code>SIM_RUNTIME</code> covers the full rainfall series and any required post-rainfall drainage period. Also verify that <code>OUTPUT_FREQUENCY</code> provides sufficient temporal resolution for the intended objective.</p></div>
+<div class="note"><strong>Return period does not repair rainfall</strong><p>Changing <code>RETURN_PERIOD</code> only changes the event label recorded by the workflow. It does not alter the supplied hyetograph or correct its units.</p></div>
+</section>
+
+<section class="subsection" id="spatial-problems">
+<p class="label">Terrain and topography</p>
+<h3>10.6 DEM, topography and spatial-data problems</h3>
+<h4 class="minor-heading">No valid DEM data found</h4>
+<div class="prose"><p>Check that the terrain dataset contains one or more valid GeoTIFF files and that any archive can be opened. Confirm that the raster covers the complete study area, contains embedded CRS information, has a valid resolution and transform, uses numeric elevation values and can be opened independently in GIS software.</p><p>The preprocessing stage can mosaic multiple GeoTIFFs, but the tiles must be mutually compatible.</p></div>
+<h4 class="minor-heading">Spatial integrity cannot be verified</h4>
+<div class="prose"><p>A raster or vector file has no coordinate-reference metadata. Restore the correct CRS rather than merely assigning EPSG:27700 without confirming the coordinates actually use British National Grid.</p><p>For Shapefiles, ensure the <code>.prj</code> file is included. For GeoPackages and GeoTIFFs, confirm that CRS metadata is embedded in the file.</p></div>
+<h4 class="minor-heading">DEM no-data value is undefined or incorrect</h4>
+<div class="prose"><p>CityCAT’s processed ASCII DEM requires the no-data value <code>-99999</code>. If this error occurs after preprocessing, inspect the DEM stored in <code>alg_inputs.zip</code> or <code>CityCAT_setup.zip</code> and check whether the source raster’s no-data metadata was interpreted correctly.</p></div>
+<h4 class="minor-heading">No valid topography data found</h4>
+<div class="prose"><p>Confirm that the topography dataset is assigned to the correct dataslot, uses a supported vector format, contains at least one valid feature, is not hidden inside a damaged archive and overlaps the DEM domain.</p></div>
+<h4 class="minor-heading">Required topography attributes are missing</h4>
+<div class="prose"><p>Check the field names described in Section 3, including the required <code>theme</code>, <code>descriptivegroup</code> and, where applicable, <code>make</code> information. Export processes may truncate, rename or remove fields.</p></div>
+<h4 class="minor-heading">Features appear displaced</h4>
+<div class="prose"><p>The most likely cause is an incorrect or missing CRS. Compare the bounds of the DEM, topography, outlets and candidate interventions. All layers should overlap when displayed using their declared coordinate systems.</p></div>
+</section>
+
+<section class="subsection" id="intervention-problems">
+<p class="label">Design-space inputs</p>
+<h3>10.7 Intervention and outlet problems</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Message or symptom</th><th scope="col">Interpretation</th><th scope="col">Action</th></tr></thead>
+<tbody>
+<tr><td>Candidate feature is out of bounds</td><td>Its representative location lies outside the DEM extent.</td><td>Correct or remove the geometry.</td></tr>
+<tr><td>Fixed feature has high overlap</td><td>Between approximately 50% and 75% of its footprint was excluded.</td><td>Review the feature; the run may continue with a warning.</td></tr>
+<tr><td>Fixed feature has critical overlap</td><td>More than approximately 75% of its footprint was removed.</td><td>Redesign or remove the invalid feature.</td></tr>
+<tr><td>Offline basin and inlet cannot be matched</td><td><code>basin_id</code> and <code>target_id</code> do not correspond.</td><td>Correct the identifiers and republish the dataset.</td></tr>
+<tr><td>Outlet cell is outside the DEM</td><td>The outlet geometry does not lie within the hydraulic domain.</td><td>Move the outlet or extend the DEM.</td></tr>
+<tr><td>No intersecting outlet cells were found</td><td>The line does not cross usable model cells.</td><td>Inspect its position, CRS and length.</td></tr>
+<tr><td>Minimum and maximum costs are both zero</td><td>No active, costed candidates were created.</td><td>Review candidate inputs and cost parameters.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>For the <code>hydrograph</code> objective, a valid outlet dataset is mandatory. Outlet features must use LineString or MultiLineString geometry and intersect the model grid.</p><p>Warnings about out-of-bounds candidates should not be ignored simply because the workflow continues. They indicate that the optimisation may be searching a different design space from the one intended.</p></div>
+</section>
+
+<section class="subsection" id="citycat-problems">
+<p class="label">Hydrodynamic model</p>
+<h3>10.8 CityCAT execution problems</h3>
+<div class="prose"><p>If CityCAT exits with an error, identify whether the failure affects the do-nothing baseline, the do-everything strategy, every candidate simulation or only a particular intervention combination.</p><p>A failure during the baseline usually indicates a problem with the fundamental model setup. A failure limited to certain candidates more strongly suggests an invalid intervention modification or numerical instability introduced by that strategy.</p><p>Inspect <code>CityCAT_setup.zip</code> where available and check:</p></div>
+<ul class="checks">
+<li>The processed DEM and its no-data value.</li><li>The generated rainfall files.</li><li>The simulation duration and output interval.</li><li>Topography and surface files.</li><li>Outlet locations.</li><li>Generated intervention modifications.</li><li>The CityCAT configuration file.</li><li>The last output written before termination.</li>
+</ul>
+<div class="note plan"><strong>Return to a small test</strong><p>Do not immediately increase the optimisation budget or submit a production run. First reproduce a valid baseline and a very small intervention test.</p></div>
+<h4 class="minor-heading">One simulation appears unusually slow</h4>
+<div class="prose"><p>Candidate simulations can vary in duration. Compare the elapsed time with the validation run, domain size and grid resolution, rainfall and simulation duration, the amount of surface water retained in the domain and previous candidates within the same instance.</p><p>Stop the workflow only when there is evidence of a genuine non-recoverable problem or the runtime is clearly inconsistent with the study plan.</p></div>
+</section>
+
+<section class="subsection" id="optimisation-problems">
+<p class="label">Search behaviour</p>
+<h3>10.9 Unexpected optimisation behaviour</h3>
+<h4 class="minor-heading">The run exceeds <code>MAX_SIMS</code></h4>
+<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. A generation already in progress may take the unique-simulation count slightly beyond the requested limit. This is expected; the Section 9 reference run uses <code>MAX_SIMS = 25</code> and records 26 unique simulations.</p></div>
+<h4 class="minor-heading">The final archive contains fewer members than <code>MAX_FRONT_SIZE</code></h4>
+<div class="prose"><p><code>MAX_FRONT_SIZE</code> is a capacity or target size, not a guarantee that the final archive will contain that many distinct non-dominated solutions. Dominance, ε-box membership and duplicate simulations can produce a smaller archive.</p></div>
+<h4 class="minor-heading">Two identical configurations were evaluated only once</h4>
+<div class="prose"><p>The tool tracks unique simulations and can reuse an existing result when the same strategy is encountered again. The algorithm may therefore generate more candidate selections than the number recorded in <code>unique_simulations.txt</code>.</p></div>
+<h4 class="minor-heading">The run converges almost immediately</h4>
+<div class="prose"><p>Check whether <code>MIN_SIMS</code> is too small, <code>LAG</code> is too short, <code>DELTA_K</code> is too permissive, the candidate search space is extremely small, most interventions have no effect or the objective has little variation.</p><p>A rapidly terminated validation run can demonstrate that the workflow operates, but it does not establish adequate production convergence.</p></div>
+<h4 class="minor-heading">Minimum and maximum objective values are both zero</h4>
+<div class="prose"><p>Possible causes include a rainfall event that produces no relevant flooding or outlet flow, objective locations outside the affected area, intervention modifications that were not applied, identical baseline and intervention simulations or an objective calculation that found no valid data.</p></div>
+<h4 class="minor-heading">Do-everything performs worse than do-nothing</h4>
+<div class="prose"><p>This is not automatically a software error. An intervention can redirect water or adversely affect a particular objective location. However, a large or implausible deterioration warrants checking the DEM modifications, feature depths, outlet placement and objective calculation.</p></div>
+<h4 class="minor-heading">A repeated run produces a different Pareto front</h4>
+<div class="prose"><p>The ε-MOEA search is stochastic. Two runs can produce different archives even when their inputs and parameters match. Use repeated runs and adequate simulation budgets when solution stability matters.</p></div>
+</section>
+
+<section class="subsection" id="publication-problems">
+<p class="label">Final outputs</p>
+<h3>10.10 Plotting, packaging and publication problems</h3>
+<h4 class="minor-heading">The optimisation completed but final plotting failed</h4>
+<div class="prose"><p>Treat the instance as incomplete. Preserve any generation summaries and <code>Solutions.txt</code>, then identify the first plotting error. Check that final solution records are non-empty, referenced simulation directories still exist, required characteristics files were produced, objective values are finite, flood-depth outputs are available and outlet results exist for a hydrograph run.</p></div>
+<h4 class="minor-heading">Solution maps are missing but generation plots exist</h4>
+<div class="prose"><p>The optimisation probably reached its generational reporting stage but failed while reconstructing or plotting the final archive. Do not infer the spatial intervention layouts from the objective-space points alone.</p></div>
+<h4 class="minor-heading">The DAFNI model step succeeded but no output dataset appears</h4>
+<div class="prose"><p>Inspect the publisher step separately. DAFNI publisher steps collect specified files from the model’s <code>/data/outputs/</code> directory and create a catalogue dataset. A recursive pattern such as <code>outputs/**/*</code> is required when results are stored in nested folders. <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-workflow">DAFNI’s workflow documentation</a> describes publisher paths and recursive file selection.</p><p>When publication succeeds, the workflow-instance page may provide a <strong>Go to dataset</strong> control for the publisher step. <a href="https://docs.secure.dafni.rl.ac.uk/release-notes">DAFNI’s release notes</a> document this link.</p></div>
+<h4 class="minor-heading">The comparison plot label appears inconsistent</h4>
+<div class="prose"><p>Check the objective recorded in <code>parameters.txt</code> and use the units defined in Section 6. For <code>hydrograph</code>, the second objective is summed peak discharge in m³/s. Do not rely on a plot label that describes it only as “risk” or uses an inconsistent unit.</p></div>
+</section>
+
+<section class="subsection" id="troubleshooting-faqs">
+<p class="label">Common questions</p>
+<h3>10.11 Frequently asked questions</h3>
+<h4 class="minor-heading">Can I run the tool without intervention datasets?</h4>
+<div class="prose"><p>Rainfall, DEM and topography are always required. Individual intervention types can be omitted if they are not part of the study, but at least one valid, costed candidate is needed for a meaningful optimisation. A <code>hydrograph</code> run additionally requires outlet lines.</p></div>
+<h4 class="minor-heading">Can I use the damages objective?</h4>
+<div class="prose"><p>No. Automated building-type assignment is not yet integrated, so the damages objective should not be selected.</p></div>
+<h4 class="minor-heading">Can I restart a stopped optimisation?</h4>
+<div class="prose"><p>Not through the current deployed workflow. Recovery modules are largely prepared, but full restart integration remains on hold. Preserve the stopped run and begin a corrected new instance.</p></div>
+<h4 class="minor-heading">Does a successful DAFNI status prove the study is valid?</h4>
+<div class="prose"><p>No. It confirms workflow execution, not hydrodynamic validity, adequate optimisation convergence or decision suitability. Complete the validation checks in Sections 5, 6 and 9.</p></div>
+<h4 class="minor-heading">Why do the outputs call the second objective “risk” during a hydrograph run?</h4>
+<div class="prose"><p>Some internal records use <code>risk</code> as a generic name for the second objective. Interpret it according to <code>OBJECTIVE</code>. For a hydrograph run, the value represents the summed peak outlet discharge.</p></div>
+<h4 class="minor-heading">Can I compare solutions from different rainfall events on one Pareto front?</h4>
+<div class="prose"><p>Not directly. Different events represent different objective contexts. Report their fronts separately and compare common strategies using a controlled scenario or robustness analysis.</p></div>
+<h4 class="minor-heading">Should I edit the container code to correct my study?</h4>
+<div class="prose"><p>Ordinary DAFNI users should correct study inputs and parameter sets. Changes to the container or workflow definition create a different software version and require separate testing, documentation and deployment.</p></div>
+<h4 class="minor-heading">Should I delete a failed instance?</h4>
+<div class="prose"><p>Retain it until the problem is understood and the evidence has been recorded. Its identifier, logs and configuration may be essential for support or audit.</p></div>
+</section>
+
+<section class="subsection" id="request-support">
+<p class="label">Escalation</p>
+<h3>10.12 Requesting support</h3>
+<div class="prose"><p>Direct the issue to the party responsible for the failing layer:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Issue</th><th scope="col">Appropriate contact</th></tr></thead>
+<tbody>
+<tr><td>Dataset geometry, rainfall or study assumptions</td><td>Study data owner</td></tr>
+<tr><td>Tool behaviour, objective calculation or guide content</td><td>Tool maintainer or model contact point</td></tr>
+<tr><td>Workflow access, platform execution or catalogue publication</td><td>DAFNI support</td></tr>
+<tr><td>CityCAT model behaviour</td><td>CityCAT specialist or tool maintainer</td></tr>
+<tr><td>Security or credential concern</td><td>DAFNI security contact immediately</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>A useful support request should contain:</p></div>
+<code class="code-block">Subject: Hydrodynamic optimisation issue – &lt;instance ID&gt;
+
+DAFNI instance:
+Workflow and version:
+Model version:
+Parameter-set name:
+Input dataset versions:
+Execution date and time:
+Last successful log message:
+First meaningful warning or error:
+Expected behaviour:
+Observed behaviour:
+Does the problem recur in the quick-start validation run?:</code>
+<div class="prose"><p>Attach the relevant, minimally necessary log extract and screenshots of the workflow-step status. Do not include passwords, access tokens or restricted source data.</p><p>The official DAFNI administrative and security contact is listed as <a href="mailto:info@dafni.ac.uk">info@dafni.ac.uk</a> in the <a href="https://docs.secure.dafni.rl.ac.uk/docs/terms-and-conditions">DAFNI terms and conditions</a>. The workflow or model catalogue entry may also provide a more specific contact point.</p></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>Troubleshoot from the first departure from normal progress, preserve the failed-instance evidence and change only one cause at a time.</strong> A small successful validation run is the safest confirmation that a correction has addressed the problem.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Guide completion"><p>Sections 1–10 complete</p><h3>Ready to begin a validation study</h3><p>Follow Section 9 for a complete reference exercise, use Section 10 when a run behaves unexpectedly, or return to Section 3 to prepare your own datasets while preserving the complete DAFNI evidence chain.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
