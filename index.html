@@ -55,6 +55,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="toc-group"><a class="toc-heading" href="#limitations-support">8 · Limitations and support</a><ol>
 <li><a href="#appropriate-use">Appropriate use</a></li><li><a href="#hydrodynamic-limitations">Hydrodynamic limitations</a></li><li><a href="#decision-space-limitations">Decision space</a></li><li><a href="#objective-limitations">Objective limitations</a></li><li><a href="#optimisation-limitations">Optimisation limitations</a></li><li><a href="#implementation-issues">Known issues</a></li><li><a href="#decision-assurance">Decision assurance</a></li><li><a href="#sources-of-help">Sources of help</a></li><li><a href="#report-issue">Report an issue</a></li><li><a href="#future-development">Future development</a></li><li><a href="#guide-maintenance">Keep the guide current</a></li>
 </ol></div>
+<div class="toc-group"><a class="toc-heading" href="#quick-start-tutorial">9 · Quick-start tutorial</a><ol>
+<li><a href="#quick-start-outcomes">Learning outcomes</a></li><li><a href="#reference-study">Reference study</a></li><li><a href="#tutorial-route">Choose a route</a></li><li><a href="#tutorial-assets">Locate DAFNI assets</a></li><li><a href="#tutorial-parameters">Create parameter set</a></li><li><a href="#tutorial-preflight">Preflight check</a></li><li><a href="#tutorial-execution">Execute and monitor</a></li><li><a href="#tutorial-outputs">Validate outputs</a></li><li><a href="#tutorial-interpretation">Interpret solutions</a></li><li><a href="#tutorial-shortlist">Create a shortlist</a></li><li><a href="#tutorial-record">Save the record</a></li><li><a href="#tutorial-checklist">Completion checklist</a></li>
+</ol></div>
 </aside>
 <main id="main-content">
 <section class="section" id="introduction"><p class="label">Section 1 · Introduction</p><h2>What is the hydrodynamic optimisation tool?</h2><hr class="rule"><div class="prose">
@@ -1518,7 +1521,257 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </section>
 </section>
 
-<aside class="next" aria-label="Guide completion"><p>Sections 1–8 complete</p><h3>Ready to begin a validation study</h3><p>Return to Section 3 to prepare the required datasets, then work through configuration, execution, interpretation and reporting while preserving the complete DAFNI evidence chain.</p></aside>
+<section class="section chapter" id="quick-start-tutorial">
+<p class="label">Section 9 · Quick-start validation tutorial</p>
+<h2>From DAFNI inputs to an interpretable shortlist</h2>
+<hr class="rule">
+<div class="prose">
+<p>This tutorial brings the preceding sections together in one continuous exercise. It uses a small reference study to demonstrate how to select the necessary datasets, configure the optimisation, execute the workflow on DAFNI and interpret the resulting trade-off solutions.</p>
+<p>The exercise is intended for training and validation. Its deliberately short optimisation budget is not suitable for drawing conclusions about a real flood-risk management scheme.</p>
+</div>
+<div class="note warn"><strong>Example-package status</strong><p>The input files and precomputed results for this reference study exist within the development project, but a canonical, versioned tutorial dataset still needs to be published through DAFNI. Until that has been completed, names shown as <code>&lt;example dataset&gt;</code> or <code>&lt;version&gt;</code> are placeholders and should be replaced with the corresponding catalogue entries.</p></div>
+
+<section class="subsection" id="quick-start-outcomes">
+<p class="label">Tutorial objectives</p>
+<h3>9.1 What you will learn</h3>
+<div class="prose"><p>By completing this tutorial, you should be able to:</p></div>
+<ul class="checks">
+<li>Locate the workflow and its associated input datasets on DAFNI.</li>
+<li>Create or duplicate a parameter set.</li>
+<li>Assign datasets to the correct workflow inputs.</li>
+<li>Execute and monitor a workflow instance.</li>
+<li>Distinguish between an instance and a published output dataset.</li>
+<li>Verify that the expected result files have been produced.</li>
+<li>Interpret the final objective-space and flood-map plots.</li>
+<li>Compare several non-dominated intervention strategies.</li>
+<li>Record enough provenance to reproduce or audit the exercise.</li>
+</ul>
+</section>
+
+<section class="subsection" id="reference-study">
+<p class="label">Worked example</p>
+<h3>9.2 The reference study</h3>
+<div class="prose"><p>The tutorial uses a one-hour rainfall event and a small intervention search space. Its active intervention options comprise:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Intervention type</th><th scope="col">Reference configuration</th></tr></thead>
+<tbody>
+<tr><td>Rain-garden candidates</td><td>8</td></tr>
+<tr><td>Flexible feature candidates</td><td>2</td></tr>
+<tr><td>Fixed feature candidates</td><td>2</td></tr>
+<tr><td>Offline storage feature</td><td>1</td></tr>
+<tr><td>Permeable-paving zones</td><td>0</td></tr>
+<tr><td>Outlet locations</td><td>2</td></tr>
+</tbody>
+</table></div>
+<div class="prose">
+<p>The optimisation objective is <code>hydrograph</code>. The tool therefore minimises total intervention cost and the sum of the peak discharges recorded at the two outlet locations.</p>
+<p>The rainfall, DEM and topography datasets are mandatory. The reference package also contains the intervention and outlet datasets needed to reproduce the example.</p>
+</div>
+<div class="note"><strong>Return-period label</strong><p>The <code>RETURN_PERIOD</code> parameter is set to <code>30</code> for record-keeping purposes. It does not generate or verify a 30-year rainfall event: the rainfall file supplied to the workflow must already contain the intended event.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-route">
+<p class="label">Two routes</p>
+<h3>9.3 Choose how to follow the tutorial</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Route</th><th scope="col">What you do</th><th scope="col">Best suited to</th></tr></thead>
+<tbody>
+<tr><td><strong>Execute the reference run</strong></td><td>Configure and run the workflow using the published tutorial inputs.</td><td>Users learning the complete DAFNI workflow.</td></tr>
+<tr><td><strong>Use the precomputed results</strong></td><td>Download the fixed reference-output package and complete the interpretation exercise.</td><td>Workshops, demonstrations and users without sufficient compute allocation.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The first route confirms that you can configure and execute the model correctly. The second provides stable outputs for learning how the results are structured and interpreted.</p><p>A new optimisation run is stochastic. It may therefore return different intervention combinations or slightly different objective values from the precomputed reference run, even when the same configuration is used. Exact numerical agreement is not required for a successful validation.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-assets">
+<p class="label">Workflow inputs</p>
+<h3>9.4 Locate the workflow and datasets</h3>
+<div class="prose"><p>Open the tool using the <strong>Open in DAFNI</strong> link at the top of this guide. Before configuring an instance, record the workflow name and version, the versions of all input datasets, the model versions used by the workflow and the date on which you accessed them.</p><p>DAFNI datasets are versioned. If a catalogue entry has been updated, use the dataset version selector to choose the version specified by this tutorial. Do not assume that the most recently published version is identical to the reference data.</p><p>Locate the following tutorial datasets:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Workflow input</th><th scope="col">Dataset to select</th></tr></thead>
+<tbody>
+<tr><td>Rainfall</td><td><code>&lt;quick-start rainfall dataset and version&gt;</code></td></tr>
+<tr><td>DEM</td><td><code>&lt;quick-start DEM dataset and version&gt;</code></td></tr>
+<tr><td>Topography</td><td><code>&lt;quick-start topography dataset and version&gt;</code></td></tr>
+<tr><td>Rain gardens</td><td><code>&lt;quick-start rain-garden dataset and version&gt;</code></td></tr>
+<tr><td>Flexible features</td><td><code>&lt;quick-start flexible-feature dataset and version&gt;</code></td></tr>
+<tr><td>Fixed features</td><td><code>&lt;quick-start fixed-feature dataset and version&gt;</code></td></tr>
+<tr><td>Offline features</td><td><code>&lt;quick-start offline-feature dataset and version&gt;</code></td></tr>
+<tr><td>Outlets</td><td><code>&lt;quick-start outlet dataset and version&gt;</code></td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Leave green-area and permeable-paving inputs empty unless the published tutorial package explicitly provides them.</p><p>If you are preparing your own copy of the example data, it must first be uploaded and published as a DAFNI dataset before it can be assigned to the workflow. See DAFNI’s official guidance on <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-upload-data-and-use">uploading and using data</a>.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-parameters">
+<p class="label">Reference configuration</p>
+<h3>9.5 Create the quick-start parameter set</h3>
+<div class="prose"><p>Create a new parameter set or duplicate the published tutorial set. Use a distinctive name, for example:</p></div>
+<code class="code-block">quickstart-hydrograph-&lt;initials&gt;-r01</code>
+<div class="prose"><p>Avoid editing a shared reference parameter set because changes may overwrite the configuration other users expect to find. Enter the following values:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Parameter</th><th scope="col">Tutorial value</th><th scope="col">Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>OBJECTIVE</code></td><td><code>hydrograph</code></td><td>Minimise summed outlet peak discharge.</td></tr>
+<tr><td><code>RETURN_PERIOD</code></td><td><code>30</code></td><td>Label the rainfall event.</td></tr>
+<tr><td><code>BINARY_CODING</code></td><td><code>gray</code></td><td>Encode intervention decisions using Gray code.</td></tr>
+<tr><td><code>NO_ZONES</code></td><td><code>0</code></td><td>Disable permeable-paving zoning.</td></tr>
+<tr><td><code>LAG</code></td><td><code>2</code></td><td>Compare recent generational fronts.</td></tr>
+<tr><td><code>DELTA_K</code></td><td><code>0.1</code></td><td>Set the convergence threshold.</td></tr>
+<tr><td><code>MAX_FRONT_SIZE</code></td><td><code>16</code></td><td>Set the target population/front size.</td></tr>
+<tr><td><code>MIN_SIMS</code></td><td><code>1</code></td><td>Permit early convergence checking.</td></tr>
+<tr><td><code>MAX_SIMS</code></td><td><code>25</code></td><td>Limit the validation-run simulation budget.</td></tr>
+<tr><td><code>BUFFER_VAL</code></td><td><code>100</code></td><td>Retained but inactive for this hydrograph objective.</td></tr>
+<tr><td><code>SIM_RUNTIME</code></td><td><code>3600</code></td><td>Simulate the one-hour event.</td></tr>
+<tr><td><code>OUTPUT_FREQUENCY</code></td><td><code>300</code></td><td>Write hydraulic outputs every five minutes.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Retain the documented default hydraulic and economic values for the remaining parameters.</p></div>
+<div class="note warn"><strong>Validation settings only</strong><p><code>MIN_SIMS = 1</code> and <code>MAX_SIMS = 25</code> create a short functional test. They do not provide sufficient exploration of the solution space for a production optimisation study.</p></div>
+<div class="prose"><p>DAFNI may divide a long parameter list over several table pages. Review every page before saving the set. Further platform-specific instructions are available in DAFNI’s guide to <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">creating a parameter set</a>.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-preflight">
+<p class="label">Before execution</p>
+<h3>9.6 Complete the preflight check</h3>
+<div class="prose"><p>Before selecting <strong>Execute workflow</strong>, verify the following:</p></div>
+<ul class="checks">
+<li><code>OBJECTIVE</code> is exactly <code>hydrograph</code>.</li>
+<li>The rainfall, DEM and topography datasets are assigned.</li>
+<li>The two outlet locations are present.</li>
+<li>All selected datasets use the tutorial versions.</li>
+<li>The rainfall duration is covered by <code>SIM_RUNTIME</code>.</li>
+<li><code>OUTPUT_FREQUENCY</code> is appropriate for the rainfall time step.</li>
+<li><code>BINARY_CODING</code> is <code>gray</code>.</li>
+<li>No permeable-paving zones are requested.</li>
+<li>The parameter set has been saved under a unique name.</li>
+<li>Only one validation instance will be submitted.</li>
+</ul>
+<div class="note warn"><strong>Stop if candidate counts differ</strong><p>If any candidate-intervention count differs from the reference configuration, check the dataset versions and geometry preparation before continuing.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-execution">
+<p class="label">Run the example</p>
+<h3>9.7 Execute and monitor the workflow</h3>
+<div class="prose"><p>Execute the workflow using the quick-start parameter set. DAFNI creates an instance representing this particular execution of the workflow. Monitor the instance and its logs for the expected sequence:</p></div>
+<ol class="process">
+<li><strong>Retrieve inputs.</strong> The assigned datasets are made available to the workflow.</li>
+<li><strong>Process spatial data.</strong> The tool validates and prepares the study inputs.</li>
+<li><strong>Prepare CityCAT.</strong> The baseline hydraulic environment is assembled.</li>
+<li><strong>Evaluate strategies.</strong> The initial population and subsequent candidates are simulated.</li>
+<li><strong>Report generations.</strong> Summary files and objective-space plots are produced.</li>
+<li><strong>Check stopping criteria.</strong> Convergence and the simulation budget are assessed.</li>
+<li><strong>Plot final solutions.</strong> The retained non-dominated strategies are mapped.</li>
+<li><strong>Publish results.</strong> The result files are passed to the workflow’s publishing stage.</li>
+</ol>
+<div class="note"><strong>Why 26 simulations may be reported</strong><p>The optimisation budget is checked between generations. The reference run completed after 26 unique simulations despite using <code>MAX_SIMS = 25</code>; this is expected behaviour rather than evidence that the parameter was ignored.</p></div>
+<div class="prose"><p>Use DAFNI’s official instructions for <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">executing a model or workflow</a> if you need assistance locating the execution controls or instance logs.</p><p>A successful instance does not necessarily mean the results have already appeared in the Data catalogue. The workflow’s publishing stage must also complete successfully before the output dataset can be retrieved through the catalogue.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-outputs">
+<p class="label">Technical validation</p>
+<h3>9.8 Validate the output package</h3>
+<div class="prose"><p>The precomputed reference package contains:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Output</th><th scope="col">Reference expectation</th></tr></thead>
+<tbody>
+<tr><td>Unique hydraulic simulations</td><td>26</td></tr>
+<tr><td>Generation objective-space plots</td><td>5</td></tr>
+<tr><td>Generation summaries</td><td>5</td></tr>
+<tr><td>Final non-dominated solutions</td><td>4</td></tr>
+<tr><td>Individual solution maps</td><td>4</td></tr>
+<tr><td>Solution-comparison plot</td><td>1</td></tr>
+<tr><td>Optimisation parameter record</td><td>1</td></tr>
+<tr><td>Processed algorithm-input archive</td><td>1</td></tr>
+<tr><td>CityCAT setup archive</td><td>1</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Check that the output package includes, at minimum:</p></div>
+<ul class="checks">
+<li><code>parameters.txt</code>, <code>Solutions.txt</code> and <code>unique_simulations.txt</code>.</li>
+<li>The generation summary files and generational objective-space plots.</li>
+<li><code>Solution Comparison.png</code> and the individual <code>Solution &lt;n&gt;.png</code> maps.</li>
+<li><code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>.</li>
+</ul>
+<div class="prose"><p>A validation run can be considered technically successful when the workflow completes, the expected result families are present and the reported costs and hydraulic objective values are finite and physically plausible.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-interpretation">
+<p class="label">Worked interpretation</p>
+<h3>9.9 Interpret the reference solutions</h3>
+<div class="prose"><p>The fixed reference output contains four non-dominated solutions:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Solution</th><th scope="col">Installation cost</th><th scope="col">Summed outlet peak discharge</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>£116,261.22</td><td>2.7747 m³/s</td></tr>
+<tr><td>1</td><td>£3,151,880.64</td><td>2.1022 m³/s</td></tr>
+<tr><td>2</td><td>£1,690,850.75</td><td>2.2238 m³/s</td></tr>
+<tr><td>3</td><td>£1,132,221.72</td><td>2.4555 m³/s</td></tr>
+</tbody>
+</table></div>
+<div class="prose">
+<p>Lower values are preferred for both objectives, so desirable solutions lie towards the lower-left of the objective-space plot.</p>
+<p>Solution 0 is the least expensive strategy but has the highest summed peak discharge among the four final solutions. Solution 1 provides the lowest hydraulic objective value but requires the greatest investment. Solutions 2 and 3 occupy intermediate positions and may provide more balanced cost–performance compromises.</p>
+<p>The progression also illustrates diminishing returns:</p>
+</div>
+<ul class="checks">
+<li>Moving from Solution 0 to Solution 3 costs approximately £1.016 million and reduces the hydraulic objective by about 0.319 m³/s.</li>
+<li>Moving from Solution 3 to Solution 2 costs approximately another £0.559 million and reduces it by about 0.232 m³/s.</li>
+<li>Moving from Solution 2 to Solution 1 costs approximately another £1.461 million for a reduction of about 0.122 m³/s.</li>
+</ul>
+<div class="note warn"><strong>Solution 0 is not the baseline</strong><p>These comparisons are between intervention strategies. Solution 0 must not be described as the do-nothing baseline simply because it is the least expensive member of the final archive.</p></div>
+<div class="prose"><p>Next, examine each solution map and its paired hydrographs. Check where the interventions are located, whether they form a spatially coherent strategy, how each outlet responds, whether peak attenuation changes the timing of flows, whether flooding appears to have been displaced elsewhere and whether the combination is practically deliverable.</p><p>The objective-space plot identifies mathematically non-dominated choices. It does not determine which solution should be implemented.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-shortlist">
+<p class="label">Decision exercise</p>
+<h3>9.10 Produce a three-solution shortlist</h3>
+<div class="prose"><p>Use the four reference solutions to construct a shortlist containing a <strong>lowest-cost option</strong>, a <strong>balanced compromise option</strong> and a <strong>highest-performing option</strong>. For each shortlisted solution, record:</p></div>
+<ul class="checks">
+<li>The solution number, installation cost and summed peak discharge.</li>
+<li>The selected intervention types.</li>
+<li>The principal spatial advantages.</li>
+<li>Potential disadvantages or implementation constraints.</li>
+<li>The reason for retaining the solution.</li>
+</ul>
+<div class="prose"><p>A reasonable first shortlist might retain Solution 0 as the lowest-cost option, either Solution 2 or 3 as the compromise, and Solution 1 as the strongest hydraulic performer. The final selection should nevertheless be based on the maps, individual outlet hydrographs and planning context—not the objective values alone.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-record">
+<p class="label">Reproducibility</p>
+<h3>9.11 Save the validation record</h3>
+<div class="prose"><p>Retain the following information alongside the downloaded results:</p></div>
+<ul class="checks">
+<li>DAFNI instance identifier and execution date.</li>
+<li>Workflow and model versions.</li>
+<li>Parameter-set name or export.</li>
+<li>Input dataset names and versions.</li>
+<li>Instance logs and the published output dataset identifier and version.</li>
+<li><code>parameters.txt</code>, <code>Solutions.txt</code> and notes explaining the shortlist.</li>
+</ul>
+<div class="prose"><p>This record should be sufficient for another authorised user to locate the same assets, understand the configuration and repeat the exercise.</p></div>
+</section>
+
+<section class="subsection" id="tutorial-checklist">
+<p class="label">Finish the exercise</p>
+<h3>9.12 Tutorial completion checklist</h3>
+<div class="prose"><p>You have completed the tutorial when you can confirm that:</p></div>
+<ul class="checks">
+<li>The correct workflow and dataset versions were selected.</li>
+<li>All mandatory inputs were assigned.</li>
+<li>The hydrograph parameter set was saved and executed.</li>
+<li>The instance and published output dataset can be distinguished.</li>
+<li>The expected output files were found.</li>
+<li>The axes and units of the objective-space plot were checked.</li>
+<li>At least one solution map and both outlet hydrographs were examined.</li>
+<li>A three-solution shortlist was justified.</li>
+<li>The validation provenance was recorded.</li>
+</ul>
+<div class="key-point"><p class="label">Key point</p><p><strong>Completing the quick-start run demonstrates that you can operate and interpret the workflow.</strong> It does not validate your own study data or establish that the short optimisation has converged sufficiently for decision-making.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Guide completion"><p>Sections 1–9 complete</p><h3>Ready to begin a validation study</h3><p>Follow Section 9 for a complete reference exercise, or return to Section 3 to prepare your own datasets and work through configuration, execution, interpretation and reporting while preserving the complete DAFNI evidence chain.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
