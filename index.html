@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–4 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–5 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -42,6 +42,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#configuring-workflow">4 · Configuring the workflow</a><ol>
 <li><a href="#create-parameter-set">Create a parameter set</a></li><li><a href="#validation-run">Begin with validation</a></li><li><a href="#select-objective">Select the objective</a></li><li><a href="#pavement-zones">Pavement zones</a></li><li><a href="#search-controls">Search controls</a></li><li><a href="#simulation-controls">Simulation controls</a></li><li><a href="#hydraulic-properties">Hydraulic properties</a></li><li><a href="#cost-configuration">Cost configuration</a></li><li><a href="#unused-parameters">Unused interventions</a></li><li><a href="#review-configuration">Review and save</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#running-optimisation">5 · Running and monitoring</a><ol>
+<li><a href="#before-launch">Before launching</a></li><li><a href="#launch-workflow">Launch the workflow</a></li><li><a href="#instance-status">Instance status</a></li><li><a href="#run-stages">Stages of a run</a></li><li><a href="#monitor-progress">Monitor progress</a></li><li><a href="#common-failures">Common failures</a></li><li><a href="#stop-run">Stopping a run</a></li><li><a href="#successful-outputs">Expected outputs</a></li><li><a href="#check-validation">Check validation</a></li><li><a href="#production-run">Move to production</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -654,7 +657,202 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </section>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 5</p><h3>Running and monitoring an optimisation</h3><p>Launch a validation instance, interpret its status and logs, recognise common failure modes, and decide whether the study is ready for a production run.</p></aside>
+<section class="section chapter" id="running-optimisation">
+<p class="label">Section 5 · Running and monitoring an optimisation</p>
+<h2>From validation instance to production run</h2>
+<hr class="rule">
+<div class="prose">
+<p>Executing a workflow creates a new DAFNI <strong>instance</strong>. The instance records the workflow version, parameter set, selected datasets and status of each workflow step.</p>
+<p>Begin with a workflow-validation run. Its purpose is to confirm that the complete pipeline works correctly; it does not establish that the CityCAT model itself is calibrated or that the optimisation has converged.</p>
+</div>
+
+<section class="subsection" id="before-launch">
+<p class="label">Final pause</p>
+<h3>5.1 Before launching the instance</h3>
+<div class="prose"><p>Complete one final review before committing computational resources.</p></div>
+<ul class="checks">
+<li>The intended workflow and model versions are selected.</li>
+<li>The validation parameter set has a clear, unique name.</li>
+<li>Rainfall, DEM and topography datasets are assigned.</li>
+<li>The objective is either <code>hydrograph</code> or <code>risk</code>.</li>
+<li>Outlet lines are assigned when using <code>hydrograph</code>.</li>
+<li><code>BINARY_CODING</code> remains <code>gray</code>.</li>
+<li>Simulation runtime covers the rainfall and subsequent flood response.</li>
+<li>Maximum front size and simulation budget are deliberately small.</li>
+<li>Candidate interventions and their cost assumptions have been reviewed.</li>
+<li>Dataset and parameter-set versions have been recorded.</li>
+</ul>
+<div class="note warn"><strong>Run one validation instance at a time</strong><p>Avoid launching several identical instances while testing. Wait for the first result and diagnose any problems before consuming additional resources.</p></div>
+</section>
+
+<section class="subsection" id="launch-workflow">
+<p class="label">Execute</p>
+<h3>5.2 Launching the workflow</h3>
+<div class="prose"><p>A workflow can be executed from the DAFNI workflow catalogue or its details page.</p></div>
+<ol class="process">
+<li><strong>Open the workflow.</strong> Select the CityCAT optimisation workflow.</li>
+<li><strong>Choose Execute.</strong> Open the list of available parameter sets.</li>
+<li><strong>Select the validation configuration.</strong> Confirm the intended parameter-set name and workflow version.</li>
+<li><strong>Execute the workflow.</strong> Submit the configuration to create a new instance.</li>
+<li><strong>Open the instance.</strong> Find it in the workflow’s <em>Instances</em> list and open the detailed status view.</li>
+</ol>
+<div class="prose"><p>The instance details page displays the workflow and the status of each step. Select an individual step to inspect its configuration and status information. See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">DAFNI execution guidance</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">parameter-set guidance</a> for the current interface.</p></div>
+<div class="note plan"><strong>Record the instance</strong><p>Note the instance name or identifier, start time, parameter set and purpose of the run. This makes it easier to distinguish validation, sensitivity and production studies later.</p></div>
+</section>
+
+<section class="subsection" id="instance-status">
+<p class="label">Platform status</p>
+<h3>5.3 Understanding instance status</h3>
+<div class="prose"><p>The exact wording and icons displayed by DAFNI may change, but an instance normally progresses through states equivalent to the following.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Status</th><th scope="col">Meaning</th><th scope="col">Recommended action</th></tr></thead>
+<tbody>
+<tr><td><strong>Waiting or queued</strong></td><td>DAFNI is waiting for dependencies or computational resources.</td><td>Allow time for scheduling. This does not indicate a model failure.</td></tr>
+<tr><td><strong>Running</strong></td><td>The container or another workflow step is active.</td><td>Monitor the detailed step status and compare elapsed time with the validation estimate.</td></tr>
+<tr><td><strong>Completed</strong></td><td>The step finished successfully.</td><td>Check whether downstream publishing is still running before treating the workflow as complete.</td></tr>
+<tr><td><strong>Failed</strong></td><td>The step returned an error.</td><td>Open the failed step, record its error information and identify the last completed processing stage.</td></tr>
+<tr><td><strong>Stopped</strong></td><td>The instance was terminated before normal completion.</td><td>Treat its results as incomplete and launch a new instance after correcting the problem.</td></tr>
+</tbody>
+</table></div>
+<div class="grid">
+<article class="card"><h4>Model completed; publisher running</h4><p>The optimisation has finished and DAFNI is collecting its outputs.</p></article>
+<article class="card"><h4>Model completed; publisher failed</h4><p>The computation may have succeeded, but the results were not published correctly.</p></article>
+<article class="card"><h4>Model failed</h4><p>Do not interpret any partial files as a completed optimisation.</p></article>
+<article class="card"><h4>All steps completed</h4><p>Proceed to the output and scientific checks later in this section.</p></article>
+</div>
+</section>
+
+<section class="subsection" id="run-stages">
+<p class="label">Execution sequence</p>
+<h3>5.4 What happens during a run?</h3>
+<div class="prose"><p>The execution log follows a recognisable sequence. Understanding these stages helps distinguish slow computation from a configuration failure.</p></div>
+<ol class="process">
+<li><strong>Container initialisation.</strong> The runtime environment and headless CityCAT display are started.</li>
+<li><strong>Input preprocessing.</strong> Rainfall, DEM and topography are validated and converted. Optional intervention and outlet datasets are processed.</li>
+<li><strong>CityCAT setup.</strong> The standardised terrain, buildings, permeable areas, intervention files and CityCAT configuration are written.</li>
+<li><strong>Optimisation initialisation.</strong> The design space is encoded and the do-nothing and do-everything boundary strategies are evaluated.</li>
+<li><strong>Evolutionary search.</strong> New strategies are generated and simulated. Messages such as <code>Advancing to Generation</code> and <code>CityCAT simulation completed</code> indicate progress.</li>
+<li><strong>Final plotting.</strong> The final solutions are decoded and spatial or objective-space plots are produced.</li>
+<li><strong>Packaging.</strong> The processed algorithm inputs and CityCAT working directory are compressed.</li>
+<li><strong>Normal termination.</strong> A successful log ends with <code>Algorithm terminated. Total execution time:</code>.</li>
+</ol>
+<div class="note"><strong>A quiet period can be normal</strong><p>A single CityCAT simulation may take a substantial amount of time. The absence of a new generation message does not necessarily mean the instance has stalled.</p></div>
+</section>
+
+<section class="subsection" id="monitor-progress">
+<p class="label">Progress indicators</p>
+<h3>5.5 Monitoring progress</h3>
+<div class="prose"><p>The most useful indicators are the workflow and model-step status, elapsed time relative to the validation estimate, completed CityCAT simulation messages, generation advances, hypervolume and convergence messages, and the transition from optimisation to plotting and compression.</p><p>The generation plots produced by a completed run also report the archive size, population size and cumulative number of unique simulations.</p></div>
+<div class="note warn"><strong>Runtime estimates are approximate</strong><p>Candidate strategies can differ in processing time, and final plotting and compression add overhead. The maximum-simulation setting is checked between generations, so the final number of unique simulations may pass the specified threshold.</p></div>
+</section>
+
+<section class="subsection" id="common-failures">
+<p class="label">Troubleshooting</p>
+<h3>5.6 Common failures and first checks</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Message or symptom</th><th scope="col">Likely cause</th><th scope="col">First check</th></tr></thead>
+<tbody>
+<tr><td>Environment-variable type casting failed</td><td>A numeric field contains text, an invalid decimal or an empty value.</td><td>Review every page of the parameter table.</td></tr>
+<tr><td>No valid rainfall data found</td><td>The dataset is missing, assigned to the wrong slot or uses an unsupported format.</td><td>Check the Rainfall Data assignment and archive contents.</td></tr>
+<tr><td>Rainfall CSV contains invalid data</td><td>Incorrect columns, units, ordering, missing values or negative intensity.</td><td>Validate the CSV against Section 3.</td></tr>
+<tr><td>No valid DEM data found</td><td>The DEM is missing, incorrectly packaged or assigned to the wrong slot.</td><td>Check the Terrain Data slot and filename extension.</td></tr>
+<tr><td>Spatial integrity cannot be verified</td><td>Raster or vector data have no coordinate-system information.</td><td>Restore valid CRS metadata or the Shapefile <code>.prj</code> component.</td></tr>
+<tr><td>No valid topography data found</td><td>Unsupported format, packaging problem or incorrect data slot.</td><td>Inspect the Topography assignment and archive structure.</td></tr>
+<tr><td>Required topography field is missing</td><td><code>theme</code>, <code>descriptivegroup</code> or the necessary <code>make</code> field was lost or renamed.</td><td>Inspect the exported attribute table.</td></tr>
+<tr><td>No outlet line data found</td><td><code>hydrograph</code> was selected without a valid outlet dataset.</td><td>Assign LineString or MultiLineString outlet data.</td></tr>
+<tr><td>Offline basin or inlet cannot be matched</td><td><code>basin_id</code> and <code>target_id</code> do not correspond.</td><td>Check identifiers and inlet geometry.</td></tr>
+<tr><td>Fixed feature has critical overlap</td><td>Most of the footprint lies in an excluded or invalid area.</td><td>Revise the geometry and its relationship to buildings or domain boundaries.</td></tr>
+<tr><td>Minimum and maximum risk are both zero</td><td>The event produces no measured reduction, or the interventions have no effect on the objective.</td><td>Check rainfall severity, objective evaluation and intervention behaviour.</td></tr>
+<tr><td>Do-nothing risk is lower than do-everything risk</td><td>The maximum intervention strategy worsens the selected objective.</td><td>Inspect intervention representation, DEM modifications and objective location.</td></tr>
+<tr><td>Minimum and maximum costs are both zero</td><td>No active candidates exist, or all applicable costs are zero.</td><td>Check candidate datasets, pavement zoning and cost parameters.</td></tr>
+<tr><td>CityCAT exits with an error</td><td>Invalid model inputs, numerical failure or an incompatible generated configuration.</td><td>Identify the final successful setup message and inspect the prepared CityCAT files.</td></tr>
+<tr><td>Failure during final plotting</td><td>The optimisation may have finished, but result generation or packaging is incomplete.</td><td>Do not treat the instance as successful; inspect its final status and available files.</td></tr>
+</tbody>
+</table></div>
+<div class="note plan"><strong>Correct the cause before rerunning</strong><p>Revise the source dataset or parameter set rather than repeatedly executing the same failing configuration.</p></div>
+</section>
+
+<section class="subsection" id="stop-run">
+<p class="label">Early termination</p>
+<h3>5.7 When should a run be stopped?</h3>
+<div class="prose"><p>DAFNI provides a <strong>Stop Workflow</strong> control on the workflow-instance page. Stop an active validation run when the wrong rainfall, objective or dataset version was selected; an inappropriate simulation budget was entered; status information confirms a non-recoverable setup problem; the observed runtime makes the study impractical; or DAFNI support advises termination.</p><p>Avoid stopping merely because one CityCAT simulation is taking longer than previous candidates. First compare the elapsed time with the model size, configured simulation runtime and earlier validation results.</p></div>
+<div class="note warn"><strong>Stopped runs are incomplete</strong><p>Full restart and recovery integration is currently on hold. Do not assume that a stopped DAFNI instance can continue from partial solutions. Preserve its configuration and launch a corrected new instance.</p></div>
+</section>
+
+<section class="subsection" id="successful-outputs">
+<p class="label">Completion package</p>
+<h3>5.8 Expected outputs from a successful run</h3>
+<div class="prose"><p>A completed workflow should publish or otherwise expose the files written beneath <code>/data/outputs/</code>.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Output</th><th scope="col">Purpose</th></tr></thead>
+<tbody>
+<tr><td><code>plots/Generation N.png</code></td><td>Shows the epsilon archive at each recorded generation, including archive and population information.</td></tr>
+<tr><td><code>plots/Solution Comparison.png</code></td><td>Shows the final set of cost-performance trade-offs.</td></tr>
+<tr><td><code>plots/Solution N.png</code></td><td>Provides a spatial view of an individual final solution and objective-specific information where available.</td></tr>
+<tr><td><code>summary/Solutions.txt</code></td><td>Records final genotypes, cost, flood-performance value and decoded feature characteristics.</td></tr>
+<tr><td><code>summary/Generation_N_Solutions.txt</code></td><td>Records the archive members present in each generation.</td></tr>
+<tr><td><code>summary/parameters.txt</code></td><td>Records the optimisation, intervention and cost settings used by the run.</td></tr>
+<tr><td><code>summary/unique_simulations.txt</code></td><td>Records the cumulative unique-simulation count by generation.</td></tr>
+<tr><td><code>execution_log.txt</code></td><td>Records preprocessing, simulation, optimisation and completion messages.</td></tr>
+<tr><td><code>alg_inputs.zip</code></td><td>Contains the standardised intervention and algorithm inputs generated during preprocessing.</td></tr>
+<tr><td><code>CityCAT_setup.zip</code></td><td>Contains the prepared CityCAT model, simulation folders, meshes and related files.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>DAFNI requires model outputs to be written beneath <code>/data/outputs/</code>. If the workflow includes a publisher step, its configured file paths determine which outputs appear in the Data catalogue. <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-dafni-ready-model/">DAFNI’s model guidance</a> explains this output convention.</p></div>
+</section>
+
+<section class="subsection" id="check-validation">
+<p class="label">Quality assurance</p>
+<h3>5.9 Checking a completed validation run</h3>
+<div class="prose"><p>Do not move directly from a green DAFNI status to a production optimisation. Download and review the validation outputs first.</p></div>
+<h4 class="minor-heading">Completion checks</h4>
+<ul class="checks">
+<li>Every workflow step reports successful completion.</li>
+<li><code>execution_log.txt</code> reaches the normal termination message.</li>
+<li><code>parameters.txt</code> matches the intended parameter set.</li>
+<li><code>Solutions.txt</code> exists, is non-empty and contains finite cost and risk values.</li>
+<li><code>unique_simulations.txt</code> records plausible progress.</li>
+<li>The two compressed setup archives can be opened.</li>
+<li>Generation and solution plots were produced.</li>
+</ul>
+<h4 class="minor-heading">Hydrodynamic checks</h4>
+<ul class="checks">
+<li>The do-nothing simulation resembles the expected baseline behaviour.</li>
+<li>Flood depths and flow patterns are physically plausible.</li>
+<li>The chosen outlet captures the intended hydrograph.</li>
+<li>Buildings used for the <code>risk</code> objective align with the model grid.</li>
+<li>Selected interventions alter the model in the expected locations.</li>
+<li>No-data areas, domain boundaries or reprojection errors are visible.</li>
+</ul>
+<h4 class="minor-heading">Optimisation checks</h4>
+<ul class="checks">
+<li>The do-everything strategy does not perform worse than do-nothing.</li>
+<li>Intervention costs are positive and of a credible order of magnitude.</li>
+<li>Increasing cost generally provides opportunities for improved flood performance.</li>
+<li>Distinct genotypes correspond to genuinely different strategies.</li>
+<li>The front is not being driven by one erroneous candidate or cost assumption.</li>
+</ul>
+<div class="note warn"><strong>Completion is not validation</strong><p>A technically completed run that fails these checks should be corrected and repeated as another validation instance.</p></div>
+</section>
+
+<section class="subsection" id="production-run">
+<p class="label">Scale up carefully</p>
+<h3>5.10 Moving to a production run</h3>
+<ol class="process">
+<li><strong>Preserve validation.</strong> Keep the successful validation parameter set unchanged.</li>
+<li><strong>Create a production configuration.</strong> Duplicate the set where available, or create a new one with a distinct name and description.</li>
+<li><strong>Keep validated assumptions.</strong> Retain the datasets and physical parameters unless a change is intentional and documented.</li>
+<li><strong>Increase the search budget.</strong> Set the chosen production values for <code>MAX_FRONT_SIZE</code>, <code>MIN_SIMS</code> and <code>MAX_SIMS</code>.</li>
+<li><strong>Estimate total runtime.</strong> Use the observed time per unique simulation and allow for plotting and packaging.</li>
+<li><strong>Record provenance.</strong> Note the workflow, model, dataset and parameter-set versions.</li>
+<li><strong>Launch once.</strong> Start one production instance and monitor its initial stages.</li>
+</ol>
+<div class="prose"><p>Changes to rainfall, candidate interventions, hydraulic properties or objectives create a different modelling experiment. They should normally receive a separate parameter set and validation run.</p></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>A completed DAFNI instance confirms that the computational workflow ran.</strong> A successful validation requires the additional scientific checks that the inputs, CityCAT response, intervention representation, objective values and costs are all credible.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 6</p><h3>Understanding and interpreting the results</h3><p>Read the Pareto front, compare individual strategies, inspect spatial outputs and communicate cost-performance trade-offs without overstating the evidence.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
