@@ -15,7 +15,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:1.4rem;gap:1rem}.card{padding:1.35rem;border:1px solid var(--line);border-radius:var(--radius);background:var(--white);box-shadow:0 8px 24px rgba(18,61,58,.05)}.card h4{margin:0 0 .45rem;color:var(--dark)}.card p{margin:0;color:var(--muted);font-size:.94rem}.number{display:grid;width:2.2rem;height:2.2rem;margin-bottom:.8rem;place-items:center;border-radius:.65rem;background:var(--soft);font-size:.8rem;font-weight:850}.checks{display:grid;margin:1.2rem 0 0;padding:0;gap:.7rem;list-style:none}.checks li{position:relative;padding:.85rem 1rem .85rem 2.8rem;border:1px solid var(--line);border-radius:.75rem;background:#fff}.checks li:before{position:absolute;left:1rem;color:var(--teal);content:"✓";font-weight:900}
 .note{margin-top:1.5rem;padding:1.2rem 1.35rem;border-left:4px solid #226d8a;border-radius:0 var(--radius) var(--radius) 0;background:#e8f3f7}.note.warn{border-color:#9b6419;background:var(--amber)}.note.plan{border-color:var(--teal);background:var(--soft)}.note strong{display:block;color:var(--dark)}.note p{margin:0}.status{display:inline-flex;margin-bottom:.6rem;padding:.25rem .55rem;border-radius:99px;background:var(--soft);font-size:.72rem;font-weight:800;text-transform:uppercase}.status.off{background:var(--amber);color:#74480e}
 .next{margin-top:4.5rem;padding:clamp(1.5rem,4vw,2.5rem);border-radius:var(--radius);background:var(--dark);color:#fff}.next p{margin:0;color:#cfe8e3}.next h3{margin:.35rem 0 .7rem;color:#fff;font-size:clamp(1.5rem,3vw,2rem)}footer{border-top:1px solid var(--line);background:#f4f7f3}.footer-inner{display:flex;justify-content:space-between;padding:2rem 0;gap:2rem;color:var(--muted);font-size:.88rem}.footer-inner p{margin:0}
-@media(max-width:860px){.hero-inner,.shell{grid-template-columns:1fr}.contents{position:static;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.contents ol{columns:2}nav a:not(.button){display:none}}@media(max-width:580px){.grid{grid-template-columns:1fr}.contents ol{columns:1}.brand span:last-child{display:none}.footer-inner{flex-direction:column}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{header,.contents{display:none}.hero{background:#fff;color:#000}.lead,.eyebrow{color:#333}.shell,.hero-inner{display:block;width:100%}}
+.contents{max-height:calc(100vh - 7rem);overflow:auto;padding-right:.5rem}.toc-heading{display:block;margin:.5rem 0 .2rem;padding:.45rem .6rem;border-radius:.45rem;background:var(--soft);color:var(--dark)!important;font-weight:800}.toc-group ol{margin-bottom:1rem}.chapter{margin-top:5rem;padding-top:5rem;border-top:1px solid var(--line)}.subsection{padding-top:3.5rem;scroll-margin-top:5rem}.process{display:grid;margin:1.5rem 0 0;padding:0;gap:.8rem;list-style:none;counter-reset:steps}.process li{position:relative;min-height:4.2rem;padding:1rem 1rem 1rem 4.15rem;border:1px solid var(--line);border-radius:.8rem;background:#fff}.process li:before{position:absolute;top:.85rem;left:1rem;display:grid;width:2.25rem;height:2.25rem;place-items:center;border-radius:50%;background:var(--dark);color:#fff;content:counter(steps);counter-increment:steps;font-size:.8rem;font-weight:800}.process li:not(:last-child):after{position:absolute;bottom:-.85rem;left:2.08rem;width:2px;height:.85rem;background:var(--line);content:""}.loop-back{margin:.85rem 0 0;color:var(--teal);font-weight:750}.table-wrap{margin-top:1.4rem;overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.guide-table{width:100%;border-collapse:collapse}.guide-table th,.guide-table td{padding:.85rem 1rem;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}.guide-table th{background:var(--soft);color:var(--dark);font-size:.85rem}.guide-table tr:last-child td{border-bottom:0}.example-code{display:block;margin:.75rem 0;padding:.8rem 1rem;border-radius:.55rem;background:#edf3f1;color:var(--dark);font-size:1.05rem;font-weight:750;letter-spacing:.18em}.key-point{margin-top:3.5rem;padding:1.5rem;border:1px solid #add7cf;border-radius:var(--radius);background:linear-gradient(135deg,#e5f2ef,#f4faf7)}
+@media(max-width:860px){.hero-inner,.shell{grid-template-columns:1fr}.contents{position:static;max-height:none;overflow:visible;padding:1rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff}.contents ol{columns:2}nav a:not(.button){display:none}}@media(max-width:580px){.grid{grid-template-columns:1fr}.contents ol{columns:1}.brand span:last-child{display:none}.footer-inner{flex-direction:column}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}@media print{header,.contents{display:none}.hero{background:#fff;color:#000}.lead,.eyebrow{color:#333}.shell,.hero-inner{display:block;width:100%}}
 </style>
 </head>
 <body>
@@ -25,13 +26,18 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Section 1 of 12</span><span class="pill">Start here</span><span class="pill">About 8 minutes</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–2 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
-<aside class="contents" id="contents" aria-label="On this page"><p>On this page</p><ol>
-<li><a href="#introduction">What is the tool?</a></li><li><a href="#audience">Who is this guide for?</a></li><li><a href="#decisions">Decisions it supports</a></li><li><a href="#interventions">Interventions</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#prerequisites">Before you start</a></li><li><a href="#outputs">What it produces</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#computing">Computational needs</a></li><li><a href="#about-guide">About this guide</a></li>
-</ol></aside>
+<aside class="contents" id="contents" aria-label="Guide contents"><p>Guide contents</p>
+<div class="toc-group"><a class="toc-heading" href="#introduction">1 · Introduction</a><ol>
+<li><a href="#audience">Who this is for</a></li><li><a href="#decisions">Decisions it supports</a></li><li><a href="#interventions">Interventions</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#prerequisites">Before you start</a></li><li><a href="#outputs">Outputs</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#computing">Computational needs</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#how-tool-works">2 · How the tool works</a><ol>
+<li><a href="#optimisation-loop">Optimisation loop</a></li><li><a href="#strategy-representation">Strategy representation</a></li><li><a href="#candidate-evaluation">Candidate evaluation</a></li><li><a href="#two-objectives">The two objectives</a></li><li><a href="#epsilon-archive">Epsilon archive</a></li><li><a href="#new-strategies">Generating strategies</a></li><li><a href="#stopping">Stopping the run</a></li><li><a href="#user-controls">What the user controls</a></li>
+</ol></div>
+</aside>
 <main id="main-content">
 <section class="section" id="introduction"><p class="label">Section 1 · Introduction</p><h2>What is the hydrodynamic optimisation tool?</h2><hr class="rule"><div class="prose">
 <p>The hydrodynamic optimisation tool is a decision-support workflow for identifying effective combinations of blue-green infrastructure to reduce urban flood risk. It combines the CityCAT hydrodynamic model with a bespoke epsilon-dominance multi-objective evolutionary algorithm (ε-MOEA).</p>
@@ -64,7 +70,136 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ul></section>
 <section class="section" id="computing"><p class="label">Runtime</p><h3>Computational requirements</h3><div class="prose"><p>Hydrodynamic optimisation is demanding because every candidate strategy requires a CityCAT simulation. Use a small test run to confirm the setup before committing resources to a production study. Depending on the domain, model resolution, rainfall duration and search budget, a production run may take several days or longer.</p><p>DAFNI supplies the managed computational environment, while users remain responsible for selecting an appropriate run size and checking study results.</p></div></section>
 <section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: understand the method, prepare the CityCAT model and intervention data, configure the DAFNI workflow, run a small validation study, launch the optimisation, and interpret and export the results.</p><p>Unavailable or incomplete features are labelled clearly. Instructions describe the deployed tool as it currently works rather than relying on the older repository README.</p></div></section>
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 2</p><h3>How the tool works</h3><p>A guided explanation of the CityCAT simulation loop, Gray-coded strategies, objective evaluation and ε-MOEA search process.</p></aside>
+<section class="section chapter" id="how-tool-works">
+<p class="label">Section 2 · How the tool works</p>
+<h2>From intervention strategy to Pareto front</h2>
+<hr class="rule">
+<div class="prose">
+<p>This section explains the optimisation process conceptually. Users do not need to understand the underlying code or evolutionary-computing theory to operate the tool, but understanding the workflow will make its settings and results easier to interpret.</p>
+</div>
+
+<section class="subsection" id="optimisation-loop">
+<p class="label">The core process</p>
+<h3>2.1 The optimisation loop</h3>
+<div class="prose"><p>The tool searches for effective blue-green infrastructure strategies by repeatedly linking the evolutionary algorithm with CityCAT.</p></div>
+<ol class="process">
+<li><strong>Generate a strategy.</strong> The evolutionary algorithm creates an encoded combination of interventions.</li>
+<li><strong>Decode the chromosome.</strong> Gray-coded values are converted into intervention states and characteristics.</li>
+<li><strong>Construct the model.</strong> The corresponding CityCAT input files are generated or modified.</li>
+<li><strong>Run CityCAT.</strong> The selected rainfall event is simulated for the candidate strategy.</li>
+<li><strong>Analyse flooding.</strong> The required hydrograph or property-exposure result is extracted.</li>
+<li><strong>Calculate cost.</strong> The estimated whole-life cost of the selected interventions is calculated.</li>
+<li><strong>Update the archive.</strong> The strategy is compared with the high-performing solutions found so far.</li>
+<li><strong>Check progress.</strong> The tool either generates another set of candidates or returns the final Pareto front.</li>
+</ol>
+<p class="loop-back">↻ The cycle repeats until a stopping condition is met.</p>
+<div class="note"><strong>Why runs are computationally demanding</strong><p>Every unique candidate requires a hydrodynamic simulation. CityCAT evaluation therefore accounts for most of the computational cost of an optimisation.</p></div>
+</section>
+
+<section class="subsection" id="strategy-representation">
+<p class="label">Encoding the design space</p>
+<h3>2.2 How intervention strategies are represented</h3>
+<div class="prose"><p>A complete intervention strategy is represented by a <strong>chromosome</strong>: a single sequence of binary values assembled from all candidate interventions in the study.</p></div>
+<div class="grid">
+<article class="card"><span class="status">Zonal</span><h4>Include or exclude</h4><p>A zonal intervention has two states: <code>0</code> excludes it and <code>1</code> includes it. This suits predefined permeable-paving, rain-garden and green-area zones.</p><code class="example-code">1 0 1 0</code><p>In this example, zones 1 and 3 are included while zones 2 and 4 are excluded.</p></article>
+<article class="card"><span class="status">Local</span><h4>Configure a feature</h4><p>Local features can use several groups of bits to encode inclusion, storage depth, area or radius, position within an allowable area, and other feature-specific characteristics.</p></article>
+</div>
+<div class="note warn"><strong>Keep the design space meaningful</strong><p>Each zone should represent a distinct physical decision. Overlapping or redundant zones enlarge the search space without creating genuinely different strategies and can make the search less efficient. Encoded dimensions and locations are for optioneering and still require detailed engineering design.</p></div>
+</section>
+
+<section class="subsection" id="gray-coding">
+<p class="label">Genetic representation</p>
+<h3>2.3 Why Gray coding is used</h3>
+<div class="prose">
+<p>The deployed tool uses Gray binary coding for characteristics with multiple possible values. In standard binary coding, two neighbouring values can have substantially different bit patterns, so several bits may need to change simultaneously. This is known as a <em>Hamming cliff</em> and can hinder evolutionary search.</p>
+<p>Gray coding orders the representation so that neighbouring encoded values differ by only one bit. A small genetic change is therefore more likely to produce a small change in the corresponding intervention characteristic.</p>
+</div>
+<div class="note plan"><strong>No user setting is required</strong><p>Gray coding is fixed within the deployed workflow and does not need to be selected or configured by the user.</p></div>
+</section>
+
+<section class="subsection" id="candidate-evaluation">
+<p class="label">Hydrodynamic evaluation</p>
+<h3>2.4 Evaluating a candidate strategy</h3>
+<div class="prose"><p>Every unique chromosome is converted into a CityCAT model configuration. Depending on the selected interventions, this may change surface permeability and infiltration properties, rain-garden locations, the elevation model used for detention features, fixed flood-management features, or offline storage and inlet arrangements.</p><p>CityCAT simulates the supplied rainfall event using this modified configuration. The tool then extracts the information needed by the chosen flood-performance objective.</p></div>
+<ul class="checks">
+<li>The chromosome is given a unique simulation identifier.</li>
+<li>Intervention-specific model inputs are generated from the decoded values.</li>
+<li>CityCAT produces the corresponding depth, flow and related model outputs.</li>
+<li>The objective calculator derives the required flood-performance value.</li>
+</ul>
+<div class="note"><strong>Avoiding duplicate simulations</strong><p>If the algorithm encounters an identical chromosome again, its existing simulation results can be reused. The reported unique-simulation count therefore records new hydrodynamic evaluations rather than every encounter with a strategy.</p></div>
+</section>
+
+<section class="subsection" id="two-objectives">
+<p class="label">Fitness evaluation</p>
+<h3>2.5 The two optimisation objectives</h3>
+<div class="prose"><p>The deployed workflow performs a bi-objective optimisation: it simultaneously minimises intervention cost and one supported measure of flood performance.</p></div>
+<div class="grid">
+<article class="card"><span class="status">Objective 1</span><h4>Whole-life intervention cost</h4><p>The present value of implementing and maintaining the selected strategy. Depending on the intervention type and configured assumptions, this can include construction, excavation, routine and major maintenance, professional fees, decommissioning, design lifespan and discounting.</p></article>
+<article class="card"><span class="status">Objective 2</span><h4>Flood performance</h4><p>Either the peak simulated discharge derived from the defined outlet hydrograph or hydrographs, or the number of buildings classified as being at high flood risk using simulated depths around their footprints.</p></article>
+</div>
+<div class="note warn"><strong>Lower values are preferred</strong><p>Both objectives are minimised. Cost values are planning estimates used to compare strategies consistently, not contractor quotations. The economic-damages objective is not currently available because automated building-type assignment has not yet been integrated.</p></div>
+</section>
+
+<section class="subsection" id="objective-space">
+<p class="label">Initial boundaries</p>
+<h3>2.6 Establishing the objective space</h3>
+<div class="prose"><p>At the beginning of a run, the tool evaluates two boundary strategies. The <strong>do-minimum strategy</strong> excludes the encoded interventions. The <strong>do-maximum strategy</strong> represents the maximum encoded intervention state.</p><p>These simulations provide initial estimates of the cost and flood-performance ranges. The tool uses these bounds to divide the objective space into an epsilon grid. If later solutions extend or dominate the initial boundaries, the grid is recalculated and the archive is checked again.</p></div>
+<div class="note warn"><strong>Important modelling assumption</strong><p>Adding appropriate interventions should not increase flood risk, and every intervention should have a positive cost. If the do-maximum strategy performs worse than the do-minimum strategy, the tool reports an error because the assumptions used to establish the search space are no longer valid.</p></div>
+</section>
+
+<section class="subsection" id="epsilon-archive">
+<p class="label">Preserving useful solutions</p>
+<h3>2.7 Pareto dominance and the epsilon archive</h3>
+<div class="prose">
+<p>The optimisation does not search for one universally “best” strategy. Cost and flood performance conflict: a strategy that achieves a greater flood reduction will often require greater investment.</p>
+<p>A solution <strong>dominates</strong> another when it is no worse for either objective and strictly better for at least one. A solution is <strong>Pareto optimal</strong> when no evaluated alternative dominates it. Together, the non-dominated solutions form the Pareto front.</p>
+<p>The ε-MOEA divides the objective space into boxes and retains no more than one representative from each relevant box. Where several solutions occupy the same box, the tool first checks strict dominance. If none dominates, it retains the solution closest to the preferred corner of the box. This produces a manageable, diverse approximation of the Pareto front rather than an archive crowded with nearly identical results.</p>
+</div>
+</section>
+
+<section class="subsection" id="new-strategies">
+<p class="label">Evolutionary search</p>
+<h3>2.8 How new strategies are generated</h3>
+<div class="prose"><p>The search begins with a small population of candidates and an archive seeded by the boundary solutions. One parent is selected from the archive and another from the current population, balancing exploitation of strong existing strategies with exploration of new possibilities.</p></div>
+<div class="grid">
+<article class="card"><h4>Selection</h4><p>Favours existing high-performing strategies when choosing parents.</p></article><article class="card"><h4>One-point crossover</h4><p>Combines portions of two parent chromosomes to produce offspring.</p></article><article class="card"><h4>Bit-flip mutation</h4><p>Introduces small random changes that help explore the search space.</p></article><article class="card"><h4>Archive injection</h4><p>Reintroduces selected archive members when the population is adaptively resized.</p></article>
+</div>
+<div class="note"><strong>Adaptive population sizing</strong><p>If progress is insufficient, the tool can increase the population size. Twenty-five per cent of the resized population is seeded from the archive, while the remainder restores diversity and explores new strategies.</p></div>
+</section>
+
+<section class="subsection" id="stopping">
+<p class="label">Completing the search</p>
+<h3>2.9 When does the optimisation stop?</h3>
+<div class="grid">
+<article class="card"><span class="status">Hard limit</span><h4>Maximum simulations</h4><p>The run stops when the configured maximum number of unique CityCAT simulations is reached. This provides a firm computational budget.</p></article>
+<article class="card"><span class="status">Adaptive</span><h4>Self-termination</h4><p>The deployed tool monitors improvement in the normalised hypervolume covered by the archive over a configurable lag window. It can stop when improvement falls below the convergence threshold and the minimum simulation requirement has been satisfied.</p></article>
+</div>
+<div class="note warn"><strong>Convergence is not proof of global optimality</strong><p>Self-termination indicates that the search has stopped making sufficient progress. It does not prove that the exact global Pareto front has been found.</p></div>
+</section>
+
+<section class="subsection" id="user-controls">
+<p class="label">Division of responsibilities</p>
+<h3>2.10 What the user controls</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">User decision</th><th scope="col">Handled automatically</th></tr></thead>
+<tbody>
+<tr><td>Rainfall event and return period</td><td>Generation of candidate chromosomes</td></tr>
+<tr><td>Candidate interventions and allowable characteristics</td><td>Gray decoding of intervention states</td></tr>
+<tr><td>Flood-performance objective</td><td>CityCAT execution for unique strategies</td></tr>
+<tr><td>Cost and lifecycle assumptions</td><td>Calculation of objective values</td></tr>
+<tr><td>Maximum front size</td><td>Epsilon-grid construction and adaptation</td></tr>
+<tr><td>Minimum and maximum simulations</td><td>Archive maintenance</td></tr>
+<tr><td>Lag window and convergence threshold</td><td>Population adaptation and self-termination</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>A larger simulation budget gives the algorithm more opportunities to discover improved strategies, but increases runtime. Similarly, requesting a more detailed approximation of the Pareto front may increase the number of useful solutions while requiring additional evaluations.</p></div>
+</section>
+
+<div class="key-point"><p class="label">Key point</p><p><strong>The tool is an iterative learning process.</strong> It proposes an intervention strategy, evaluates it using a fully dynamic CityCAT simulation, retains useful results and uses those results to guide subsequent simulations. The final output is a diverse set of cost-risk trade-offs for decision-makers to examine, not a single prescribed design.</p></div>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 3</p><h3>Preparing your input data</h3><p>The required files, accepted formats, coordinate system, data slots and checks to complete before configuring a DAFNI run.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
