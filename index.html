@@ -61,6 +61,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="toc-group"><a class="toc-heading" href="#troubleshooting-faq">10 · Troubleshooting and FAQs</a><ol>
 <li><a href="#troubleshooting-evidence">Begin with evidence</a></li><li><a href="#diagnostic-layer">Identify the layer</a></li><li><a href="#dafni-problems">DAFNI access</a></li><li><a href="#parameter-problems">Parameter sets</a></li><li><a href="#rainfall-problems">Rainfall data</a></li><li><a href="#spatial-problems">Spatial data</a></li><li><a href="#intervention-problems">Interventions and outlets</a></li><li><a href="#citycat-problems">CityCAT execution</a></li><li><a href="#optimisation-problems">Optimisation behaviour</a></li><li><a href="#publication-problems">Plots and publication</a></li><li><a href="#troubleshooting-faqs">Frequently asked questions</a></li><li><a href="#request-support">Request support</a></li>
 </ol></div>
+<div class="toc-group"><a class="toc-heading" href="#technical-reference">11 · Technical reference</a><ol>
+<li><a href="#model-runtime">Model and runtime</a></li><li><a href="#runtime-data-flow">Runtime data flow</a></li><li><a href="#dataslot-reference">Dataslot reference</a></li><li><a href="#input-schema-reference">Input schemas</a></li><li><a href="#parameter-family-index">Parameter index</a></li><li><a href="#objective-definitions">Objective definitions</a></li><li><a href="#genotype-identifiers">Genotypes and identifiers</a></li><li><a href="#stopping-reference">Stopping logic</a></li><li><a href="#output-reference">Output files</a></li><li><a href="#solutions-data-dictionary">Solutions data dictionary</a></li><li><a href="#technical-glossary">Technical glossary</a></li>
+</ol></div>
 </aside>
 <main id="main-content">
 <section class="section" id="introduction"><p class="label">Section 1 · Introduction</p><h2>What is the hydrodynamic optimisation tool?</h2><hr class="rule"><div class="prose">
@@ -2005,7 +2008,312 @@ Does the problem recur in the quick-start validation run?:</code>
 </section>
 </section>
 
-<aside class="next" aria-label="Guide completion"><p>Sections 1–10 complete</p><h3>Ready to begin a validation study</h3><p>Follow Section 9 for a complete reference exercise, use Section 10 when a run behaves unexpectedly, or return to Section 3 to prepare your own datasets while preserving the complete DAFNI evidence chain.</p></aside>
+<section class="section chapter" id="technical-reference">
+<p class="label">Section 11 · Technical reference</p>
+<h2>The deployed interface, data flow and output contract</h2>
+<hr class="rule">
+<div class="prose"><p>This section is intended as a lookup resource. For step-by-step instructions, use Sections 3–10. Parameter defaults and economic assumptions are documented in Section 4.</p><p>The reference describes the current implementation inspected for this guide. Always record the DAFNI workflow and model versions used for a study because later deployments may change the interface or behaviour.</p></div>
+<div class="note"><strong>Reference hierarchy</strong><p>The DAFNI catalogue records which model version was executed. The parameter set records the values supplied to it. The model definition describes the visible interface, while the container implementation determines the effective runtime behaviour. Preserve all four elements when documenting a study.</p></div>
+<section class="subsection" id="model-runtime">
+<p class="label">Implementation identity</p>
+<h3>11.1 Model identity and runtime</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Property</th><th scope="col">Current implementation</th></tr></thead>
+<tbody>
+<tr><td>DAFNI display name</td><td><code>CityCAT_Optimisation</code></td></tr>
+<tr><td>Internal model name</td><td><code>citycat-opti</code></td></tr>
+<tr><td>Publisher</td><td>Newcastle University</td></tr>
+<tr><td>Model-definition API</td><td><code>v1beta3</code></td></tr>
+<tr><td>Principal entry point</td><td><code>run.py</code>, launched through <code>entrypoint.sh</code></td></tr>
+<tr><td>Optimisation method</td><td>ε-dominance multi-objective evolutionary algorithm</td></tr>
+<tr><td>Hydrodynamic model</td><td>CityCAT</td></tr>
+<tr><td>Python version</td><td>3.11</td></tr>
+<tr><td>Spatial reference used internally</td><td>British National Grid, EPSG:27700</td></tr>
+<tr><td>Binary coding</td><td>Gray coding</td></tr>
+<tr><td>CityCAT configuration number</td><td>6</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The container uses a Linux environment for the Python optimisation and geospatial-processing components. The Windows CityCAT executable is run through Wine in a headless display environment.</p><p>The principal Python dependencies include NumPy, SciPy, pandas, Matplotlib, GeoPandas, Fiona, Shapely, Rtree, GDAL and Rasterio.</p><p>DAFNI executes models as isolated containers. Parameters are passed as environment variables, while assigned datasets are mounted beneath <code>/data/inputs/</code>. Input datasets are read-only and model outputs must be placed beneath <code>/data/outputs/</code> for collection by the platform. See <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-dafni-ready-model/">DAFNI’s model-interface guidance</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/Reference/model-definition-reference">model-definition reference</a>.</p></div>
+</section>
+
+<section class="subsection" id="runtime-data-flow">
+<p class="label">Processing architecture</p>
+<h3>11.2 Runtime data flow</h3>
+<pre class="code-block" aria-label="Runtime data flow">DAFNI parameter set
+        │
+        ├── environment variables
+        │
+DAFNI input datasets
+        │
+        └── /data/inputs/&lt;dataslot path&gt;
+                    │
+                    ▼
+        Rainfall and spatial preprocessing
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+  CityCAT_setup          alg_inputs
+          │                   │
+          └─────────┬─────────┘
+                    ▼
+           ε-MOEA initialisation
+                    │
+                    ▼
+        Repeated CityCAT simulations
+                    │
+                    ▼
+       Objective and cost evaluation
+                    │
+                    ▼
+       Generation and final reporting
+                    │
+                    ▼
+            /data/outputs/</pre>
+<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. At the end of a successful run, the processed algorithm inputs and CityCAT working directory are compressed.</p></div>
+</section>
+
+<section class="subsection" id="dataslot-reference">
+<p class="label">DAFNI input contract</p>
+<h3>11.3 DAFNI dataslot reference</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">DAFNI dataslot</th><th scope="col">Container path</th><th scope="col">Accepted runtime inputs</th><th scope="col">Effective requirement</th></tr></thead>
+<tbody>
+<tr><td>Rainfall Data</td><td><code>inputs/rainfall</code></td><td><code>.csv</code>, <code>.txt</code></td><td>Required for every run</td></tr>
+<tr><td>Terrain Data (DEM)</td><td><code>inputs/dem</code></td><td><code>.tif</code>, <code>.asc</code></td><td>Required for every run</td></tr>
+<tr><td>Topography</td><td><code>inputs/topography</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Required for every run</td></tr>
+<tr><td>Permeable Areas</td><td><code>inputs/permeable-areas</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Optional baseline override</td></tr>
+<tr><td>Permeable Pavements</td><td><code>inputs/permeable-pavements</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Optional candidate override</td></tr>
+<tr><td>Green Areas</td><td><code>inputs/green-areas</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Flexible Feature Data</td><td><code>inputs/flexible-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Fixed Feature Data</td><td><code>inputs/fixed-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Offline Feature Data</td><td><code>inputs/offline-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Rain Gardens</td><td><code>inputs/rain-gardens</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Outlet Lines</td><td><code>inputs/outlets</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Required when <code>OBJECTIVE=hydrograph</code></td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>ZIP archives can be supplied to these dataslots. The model extracts archives and searches their directories recursively for accepted files.</p></div>
+<div class="note warn"><strong>Model-definition discrepancy</strong><p>The current DAFNI model definition marks all dataslots as optional. The runtime nevertheless enforces rainfall, DEM and topography, and conditionally enforces outlet lines for the hydrograph objective. Follow the effective requirements in this guide.</p></div>
+<div class="prose"><p>If several valid rainfall files are found, the first discovered file is used. Publish each rainfall event as a separate, clearly identified dataset rather than placing several events in one dataslot.</p></div>
+</section>
+
+<section class="subsection" id="input-schema-reference">
+<p class="label">Data structures</p>
+<h3>11.4 Input schema summary</h3>
+<h4 class="minor-heading">Rainfall CSV</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Column position</th><th scope="col">Content</th><th scope="col">Unit</th></tr></thead>
+<tbody><tr><td>1</td><td>Elapsed time</td><td>seconds</td></tr><tr><td>2</td><td>Rainfall intensity</td><td>millimetres per hour</td></tr></tbody>
+</table></div>
+<div class="prose"><p>The table must contain exactly two columns. Values must be numeric and complete, time must increase strictly and rainfall intensity cannot be negative.</p><p>A <code>.txt</code> rainfall file must use the CityCAT rainfall structure described in Section 3. The declared number of data points must equal the number of data rows.</p></div>
+<h4 class="minor-heading">DEM</h4>
+<ul class="checks"><li>Use GeoTIFF or ESRI ASCII format.</li><li>Include valid CRS information.</li><li>Use metres for elevation.</li><li>Cover all interventions and outlets.</li><li>Provide compatible metadata when several tiles are supplied.</li></ul>
+<div class="prose"><p>Processing creates a British National Grid ESRI ASCII raster with a no-data value of <code>-99999</code>.</p></div>
+<h4 class="minor-heading">Topography</h4>
+<div class="prose"><p>Required attribute names are interpreted case-insensitively after conversion to lower case.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Attribute</th><th scope="col">Purpose</th></tr></thead>
+<tbody><tr><td><code>theme</code></td><td>Identifies buildings, land and roads, tracks and paths</td></tr><tr><td><code>descriptivegroup</code></td><td>Distinguishes buildings, roads, roadside areas and paths</td></tr><tr><td><code>make</code></td><td>Identifies natural surfaces when permeable areas are derived from topography</td></tr></tbody>
+</table></div>
+<div class="prose"><p>The implementation uses these values to derive buildings, potential pavement surfaces, roads and baseline permeable areas.</p></div>
+<h4 class="minor-heading">Candidate features</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Feature type</th><th scope="col">Principal fields</th></tr></thead>
+<tbody>
+<tr><td>Flexible</td><td>Optional encoded ranges including <code>h_min</code>, <code>h_max</code>, <code>h_len</code> and equivalent rotation or translation controls</td></tr>
+<tr><td>Fixed</td><td>Optional <code>h_min</code>, <code>h_max</code> and <code>h_len</code> controls</td></tr>
+<tr><td>Offline basin</td><td><code>basin_id</code> and optional encoded dimensional controls</td></tr>
+<tr><td>Offline inlet</td><td><code>target_id</code> matching the associated basin’s <code>basin_id</code></td></tr>
+<tr><td>Outlet</td><td><code>outlet_id</code> recommended</td></tr>
+<tr><td>Zonal interventions</td><td>Geometry defines the selectable area</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Flexible and offline features can encode <code>h</code> for height or depth, <code>r</code> for rotation or radius, and <code>x</code> and <code>y</code> for spatial translation. Fixed features encode only the <code>h</code> characteristic in the current implementation.</p></div>
+</section>
+
+<section class="subsection" id="parameter-family-index">
+<p class="label">Configuration dictionary</p>
+<h3>11.5 Parameter-family index</h3>
+<div class="prose"><p>All DAFNI parameters are passed into the container as text environment variables and converted to their required numeric types at startup. Invalid values therefore commonly produce an environment-variable casting error.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Family</th><th scope="col">Parameters</th><th scope="col">Reference</th></tr></thead>
+<tbody>
+<tr><td>Study definition</td><td><code>OBJECTIVE</code>, <code>RETURN_PERIOD</code>, <code>BUFFER_VAL</code></td><td>Section 4.3</td></tr>
+<tr><td>Pavement zoning</td><td><code>NO_ZONES</code>, <code>PAV_MIN_ZONE_AREA</code></td><td>Section 4.4</td></tr>
+<tr><td>Optimisation</td><td><code>LAG</code>, <code>DELTA_K</code>, <code>MAX_FRONT_SIZE</code>, <code>MIN_SIMS</code>, <code>MAX_SIMS</code></td><td>Section 4.5</td></tr>
+<tr><td>Coding</td><td><code>BINARY_CODING</code></td><td>Section 4.5</td></tr>
+<tr><td>Simulation timing</td><td><code>SIM_RUNTIME</code>, <code>OUTPUT_FREQUENCY</code></td><td>Section 4.6</td></tr>
+<tr><td>Surface roughness</td><td><code>IMPERMEABLE_ROUGHNESS</code>, <code>PERMEABLE_ROUGHNESS</code></td><td>Section 4.6</td></tr>
+<tr><td>Baseline infiltration</td><td><code>PERMEABLE_HYDRAULIC_CONDUCTIVITY</code> and other <code>PERMEABLE_...</code> fields</td><td>Section 4.7</td></tr>
+<tr><td>Pavement hydraulics</td><td><code>PAV_HYDRAULIC_CONDUCTIVITY</code> and other <code>PAV_...</code> hydraulic fields</td><td>Section 4.7</td></tr>
+<tr><td>Rain-garden hydraulics</td><td><code>RG_HYDRAULIC_CONDUCTIVITY</code> and other <code>RG_...</code> hydraulic fields</td><td>Section 4.7</td></tr>
+<tr><td>Global economics</td><td><code>DISCOUNT_RATE</code>, <code>DECOMM_RATE</code>, <code>PROFESSIONAL_FEES</code>, <code>EXCAVATION_RATE</code></td><td>Section 4.8</td></tr>
+<tr><td>Offline inlet</td><td><code>INLET_DROP</code></td><td>Section 4.8</td></tr>
+<tr><td>Intervention costs</td><td><code>GA_...</code>, <code>FEAT_...</code>, <code>FF_...</code>, <code>OFF_...</code>, <code>PAV_...</code>, <code>RG_...</code></td><td>Section 4.8</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>All parameters are currently displayed as required by DAFNI, including parameters associated with intervention types that are absent from a study. Retain their defaults when they are not applicable.</p><p>Although <code>BINARY_CODING</code> is visible in the interface, the current main execution path constructs the optimiser using Gray coding directly. Leave the displayed value as <code>gray</code>.</p></div>
+</section>
+
+<section class="subsection" id="objective-definitions">
+<p class="label">Fitness calculations</p>
+<h3>11.6 Objective definitions</h3>
+<div class="prose"><p>Every optimisation minimises intervention whole-life cost and the selected flood-performance objective.</p></div>
+<h4 class="minor-heading">Cost objective</h4>
+<div class="prose"><p>The cost objective is reported in pounds sterling. Depending on intervention type, it combines installation or excavation cost, professional fees, annual maintenance, scheduled minor and major maintenance, decommissioning cost and present-value discounting.</p><p>For excavated features, the general form is:</p></div>
+<pre class="code-block" aria-label="Present-value cost formula">present-value cost =
+    construction cost
+  + professional fees
+  + discounted annual and scheduled maintenance
+  + discounted end-of-life decommissioning</pre>
+<div class="prose"><p>The final strategy cost is the sum of the active zonal and feature costs. The calculation is a comparative whole-life estimate rather than a detailed project quotation.</p></div>
+<h4 class="minor-heading">Hydrograph objective</h4>
+<div class="prose"><p>For each supplied outlet, the tool derives a discharge time series and identifies its maximum discharge. The objective is:</p></div>
+<pre class="code-block" aria-label="Hydrograph objective formula">hydrograph objective =
+    sum of the maximum discharge at each outlet</pre>
+<div class="prose"><p>The objective is minimised and its correct unit is m³/s. This is an absolute summed peak value, not the reduction from baseline. Any improvement must be calculated by comparing a solution with the relevant baseline result.</p></div>
+<h4 class="minor-heading">Property-risk objective</h4>
+<div class="prose"><p>The <code>risk</code> objective minimises the number of buildings classified as high risk within the exposure-analysis buffer. For each building, the analysis calculates mean and 90th-percentile flood depth from intersecting model cells. A building is assigned to the current high-risk class when:</p></div>
+<pre class="code-block" aria-label="Property-risk classification">mean depth ≥ 0.10 m
+and
+90th-percentile depth ≥ 0.30 m</pre>
+<div class="prose"><p>The reported objective is the count of buildings meeting both conditions.</p></div>
+<h4 class="minor-heading">Damages objective</h4>
+<div class="prose"><p>The codebase contains damage-calculation components, but <code>damages</code> is not available in the deployed user workflow because building types cannot yet be assigned automatically and reliably.</p></div>
+</section>
+<section class="subsection" id="genotype-identifiers">
+<p class="label">Encoded strategies</p>
+<h3>11.7 Genotype and simulation identifiers</h3>
+<div class="prose"><p>The complete genotype is assembled in the following order:</p></div>
+<pre class="code-block" aria-label="Genotype composition">Permeable pavements
+Rain gardens
+Green areas
+Flexible features
+Fixed features
+Offline features</pre>
+<div class="prose"><p>Zonal interventions use one decision bit per candidate or zone. Flexible, fixed and offline features use groups of bits to encode their design characteristics.</p><p>Gray coding is used when decoding feature characteristics. Adjacent encoded values generally differ by one bit, reducing disruptive jumps between neighbouring design values during mutation.</p><p>Each unique genotype also receives a simulation-directory identifier:</p></div>
+<code class="code-block">Sim_&lt;base36 identifier&gt;</code>
+<div class="prose"><p>The identifier is produced by interpreting the complete bit string as an integer, adding one and encoding the result in base 36. It shortens directory names for large search spaces.</p></div>
+<div class="note"><strong>Identifier meaning</strong><p>A <code>Sim_...</code> identifier is a storage key for an evaluated genotype. It is not a solution rank, generation number or measure of performance. Final <code>Solution N</code> numbers are assigned separately when the retained archive is reported.</p></div>
+<div class="prose"><p>If the optimiser encounters a genotype that has already been simulated, it reuses the stored result and does not increase the unique-simulation count.</p></div>
+</section>
+
+<section class="subsection" id="stopping-reference">
+<p class="label">Algorithm reference</p>
+<h3>11.8 Optimisation terminology and stopping logic</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Term</th><th scope="col">Technical meaning</th></tr></thead>
+<tbody>
+<tr><td>Population</td><td>Candidate strategies currently used to generate new strategies</td></tr>
+<tr><td>Archive</td><td>Retained non-dominated approximation of the Pareto front</td></tr>
+<tr><td>Objective vector</td><td>The cost and flood-performance values belonging to one strategy</td></tr>
+<tr><td>Dominance</td><td>One solution is no worse in either objective and better in at least one</td></tr>
+<tr><td>ε-box</td><td>A discretised region of normalised objective space</td></tr>
+<tr><td>Generation</td><td>One cycle of selection, recombination, mutation and evaluation</td></tr>
+<tr><td>Unique simulation</td><td>A genotype for which a new CityCAT execution was required</td></tr>
+<tr><td>Hypervolume</td><td>A measure of the objective space covered by the archive</td></tr>
+<tr><td>Convergence</td><td>Insufficient archive improvement over the configured lag</td></tr>
+<tr><td>Pareto front</td><td>The set of non-dominated cost–performance trade-offs</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The run can terminate when either improvement remains within <code>DELTA_K</code> over the configured <code>LAG</code>, after <code>MIN_SIMS</code> has been reached, or the unique-simulation count reaches the <code>MAX_SIMS</code> stopping threshold.</p><p>Stopping is checked between generations, so the final count can exceed <code>MAX_SIMS</code> slightly.</p></div>
+</section>
+
+<section class="subsection" id="output-reference">
+<p class="label">Result contract</p>
+<h3>11.9 Output-file reference</h3>
+<h4 class="minor-heading">Top-level outputs</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Path</th><th scope="col">Content</th></tr></thead>
+<tbody>
+<tr><td><code>execution_log.txt</code></td><td>Timestamped preprocessing, simulation, optimisation and completion messages</td></tr>
+<tr><td><code>alg_inputs.zip</code></td><td>Standardised spatial and feature inputs generated during preprocessing</td></tr>
+<tr><td><code>CityCAT_setup.zip</code></td><td>Prepared CityCAT model, configuration and retained simulation files</td></tr>
+<tr><td><code>plots/</code></td><td>Generational, comparison and solution plots</td></tr>
+<tr><td><code>summary/</code></td><td>Parameters, solution tables and simulation counts</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The bundled CityCAT executable is removed before <code>CityCAT_setup.zip</code> is created.</p></div>
+<h4 class="minor-heading">Plot files</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">File</th><th scope="col">Content</th></tr></thead>
+<tbody>
+<tr><td><code>Generation N.png</code></td><td>Population, archive and objective-space state for generation N</td></tr>
+<tr><td><code>Solution Comparison.png</code></td><td>Final retained cost–performance solutions</td></tr>
+<tr><td><code>Solution N.png</code></td><td>Flood map, selected interventions and objective-specific panels</td></tr>
+<tr><td><code>Offline_Feature_Inlet_Lines.png</code></td><td>Diagnostic representation of offline basins and their inlets, when applicable</td></tr>
+</tbody>
+</table></div>
+<h4 class="minor-heading">Summary files</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">File</th><th scope="col">Structure</th></tr></thead>
+<tbody>
+<tr><td><code>parameters.txt</code></td><td>Human-readable configuration and derived design-space dimensions</td></tr>
+<tr><td><code>Generation_N_Solutions.txt</code></td><td>Tab-separated <code>Genotype</code>, <code>Cost</code> and <code>Risk</code> columns</td></tr>
+<tr><td><code>Solutions.txt</code></td><td>Final genotype, objectives and decoded intervention characteristics</td></tr>
+<tr><td><code>unique_simulations.txt</code></td><td>Cumulative unique-simulation count recorded at each generation</td></tr>
+</tbody>
+</table></div>
+</section>
+
+<section class="subsection" id="solutions-data-dictionary">
+<p class="label">Tabular results</p>
+<h3>11.10 <code>Solutions.txt</code> data dictionary</h3>
+<div class="prose"><p>The first fields are always:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Column</th><th scope="col">Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>Genotype</code></td><td>Complete encoded strategy</td></tr>
+<tr><td><code>Cost</code></td><td>Whole-life cost in pounds sterling</td></tr>
+<tr><td><code>Risk</code></td><td>Generic internal name for the selected flood-performance objective</td></tr>
+<tr><td><code>Pavements</code></td><td>Pavement-zone decision substring</td></tr>
+<tr><td><code>RainGardens</code></td><td>Rain-garden decision substring</td></tr>
+<tr><td><code>GreenAreas</code></td><td>Green-area decision substring</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The meaning of <code>Risk</code> depends on <code>OBJECTIVE</code>: for <code>hydrograph</code> it is summed peak discharge in m³/s; for <code>risk</code> it is the number of high-risk buildings.</p><p>Additional columns depend on the supplied candidates:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Column pattern</th><th scope="col">Meaning</th></tr></thead>
+<tbody>
+<tr><td><code>FeatureID&lt;n&gt;</code></td><td>Encoded flexible-feature configuration</td></tr>
+<tr><td><code>h&lt;n&gt;</code></td><td>Decoded height or depth</td></tr>
+<tr><td><code>r&lt;n&gt;</code></td><td>Decoded rotation or radius</td></tr>
+<tr><td><code>dx&lt;n&gt;</code>, <code>dy&lt;n&gt;</code></td><td>Decoded spatial translation</td></tr>
+<tr><td><code>FeatureID_F&lt;n&gt;</code></td><td>Encoded fixed-feature configuration</td></tr>
+<tr><td><code>h_F&lt;n&gt;</code></td><td>Fixed-feature height or depth</td></tr>
+<tr><td><code>FeatureID_OFF&lt;n&gt;</code></td><td>Encoded offline-feature configuration</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>The table width therefore changes between studies. Analyse columns by their headers rather than assuming a fixed position.</p></div>
+</section>
+
+<section class="subsection" id="technical-glossary">
+<p class="label">Definitions</p>
+<h3>11.11 Technical glossary</h3>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Term</th><th scope="col">Definition</th></tr></thead>
+<tbody>
+<tr><td>Baseline</td><td>The CityCAT simulation without candidate interventions selected</td></tr>
+<tr><td>Candidate</td><td>A location or feature made available to the optimiser</td></tr>
+<tr><td>Chromosome or genotype</td><td>The encoded representation of one complete intervention strategy</td></tr>
+<tr><td>Dataslot</td><td>A named DAFNI input through which a dataset is mounted into the container</td></tr>
+<tr><td>Decision variable</td><td>An encoded intervention choice or characteristic</td></tr>
+<tr><td>Do-everything</td><td>Boundary strategy selecting the maximum encoded intervention configuration</td></tr>
+<tr><td>DAFNI instance</td><td>One execution of a particular workflow configuration</td></tr>
+<tr><td>Non-dominated</td><td>Not outperformed by another solution in all optimisation objectives</td></tr>
+<tr><td>Parameter set</td><td>The DAFNI record containing model parameters and dataset assignments</td></tr>
+<tr><td>Pareto-optimal</td><td>Non-dominated within the set of evaluated strategies</td></tr>
+<tr><td>Publisher step</td><td>Workflow stage that creates a DAFNI catalogue dataset from model outputs</td></tr>
+<tr><td>Return period</td><td>Label describing the supplied rainfall event; it does not modify rainfall</td></tr>
+<tr><td>Solution</td><td>A retained strategy and its evaluated objectives</td></tr>
+<tr><td>Validation run</td><td>Small execution used to test the workflow rather than support decisions</td></tr>
+<tr><td>Workflow version</td><td>Versioned arrangement of DAFNI model and publishing steps</td></tr>
+</tbody>
+</table></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>Interpret every output using the recorded model version, parameter set and objective.</strong> Generic internal terms such as <code>Risk</code> and identifiers such as <code>Sim_...</code> only become meaningful when linked back to that technical context.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Guide completion"><p>Sections 1–11 complete</p><h3>Ready to begin a validation study</h3><p>Follow Section 9 for a complete reference exercise, use Section 10 when a run behaves unexpectedly, and consult Section 11 for the deployed technical contract and output data dictionary.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
