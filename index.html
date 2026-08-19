@@ -26,7 +26,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI ↗</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–6 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
+<div><p class="eyebrow">DAFNI Fellowship practical guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to use the DAFNI-hosted tool to explore cost-effective urban flood-risk interventions with CityCAT and multi-objective optimisation.</p><div class="pills"><span class="pill">Sections 1–7 available</span><span class="pill">Start here</span><span class="pill">Practical user guide</span></div></div>
 <aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Platform</dt><dd>DAFNI</dd><dt>Flood model</dt><dd>CityCAT</dd><dt>Method</dt><dd>ε-MOEA</dd><dt>Outputs</dt><dd>Pareto-optimal strategies</dd></dl></aside>
 </div></section>
 <div class="shell">
@@ -48,6 +48,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#interpreting-results">6 · Interpreting the results</a><ol>
 <li><a href="#results-files">Supporting files</a></li><li><a href="#reading-objective-space">Objective-space plots</a></li><li><a href="#generation-plots">Generation plots</a></li><li><a href="#solution-comparison">Final comparison</a></li><li><a href="#match-solutions">Match points to solutions</a></li><li><a href="#solution-maps">Flood maps</a></li><li><a href="#hydrograph-panel">Hydrograph panel</a></li><li><a href="#select-shortlist">Select a shortlist</a></li><li><a href="#report-results">Report responsibly</a></li>
+</ol></div>
+<div class="toc-group"><a class="toc-heading" href="#reporting-reproducibility">7 · Reporting and reproducibility</a><ol>
+<li><a href="#locate-results">Locate results</a></li><li><a href="#download-results">Download outputs</a></li><li><a href="#dafni-provenance">Record provenance</a></li><li><a href="#preserve-parameters">Preserve parameter sets</a></li><li><a href="#local-archive">Local archive</a></li><li><a href="#compare-scenarios">Compare scenarios</a></li><li><a href="#further-analysis">Further analysis</a></li><li><a href="#share-results">Share through DAFNI</a></li><li><a href="#prepare-report">Prepare a report</a></li><li><a href="#recovery-status">Recovery status</a></li>
 </ol></div>
 </aside>
 <main id="main-content">
@@ -1053,7 +1056,231 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 </section>
 </section>
 
-<aside class="next" aria-label="Next guide section"><p>Coming next · Section 7</p><h3>Reporting, reproducibility and further analysis</h3><p>Preserve the evidence behind a run, compare scenarios and prepare optimisation results for technical review and stakeholder communication.</p></aside>
+<section class="section chapter" id="reporting-reproducibility">
+<p class="label">Section 7 · Reporting, reproducibility and further analysis</p>
+<h2>From a completed DAFNI instance to an auditable study record</h2>
+<hr class="rule">
+<div class="prose">
+<p>A completed optimisation should be preserved as a traceable modelling experiment. This requires more than retaining the final comparison plot: the DAFNI asset versions, parameter set, input datasets, numerical results and interpretation decisions must remain connected.</p>
+<p>On DAFNI, a workflow version and parameter set create a workflow instance. The model writes its files beneath <code>/data/outputs/</code>, after which a publisher step selects files and creates an output dataset in the Data catalogue. The user can then download or share that published dataset.</p>
+<p>DAFNI’s model guidance requires outputs to be written beneath <code>/data/outputs/</code>, while the publisher configuration determines which files become part of the published dataset. The output list in the model definition describes expected files but does not, by itself, publish them. See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-dafni-ready-model/">DAFNI-ready model guidance</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-workflow">workflow and publisher guidance</a>.</p>
+</div>
+<div class="note plan"><strong>Two completion checks</strong><p>A successful model step means the optimisation ran. A successful publisher step means its selected results were added to the Data catalogue.</p></div>
+
+<section class="subsection" id="locate-results">
+<p class="label">Published dataset</p>
+<h3>7.1 Locating the published results</h3>
+<ol class="process">
+<li><strong>Open the completed instance.</strong> Find it in the workflow’s <em>Instances</em> list.</li>
+<li><strong>Check both relevant steps.</strong> Confirm that the optimisation model step and publisher step completed.</li>
+<li><strong>Follow the publisher link.</strong> Select the publisher step and use <em>Go to dataset</em>, where available.</li>
+<li><strong>Use the Data catalogue if required.</strong> Navigate to <em>Data</em> and locate the output dataset created by the workflow.</li>
+<li><strong>Confirm its origin.</strong> Check that the dataset metadata refers to the intended workflow instance.</li>
+<li><strong>Select the correct version.</strong> Confirm the dataset version before downloading any files.</li>
+</ol>
+<div class="prose"><p>DAFNI’s execution guidance directs users to retrieve completed model outputs from the Data section. Publisher-created datasets also record their workflow origin. See <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">executing a model on DAFNI</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-workflow">creating publisher steps</a>.</p></div>
+<div class="note warn"><strong>If no dataset is available</strong><p>Check the publisher-step status. The model may have completed while publication failed, or the publisher may have been configured to select a different set of output paths.</p></div>
+</section>
+
+<section class="subsection" id="download-results">
+<p class="label">Complete package</p>
+<h3>7.2 Downloading the results</h3>
+<div class="prose"><p>The dataset details page lists the individual files available to download. Download the complete package before beginning detailed interpretation.</p></div>
+<div class="grid">
+<article class="card"><h4>Plots</h4><p><code>Generation N.png</code>, <code>Solution Comparison.png</code> and every <code>Solution N.png</code>.</p></article>
+<article class="card"><h4>Summaries</h4><p><code>Solutions.txt</code>, generation records, <code>parameters.txt</code> and <code>unique_simulations.txt</code>.</p></article>
+<article class="card"><h4>Execution evidence</h4><p><code>execution_log.txt</code>, including warnings and the normal termination message.</p></article>
+<article class="card"><h4>Archives</h4><p><code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>.</p></article>
+</div>
+<div class="prose"><p>DAFNI provides individual downloads and bulk-selection controls on the dataset details page. When using the table-header checkbox, it selects the files currently visible in the table. Set the displayed rows to <em>All</em> first if the dataset spans multiple pages. Selected files are downloaded individually rather than being combined into another archive. This behaviour is documented in the <a href="https://docs.secure.dafni.rl.ac.uk/release-notes">DAFNI release notes</a>.</p></div>
+<ul class="checks">
+<li>Confirm that all expected files are present.</li>
+<li>Check that neither ZIP archive is empty or corrupted.</li>
+<li>Retain the original filenames.</li>
+<li>Preserve the downloaded files unchanged before extracting working copies.</li>
+<li>Record the output dataset and version identifiers.</li>
+</ul>
+<div class="note"><strong>Preserve the original archives</strong><p>Extract working copies of <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> for examination, but retain the downloaded ZIP files as part of the authoritative run record.</p></div>
+</section>
+
+<section class="subsection" id="dafni-provenance">
+<p class="label">Asset identity</p>
+<h3>7.3 Recording the DAFNI provenance</h3>
+<div class="prose"><p>A reproducible record must identify the exact assets used to create the workflow instance.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Record</th><th scope="col">Why it matters</th></tr></thead>
+<tbody>
+<tr><td>Workflow name and version ID</td><td>Identifies the workflow structure that was executed.</td></tr>
+<tr><td>Model name and version ID</td><td>Identifies the deployed container and model definition.</td></tr>
+<tr><td>Parameter-set name</td><td>Identifies the configuration selected for execution.</td></tr>
+<tr><td>Workflow-instance name or ID</td><td>Identifies the individual execution.</td></tr>
+<tr><td>Instance start and completion times</td><td>Distinguishes repeated or similarly named runs.</td></tr>
+<tr><td>Input dataset and version IDs</td><td>Identifies the precise rainfall, DEM, topography and intervention data supplied.</td></tr>
+<tr><td>Output dataset and version ID</td><td>Identifies the published results package.</td></tr>
+<tr><td>Source-code release or commit</td><td>Links the deployed model version to its source, where available.</td></tr>
+<tr><td>Guide version</td><td>Records the instructions used to configure and interpret the run.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>A DAFNI parameter set defines the parameter values and dataset versions used to create an instance and is associated with a workflow version. The selected model and its version form part of the workflow step. See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/Reference/parameter-set-reference">Parameter Set reference</a> and <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">Parameter Set guidance</a>.</p><p>The instance details page allows users to select a step and review the configuration supplied to it. Use this view when recording versions or checking which datasets were assigned.</p></div>
+<div class="note warn"><strong>Do not rely on <code>parameters.txt</code> alone</strong><p>It records the optimisation and modelling settings generated by the tool, but it is not a complete record of DAFNI workflow, model, input-dataset and output-dataset version identifiers.</p></div>
+</section>
+
+<section class="subsection" id="preserve-parameters">
+<p class="label">Configuration control</p>
+<h3>7.4 Preserving parameter sets safely</h3>
+<div class="prose"><p>Editing an existing parameter set overwrites it. DAFNI provides a duplication control so that an established configuration can be copied before changes are made. See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-parameter-set">Parameter Set guidance</a> and <a href="https://docs.secure.dafni.rl.ac.uk/release-notes">release notes</a>.</p></div>
+<ul class="checks">
+<li>Do not edit the parameter set associated with a completed reference run.</li>
+<li>Duplicate it before creating a new scenario.</li>
+<li>Give every scenario a distinct display name and description.</li>
+<li>State the study area, rainfall event, objective and purpose in the description.</li>
+<li>Change only the parameters or datasets required for that scenario.</li>
+<li>Record the workflow version shown against the parameter set.</li>
+<li>Confirm every dataslot’s selected dataset version before execution.</li>
+</ul>
+<h4 class="minor-heading">Suggested naming convention</h4>
+<code class="code-block">&lt;study-area&gt;-&lt;event&gt;-&lt;objective&gt;-&lt;scenario&gt;-&lt;revision&gt;
+
+newcastle-rp30-risk-validation-r01
+newcastle-rp30-risk-production-r01
+newcastle-rp30-hydrograph-high-storage-r01</code>
+<div class="prose"><p>DAFNI allows the dataset version assigned to a dataslot to be selected explicitly. Its date and version message are shown during parameter-set configuration.</p></div>
+</section>
+
+<section class="subsection" id="local-archive">
+<p class="label">Study record</p>
+<h3>7.5 Creating a local archive</h3>
+<div class="prose"><p>Store each completed run in a separate directory. A practical structure is:</p></div>
+<code class="code-block">study-name/
+├── 00-dafni-record/
+├── 01-original-download/
+├── 02-extracted-results/
+├── 03-analysis/
+├── 04-figures-and-tables/
+└── 05-reporting/</code>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Directory</th><th scope="col">Contents</th></tr></thead>
+<tbody>
+<tr><td><code>00-dafni-record</code></td><td>Instance, workflow, model, parameter-set and dataset identifiers.</td></tr>
+<tr><td><code>01-original-download</code></td><td>Unaltered files downloaded from DAFNI.</td></tr>
+<tr><td><code>02-extracted-results</code></td><td>Working copies extracted from the two ZIP archives.</td></tr>
+<tr><td><code>03-analysis</code></td><td>Derived tables, calculations, GIS projects and analysis scripts.</td></tr>
+<tr><td><code>04-figures-and-tables</code></td><td>Selected maps, objective-space figures and reporting tables.</td></tr>
+<tr><td><code>05-reporting</code></td><td>Interpretation notes, shortlist rationale and reports.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Create a short run record containing the study purpose, responsible analyst, download date, DAFNI identifiers, input descriptions, objective, storm event, execution warnings, files received, subsequent software and post-download processing. Where long-term integrity matters, record file checksums alongside the original download. Store derived or edited files separately rather than replacing the originals.</p></div>
+</section>
+
+<section class="subsection" id="compare-scenarios">
+<p class="label">Controlled comparison</p>
+<h3>7.6 Comparing scenarios and repeated runs</h3>
+<div class="prose"><p>Comparisons are most informative when the difference between experiments is intentional and clearly recorded.</p></div>
+<ul class="checks">
+<li>The flood objective and its units are identical.</li>
+<li>The rainfall event and simulation duration are identical unless rainfall is the tested variable.</li>
+<li>The DEM, topography and building data use the same versions.</li>
+<li>The candidate intervention set is unchanged unless its effect is being tested.</li>
+<li>The cost basis, discount rate and intervention lifetimes are consistent.</li>
+<li>Both runs passed the validation checks in Section 5.</li>
+<li>Both runs used adequate optimisation budgets.</li>
+</ul>
+<div class="note warn"><strong>Keep incompatible fronts separate</strong><p>If the rainfall, objective or cost basis differs, report the archives as separate scenarios rather than combining their solutions into one apparent Pareto front.</p></div>
+<div class="prose"><p>Useful comparisons include change from each run’s do-nothing baseline, percentage reduction, additional cost per unit of improvement, interventions shared across shortlists, stability across rainfall events and variation between repeated runs.</p><p>Because the ε-MOEA search is stochastic, two runs with identical inputs may not return identical archives. Repeated runs can help distinguish consistently strong strategies from solutions found only in one search.</p></div>
+</section>
+
+<section class="subsection" id="further-analysis">
+<p class="label">Beyond the automatic plots</p>
+<h3>7.7 Undertaking further analysis</h3>
+<div class="grid">
+<article class="card"><h4>Tabular analysis</h4><p>Import <code>Solutions.txt</code> as a delimited table to filter by budget, calculate baseline improvement, compare marginal benefit and count selected intervention types.</p></article>
+<article class="card"><h4>Spatial analysis</h4><p>Use GIS software to compare maximum depths, create solution-minus-baseline maps, inspect transferred flooding and prepare reporting maps.</p></article>
+<article class="card"><h4>Hydrograph analysis</h4><p>Use <code>discharge_timeseries.txt</code> to compare outlet peaks, timing, duration, shape and discharge volume.</p></article>
+<article class="card"><h4>DAFNI visualisation</h4><p>Where configured, use browser-based drag-and-drop tools for straightforward CSV data or Jupyter Notebooks for more advanced analysis.</p></article>
+</div>
+<div class="prose"><p>Retain the original row number during tabular analysis because it links each record to <code>Solution N.png</code>. Derived maps should identify the source solution, baseline, event, depth units and processing method. For hydrographs, remember that only the sum of individual outlet peak discharges is used by the current objective.</p><p>DAFNI supports visualisations created from datasets. A workflow can contain a <strong>Publish and Visualise</strong> step, or a visualisation can be created separately from selected datasets. These capabilities are optional and are not enabled merely because an output dataset has been published. See the <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-workflow">DAFNI workflow and visualisation guidance</a>.</p></div>
+<div class="note plan"><strong>Preserve traceability</strong><p>Whether analysis is undertaken locally or on DAFNI, record the source output-dataset version and do not alter the authoritative <code>Solutions.txt</code>.</p></div>
+</section>
+
+<section class="subsection" id="share-results">
+<p class="label">Collaboration</p>
+<h3>7.8 Sharing results through DAFNI</h3>
+<div class="prose"><p>DAFNI assets can be shared with collaborators who have DAFNI accounts by adding them to a group. Data, models and workflows are separate assets and may require separate permissions.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Role</th><th scope="col">General capability</th></tr></thead>
+<tbody>
+<tr><td>Administrator</td><td>Manages group users and assets.</td></tr>
+<tr><td>Editor</td><td>Adds and edits group assets.</td></tr>
+<tr><td>Executor</td><td>Executes shared workflows.</td></tr>
+<tr><td>Viewer</td><td>Views shared assets.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>For workflows, DAFNI distinguishes between permission to view and execute and permission to view, execute and update. Sharing data and models follows a similar group-based process. See the official <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-share-assets">DAFNI asset-sharing guidance</a>.</p></div>
+<ul class="checks">
+<li>Confirm that the recipient has an approved DAFNI account.</li>
+<li>Share the output dataset with the appropriate group.</li>
+<li>Share the workflow if the recipient needs to reproduce the run.</li>
+<li>Confirm access to every required input dataset and model.</li>
+<li>Apply the minimum permissions required.</li>
+<li>Review input-data licences and usage restrictions.</li>
+<li>Avoid making sensitive spatial data public.</li>
+<li>Include enough metadata for another user to understand the experiment.</li>
+</ul>
+<div class="note warn"><strong>Check the complete permission chain</strong><p>Sharing a workflow does not remove the need for access to its model and input datasets. Confirm all required assets before asking another user to reproduce a run.</p></div>
+</section>
+
+<section class="subsection" id="prepare-report">
+<p class="label">Technical communication</p>
+<h3>7.9 Preparing a results report</h3>
+<div class="prose"><p>A concise report should allow a reader to understand what was modelled, what was found and how the preferred strategies were selected.</p></div>
+<h4 class="minor-heading">Study definition</h4>
+<ul class="checks">
+<li>Study area, decision context, rainfall event and return period.</li>
+<li>Input-data sources and versions.</li>
+<li>CityCAT model and workflow versions.</li>
+<li>Selected objective and candidate intervention types.</li>
+<li>Cost basis, appraisal period and optimisation configuration.</li>
+</ul>
+<h4 class="minor-heading">Optimisation performance</h4>
+<ul class="checks">
+<li>Number of unique CityCAT simulations and generations.</li>
+<li>Final archive size and evidence used to judge convergence.</li>
+<li>Warnings, failed simulations and whether repeated runs were undertaken.</li>
+</ul>
+<h4 class="minor-heading">Shortlisted strategies</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Field</th><th scope="col">Report</th></tr></thead>
+<tbody>
+<tr><td>Solution</td><td>Final solution number and simulation identifier.</td></tr>
+<tr><td>Cost</td><td>Modelled whole-life intervention cost.</td></tr>
+<tr><td>Flood objective</td><td>High-risk building count or summed peak discharge.</td></tr>
+<tr><td>Improvement</td><td>Absolute and percentage change from do-nothing.</td></tr>
+<tr><td>Interventions</td><td>Types, locations and decoded dimensions.</td></tr>
+<tr><td>Spatial effects</td><td>Intended benefits and any transferred impacts.</td></tr>
+<tr><td>Reason for inclusion</td><td>Least-cost, balanced, performance-led or threshold-compliant.</td></tr>
+<tr><td>Limitations</td><td>Important model, data or delivery qualifications.</td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>Every reported figure should identify the solution number, rainfall event, objective, cost, flood-performance value, depth or discharge units, baseline and DAFNI output-dataset version or run identifier.</p></div>
+</section>
+
+<section class="subsection" id="recovery-status">
+<p class="label">Current limitation</p>
+<h3>7.10 Recovery and reuse status</h3>
+<div class="prose"><p>The recovery modules are intended to allow optimisation to restart using solutions from an earlier run. Much of the underlying functionality is available, but full integration into the DAFNI workflow is currently on hold.</p></div>
+<ul class="checks">
+<li>Do not assume a stopped or failed DAFNI instance can be resumed.</li>
+<li>Do not upload an earlier <code>Solutions.txt</code> as a restart file unless a future workflow version explicitly supports it.</li>
+<li>Preserve <code>Solutions.txt</code>, generation archives, <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>.</li>
+<li>Record the model and workflow versions that created those files.</li>
+<li>Treat any later continuation using a new workflow version as a new modelling experiment.</li>
+</ul>
+<div class="note warn"><strong>Recovery placeholder</strong><p>This guidance will be expanded when restart inputs, compatibility checks and the DAFNI parameter interface have been fully integrated and validated.</p></div>
+<div class="key-point"><p class="label">Key point</p><p><strong>Reproducibility depends on the complete chain of evidence.</strong> Preserve the workflow, model, parameter set, input-dataset versions, workflow instance and output-dataset version alongside the downloaded results and interpretation record. A final plot without this provenance cannot fully describe or reproduce the modelling experiment.</p></div>
+</section>
+</section>
+
+<aside class="next" aria-label="Next guide section"><p>Coming next · Section 8</p><h3>Limitations, support and future development</h3><p>Understand the present scope of the tool, recognise when specialist review is needed and find the right route for technical or DAFNI platform support.</p></aside>
 </main>
 </div>
 <footer><div class="footer-inner"><p><strong>Dr James Mckenna</strong> · Newcastle University</p><p>Developed through a DAFNI Fellowship</p></div></footer>
