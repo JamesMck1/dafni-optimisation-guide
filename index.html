@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="User guide for the DAFNI-hosted CityCAT hydrodynamic optimisation tool.">
-<title>CityCAT Optimisation Tool | Comprehensive User Guide</title>
+<meta name="description" content="User guide for the DAFNI-hosted CityCAT optimisation workflow family, including runtime estimation and multistage optimisation.">
+<title>CityCAT Optimisation Workflows | Comprehensive User Guide</title>
 <style>
 :root{--ink:#17312f;--muted:#566b68;--paper:#fbfcf8;--white:#fff;--teal:#176f68;--dark:#123d3a;--soft:#e5f2ef;--amber:#fff3dc;--line:#d9e4e0;--radius:1rem;--width:76rem}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Aptos,"Segoe UI",Arial,sans-serif;line-height:1.7}a{color:var(--teal);text-underline-offset:.2em}a:focus-visible{outline:3px solid #f0ae43;outline-offset:4px}.skip{position:fixed;top:.7rem;left:.7rem;z-index:20;padding:.6rem .9rem;background:#fff;font-weight:700;transform:translateY(-150%)}.skip:focus{transform:none}
@@ -40,6 +40,16 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 .overview-flow span{color:var(--muted);font-size:.9rem}
 .flow-icon{display:grid;width:2.6rem;height:2.6rem;margin-bottom:.8rem;place-items:center;border-radius:.75rem;background:var(--soft);color:var(--dark);font-size:1.15rem;font-weight:900}
 .flow-caption{margin:.8rem 0 0;color:var(--muted);font-size:.88rem;text-align:center}
+.workflow-map{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:1.5rem;gap:1rem}
+.workflow-card{display:flex;flex-direction:column;padding:1.35rem;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 8px 24px rgba(18,61,58,.05)}
+.workflow-card h4{margin:0 0 .55rem;color:var(--dark);font-size:1.05rem;line-height:1.35}
+.workflow-card p{margin:0;color:var(--muted);font-size:.92rem}
+.workflow-card .status{align-self:flex-start}
+.workflow-card a{margin-top:auto;padding-top:1rem;font-weight:750}
+.workflow-routes{display:grid;margin-top:1rem;gap:.65rem}
+.workflow-route{display:grid;grid-template-columns:7rem 1fr;align-items:center;padding:.8rem 1rem;border:1px solid var(--line);border-radius:.75rem;background:var(--soft);gap:1rem}
+.workflow-route strong{color:var(--dark)}
+.workflow-route span{color:var(--muted);font-size:.9rem}
 .output-example{display:grid;grid-template-columns:.8fr 1.2fr;margin-top:1.5rem;overflow:hidden;border:1px solid var(--line);border-radius:var(--radius);background:#fff;box-shadow:0 8px 24px rgba(18,61,58,.05)}
 .output-example figure{display:flex;flex-direction:column;margin:0;padding:1rem}
 .output-example figure+figure{border-left:1px solid var(--line)}
@@ -67,6 +77,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
   .partner-inner{align-items:flex-start;flex-direction:column;gap:.8rem}
   .partner-logos{justify-content:flex-start;width:100%}
   .overview-flow{grid-template-columns:1fr;gap:1rem}
+  .workflow-map{grid-template-columns:1fr}
+  .workflow-route{grid-template-columns:1fr;gap:.15rem}
   .overview-flow li:not(:last-child):after{right:auto;bottom:-1.25rem;left:50%;top:auto;content:"\2193";transform:translateX(-50%)}
   .output-example{grid-template-columns:1fr}
   .output-example figure+figure{border-top:1px solid var(--line);border-left:0}
@@ -82,11 +94,11 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <a class="skip" href="#main-content">Skip to guide</a>
 <header><div class="bar">
 <a class="brand" href="#top" aria-label="CityCAT Optimisation user guide home"><span>CityCAT Optimisation &middot; User Guide</span></a>
-<nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open in DAFNI &nearr;</a></nav>
+<nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#workflow-family">Choose a workflow</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open main tool &nearr;</a></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
-<div><p class="eyebrow">Comprehensive user guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to identify and compare cost-effective urban flood-intervention strategies using a DAFNI-hosted workflow.</p><div class="pills"><a class="pill" href="#quick-start-tutorial">Start with the quick guide</a><a class="pill" href="#preparing-input-data">Prepare your inputs</a><a class="pill" href="#technical-reference">Technical reference</a></div></div>
-<aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Purpose</dt><dd>Explore and compare urban flood-intervention strategies</dd><dt>Balances</dt><dd>Whole-life cost and flood-risk reduction</dd><dt>Inputs</dt><dd>Flood-model data, candidate interventions and cost assumptions</dd><dt>Outputs</dt><dd>Best-performing trade-off strategies, maps and detailed records</dd><dt>Platform</dt><dd>DAFNI</dd></dl></aside>
+<div><p class="eyebrow">Comprehensive user guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to plan, run and continue cost-effective urban flood-intervention searches using the DAFNI-hosted CityCAT optimisation workflow family.</p><div class="pills"><a class="pill" href="#workflow-family">Choose a workflow</a><a class="pill" href="#quick-start-tutorial">Start with the quick guide</a><a class="pill" href="#preparing-input-data">Prepare your inputs</a><a class="pill" href="#technical-reference">Technical reference</a></div></div>
+<aside class="snapshot" aria-label="Guide snapshot"><h2>At a glance</h2><dl><dt>Purpose</dt><dd>Explore and compare urban flood-intervention strategies</dd><dt>Balances</dt><dd>Whole-life cost and flood-risk reduction</dd><dt>Workflows</dt><dd>Estimate runtime, optimise directly or continue in stages</dd><dt>Outputs</dt><dd>Best-performing trade-off strategies, maps and detailed records</dd><dt>Platform</dt><dd>DAFNI</dd></dl></aside>
 </div></section>
 <section class="partners" aria-label="Project partners"><div class="partner-inner">
 <p>Developed with support from</p>
@@ -98,7 +110,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="shell">
 <aside class="contents" id="contents" aria-label="Guide contents"><p>Guide contents</p>
 <div class="toc-group"><a class="toc-heading" href="#introduction">1 · Introduction</a><ol>
-<li><a href="#audience">Who this is for</a></li><li><a href="#decisions">Decisions it supports</a></li><li><a href="#interventions">Interventions</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#prerequisites">Before you start</a></li><li><a href="#outputs">Outputs</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#computing">Computational needs</a></li>
+<li><a href="#workflow-family">Choose a workflow</a></li><li><a href="#audience">Who this is for</a></li><li><a href="#decisions">Decisions it supports</a></li><li><a href="#interventions">Interventions</a></li><li><a href="#objectives">Objectives</a></li><li><a href="#prerequisites">Before you start</a></li><li><a href="#outputs">Outputs</a></li><li><a href="#limitations">Limitations</a></li><li><a href="#computing">Computational needs</a></li>
 </ol></div>
 <div class="toc-group"><a class="toc-heading" href="#how-tool-works">2 · How the tool works</a><ol>
 <li><a href="#optimisation-loop">Optimisation loop</a></li><li><a href="#strategy-representation">Strategy representation</a></li><li><a href="#candidate-evaluation">Candidate evaluation</a></li><li><a href="#two-objectives">The two objectives</a></li><li><a href="#epsilon-archive">Epsilon archive</a></li><li><a href="#new-strategies">Generating strategies</a></li><li><a href="#stopping">Stopping the run</a></li><li><a href="#user-controls">What the user controls</a></li>
@@ -138,7 +150,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="section" id="introduction"><p class="label">Section 1 &middot; Introduction</p><h2>What is the hydrodynamic optimisation tool?</h2><hr class="rule"><div class="prose">
 <p>The hydrodynamic optimisation tool helps users explore where and how urban flood interventions could be deployed. It compares many possible strategies so that users can identify options offering useful balances between whole-life cost and flood-risk reduction.</p>
 <p>The tool automatically generates candidate strategies, tests each one using a hydrodynamic flood simulation and uses the results to focus its search on increasingly promising options.</p>
-<p>The workflow runs on the Data &amp; Analytics Facility for National Infrastructure (DAFNI) and uses CityCAT as its flood-simulation engine. Users do not need to understand the underlying optimisation algorithm to follow the practical parts of this guide.</p>
+<p>The workflow family runs on the Data &amp; Analytics Facility for National Infrastructure (DAFNI) and uses CityCAT as its flood-simulation engine. Users do not need to understand the underlying optimisation algorithm to follow the practical parts of this guide.</p>
 </div>
 <ol class="overview-flow" aria-label="How the tool works at a glance">
 <li><span class="flow-icon" aria-hidden="true">01</span><strong>Define the possibilities</strong><span>Supply candidate interventions, flood-model data and consistent cost assumptions.</span></li>
@@ -146,6 +158,22 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li><span class="flow-icon" aria-hidden="true">03</span><strong>Compare the strongest options</strong><span>Review the best trade-offs found between whole-life cost and flood-risk reduction.</span></li>
 </ol>
 <p class="flow-caption">The process continues until the configured simulation budget or stopping condition is reached.</p>
+</section>
+<section class="section" id="workflow-family"><p class="label">Workflow family</p><h3>Choose the route that fits your study</h3><div class="prose">
+<p>Three DAFNI workflows use the same CityCAT model preparation and hydrodynamic assumptions. The standard workflow remains the simplest route for a self-contained run. The runtime estimator and multistage workflow add a planned, resumable route for larger studies.</p>
+</div>
+<div class="workflow-map">
+<article class="workflow-card"><span class="status">Plan and prepare</span><h4>CityCAT Optimisation Tool: Runtime Estimator</h4><p>Runs one cold baseline simulation and one or more reusable-mesh baseline samples using the intended study inputs. It estimates the hydrodynamic runtime for a chosen simulation budget and packages a ready-to-continue model state.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows">Find this workflow in DAFNI &nearr;</a></article>
+<article class="workflow-card"><span class="status">Direct route</span><h4>CityCAT Optimisation Tool</h4><p>Runs preprocessing, CityCAT simulation, evolutionary search, plotting and export as one end-to-end optimisation. Use it for validation, teaching and studies expected to complete comfortably in one instance.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=9181f614-0e0a-47cd-b472-9eb6d479cc4f">Open the main workflow &nearr;</a></article>
+<article class="workflow-card"><span class="status">Continue a study</span><h4>CityCAT Optimisation Tool: Multistage Optimisation</h4><p>Continues a runtime-estimator package or an earlier compatible optimisation. It reuses the prepared inputs, mesh and valid simulations, rebuilds the nondominated archive and applies a new allowance of additional simulations.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows">Find this workflow in DAFNI &nearr;</a></article>
+</div>
+<div class="workflow-routes" aria-label="Supported CityCAT optimisation routes">
+<div class="workflow-route"><strong>Direct route</strong><span>Study datasets &rarr; CityCAT Optimisation Tool &rarr; results</span></div>
+<div class="workflow-route"><strong>Planned route</strong><span>Study datasets &rarr; Runtime Estimator &rarr; Multistage Optimisation &rarr; results</span></div>
+<div class="workflow-route"><strong>Extended route</strong><span>Earlier compatible optimisation &rarr; Multistage Optimisation &rarr; further results</span></div>
+</div>
+<div class="note plan"><strong>The hand-off uses three files</strong><p>Supply <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> as three separate DAFNI datasets. Use all three files from the same source instance and preserve that instance’s workflow, model and dataset versions.</p></div>
+<div class="note warn"><strong>Runtime estimates cover hydrodynamics, not the whole instance</strong><p>The estimator excludes objective analysis, evolutionary-algorithm operations, plotting, final exports and DAFNI queue or scheduling time. Treat its result as a planning estimate and retain operational contingency.</p></div>
 </section>
 <section class="section" id="audience"><p class="label">Audience</p><h3>Who is this guide for?</h3><div class="prose"><p>This guide is for people who want to explore how flood interventions can be optimally designed and located within urban environments. It supports both technical users and decision-makers who will interpret the results.</p></div><div class="grid">
 <article class="card"><span class="number">01</span><h4>Flood-risk authorities</h4><p>Example: Lead Local Flood Authorities and Environment Agency teams assessing strategic options.</p></article>
@@ -197,11 +225,14 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="section" id="limitations"><p class="label">Use with care</p><h3>Important limitations</h3><ul class="checks">
 <li><strong>Optioneering, not detailed design.</strong> Results identify promising strategies for further investigation, not construction-ready designs.</li><li><strong>Results reflect the model.</strong> Conclusions depend on the supplied data, model setup and rainfall scenario.</li><li><strong>Cost assumptions matter.</strong> Use a consistent costing basis across all interventions so that strategies can be compared fairly. Default unit costs can be replaced with study-specific values.</li><li><strong>The search is finite.</strong> The tool explores many promising strategies but cannot test every possible combination. Larger design spaces generally require larger simulation budgets.</li><li><strong>Practical constraints require review.</strong> Ownership, utilities, maintenance, ecology, accessibility and constructability are not assessed automatically. Additional social and environmental benefits are not currently included as optimisation objectives.</li>
 </ul></section>
-<section class="section" id="computing"><p class="label">Runtime</p><h3>Computational requirements</h3><div class="prose"><p>Every candidate strategy requires a hydrodynamic simulation. Use a small test run to confirm the setup before committing resources to a production study. For urban areas, high-resolution data are important so that flow paths are adequately resolved.</p></div>
-<div class="table-wrap"><table class="guide-table"><caption>Indicative wall-clock time for one hydrodynamic simulation</caption><thead><tr><th>Domain size (km<sup>2</sup>)</th><th>Computational cells</th><th>Rainfall return period (years)</th><th>Simulation duration (hours)</th><th>Wall-clock time (hh:mm:ss)</th></tr></thead><tbody><tr><td><span class="placeholder">TBC</span></td><td><span class="placeholder">TBC</span></td><td><span class="placeholder">TBC</span></td><td><span class="placeholder">TBC</span></td><td><span class="placeholder">TBC</span></td></tr></tbody></table></div>
-<p class="table-note">Values are placeholders. Timings will be indicative only because every catchment is unique. The table reports the cost of one simulation, not a complete optimisation. Total runtime also depends on the number of simulations performed per generation, which users control through <code>max_front_size</code>.</p>
+<section class="section" id="computing"><p class="label">Runtime</p><h3>Computational requirements</h3><div class="prose"><p>Every candidate strategy requires a hydrodynamic simulation. Use the <strong>CityCAT Optimisation Tool: Runtime Estimator</strong> with the intended study datasets and hydrodynamic parameters before committing resources to a production study. For urban areas, high-resolution data are important so that flow paths are adequately resolved.</p><p>Set <code>TARGET_SIMULATIONS</code> to the planned optimisation allowance. The minimum useful benchmark, <code>WARM_RUNS=1</code>, measures one cold mesh-building run and one reusable-mesh run. Additional warm runs improve the stability of the reported median but increase the benchmark cost.</p></div>
+<div class="grid">
+<article class="card"><h4><code>runtime_estimate.csv</code></h4><p>Provides the principal timing values for a quick planning review.</p></article>
+<article class="card"><h4><code>runtime_estimate.json</code></h4><p>Records all timing samples, configuration context, assumptions and hydrodynamic-only and setup-inclusive estimates.</p></article>
+</div>
+<p class="table-note">Candidate strategies can take different amounts of time to simulate. The estimate also excludes optimisation analysis, plotting, export and DAFNI scheduling, so it should not be treated as a guaranteed wall-clock completion time.</p>
 <div class="prose"><p>DAFNI supplies the managed computational environment, while users remain responsible for selecting an appropriate run size and checking study results. For computationally demanding optimisations that cannot be completed within a reasonable timeframe on DAFNI, contact the guide authors to discuss possible access to cloud-computing resources. Access cannot be guaranteed and depends on resource availability, project scope and applicable access arrangements.</p></div></section>
-<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the tool. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tool. This edition is valid for DAFNI model version <code>v6</code> and was last updated on 20 August 2026.</p></div></section>
+<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition is valid for DAFNI model version <code>v6</code> and was last updated on 26 August 2026.</p></div></section>
 <section class="section chapter" id="how-tool-works">
 <p class="label">Section 2 · How the tool works</p>
 <h2>From intervention strategy to Pareto front</h2>
@@ -811,9 +842,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="subsection" id="launch-workflow">
 <p class="label">Execute</p>
 <h3>5.2 Launching the workflow</h3>
-<div class="prose"><p>A workflow can be executed from the DAFNI workflow catalogue or its details page.</p></div>
+<div class="prose"><p>A workflow can be executed from the DAFNI workflow catalogue or its details page. Confirm the route before creating the instance: the standard and runtime-estimator workflows use the original study datasets, while Multistage Optimisation uses the three-file package from a compatible earlier instance.</p></div>
 <ol class="process">
-<li><strong>Open the workflow.</strong> Select the CityCAT optimisation workflow.</li>
+<li><strong>Open the workflow.</strong> Select the intended CityCAT optimisation, runtime-estimator or multistage workflow.</li>
 <li><strong>Choose Execute.</strong> Open the list of available parameter sets.</li>
 <li><strong>Select the validation configuration.</strong> Confirm the intended parameter-set name and workflow version.</li>
 <li><strong>Execute the workflow.</strong> Submit the configuration to create a new instance.</li>
@@ -899,7 +930,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <p class="label">Early termination</p>
 <h3>5.7 When should a run be stopped?</h3>
 <div class="prose"><p>DAFNI provides a <strong>Stop Workflow</strong> control on the workflow-instance page. Stop an active validation run when the wrong rainfall, objective or dataset version was selected; an inappropriate simulation budget was entered; status information confirms a non-recoverable setup problem; the observed runtime makes the study impractical; or DAFNI support advises termination.</p><p>Avoid stopping merely because one CityCAT simulation is taking longer than previous candidates. First compare the elapsed time with the model size, configured simulation runtime and earlier validation results.</p></div>
-<div class="note warn"><strong>Stopped runs are incomplete</strong><p>Full restart and recovery integration is currently on hold. Do not assume that a stopped DAFNI instance can continue from partial solutions. Preserve its configuration and launch a corrected new instance.</p></div>
+<div class="note warn"><strong>Continuation depends on complete hand-off files</strong><p>A stopped or failed instance can be continued only when it produced valid copies of <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>. If any file is missing, incomplete or from a different run, correct the cause and launch a new standard or runtime-estimator instance.</p></div>
 </section>
 
 <section class="subsection" id="successful-outputs">
@@ -1382,17 +1413,18 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </section>
 
 <section class="subsection" id="recovery-status">
-<p class="label">Current limitation</p>
-<h3>7.10 Recovery and reuse status</h3>
-<div class="prose"><p>The recovery modules are intended to allow optimisation to restart using solutions from an earlier run. Much of the underlying functionality is available, but full integration into the DAFNI workflow is currently on hold.</p></div>
+<p class="label">Multistage continuation</p>
+<h3>7.10 Continue and extend an optimisation</h3>
+<div class="prose"><p><strong>CityCAT Optimisation Tool: Multistage Optimisation</strong> continues a compatible runtime-estimator package or an earlier complete or incomplete optimisation. It restores the original scientific, representation and economic settings, reuses an existing CityCAT mesh where available, reconstructs valid simulations and resumes the search from a reduced nondominated archive.</p></div>
 <ul class="checks">
-<li>Do not assume a stopped or failed DAFNI instance can be resumed.</li>
-<li>Do not upload an earlier <code>Solutions.txt</code> as a restart file unless a future workflow version explicitly supports it.</li>
-<li>Preserve <code>Solutions.txt</code>, generation archives, <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>.</li>
-<li>Record the model and workflow versions that created those files.</li>
-<li>Treat any later continuation using a new workflow version as a new modelling experiment.</li>
+<li>Create three DAFNI input datasets containing <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> from one source instance.</li>
+<li>Record the source workflow, model, parameter-set, input-dataset and output-dataset versions before continuing.</li>
+<li>Set <code>LAG</code>, <code>DELTA_K</code>, <code>MAX_FRONT_SIZE</code>, <code>MIN_SIMS</code> and <code>MAX_SIMS</code> for the new stage.</li>
+<li>Treat <code>MIN_SIMS</code> and <code>MAX_SIMS</code> as additional unique simulations, not absolute totals across every stage.</li>
+<li>Preserve the outputs from every stage; the next multistage run can use the newly published three-file package.</li>
 </ul>
-<div class="note warn"><strong>Recovery placeholder</strong><p>This guidance will be expanded when restart inputs, compatibility checks and the DAFNI parameter interface have been fully integrated and validated.</p></div>
+<div class="note"><strong>Recovered simulations still count</strong><p>If <code>R</code> valid simulations are recovered, the absolute stopping counters become <code>R + MIN_SIMS</code> and <code>R + MAX_SIMS</code>. A runtime-estimator package contributes one existing unique baseline genotype even when several warm timing samples were collected.</p></div>
+<div class="note warn"><strong>Do not mix stages or substitute <code>Solutions.txt</code></strong><p>The multistage workflow requires the complete three-file model state. A solution table alone cannot restore the prepared geometry, candidate ordering, mesh and simulation evidence needed for a safe continuation.</p></div>
 <div class="key-point"><p class="label">Key point</p><p><strong>Reproducibility depends on the complete chain of evidence.</strong> Preserve the workflow, model, parameter set, input-dataset versions, workflow instance and output-dataset version alongside the downloaded results and interpretation record. A final plot without this provenance cannot fully describe or reproduce the modelling experiment.</p></div>
 </section>
 </section>
@@ -1510,7 +1542,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <tr><td>Rainfall, DEM and topography may not all appear as required in the DAFNI interface.</td><td>They remain functionally mandatory and the run will fail without valid files.</td></tr>
 <tr><td><code>BINARY_CODING</code> is exposed as a parameter.</td><td>Keep it set to <code>gray</code>; alternative coding is not supported by this guide.</td></tr>
 <tr><td>The damages objective appears in parts of the code.</td><td>It is not currently available for routine DAFNI studies.</td></tr>
-<tr><td>Recovery modules exist but are not fully integrated.</td><td>A stopped or completed run cannot yet be selected as a supported restart source.</td></tr>
+<tr><td>Multistage continuation uses three separate file datasets.</td><td>Keep <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> together and do not combine files from different source instances.</td></tr>
 <tr><td>Objective-space plots say <code>Installation Cost (£)</code>.</td><td>Interpret the value according to the configured whole-life cost calculation.</td></tr>
 <tr><td>Hydrograph objective-space plots say <code>Peak flow (m³)</code>.</td><td>The underlying peak-discharge objective is a rate and should be interpreted in m³/s.</td></tr>
 <tr><td>The final comparison legend includes objective vectors and a reference Pareto front.</td><td>Those datasets are not populated; the blue ε-MOEA archive is the operative result.</td></tr>
@@ -1598,9 +1630,9 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <h3>8.10 Future development</h3>
 <div class="grid">
 <article class="card"><h4>Damages objective</h4><p>Future work will automate or standardise the assignment of building types required by the damage calculation. This must be validated before routine use.</p></article>
-<article class="card"><h4>Restart and recovery</h4><p>The recovery components will be integrated so that compatible solutions from an earlier run can be supplied safely to a new DAFNI instance.</p></article>
+<article class="card"><h4>Workflow assurance</h4><p>Future releases can strengthen automated compatibility reporting and make the provenance chain between runtime-estimator and multistage instances easier to inspect.</p></article>
 </div>
-<div class="prose"><p>Restart integration will require a defined input format, model- and workflow-version compatibility checks, validation of genotype lengths and candidate ordering, preservation of the original parameter and dataset context, a clear distinction between continuation and a new experiment, and dedicated user guidance.</p></div>
+<div class="prose"><p>The current multistage workflow already restores the defined three-file input package and validates the recovered model state. Further development should retain strict compatibility checks, preserve the original parameter and dataset context and distinguish each continuation stage clearly in reports.</p></div>
 <h4 class="minor-heading">Possible enhancements</h4>
 <div class="prose"><p>The following are potential directions rather than commitments of the current version.</p></div>
 <ul class="checks">
@@ -1692,6 +1724,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </tbody>
 </table></div>
 <div class="prose"><p>The first route confirms that you can configure and execute the model correctly. The second provides stable outputs for learning how the results are structured and interpreted.</p><p>A new optimisation run is stochastic. It may therefore return different intervention combinations or slightly different objective values from the precomputed reference run, even when the same configuration is used. Exact numerical agreement is not required for a successful validation.</p></div>
+<div class="note plan"><strong>The tutorial uses the direct workflow</strong><p>Follow the <strong>CityCAT Optimisation Tool</strong> route for this short exercise. For a larger production study, first run <strong>CityCAT Optimisation Tool: Runtime Estimator</strong> and pass its three-file package to <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong>.</p></div>
 </section>
 
 <section class="subsection" id="tutorial-assets">
@@ -2067,7 +2100,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <h4 class="minor-heading">Can I use the damages objective?</h4>
 <div class="prose"><p>No. Automated building-type assignment is not yet integrated, so the damages objective should not be selected.</p></div>
 <h4 class="minor-heading">Can I restart a stopped optimisation?</h4>
-<div class="prose"><p>Not through the current deployed workflow. Recovery modules are largely prepared, but full restart integration remains on hold. Preserve the stopped run and begin a corrected new instance.</p></div>
+<div class="prose"><p>Yes, through <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong>, provided the source instance produced valid <code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> files. Supply all three from the same instance and set the new stage’s additional simulation limits. If the source failed before creating a complete package, begin a corrected new instance.</p></div>
 <h4 class="minor-heading">Does a successful DAFNI status prove the study is valid?</h4>
 <div class="prose"><p>No. It confirms workflow execution, not hydrodynamic validity, adequate optimisation convergence or decision suitability. Complete the validation checks in Sections 5, 6 and 9.</p></div>
 <h4 class="minor-heading">Why do the outputs call the second objective “risk” during a hydrograph run?</h4>
@@ -2125,11 +2158,12 @@ Does the problem recur in the quick-start validation run?:</code>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Property</th><th scope="col">Current implementation</th></tr></thead>
 <tbody>
-<tr><td>DAFNI display name</td><td><code>CityCAT_Optimisation</code></td></tr>
-<tr><td>Internal model name</td><td><code>citycat-opti</code></td></tr>
+<tr><td>DAFNI workflows</td><td><strong>CityCAT Optimisation Tool</strong>; <strong>CityCAT Optimisation Tool: Runtime Estimator</strong>; <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong></td></tr>
+<tr><td>DAFNI model display names</td><td><code>CityCAT_Optimisation</code>; <code>CityCAT Runtime Estimator</code>; <code>CityCAT Multistage Optimisation</code></td></tr>
+<tr><td>Internal model names</td><td><code>citycat-opti</code>; <code>citycat-runtime-estimator</code>; <code>citycat-multistage-optimisation</code></td></tr>
 <tr><td>Publisher</td><td>Newcastle University</td></tr>
 <tr><td>Model-definition API</td><td><code>v1beta3</code></td></tr>
-<tr><td>Principal entry point</td><td><code>run.py</code>, launched through <code>entrypoint.sh</code></td></tr>
+<tr><td>Principal entry points</td><td><code>run.py</code> through <code>entrypoint.sh</code>; <code>run_benchmark.py</code>; <code>recovery_run.py</code></td></tr>
 <tr><td>Optimisation method</td><td>ε-dominance multi-objective evolutionary algorithm</td></tr>
 <tr><td>Hydrodynamic model</td><td>CityCAT</td></tr>
 <tr><td>Python version</td><td>3.11</td></tr>
@@ -2144,7 +2178,7 @@ Does the problem recur in the quick-start validation run?:</code>
 <section class="subsection" id="runtime-data-flow">
 <p class="label">Processing architecture</p>
 <h3>11.2 Runtime data flow</h3>
-<pre class="code-block" aria-label="Runtime data flow">DAFNI parameter set
+<pre class="code-block" aria-label="Runtime data flow for direct and staged optimisation routes">DAFNI parameter set
         │
         ├── environment variables
         │
@@ -2161,20 +2195,26 @@ DAFNI input datasets
           │                   │
           └─────────┬─────────┘
                     ▼
-           ε-MOEA initialisation
-                    │
-                    ▼
-        Repeated CityCAT simulations
-                    │
-                    ▼
-       Objective and cost evaluation
-                    │
-                    ▼
-       Generation and final reporting
-                    │
-                    ▼
-            /data/outputs/</pre>
-<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. At the end of a successful run, the processed algorithm inputs and CityCAT working directory are compressed.</p></div>
+       ┌────────────┴────────────┐
+       │                         │
+       ▼                         ▼
+Runtime Estimator       Direct ε-MOEA run
+       │                         │
+       ▼                         │
+three-file hand-off              │
+       │                         │
+       ▼                         │
+Multistage ε-MOEA run ◄──────────┘
+       │
+       ▼
+Repeated CityCAT simulations
+       │
+       ▼
+Objective, cost and final reporting
+       │
+       ▼
+/data/outputs/</pre>
+<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. The direct and runtime-estimator routes compress the prepared algorithm inputs and CityCAT working directory so that compatible state can be retained. The multistage route restores those archives, recovers valid simulations and produces a fresh package for another stage if required.</p></div>
 </section>
 
 <section class="subsection" id="dataslot-reference">
@@ -2338,6 +2378,18 @@ Offline features</pre>
 </tbody>
 </table></div>
 <div class="prose"><p>The bundled CityCAT executable is removed before <code>CityCAT_setup.zip</code> is created.</p></div>
+<h4 class="minor-heading">Workflow-specific and continuation outputs</h4>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Path</th><th scope="col">Workflow and purpose</th></tr></thead>
+<tbody>
+<tr><td><code>runtime_estimate.csv</code></td><td>Runtime Estimator: principal timing values for quick review</td></tr>
+<tr><td><code>runtime_estimate.json</code></td><td>Runtime Estimator: timing samples, context, assumptions and aggregate estimates</td></tr>
+<tr><td><code>parameters.txt</code></td><td>Runtime Estimator and Multistage Optimisation: top-level continuation copy of the archived configuration</td></tr>
+<tr><td><code>alg_inputs.zip</code></td><td>All routes: one of the three inputs required by Multistage Optimisation</td></tr>
+<tr><td><code>CityCAT_setup.zip</code></td><td>All routes: prepared model, mesh and retained simulations for continuation</td></tr>
+</tbody>
+</table></div>
+<div class="note warn"><strong>Three separate DAFNI datasets</strong><p>For a multistage hand-off, publish or upload the parameter file and two archives as three inputs. When continuing a standard optimisation, select its archived <code>summary/parameters.txt</code> as the parameter file.</p></div>
 <h4 class="minor-heading">Plot files</h4>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">File</th><th scope="col">Content</th></tr></thead>
