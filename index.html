@@ -240,10 +240,10 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <article class="card"><h4><code>runtime_estimate.csv</code></h4><p>Provides the timing components and measured objective span for a quick planning review.</p></article>
 <article class="card"><h4><code>runtime_estimate.json</code></h4><p>Records the objective bounds, runtime components, assumptions and, where applicable, outlet peaks.</p></article>
 </div>
-<div class="note plan"><strong>Use the estimator as a study-readiness check</strong><p>If the two boundary designs show little or no useful flood-performance difference, reassess the candidate interventions, rainfall event and selected objective before paying for a larger search. For a hydrograph objective, increase <code>SIM_RUNTIME</code> and rerun the estimator if any outlet is still rising when either boundary simulation ends.</p></div>
+<div class="note plan"><strong>Use the estimator as a study-readiness check</strong><p>If the two boundary designs show little or no useful flood-performance difference, reassess the candidate interventions, rainfall event and selected objective before paying for a larger search. For a hydrograph objective, increase <code>SIM_RUNTIME</code> and rerun the estimator if any outlet is still rising when either boundary simulation ends. The estimator still publishes its findings, but warns that the estimate is not suitable for use.</p></div>
 <p class="table-note">The reported total assumes that the <code>MAX_SIMS</code> limit is reached. The realised runtime is expected to be lower when self-termination activates. Candidate strategies can take different amounts of time to simulate, and the estimate excludes evolutionary selection and recombination, plotting, final exports and DAFNI scheduling.</p>
 <div class="prose"><p>DAFNI supplies the managed computational environment, while users remain responsible for selecting an appropriate run size and checking study results. For computationally demanding optimisations that cannot be completed within a reasonable timeframe on DAFNI, contact the guide authors to discuss possible access to cloud-computing resources. Access cannot be guaranteed and depends on resource availability, project scope and applicable access arrangements.</p></div></section>
-<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition was reviewed against the optimisation source and DAFNI model definitions on 8 September 2026. Always record the model version used for an individual study.</p></div></section>
+<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition was reviewed against the optimisation source and DAFNI model definitions on 10 September 2026. Always record the model version used for an individual study.</p></div></section>
 <section class="section chapter" id="how-tool-works">
 <p class="label">Section 2 · How the tool works</p>
 <h2>From intervention strategy to Pareto front</h2>
@@ -433,7 +433,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 
 <section class="subsection" id="dem-data">
 <p class="label">Mandatory input</p>
-<h3>3.4 Digital elevation model</h3>
+<h3>3.4 Digital elevation model and study area boundary</h3>
 <div class="prose">
 <p>The terrain dataset may contain an ESRI ASCII raster (<code>.asc</code>) or GeoTIFF (<code>.tif</code>). A single raster can be supplied directly, or several tiles can be packaged together in an archive. When multiple tiles are present, the tool mosaics them using the highest available resolution and bilinear resampling.</p>
 <p>The raster must include valid coordinate-reference-system metadata. During preprocessing, it is converted to British National Grid (<strong>EPSG:27700</strong>), assigned a NoData value of <code>-99999</code>, and written as the ESRI ASCII terrain file required by CityCAT.</p>
@@ -444,6 +444,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Ensure that every tile has valid and compatible coordinate metadata.</li>
 <li>Check for seams, duplicated coverage and unexpected resolution changes before upload.</li>
 </ul>
+<h4 class="minor-heading">Study Area Boundary</h4>
+<div class="prose"><p>Use this optional polygon dataset to define the area you want to model. Without it, the full extent of the terrain dataset is modelled. With it, the tool crops the terrain grid and excludes cells outside the boundary from the simulation. A smaller modelled area can substantially reduce the work repeated for every design, but the boundary must still include the flow paths and surrounding catchment needed for a sound flood study.</p><p>The boundary must overlap the terrain data. Only the part covered by the terrain can be modelled, so supplying a larger boundary does not fill gaps in terrain coverage.</p><p>Background topography and existing permeable-area features wholly outside the modelled area are dropped; features crossing its edge are kept whole. Paving candidates derived automatically from topography are cut back to the modelled area. In contrast, all supplied intervention features, offline-basin inlets, supplied paving polygons and outlet lines must lie wholly inside it. The tool stops and identifies features extending outside, rather than silently removing or cutting your proposed designs.</p></div>
 <div class="note"><strong>Reprojection is automatic, quality control is not</strong><p>The tool standardises the coordinate system and output format, but it cannot determine whether the surface is hydrologically suitable. Review sinks, bridges, walls, buildings and other elevation treatments as part of the CityCAT model setup.</p></div>
 </section>
 
@@ -468,11 +470,13 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 
 <section class="subsection" id="base-surfaces">
 <p class="label">Optional overrides</p>
-<h3>3.6 Base permeable areas and pavement candidates</h3>
+<h3>3.6 Base permeable areas, pavement candidates and exclusion zones</h3>
 <div class="grid">
 <article class="card"><h4>Permeable Areas</h4><p>A polygon dataset describing the existing baseline infiltration surface used in every simulation. If it is omitted, the tool derives this surface from the topography attributes.</p></article>
 <article class="card"><h4>Permeable Paving</h4><p>A polygon dataset defining surfaces that the optimiser may convert to permeable paving. Each resolved polygon becomes one decision zone and <code>NO_ZONES</code> is ignored. If this dataset is omitted, candidates are derived from roadside and path features in the topography and divided using <code>NO_ZONES</code>.</p></article>
 </div>
+<h4 class="minor-heading">Exclusion Zone</h4>
+<div class="prose"><p>This optional polygon dataset marks ground that must not be excavated for interventions. If it is omitted, the tool protects buildings, pavements and roads identified in the topography, including a 5-metre buffer around them.</p><p>A supplied Exclusion Zone <strong>replaces</strong> that automatic protection; it is not added to it. Your polygons are used as drawn, with no extra buffer. Include all areas and clearances you need to protect, not just additional restrictions. This setting does not remove ground from the flood model.</p><p>Study Area Boundary, Exclusion Zone, Permeable Areas and Permeable Paving accept Shapefile, GeoPackage or File Geodatabase data, optionally in a ZIP archive. Keep each dataset in its own data slot.</p></div>
 <div class="note"><strong>Baseline is different from an intervention</strong><p><strong>Permeable Areas</strong> describe existing conditions and are always included. <strong>Green-Area Interventions</strong> are optional candidates that the optimiser may select. Keep these datasets conceptually separate.</p></div>
 </section>
 
@@ -535,6 +539,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li><strong>Locate the mounted datasets.</strong> The tool reads the assigned files from the DAFNI input directories.</li>
 <li><strong>Extract archives.</strong> Supported ZIP packages and geodatabases are unpacked into the output workspace.</li>
 <li><strong>Validate and standardise.</strong> Rainfall, raster and vector inputs are checked, converted and reprojected where required.</li>
+<li><strong>Apply the study boundary.</strong> Crop and mask the terrain, retain relevant background features, and check that supplied interventions and outlets lie inside the modelled area.</li>
 <li><strong>Derive CityCAT layers.</strong> Buildings, infiltration areas, intervention candidates and outlet points are constructed.</li>
 <li><strong>Write working inputs.</strong> The CityCAT setup and optimiser configuration are saved beneath <code>/data/outputs/</code>.</li>
 <li><strong>Start the optimisation.</strong> Boundary strategies are created and the first CityCAT simulations begin.</li>
@@ -549,6 +554,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Rainfall, DEM and topography datasets are assigned to the correct mandatory slots.</li>
 <li>The rainfall file contains valid, increasing times and non-negative intensities in the required units.</li>
 <li>The DEM covers the full domain and has valid coordinate and NoData information.</li>
+<li>If supplied, the Study Area Boundary covers the intended flood study and contains all supplied interventions, inlets, paving candidates and outlet lines within the terrain coverage.</li>
+<li>If supplied, the Exclusion Zone includes all required protected areas and clearances, as it replaces the automatic 5-metre-buffered protection.</li>
 <li>Topography includes usable buildings and baseline permeable areas, with the required attributes.</li>
 <li>All spatial datasets have a defined coordinate system and align when inspected together.</li>
 <li>Candidate datasets contain only feasible, study-relevant intervention locations.</li>
@@ -673,7 +680,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td><code>PERMEABLE_ROUGHNESS</code></td><td>0.035</td><td>Manning’s n</td><td>Surface roughness for permeable areas.</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p><code>SIM_RUNTIME</code> must cover the full rainfall event and enough time for the relevant flood response or hydrograph to develop. Ending a simulation too early can truncate the peak flow or maximum flood extent. For a hydrograph study, the runtime estimator checks every outlet for both boundary designs and stops with an error if a flow is still rising at the end.</p><p><code>OUTPUT_FREQUENCY</code> controls temporal output resolution. A shorter interval provides more detailed results but creates more data and can increase processing and storage requirements.</p></div>
+<div class="prose"><p><code>SIM_RUNTIME</code> must cover the full rainfall event and enough time for the relevant flood response or hydrograph to develop. Ending a simulation too early can truncate the peak flow or maximum flood extent. For a hydrograph study, the runtime estimator checks every outlet for both boundary designs. If a flow is still rising at the end, it completes so that you can inspect the outputs, but warns that the estimate must not be used. Increase the simulation duration and rerun the estimator.</p><p><code>OUTPUT_FREQUENCY</code> controls temporal output resolution. A shorter interval provides more detailed results but creates more data and can increase processing and storage requirements.</p></div>
 <ul class="checks">
 <li>Use positive values and make output frequency shorter than simulation runtime so that more than one result is written.</li>
 <li>Extend the runtime beyond the final rainfall timestep where the flood response requires it.</li>
@@ -941,7 +948,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 
 <section class="subsection" id="common-failures">
 <p class="label">Troubleshooting</p>
-<h3>5.6 Common failures and first checks</h3>
+<h3>5.6 Common warnings, failures and first checks</h3>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Message or symptom</th><th scope="col">Likely cause</th><th scope="col">First check</th></tr></thead>
 <tbody>
@@ -984,7 +991,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <thead><tr><th scope="col">Output</th><th scope="col">Purpose</th></tr></thead>
 <tbody>
 <tr><td><code>plots/Generation N.png</code></td><td>Shows the epsilon archive at each recorded generation, including archive and population information.</td></tr>
-<tr><td><code>plots/Solution Comparison.png</code></td><td>Shows the final set of cost-performance trade-offs.</td></tr>
+<tr><td><code>plots/Final Solutions.png</code></td><td>Shows the final set of cost-performance trade-offs.</td></tr>
 <tr><td><code>plots/Solution N.png</code></td><td>Provides a spatial view of an individual final solution and objective-specific information where available.</td></tr>
 <tr><td><code>summary/Solutions.txt</code></td><td>Records final genotypes, cost, flood-performance value and decoded feature characteristics.</td></tr>
 <tr><td><code>summary/Generation_N_Solutions.txt</code></td><td>Records the archive members present in each generation.</td></tr>
@@ -1010,7 +1017,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td><code>parameters.txt</code>, <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code></td><td>Provide the compatible hand-off to Multistage Optimisation; the CityCAT archive retains both boundary simulations.</td></tr>
 </tbody>
 </table></div>
-<div class="note warn"><strong>A failed peak check does not produce a normal published package</strong><p>On DAFNI, use the error banner in the model log to identify the affected design and outlets. The hydrograph figure is created before the estimator stops, but it may not be available through the usual output dataset when the workflow fails.</p></div>
+<div class="note warn"><strong>A completed estimator can still need correction</strong><p>If an outlet peak was not captured, the estimator still finishes and packages its outputs for publication. Warnings appear in the execution log, both plots and the runtime reports. Read these even when DAFNI shows a successful model step. Increase <code>SIM_RUNTIME</code> and run the estimator again before using its cost–performance comparison, planning a production runtime or continuing into optimisation. Do not reuse the short-duration simulations for the corrected study.</p></div>
 <div class="prose"><p>DAFNI requires model outputs to be written beneath <code>/data/outputs/</code>. If the workflow includes a publisher step, its configured file paths determine which outputs appear in the Data catalogue. <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-create-a-dafni-ready-model/">DAFNI’s model guidance</a> explains this output convention.</p></div>
 </section>
 
@@ -1086,7 +1093,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <thead><tr><th scope="col">Output</th><th scope="col">Use when interpreting the run</th></tr></thead>
 <tbody>
 <tr><td><code>plots/Generation N.png</code></td><td>Examine how the ε-MOEA archive developed during the search.</td></tr>
-<tr><td><code>plots/Solution Comparison.png</code></td><td>Compare the final cost–performance trade-offs.</td></tr>
+<tr><td><code>plots/Final Solutions.png</code></td><td>Compare the final cost–performance trade-offs.</td></tr>
 <tr><td><code>plots/Solution N.png</code></td><td>Inspect the intervention layout and maximum flood depths for a final strategy. Hydrograph runs also include an outlet-discharge panel.</td></tr>
 <tr><td><code>summary/Solutions.txt</code></td><td>Obtain the authoritative genotype, cost, objective value and decoded intervention characteristics for each final strategy.</td></tr>
 <tr><td><code>summary/Generation_N_Solutions.txt</code></td><td>Identify the archive members present during a particular generation.</td></tr>
@@ -1129,7 +1136,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>6.3 Understanding the generational plots</h3>
 <div class="prose">
 <p><code>Generation N.png</code> shows the ε-MOEA archive at a particular stage of the search. Each blue cross is an archive solution. The number printed beside a point is its position within that generation’s archive; it is not a permanent solution identifier. Archive membership and ordering can change, so a point labelled <code>3</code> in one generation should not be assumed to be the same strategy as point <code>3</code> in another.</p>
-<p>The title reports the generation number, cumulative number of unique simulations, archive size and population size.</p>
+<p>The title reports the generation number and cumulative number of unique simulations, followed by the <strong>current number of best solutions</strong> and the <strong>number of candidate solutions being tested</strong>. The blue points are labelled <strong>Current best solutions</strong>. These counts distinguish retained options from designs being explored.</p>
 <p>When the configured maximum front size is 18 or fewer, the plot also shows a dotted epsilon grid. Labels such as <code>(2, 4)</code> identify the cost and flood-performance epsilon box occupied by a solution. They are grid indices, not solution numbers, ranks or uncertainty ranges. The grid and its labels are suppressed for larger fronts to preserve readability.</p>
 </div>
 <h4 class="minor-heading">What to look for</h4>
@@ -1146,10 +1153,10 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 
 <section class="subsection" id="solution-comparison">
 <p class="label">Final archive</p>
-<h3>6.4 Understanding <code>Solution Comparison.png</code></h3>
+<h3>6.4 Understanding <code>Final Solutions.png</code></h3>
 <div class="prose">
-<p><code>Solution Comparison.png</code> displays the final ε-MOEA archive. Each blue cross is a final cost–performance trade-off available for further examination.</p>
-<p>In the current implementation, this figure displays the final archive only. The legend also contains entries for grey <strong>Objective Vectors</strong> and a red <strong>Pareto-Optimal Front</strong>, but the corresponding comparison datasets are not currently populated. Treat these legend entries as placeholders: the figure does not show every evaluated strategy or a known reference Pareto front.</p>
+<p><code>Final Solutions.png</code> displays the final set of best trade-off solutions. Each blue cross is a final cost–performance trade-off available for further examination.</p>
+<p>The figure shows only the best solutions retained by the search, not every design tested or a known true optimum. Its title reports the number of unique simulations, which is not the number of final options. Older output packages call this figure <code>Solution Comparison.png</code>; current runs use <code>Final Solutions.png</code>.</p>
 <p>Use the figure to identify a shortlist rather than immediately choosing one point. Useful candidates commonly include the least-cost non-dominated strategy, one or more intermediate strategies around the bend in the curve, the best-performing strategy, and any strategy close to an explicit budget or performance threshold.</p>
 </div>
 <h4 class="minor-heading">Compare with the baseline</h4>
@@ -1304,7 +1311,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>7.2 Downloading the results</h3>
 <div class="prose"><p>The dataset details page lists the individual files available to download. Download the complete package before beginning detailed interpretation.</p></div>
 <div class="grid">
-<article class="card"><h4>Plots</h4><p><code>Generation N.png</code>, <code>Solution Comparison.png</code> and every <code>Solution N.png</code>.</p></article>
+<article class="card"><h4>Plots</h4><p><code>Generation N.png</code>, <code>Final Solutions.png</code> and every <code>Solution N.png</code>.</p></article>
 <article class="card"><h4>Summaries</h4><p><code>Solutions.txt</code>, generation records, <code>parameters.txt</code> and <code>unique_simulations.txt</code>.</p></article>
 <article class="card"><h4>Solution packages</h4><p>One folder per final option, containing a readable summary, GeoPackage and maximum-depth raster.</p></article>
 <article class="card"><h4>Execution evidence</h4><p><code>execution_log.txt</code> for the readable run narrative and <code>diagnostic_log.txt</code> for the full technical trace.</p></article>
@@ -1901,7 +1908,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <ul class="checks">
 <li><code>parameters.txt</code>, <code>Solutions.txt</code> and <code>unique_simulations.txt</code>.</li>
 <li>The generation summary files and generational objective-space plots.</li>
-<li><code>Solution Comparison.png</code> and the individual <code>Solution &lt;n&gt;.png</code> maps.</li>
+<li><code>Final Solutions.png</code> and the individual <code>Solution &lt;n&gt;.png</code> maps.</li>
 <li>One <code>solution_exports/Solution_&lt;n&gt;</code> folder for each final option.</li>
 <li><code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>.</li>
 </ul>
@@ -1912,7 +1919,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <p class="label">Worked interpretation</p>
 <h3>9.9 Interpret the reference solutions</h3>
 <div class="prose">
-<p>Open <code>Solution Comparison.png</code> and <code>Solutions.txt</code> together. Lower values are preferred for both objectives, so desirable solutions lie towards the lower-left of the plot.</p>
+<p>Open <code>Final Solutions.png</code> and <code>Solutions.txt</code> together. Lower values are preferred for both objectives, so desirable solutions lie towards the lower-left of the plot.</p>
 <p>Identify the least-cost non-dominated option, the option with the lowest combined peak flow and one or more intermediate options. For each, record the estimated whole-life cost and combined peak flow from the current output rather than copying values from screenshots or an older reference package.</p>
 <p>Then compare each option with the next more expensive one:</p>
 </div>
@@ -2085,6 +2092,10 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <div class="prose"><p>Confirm that the topography dataset is assigned to the correct dataslot, uses a supported vector format, contains at least one valid feature, is not hidden inside a damaged archive and overlaps the DEM domain.</p></div>
 <h4 class="minor-heading">Required topography attributes are missing</h4>
 <div class="prose"><p>Check the field names described in Section 3, including the required <code>theme</code>, <code>descriptivegroup</code> and, where applicable, <code>make</code> information. Export processes may truncate, rename or remove fields.</p></div>
+<h4 class="minor-heading">The boundary or exclusion zone cannot be used</h4>
+<div class="prose"><p>Check that the dataset contains usable polygons and has the correct coordinate system. A Study Area Boundary must overlap the terrain. An Exclusion Zone must contain polygons overlapping the modelled area: wholly external polygons are ignored, crossing polygons are kept whole, and an entirely external dataset stops the run. If it protects the whole modelled area, the log warns that excavation is prevented everywhere. Correct the dataset or leave its slot empty only if the default behaviour is appropriate.</p></div>
+<h4 class="minor-heading">An intervention or outlet lies outside the modelled area</h4>
+<div class="prose"><p>The log names the affected features and describes how far they extend outside. Inspect them alongside the boundary and terrain in GIS. Correct the location, enlarge the boundary with adequate terrain coverage, or remove the feature if it is not part of the study. Include offline-basin inlet points and the complete outlet lines in this check.</p></div>
 <h4 class="minor-heading">Features appear displaced</h4>
 <div class="prose"><p>The most likely cause is an incorrect or missing CRS. Compare the bounds of the DEM, topography, outlets and candidate interventions. All layers should overlap when displayed using their declared coordinate systems.</p></div>
 </section>
@@ -2118,7 +2129,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 </ul>
 <div class="note plan"><strong>Return to a small test</strong><p>Do not immediately increase the optimisation budget or submit a production run. First reproduce a valid baseline and a very small intervention test.</p></div>
 <h4 class="minor-heading">The runtime estimator says a flood peak was not captured</h4>
-<div class="prose"><p>At least one outlet reached its largest recorded discharge at the final output time for the do-nothing or do-everything design. The reported value may therefore be a rising flow rather than the true peak. Note the affected design and outlet identifiers from the error banner, increase <code>SIM_RUNTIME</code> sufficiently for the hydrograph to rise and fall, and rerun the estimator.</p><p>DAFNI does not normally publish an output dataset from a failed model run. Use the model log as the primary evidence; <code>Boundary_Hydrographs.png</code> is written before the failure but may not reach the catalogue.</p></div>
+<div class="prose"><p>At least one outlet reached its largest recorded discharge at the final output time for the do-nothing or do-everything design. The reported value may therefore be a rising flow rather than the true peak. Note the affected design and outlet identifiers from the warning banner, increase <code>SIM_RUNTIME</code> sufficiently for the hydrograph to rise and fall, and rerun the estimator.</p><p>This finding no longer stops the estimator: it completes and packages its plots, reports and continuation files for publication. Inspect <code>Boundary_Hydrographs.png</code> and the warnings on <code>Objective_Space.png</code> and in the log. A successful DAFNI status does not make this estimate suitable for use. The timings describe a simulation that ends too early, so rerun with a longer duration before planning or continuing the optimisation.</p></div>
 <h4 class="minor-heading">One simulation appears unusually slow</h4>
 <div class="prose"><p>Candidate simulations can vary in duration. Compare the elapsed time with the validation run, domain size and grid resolution, rainfall and simulation duration, the amount of surface water retained in the domain and previous candidates within the same instance.</p><p>Stop the workflow only when there is evidence of a genuine non-recoverable problem or the runtime is clearly inconsistent with the study plan.</p></div>
 </section>
@@ -2290,6 +2301,8 @@ Objective, cost and final reporting
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">DAFNI dataslot</th><th scope="col">Container path</th><th scope="col">Accepted runtime inputs</th><th scope="col">Effective requirement</th></tr></thead>
 <tbody>
+<tr><td>Study Area Boundary</td><td><code>inputs/boundary</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Optional; otherwise the full terrain extent is modelled</td></tr>
+<tr><td>Exclusion Zone</td><td><code>inputs/exclusion-zone</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Optional replacement for automatically protected excavation areas</td></tr>
 <tr><td>Rainfall Data</td><td><code>inputs/rainfall</code></td><td><code>.csv</code>, <code>.txt</code></td><td>Required for every run</td></tr>
 <tr><td>Terrain Data (DTM)</td><td><code>inputs/dem</code></td><td><code>.tif</code>, <code>.asc</code></td><td>Required for every run</td></tr>
 <tr><td>Topography</td><td><code>inputs/topography</code></td><td><code>.shp</code>, <code>.gpkg</code>, <code>.gdb</code></td><td>Required for every run</td></tr>
@@ -2460,6 +2473,7 @@ Offline detention basins</pre>
 <tr><td><code>CityCAT_setup.zip</code></td><td>All routes: prepared model, mesh and retained simulations for continuation; the estimator retains both boundary designs</td></tr>
 </tbody>
 </table></div>
+<div class="prose"><p>For a measured hydrograph run, both reports include <code>flood_peak_captured</code>: <code>yes</code> or <code>no</code> in the CSV, and <code>true</code> or <code>false</code> in the JSON. If false, the JSON also names <code>outlets_still_rising</code> and includes a <code>flood_peak_warning</code>. Outputs are still packaged, but the estimate must not be used until the simulation duration is corrected and the estimator rerun.</p></div>
 <h4 class="minor-heading">How the runtime estimate is formed</h4>
 <div class="prose"><p>The estimator reads timings from CityCAT’s own log. The first boundary simulation includes the one-off mesh generation. The second reuses the mesh, while the time between the simulations captures objective analysis and preparation of the next design. The first design is charged at its measured duration; each later design is estimated from the between-design processing, second-run preparation and the average hydrodynamic duration of the two boundary simulations.</p><p>The total assumes that the optimisation reaches <code>MAX_SIMS</code>. It excludes evolutionary selection and recombination, plots produced during the search, final maps and GIS exports, and DAFNI queue time.</p></div>
 <div class="note warn"><strong>Use exactly one input mode</strong><p>For a multistage hand-off, select the complete previous-stage output dataset or supply the parameter file and two archives as three individual inputs. Never populate both modes. Individual filenames may vary, but each dataslot must contain exactly one file with the required extension.</p></div>
@@ -2468,7 +2482,7 @@ Offline detention basins</pre>
 <thead><tr><th scope="col">File</th><th scope="col">Content</th></tr></thead>
 <tbody>
 <tr><td><code>Generation N.png</code></td><td>Population, archive and objective-space state for generation N</td></tr>
-<tr><td><code>Solution Comparison.png</code></td><td>Final retained cost–performance solutions</td></tr>
+<tr><td><code>Final Solutions.png</code></td><td>Final retained cost–performance solutions</td></tr>
 <tr><td><code>Solution N.png</code></td><td>Flood map, selected interventions and objective-specific panels</td></tr>
 <tr><td><code>Objective_Space.png</code></td><td>Runtime-estimator boundary designs and shaded objective range</td></tr>
 <tr><td><code>Boundary_Hydrographs.png</code></td><td>Runtime-estimator outlet peaks for both boundary designs, for <code>hydrograph</code> only</td></tr>
