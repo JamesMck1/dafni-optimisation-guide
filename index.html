@@ -243,7 +243,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="note plan"><strong>Use the estimator as a study-readiness check</strong><p>If the two boundary designs show little or no useful flood-performance difference, reassess the candidate interventions, rainfall event and selected objective before paying for a larger search. For a hydrograph objective, increase <code>SIM_RUNTIME</code> and rerun the estimator if any outlet is still rising when either boundary simulation ends. The estimator still publishes its findings, but warns that the estimate is not suitable for use.</p></div>
 <p class="table-note">The reported total assumes that the <code>MAX_SIMS</code> limit is reached. The realised runtime is expected to be lower when self-termination activates. Candidate strategies can take different amounts of time to simulate, and the estimate excludes evolutionary selection and recombination, plotting, final exports and DAFNI scheduling.</p>
 <div class="prose"><p>DAFNI supplies the managed computational environment, while users remain responsible for selecting an appropriate run size and checking study results. For computationally demanding optimisations that cannot be completed within a reasonable timeframe on DAFNI, contact the guide authors to discuss possible access to cloud-computing resources. Access cannot be guaranteed and depends on resource availability, project scope and applicable access arrangements.</p></div></section>
-<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition was reviewed against the optimisation source and DAFNI model definitions on 10 September 2026. Always record the model version used for an individual study.</p></div></section>
+<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition was reviewed against the optimisation source and DAFNI model definitions on 25 September 2026. Always record the model version used for an individual study.</p></div></section>
 <section class="section chapter" id="how-tool-works">
 <p class="label">Section 2 · How the tool works</p>
 <h2>From intervention strategy to Pareto front</h2>
@@ -498,7 +498,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="prose">
 <p>Detention basins, engineered terrain features and offline basins can use <code>h_min</code>, <code>h_max</code> and <code>h_len</code> to define their depth or height range. If these fields are absent, the defaults are 0 metres, 1.5 metres and 2 bits.</p>
 <p>For a polygon detention basin, the tool finds the largest circle that fits inside the drawn area, derives practical radius and movement limits, and uses the DTM cell size to decide how finely those ranges can be represented. Optional <code>r_min</code>, <code>r_max</code>, <code>dx_min</code>, <code>dx_max</code>, <code>dy_min</code> and <code>dy_max</code> values can narrow those limits but cannot expand them beyond the drawn area. Set both limits for an axis to zero to keep the basin centre fixed on that axis. A point-based basin defaults to a fixed centre and a radius of one DTM cell. Because a point has no enclosing area, provide defensible radius and movement limits explicitly where those defaults are not suitable.</p>
-<p>For offline storage, the tool joins each inlet to its basin where <code>target_id</code> equals <code>basin_id</code>. Inlets must be Point or MultiPoint geometry. Offline basins are not translated. Their maximum radius is restricted so that the basin does not reach its own inlet and at least two DTM-cell widths remain for the connection. The basin is also deepened where necessary so that its connecting pipe can fall by the configured minimum gradient.</p>
+<p>For offline storage, the tool joins each inlet to its basin where <code>target_id</code> equals <code>basin_id</code>. Inlets must be Point or MultiPoint geometry. Offline basins are not translated. Their maximum radius is restricted so that the basin does not reach its own inlet and at least two DTM-cell widths remain for the connection. Where the connecting pipe needs a deeper outfall, the tool charges the required sink cut against the basin’s drawn <code>h_max</code>. The remaining range is the storage depth the optimiser can select. If the sink leaves no depth above <code>h_min</code>, the run stops so that you can revise the basin depth or location or move the inlet.</p>
 </div>
 <div class="note warn"><strong>The uploaded data define the search space</strong><p>Check candidate locations for ownership, physical feasibility and meaningful separation before upload. The optimiser selects and configures the supplied candidates; it does not determine whether a location is buildable.</p></div>
 </section>
@@ -772,7 +772,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Design life · <code>OFF_DESIGN_LIFE</code></td><td>50 years</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>Offline-basin construction cost is calculated from excavation volume using <code>EXCAVATION_RATE</code>. The flat annual maintenance charge is added to the volume-based rate; its default is zero, so the volume-based rate alone applies unless you enter a study-specific flat charge.</p></div>
+<div class="prose"><p>Offline-basin construction cost is calculated from excavation volume using <code>EXCAVATION_RATE</code>. Excavation includes any sink cut needed to bring the basin floor below the connecting pipe outfall, even though that cut adds no storage. The flat annual maintenance charge is added to the volume-based rate; its default is zero, so the volume-based rate alone applies unless you enter a study-specific flat charge.</p></div>
 
 <h4 class="minor-heading">Offline-basin inlet connections</h4>
 <div class="table-wrap"><table class="guide-table">
@@ -789,7 +789,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Decommissioning · <code>OFF_INLET_DECOMM_RATE</code></td><td>0.0 of connection construction cost</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The connection cost is based on the modelled pipe length from inlet to basin edge plus one gully, inspection chamber and headwall for each active connection. It is reported separately from the basin cost in each exported solution summary.</p></div>
+<div class="prose"><p>The connection cost is based on the modelled pipe length from inlet to basin edge plus one gully, inspection chamber and headwall for each active connection. It is reported separately from the basin cost in each exported solution summary. A missing pipe length for an active offline basin now stops costing with an error rather than omitting the connection charge.</p></div>
 
 <h4 class="minor-heading">Permeable paving</h4>
 <div class="table-wrap"><table class="guide-table">
@@ -1194,7 +1194,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Map symbol</th><th scope="col">Meaning</th></tr></thead>
 <tbody>
-<tr><td>Grey polygons</td><td>Buildings and the base pavement surface.</td></tr>
+<tr><td>Grey polygons</td><td>Base pavement surface and, for hydrograph runs, buildings. With a baseline comparison available in risk runs, grey buildings are not at high risk in either design.</td></tr>
 <tr><td>Translucent red area</td><td>Exclusion zone.</td></tr>
 <tr><td>Spring-green polygons</td><td>Selected permeable-paving zones.</td></tr>
 <tr><td>Brown-orange polygons</td><td>Selected rain gardens.</td></tr>
@@ -1206,6 +1206,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Coloured semi-transparent squares</td><td>Hydrograph outlet cells.</td></tr>
 </tbody>
 </table></div>
+<div class="prose"><p>For a <code>risk</code> run, the map normally colours buildings using the exposure results for the selected design and the do-nothing baseline. The building legend sits beside the map: red means high risk in both designs, green means no longer at high risk, and orange means newly at high risk. Grey means not at high risk in either design. These categories show changes in the tool’s high-risk classification, not the size of each building’s flood-depth change.</p><p>If baseline exposure results are missing or empty, the legend shows only grey buildings that are not at high risk and red buildings that are at high risk in the selected design. If the selected design’s exposure results are missing, empty or lack the required columns, or building identifiers are unavailable, its buildings are drawn grey without risk categories. Check the legend and run log before interpreting the colours.</p></div>
 <div class="prose"><p>Detention basins, engineered terrain features and offline basins whose decoded depth or elevation change is zero are omitted because they are inactive in that strategy.</p></div>
 <h4 class="minor-heading">Questions to ask</h4>
 <ul class="checks">
@@ -1217,7 +1218,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Does the strategy rely excessively on one intervention?</li>
 <li>Are the spatial changes substantial enough to explain the objective improvement?</li>
 </ul>
-<div class="note warn"><strong>Risk-map limitation</strong><p>For a risk-objective run, buildings remain grey on the final solution map. The map does not colour buildings according to their calculated risk class. Use the objective value and retained exposure outputs, where available, rather than attempting to count high-risk buildings visually.</p></div>
+<div class="note"><strong>Read the risk value alongside the map</strong><p>Building colours help locate changes in classification. Use the reported objective value and exposure results for the building count; the map is a visual summary and can fall back to grey buildings when the required data are unavailable.</p></div>
 </section>
 
 <section class="subsection" id="hydrograph-panel">
@@ -1493,7 +1494,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="multistage-status">
 <p class="label">Multistage continuation</p>
 <h3>7.10 Continue and extend an optimisation</h3>
-<div class="prose"><p><strong>CityCAT Optimisation Tool: Multistage Optimisation</strong> continues a compatible runtime-estimator package or an earlier complete or incomplete optimisation. It restores the original scientific, representation and economic settings, reuses an existing CityCAT mesh where available, reconstructs valid simulations and resumes the search from a reduced nondominated archive.</p></div>
+<div class="prose"><p><strong>CityCAT Optimisation Tool: Multistage Optimisation</strong> continues a compatible runtime-estimator package or an earlier complete or incomplete optimisation. It restores the original scientific, representation and economic settings, reuses an existing CityCAT mesh where available, reconstructs valid simulations and resumes the search from a reduced nondominated archive. For offline basins, it also retains the recorded pipe lengths needed to reconstruct connection costs and verifies that the stored storage-depth limits still match the earlier stage.</p></div>
 <ul class="checks">
 <li>Select the complete output dataset from one previous stage, or create three individual datasets containing one parameter <code>.txt</code> file and the two required <code>.zip</code> archives.</li>
 <li>Populate only one input mode. Supplying both the complete dataset and any individual hand-off dataset causes validation to fail.</li>
@@ -1503,6 +1504,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <li>Preserve the outputs from every stage; the next multistage run can use the complete newly published output dataset directly.</li>
 </ul>
 <div class="note"><strong>Previous-stage simulations still count</strong><p>If <code>R</code> valid simulations exist in earlier stages, the absolute stopping counters become <code>R + MIN_SIMS</code> and <code>R + MAX_SIMS</code>. A successful runtime-estimator package contributes two retained boundary simulations: do nothing and do everything.</p></div>
+<div class="note warn"><strong>Keep offline-basin geometry consistent</strong><p>A continuation verifies the effective <code>h_max</code> recorded with the previous stage’s processed inputs when the original drawn budget was retained. Changes to the terrain, exclusion zone, <code>INLET_DROP</code> or <code>MIN_PIPE_GRADIENT</code> that would change the required sink cut then stop the run. Older packages without a recorded drawn budget retain their stored <code>h_max</code>, so preserving the complete original package and configuration is especially important. Start a separate study if these design assumptions must change.</p></div>
 <div class="note warn"><strong>Do not mix stages or substitute <code>Solutions.txt</code></strong><p>The multistage workflow requires the complete three-file model state. A solution table alone cannot restore the prepared geometry, candidate ordering, mesh and simulation evidence needed for a safe continuation.</p></div>
 <div class="key-point"><p class="label">Key point</p><p><strong>Reproducibility depends on the complete chain of evidence.</strong> Preserve the workflow, model, parameter set, input-dataset versions, workflow instance and output-dataset version alongside the downloaded results and interpretation record. A final plot without this provenance cannot fully describe or reproduce the modelling experiment.</p></div>
 </section>
@@ -1614,7 +1616,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="implementation-issues">
 <p class="label">Version-specific notes</p>
 <h3>8.6 Current implementation and presentation issues</h3>
-<div class="prose"><p>The following points apply to the current deployed version.</p></div>
+<div class="prose"><p>The following points apply to the source version inspected for this guide. Confirm the selected DAFNI model version before relying on version-specific behaviour.</p></div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Current issue</th><th scope="col">User implication</th></tr></thead>
 <tbody>
@@ -1624,7 +1626,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <tr><td>The final comparison legend includes objective vectors and a reference Pareto front.</td><td>Those datasets are not populated; the blue ε-MOEA archive is the operative result.</td></tr>
 <tr><td>Final solution numbering begins at zero.</td><td>Match <code>Solution N.png</code> to row <code>N</code> of <code>Solutions.txt</code>.</td></tr>
 <tr><td>Generation labels are temporary archive indices.</td><td>Do not use them as persistent solution identifiers.</td></tr>
-<tr><td>High-risk buildings are not highlighted in final maps.</td><td>Do not estimate the objective by visually counting grey building polygons.</td></tr>
+<tr><td>Risk-map colours depend on readable exposure results and building identifiers.</td><td>Check the building legend and log. Where the required data are missing, maps may show only current risk or leave buildings grey.</td></tr>
 <tr><td>The simulation limit is evaluated between generations.</td><td>The completed run can contain slightly more unique simulations than <code>MAX_SIMS</code>.</td></tr>
 <tr><td>Some solution exports use idealised geometry.</td><td>Circular basin footprints and inlet-connection lines describe the decoded design; the exact CityCAT cells still depend on the DTM grid and exclusion mask.</td></tr>
 </tbody>
@@ -1713,7 +1715,6 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <div class="prose"><p>The following are potential directions rather than commitments of the current version.</p></div>
 <ul class="checks">
 <li>Stable identifiers linking generation plots, final archives and simulations.</li>
-<li>Maps that highlight calculated building-risk classes.</li>
 <li>Clearer final comparison legends.</li>
 <li>Automated baseline and relative-improvement tables.</li>
 <li>Scenario and sensitivity-analysis support.</li>
@@ -2112,6 +2113,9 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <tr><td>Offline basin and inlet cannot be matched</td><td><code>basin_id</code> and <code>target_id</code> do not correspond.</td><td>Correct the identifiers and republish the dataset.</td></tr>
 <tr><td>Detention basin cannot be represented</td><td>The largest circle that fits in the drawn area is smaller than one DTM cell.</td><td>Enlarge the footprint or provide a point with suitable radius limits.</td></tr>
 <tr><td>Offline basin has no admissible radius</td><td>The basin cannot fit while leaving the required clearance to its inlet.</td><td>Enlarge or move the basin, or move the inlet farther away.</td></tr>
+<tr><td>Offline basin cannot be fed by gravity within its depth budget</td><td>The sink cut needed to reach the pipe outfall consumes the drawn <code>h_max</code>, leaving no storage depth above <code>h_min</code>.</td><td>Increase the basin’s allowed depth, move the inlet to lower ground or resite the basin.</td></tr>
+<tr><td>Resuming would change an offline basin’s <code>h_max</code></td><td>The recalculated pipe sink differs from the depth budget used for archived simulations.</td><td>Check that the original terrain, exclusion zone, inlet drop and minimum pipe gradient were preserved. Start a separate study if the design assumptions have changed.</td></tr>
+<tr><td>Offline basin has no recorded pipe length</td><td>An active connection cannot be costed from its stored feature table.</td><td>Inspect the previous-stage package and logs; restore the complete matching <code>CityCAT_setup.zip</code> and <code>alg_inputs.zip</code> from one instance.</td></tr>
 <tr><td>Outlet cell is outside the DEM</td><td>The outlet geometry does not lie within the hydraulic domain.</td><td>Move the outlet or extend the DEM.</td></tr>
 <tr><td>No intersecting outlet cells were found</td><td>The line does not cross usable model cells.</td><td>Inspect its position, CRS and length.</td></tr>
 <tr><td>Minimum and maximum costs are both zero</td><td>No active, costed candidates were created.</td><td>Review candidate inputs and cost parameters.</td></tr>
@@ -2292,7 +2296,7 @@ Objective, cost and final reporting
        │
        ▼
 /data/outputs/</pre>
-<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. The runtime estimator simulates and retains both boundary designs before compressing the prepared algorithm inputs and CityCAT working directory. The direct route creates the same continuation archives after its search. The multistage route restores those archives, recovers valid simulations and produces a fresh package for another stage if required.</p></div>
+<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. The runtime estimator simulates and retains both boundary designs before compressing the prepared algorithm inputs and CityCAT working directory. The direct route creates the same continuation archives after its search. The multistage route restores those archives, preserves completed features’ excavation-volume and offline pipe-length tables while rebuilding the algorithm, verifies offline depth budgets, recovers valid simulations and produces a fresh package for another stage if required.</p></div>
 </section>
 
 <section class="subsection" id="dataslot-reference">
@@ -2352,7 +2356,7 @@ Objective, cost and final reporting
 <tr><td>Zonal interventions</td><td>Geometry defines the selectable area</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>Detention and offline basins encode <code>h</code> for depth and <code>r</code> for radius. Detention basins can also encode <code>x</code> and <code>y</code> movement within their admissible area. Engineered terrain features encode only <code>h</code> for their elevation change. For basin radius and movement, the tool derives encoding lengths from the DTM cell size; <code>h_len</code> remains user-configurable.</p></div>
+<div class="prose"><p>Detention and offline basins encode <code>h</code> for depth and <code>r</code> for radius. Detention basins can also encode <code>x</code> and <code>y</code> movement within their admissible area. Engineered terrain features encode only <code>h</code> for their elevation change. For basin radius and movement, the tool derives encoding lengths from the DTM cell size; <code>h_len</code> remains user-configurable.</p><p>In the processed offline-basin feature table, <code>h_max_drawn</code> records the original depth limit and <code>h_max</code> records the limit left for storage after the largest required sink cut across the encoded radii. A resumed stage retains that effective <code>h_max</code> for its archived genotype values and checks it against the drawn limit where that field exists. Archived excavation-volume and pipe-length tables are restored after feature initialisation so that earlier candidates keep their measured costs.</p></div>
 </section>
 
 <section class="subsection" id="parameter-family-index">
@@ -2483,7 +2487,7 @@ Offline detention basins</pre>
 <tbody>
 <tr><td><code>Generation N.png</code></td><td>Population, archive and objective-space state for generation N</td></tr>
 <tr><td><code>Final Solutions.png</code></td><td>Final retained cost–performance solutions</td></tr>
-<tr><td><code>Solution N.png</code></td><td>Flood map, selected interventions and objective-specific panels</td></tr>
+<tr><td><code>Solution N.png</code></td><td>Flood map and selected interventions, with hydrographs for the <code>hydrograph</code> objective or building-risk categories for the <code>risk</code> objective when exposure data are available</td></tr>
 <tr><td><code>Objective_Space.png</code></td><td>Runtime-estimator boundary designs and shaded objective range</td></tr>
 <tr><td><code>Boundary_Hydrographs.png</code></td><td>Runtime-estimator outlet peaks for both boundary designs, for <code>hydrograph</code> only</td></tr>
 <tr><td><code>Offline_Feature_Inlet_Lines.png</code></td><td>Diagnostic representation of offline basins and their inlets, when applicable</td></tr>
