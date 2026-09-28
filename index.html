@@ -22,6 +22,11 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 :root{--gold:#f0ae43}
 .bar,.hero-inner,.partner-inner,.shell,.footer-inner{width:min(calc(100% - 2rem),var(--width));margin:auto}
 .brand{gap:0}
+.nav-buttons{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.45rem}
+.nav-buttons .button{white-space:nowrap}
+@media(max-width:1280px){nav a:not(.button){display:none}}
+@media(max-width:1100px){nav{gap:.8rem}.nav-buttons .button{padding:.45rem .6rem;font-size:.82rem}}
+@media(max-width:860px){.bar{flex-wrap:wrap;padding:.5rem 0}.nav-buttons{justify-content:flex-start}}
 .brand:before{width:.35rem;height:2.1rem;margin-right:.7rem;border-radius:1rem;background:var(--teal);content:""}
 .mark{display:none}
 .pill{padding:.35rem .7rem;border-color:rgba(255,255,255,.35);color:#fff;font-weight:700;text-decoration:none}
@@ -95,7 +100,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <a class="skip" href="#main-content">Skip to guide</a>
 <header><div class="bar">
 <a class="brand" href="#top" aria-label="CityCAT Optimisation user guide home"><span>CityCAT Optimisation &middot; User Guide</span></a>
-<nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#workflow-family">Choose a workflow</a><a href="#contents">Guide contents</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=33b3835a-f8d4-4ace-8ee5-4cb62e6f8a5f">Open main tool &nearr;</a></nav>
+<nav aria-label="Primary navigation"><a href="#introduction">Start here</a><a href="#workflow-family">Choose a workflow</a><a href="#contents">Guide contents</a><span class="nav-buttons" role="group" aria-label="Open a workflow on DAFNI"><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=1d329298-a2f1-402f-bb37-77b2356f5eb5" title="CityCAT Optimisation Tool: Runtime Estimator">Runtime Estimator &nearr;</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=2e7df4f4-5200-42a8-ae8e-3284dc0f1b36" title="CityCAT Optimisation Tool">Optimisation Tool &nearr;</a><a class="button" href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=77a23ff5-31a6-4984-b1ad-7ee163454e02" title="CityCAT Optimisation Tool: Multistage Optimisation">Multistage &nearr;</a></span></nav>
 </div></header>
 <section class="hero" id="top"><div class="hero-inner">
 <div><p class="eyebrow">Comprehensive user guide</p><h1>Hydrodynamic optimisation for blue-green infrastructure</h1><p class="lead">Learn how to optimise the placement and design of blue-green infrastructure to explore cost-effective urban flood-intervention strategies using the DAFNI-hosted CityCAT optimisation tool.</p><div class="pills"><a class="pill" href="#workflow-family">Choose a workflow</a><a class="pill" href="#quick-start-tutorial">Start with the quick guide</a><a class="pill" href="#preparing-input-data">Prepare your inputs</a><a class="pill" href="#technical-reference">Technical reference</a></div></div>
@@ -164,16 +169,16 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <p>The optimisation tool is available through three DAFNI workflows. The standard workflow performs a complete optimisation in one run. The runtime estimator uses the intended study inputs to test the two ends of the design space, check that the study setup is suitable and estimate the maximum duration of a full run. The multistage workflow continues from the packaged outputs of the estimator or an earlier optimisation, allowing a larger study to be divided into manageable stages.</p>
 </div>
 <div class="workflow-map">
-<article class="workflow-card"><span class="status">Plan and prepare</span><h4>CityCAT Optimisation Tool: Runtime Estimator</h4><p>Runs exactly two full simulations: a do-nothing design and a do-everything design with every intervention at its largest configured setting. It estimates runtime, shows the available cost–performance range and, for a peak-flow study, checks that every outlet hydrograph has peaked before the simulation ends. Both simulations are packaged for continuation.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=33b3835a-f8d4-4ace-8ee5-4cb62e6f8a5f">Find this workflow on DAFNI &nearr;</a></article>
-<article class="workflow-card"><span class="status">Direct route</span><h4>CityCAT Optimisation Tool</h4><p>Runs preprocessing of input data, CityCAT simulation, evolutionary search, plotting and export as one end-to-end optimisation run.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=33b3835a-f8d4-4ace-8ee5-4cb62e6f8a5f">Find this workflow on DAFNI &nearr;</a></article>
-<article class="workflow-card"><span class="status">Continue a study</span><h4>CityCAT Optimisation Tool: Multistage Optimisation</h4><p>Continues a runtime-estimator package or an earlier compatible optimisation. It reuses the prepared inputs, mesh and valid simulations, rebuilds the best-performing set and then searches for further improvements using a new allowance of additional simulations.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=108e39f2-fefb-4269-a25a-c9c45ef7e9cf">Find this workflow on DAFNI &nearr;</a></article>
+<article class="workflow-card"><span class="status">Plan and prepare</span><h4>CityCAT Optimisation Tool: Runtime Estimator</h4><p>Runs exactly two full simulations: a do-nothing design and a do-everything design with every intervention at its largest configured setting. It estimates runtime, shows the available cost–performance range and, for a peak-flow study, checks that every outlet hydrograph has peaked before the simulation ends. Both simulations are packaged for continuation.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=1d329298-a2f1-402f-bb37-77b2356f5eb5">Find this workflow on DAFNI &nearr;</a></article>
+<article class="workflow-card"><span class="status">Direct route</span><h4>CityCAT Optimisation Tool</h4><p>Runs preprocessing of input data, CityCAT simulation, evolutionary search, plotting and export as one end-to-end optimisation run.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=2e7df4f4-5200-42a8-ae8e-3284dc0f1b36">Find this workflow on DAFNI &nearr;</a></article>
+<article class="workflow-card"><span class="status">Continue a study</span><h4>CityCAT Optimisation Tool: Multistage Optimisation</h4><p>Continues a runtime-estimator package or an earlier compatible optimisation. It reuses the prepared inputs, mesh and valid simulations, rebuilds the best-performing set and then searches for further improvements using a new allowance of additional simulations.</p><a href="https://facility.secure.dafni.rl.ac.uk/workflows/details?id=77a23ff5-31a6-4984-b1ad-7ee163454e02">Find this workflow on DAFNI &nearr;</a></article>
 </div>
 <div class="workflow-routes" aria-label="Supported CityCAT optimisation routes">
 <div class="workflow-route"><strong>Direct route</strong><span>Study datasets &rarr; CityCAT Optimisation Tool &rarr; results</span></div>
 <div class="workflow-route"><strong>Planned route</strong><span>Study datasets &rarr; Runtime Estimator &rarr; Multistage Optimisation &rarr; results</span></div>
 <div class="workflow-route"><strong>Extended route</strong><span>Earlier compatible optimisation &rarr; Multistage Optimisation &rarr; further results</span></div>
 </div>
-<div class="note plan"><strong>Choose one hand-off mode</strong><p>Supply either the complete output dataset from the previous stage or three individual datasets containing one parameter <code>.txt</code> file and two <code>.zip</code> archives. Do not populate both modes. Keep every component from the same source instance and preserve that instance’s workflow, model and dataset versions. Outputs from previously executed workflows are easily accessible as inputs via the DAFNI data catalogue.</p></div>
+<div class="note plan"><strong>Choose one hand-off mode</strong><p>Supply either the complete output dataset from the previous stage or three individual datasets containing one parameter <code>.txt</code> file and two <code>.zip</code> archives. Do not populate both modes. Keep every component from the same source instance, keep the archives’ original names (<code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code>) and preserve that instance’s workflow, model and dataset versions. Outputs from previously executed workflows are easily accessible as inputs via the DAFNI data catalogue.</p></div>
 <div class="note warn">
        <strong>Note on Runtime Estimates</strong>
        <p>The estimate uses the measured setup and processing time around both boundary simulations. The first simulation includes mesh generation; the second reuses that mesh. Later designs are estimated using the second preparation time and the average hydrodynamic time of the two boundary designs.</p>
@@ -198,14 +203,14 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <article class="card"><h4>Rain gardens</h4><p>Vegetated features that collect, store and manage runoff.</p></article>
 <article class="card"><h4>Green-area interventions</h4><p>Conversion of impermeable surfaces to permeable green areas, which may also deliver social, environmental or other co-benefits.</p></article>
 <article class="card"><h4>Detention basins</h4><p>Storage areas whose location and capacity can be explored by the tool.</p></article>
-<article class="card"><h4>Engineered terrain features</h4><p>User-defined footprints that can represent shaped storage, barriers, channels and other interventions.</p></article>
+<article class="card"><h4>Engineered terrain features</h4><p>User-defined lines or footprints whose ground level is raised, such as walls and bunds, or lowered, such as channels. Only the height change is optimised.</p></article>
 <article class="card"><h4>Offline detention basins</h4><p>Storage located away from the intercepted flow path and connected to a separate inlet.</p></article>
 <article class="card"><span class="status off">Not currently available</span><h4>Green roofs</h4><p>CityCAT can represent green roofs, but they cannot currently be selected or optimised by this workflow.</p></article>
 </div><div class="note"><strong>Study-specific candidates</strong><p>The tool searches only among the interventions and locations supplied by the user. Well-informed candidate sites and realistic parameter ranges are required to make effective use of the optimisation tool.</p></div></section>
 <section class="section" id="objectives"><p class="label">Optimisation objectives</p><h3>Which flood-risk measures are available?</h3><div class="prose"><p>Every run balances estimated whole-life cost against one selected measure of flood risk.</p></div><div class="grid">
 <article class="card"><span class="status">Available</span><h4>Peak flow</h4><p>The algorithm seeks solutions which cost-effectively reduce the peak flow at user defined locations with respect to the baseline. When several locations are specified, the peak flows are combined.</p></article>
 <article class="card"><span class="status">Available</span><h4>Property flood risk</h4><p>The algorithm seeks solutions that cost-effectively reduce the number of buildings classified as being at high flood risk with respect to the baseline.</p></article>
-<article class="card"><span class="status off">Not currently available</span><h4>Economic damages</h4><p>The algorithm seeks solutions that cost-effectively reduce the estimated cost of damages to properties due to flooding with respect to the baseline. This measure remains under development because building types and therefore economic damages cannot yet be assigned automatically and reliably.</p></article>
+<article class="card"><span class="status off">Not currently available</span><h4>Economic damages</h4><p>The algorithm seeks solutions that cost-effectively reduce the estimated cost of damages to properties due to flooding with respect to the baseline. This measure remains under development because building types and therefore economic damages cannot yet be assigned automatically and reliably. Selecting it stops the run at start-up with an explanation.</p></article>
 </div><div class="note warn"><strong>Choose only supported measures</strong><p>Do not configure a study around economic damages at this stage. The guide will be updated when the required building-classification workflow is available.</p></div></section>
 <section class="section" id="prerequisites"><p class="label">Prerequisites</p><h3>What do I need before starting?</h3><div class="prose"><p>Users need access to DAFNI and a CityCAT-ready study. At minimum, the hydrodynamic model requires rainfall, a digital elevation model (DEM) and topography data.</p></div><ul class="checks">
 <li><strong>DAFNI access</strong> and permission to use the workflow. If you do not already have a DAFNI account <a href="https://www.dafni.ac.uk/who-we-are/applying-for-an-account/" target="_blank" rel="noopener noreferrer">apply for one here</a>.</li><li><strong>Rainfall data</strong> representing the event or scenario to be modelled.</li><li><strong>A digital elevation model</strong> covering the study domain.</li><li><strong>Topography data</strong> describing the urban environment for CityCAT.</li><li><strong>Candidate intervention data</strong> defining the measures and locations the optimiser may select.</li><li><strong>A clear objective</strong> and an agreed basis for interpreting cost and flood performance.</li>
@@ -240,7 +245,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <figure class="solution-slide"><img src="assets/images/solution-gallery-risk/solution-08.jpg" width="2400" height="1657" loading="lazy" alt="Solution 8 flood map with interventions and buildings coloured by high-risk classification"><figcaption>Risk solution 8</figcaption></figure>
 </div><p class="gallery-note">Scroll horizontally to compare these nine strategies. Grey buildings are not at high risk; red buildings remain at high risk, green buildings are no longer at high risk, and orange buildings are now at high risk compared with the do-nothing baseline.</p></article>
 <article class="result-output"><h4>GIS-ready solution packages</h4><p>Provides spatial files for detailed review, site assessment and onward design work.</p><figure><img src="assets/images/qgis-solution-package.jpg" width="2200" height="771" loading="lazy" alt="QGIS view of solution GeoPackage layers, maximum flood depth raster and a human-readable intervention summary"><figcaption>The GeoPackage layers, maximum-flood-depth raster and human-readable summary can be opened in QGIS alongside local constraints, site information and design data for detailed review.</figcaption></figure></article>
-<article class="result-output"><h4>Run record</h4><p>Preserves the evidence needed to reproduce, audit and share an optimisation run.</p><figure><img src="assets/images/output_data.png" width="626" height="190" loading="lazy" alt="Example output folder showing plots, solution exports, summary, archived inputs, CityCAT setup and execution log"><figcaption>The output archive retains plots, exported solutions, a summary, original inputs, CityCAT setup files and the execution log.</figcaption></figure></article>
+<article class="result-output"><h4>Run record</h4><p>Preserves the evidence needed to reproduce, audit and share an optimisation run.</p><figure><img src="assets/images/output_data.png" width="626" height="190" loading="lazy" alt="Example output folder showing plots, solution exports, summary, archived inputs, CityCAT setup and execution log"><figcaption>The output archive retains plots, exported solutions, a summary, the processed inputs, CityCAT setup files and the execution log.</figcaption></figure></article>
 </div></section>
 <section class="section" id="limitations"><p class="label">Use with care</p><h3>Important limitations</h3><ul class="checks">
 <li><strong>Optioneering, not detailed design.</strong> Results identify promising strategies for further investigation, not construction-ready designs.</li><li><strong>Results reflect the model.</strong> Conclusions depend on the supplied data, model setup and rainfall scenario.</li><li><strong>Cost assumptions matter.</strong> Use a consistent costing basis across all interventions so that strategies can be compared fairly. Default unit costs can be replaced with study-specific values.</li><li><strong>The search is finite.</strong> The tool explores many promising strategies but cannot test every possible combination. Larger design spaces generally require larger simulation budgets.</li><li><strong>Practical constraints require review.</strong> Ownership, utilities, maintenance, ecology, accessibility and constructability are not assessed automatically. Additional social and environmental benefits are not currently included as optimisation objectives.</li>
@@ -255,7 +260,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="note plan"><strong>Use the estimator as a study-readiness check</strong><p>If the two boundary designs show little or no useful flood-performance difference, reassess the candidate interventions, rainfall event and selected objective before paying for a larger search. For a hydrograph objective, increase <code>SIM_RUNTIME</code> and rerun the estimator if any outlet is still rising when either boundary simulation ends. The estimator still publishes its findings, but warns that the estimate is not suitable for use.</p></div>
 <p class="table-note">The reported total assumes that the <code>MAX_SIMS</code> limit is reached. The realised runtime is expected to be lower when self-termination activates. Candidate strategies can take different amounts of time to simulate, and the estimate excludes evolutionary selection and recombination, plotting, final exports and DAFNI scheduling.</p>
 <div class="prose"><p>DAFNI supplies the managed computational environment, while users remain responsible for selecting an appropriate run size and checking study results. For computationally demanding optimisations that cannot be completed within a reasonable timeframe on DAFNI, contact the guide authors to discuss possible access to cloud-computing resources. Access cannot be guaranteed and depends on resource availability, project scope and applicable access arrangements.</p></div></section>
-<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition was reviewed against the optimisation source and DAFNI model definitions on 25 September 2026. Always record the model version used for an individual study.</p></div></section>
+<section class="section" id="about-guide"><p class="label">How to use the guide</p><h3>About this guide</h3><div class="prose"><p>The guide follows a practical study sequence: prepare the flood model and intervention data, configure and validate the DAFNI workflow, run or continue the optimisation, and interpret and export the results.</p><p>Sections 2 to 10 provide the practical guidance needed to operate and assess the workflow family. Section 11 provides an in-depth technical reference for advanced and curious users.</p><p>Unavailable or incomplete features are labelled clearly, and the authors will endeavour to keep this guide aligned with the deployed tools. This edition describes the deployed tools as of 28 September 2026. Always record the model version used for an individual study.</p></div></section>
 <section class="section chapter" id="how-tool-works">
 <p class="label">Section 2 · How the tool works</p>
 <h2>From intervention strategy to Pareto front</h2>
@@ -288,19 +293,18 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="prose"><p>A complete intervention strategy is represented by a <strong>chromosome</strong>: a single sequence of binary values assembled from all candidate interventions in the study.</p></div>
 <div class="grid">
 <article class="card"><span class="status">Zonal</span><h4>Include or exclude</h4><p>A zonal intervention has two states: <code>0</code> excludes it and <code>1</code> includes it. This suits predefined permeable-paving, rain-garden and green-area zones.</p><code class="example-code">1 0 1 0</code><p>In this example, zones 1 and 3 are included while zones 2 and 4 are excluded.</p></article>
-<article class="card"><span class="status">Local</span><h4>Configure a feature</h4><p>Local features can use several groups of bits to encode inclusion, storage depth, area or radius, position within an allowable area, and other feature-specific characteristics.</p></article>
+<article class="card"><span class="status">Local</span><h4>Configure a feature</h4><p>Local features use groups of bits to encode their depth or height and, for basins, their radius and position within an allowable area. There is no separate on/off bit: a feature set to a depth or height change of zero, the default minimum, is not built.</p></article>
 </div>
 <div class="note warn"><strong>Keep the design space meaningful</strong><p>Each zone should represent a distinct physical decision. Overlapping or redundant zones enlarge the search space without creating genuinely different strategies and can make the search less efficient. Encoded dimensions and locations are for optioneering and still require detailed engineering design.</p></div>
 </section>
 
 <section class="subsection" id="gray-coding">
 <p class="label">Genetic representation</p>
-<h3>2.3 Why Gray coding is recommended</h3>
+<h3>2.3 Why Gray coding is used</h3>
 <div class="prose">
-<p>The tool supports <code>gray</code>, <code>standard</code> and <code>unary</code> coding for characteristics with multiple possible values. Gray coding is the recommended default. In standard binary coding, two neighbouring values can have substantially different bit patterns, so several bits may need to change simultaneously. This is known as a <em>Hamming cliff</em> and can hinder evolutionary search.</p>
+<p>Characteristics with several possible values, such as a basin’s depth or radius, are encoded using Gray coding. In ordinary binary coding, two neighbouring values can have substantially different bit patterns, so several bits may need to change simultaneously. This is known as a <em>Hamming cliff</em> and can hinder evolutionary search.</p>
 <p>Gray coding orders the representation so that neighbouring encoded values differ by only one bit. A small genetic change is therefore more likely to produce a small change in the corresponding intervention characteristic.</p>
 </div>
-<div class="note plan"><strong>Use Gray coding unless you are comparing methods</strong><p>Leave <code>BINARY_CODING</code> set to <code>gray</code> for routine studies. Changing the coding changes how the same design ranges are represented and can change the search behaviour; unary coding also offers fewer distinct values for a characteristic with the same number of bits.</p></div>
 </section>
 
 <section class="subsection" id="candidate-evaluation">
@@ -330,9 +334,9 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="subsection" id="reading-objective-space">
 <p class="label">Initial boundaries</p>
 <h3>2.6 Establishing the objective space</h3>
-<div class="prose"><p>At the beginning of a run, the tool evaluates two boundary strategies. The <strong>do-nothing design</strong> excludes the encoded interventions. The <strong>do-everything design</strong> selects every candidate and uses the largest configured value for each feature characteristic.</p><p>These simulations provide initial estimates of the cost and flood-performance ranges. The tool uses these bounds to divide the objective space into an epsilon grid. If later solutions extend or dominate the initial boundaries, the grid is recalculated and the archive is checked again.</p></div>
+<div class="prose"><p>At the beginning of a run, the tool evaluates two boundary strategies. The <strong>do-nothing design</strong> sets every intervention to its minimum: zonal interventions are excluded and each feature takes its smallest depth or height change. With the default minimum of zero, no feature is built and the design costs nothing. The <strong>do-everything design</strong> selects every zonal candidate and gives each feature its largest depth, height change and radius, with each basin at the position it was drawn.</p><p>These simulations provide initial estimates of the cost and flood-performance ranges. The tool uses these bounds to divide the objective space into an epsilon grid. The bounds are recalculated from the retained solutions after every generation, so the grid can expand or contract as the search proceeds, and the archive is checked again each time.</p></div>
 <div class="note"><strong>The runtime estimator exposes the same boundaries</strong><p>It evaluates these two designs without starting the evolutionary search and plots them in <code>Objective_Space.png</code>. This lets users inspect the potential cost–performance span before deciding whether to run an optimisation.</p></div>
-<div class="note warn"><strong>Important modelling assumption</strong><p>Adding appropriate interventions should not increase flood risk, and every intervention should have a positive cost. If the do-everything design performs worse than the do-nothing design, the tool reports an error because the assumptions used to establish the search space are no longer valid.</p></div>
+<div class="note warn"><strong>Important modelling assumption</strong><p>Adding appropriate interventions should not increase flood risk, and every intervention should have a positive cost. If the do-everything design performs worse than the do-nothing design, the optimisation stops with an error (“The 'do nothing' baseline scenario has a lower risk … than the 'do everything' scenario”) because the assumptions used to establish the search space are no longer valid. The runtime estimator reports the two values without stopping, so it can be used to investigate the cause.</p></div>
 </section>
 
 <section class="subsection" id="epsilon-archive">
@@ -348,19 +352,19 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="subsection" id="new-strategies">
 <p class="label">Evolutionary search</p>
 <h3>2.8 How new strategies are generated</h3>
-<div class="prose"><p>The search begins with a small population of candidates and an archive seeded by the boundary solutions. One parent is selected from the archive and another from the current population, balancing exploitation of strong existing strategies with exploration of new possibilities.</p></div>
+<div class="prose"><p>The search begins with a population of five designs: do-nothing, do-everything and three random designs. The archive starts with one further random design and takes in the boundary designs at the first update, although either can later be displaced by better representatives of its ε-box. In each generation, every member of the population produces one offspring. One parent is taken from the current population and the other from the archive, balancing exploitation of strong existing strategies with exploration of new possibilities.</p></div>
 <div class="grid">
-<article class="card"><h4>Selection</h4><p>Favours existing high-performing strategies when choosing parents.</p></article><article class="card"><h4>One-point crossover</h4><p>Combines portions of two parent chromosomes to produce offspring.</p></article><article class="card"><h4>Bit-flip mutation</h4><p>Introduces small random changes that help explore the search space.</p></article><article class="card"><h4>Archive injection</h4><p>Reintroduces selected archive members when the population is adaptively resized.</p></article>
+<article class="card"><h4>Selection</h4><p>The population parent is the winner of a two-way tournament judged on Pareto dominance, with crowding used to break ties. The archive parent is chosen at random.</p></article><article class="card"><h4>One-point crossover</h4><p>Combines portions of two parent chromosomes to produce offspring.</p></article><article class="card"><h4>Bit-flip mutation</h4><p>Flips each bit with a probability of one divided by the chromosome length, so an offspring typically differs from its parents in about one bit.</p></article><article class="card"><h4>Archive injection</h4><p>Reintroduces selected archive members when the population is adaptively resized.</p></article>
 </div>
-<div class="note"><strong>Adaptive population sizing</strong><p>If progress is insufficient, the tool can increase the population size. Twenty-five per cent of the resized population is seeded from the archive, while the remainder restores diversity and explores new strategies.</p></div>
+<div class="note"><strong>Adaptive population sizing</strong><p>When, in one generation, the archive size changes by no more than a fraction <code>DELTA_K</code> and no more than that fraction of its members is replaced, the population is doubled, up to four times the archive size. It never shrinks. A quarter of the new size is filled with copies of archive members, and the added places are filled with new random designs to restore diversity.</p></div>
 </section>
 
 <section class="subsection" id="stopping">
 <p class="label">Completing the search</p>
 <h3>2.9 When does the optimisation stop?</h3>
 <div class="grid">
-<article class="card"><span class="status">Upper threshold</span><h4>Maximum simulations</h4><p>The run stops after the configured maximum number of unique CityCAT simulations is reached. This is checked between generations, so the final total can be slightly higher.</p></article>
-<article class="card"><span class="status">Adaptive</span><h4>Self-termination</h4><p>The deployed tool monitors improvement in the normalised hypervolume covered by the archive over a configurable lag window. It can stop when improvement falls below the convergence threshold and the minimum simulation requirement has been satisfied.</p></article>
+<article class="card"><span class="status">Upper threshold</span><h4>Maximum simulations</h4><p>The run stops after the configured maximum number of unique CityCAT simulations is reached. This is checked between generations, so the final total can exceed it by up to one generation’s worth of new simulations.</p></article>
+<article class="card"><span class="status">Adaptive</span><h4>Self-termination</h4><p>The tool measures the hypervolume of the archive in normalised objective space and compares it with its value <code>LAG</code> generations earlier. The run stops once that change is no more than <code>DELTA_K</code> of the area of one ε-box, provided at least <code>MIN_SIMS</code> unique simulations have been run.</p></article>
 </div>
 <div class="note warn"><strong>Convergence is not proof of global optimality</strong><p>Self-termination indicates that the search has stopped making sufficient progress. It does not prove that the exact global Pareto front has been found.</p></div>
 </section>
@@ -378,7 +382,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Maximum front size</td><td>Epsilon-grid construction and adaptation</td></tr>
 <tr><td>Minimum and maximum simulations</td><td>Archive maintenance</td></tr>
 <tr><td>Lag window and convergence threshold</td><td>Population adaptation and self-termination</td></tr>
-<tr><td>Binary coding scheme</td><td>Consistent decoding throughout simulation, plotting and export</td></tr>
+<tr><td>Study-area boundary and exclusion zone</td><td>Consistent decoding throughout simulation, plotting and export</td></tr>
 </tbody>
 </table></div>
 <div class="prose"><p>A larger simulation budget gives the algorithm more opportunities to discover improved strategies, but increases runtime. Similarly, requesting a more detailed approximation of the Pareto front may increase the number of useful solutions while requiring additional evaluations.</p></div>
@@ -393,7 +397,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <hr class="rule">
 <div class="prose">
 <p>Good input preparation is essential. The optimiser may run CityCAT hundreds or thousands of times, so an error in the rainfall, terrain, topography or candidate-intervention data can be repeated throughout an expensive study. Prepare and check a small, valid CityCAT setup before launching the optimisation.</p>
-<p>This section describes the inputs accepted by the deployed workflow. It reflects the current data-processing code and container configuration rather than the older repository README.</p>
+<p>This section describes the inputs accepted by the deployed workflows.</p>
 </div>
 
 <section class="subsection" id="dafni-data-flow">
@@ -401,7 +405,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>3.1 How DAFNI supplies data to the tool</h3>
 <div class="prose">
 <p>On DAFNI, inputs are managed as datasets. After uploading and publishing a dataset, assign a specific version of it to the corresponding workflow data slot through a parameter set. When an instance starts, DAFNI mounts the selected datasets inside the container under <code>/data/inputs/</code>.</p>
-<p>The mounted inputs are read-only. The tool therefore validates and converts them into working files beneath <code>/data/outputs/CityCAT_setup</code> and <code>/data/outputs/alg_inputs</code>. These working directories, together with the optimisation results, are collected as run outputs.</p>
+<p>The mounted inputs are read-only. The tool therefore validates and converts them into working files beneath <code>/data/outputs/CityCAT_setup</code> and <code>/data/outputs/alg_inputs</code>. At the end of a successful run these working directories are compressed into <code>CityCAT_setup.zip</code> and <code>alg_inputs.zip</code> and published with the optimisation results.</p>
 </div>
 <div class="note"><strong>Use one dataset per data slot</strong><p>Keep each input type in a clearly named DAFNI dataset. This makes parameter sets easier to audit, update and reuse across studies.</p></div>
 </section>
@@ -425,7 +429,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <p class="label">Mandatory input</p>
 <h3>3.3 Rainfall data</h3>
 <div class="prose">
-<p>The rainfall dataset may contain a two-column CSV file or a rainfall text file already formatted for CityCAT. For CSV input, the first column is elapsed time in seconds and the second is rainfall intensity in millimetres per hour.</p>
+<p>The rainfall dataset may contain a two-column CSV file or a rainfall text file already formatted for CityCAT. For CSV input, the first column is elapsed time in seconds and the second is rainfall intensity in millimetres per hour. A header row is optional: if the first row holds two numbers it is read as the first time step, and otherwise it is treated as column names, whatever its wording.</p>
 <pre class="code-block" aria-label="Example rainfall CSV">time_seconds,rainfall_mm_hr
 0,0
 300,18.5
@@ -440,15 +444,33 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Remove blank cells, duplicate times and non-numeric values.</li>
 <li>Check that the event duration and timestep are appropriate for the study.</li>
 </ul>
-<div class="note warn"><strong>Only one rainfall file is used</strong><p>If a dataset contains several valid rainfall files, the first file discovered by the preprocessing routine is selected. Use a separate, clearly named dataset for each event. The workflow’s return-period parameter labels the run; it does not scale or otherwise modify the supplied rainfall values.</p></div>
+<h4 class="minor-heading">CityCAT rainfall text files</h4>
+<div class="prose"><p>A <code>.txt</code> file is read as a rainfall file already in CityCAT’s own format, so its values are used without unit conversion. It must follow this layout, which is also the form the tool writes when it converts a CSV:</p></div>
+<pre class="code-block" aria-label="Example CityCAT rainfall text file">* * *
+* * * rainfall ***
+* * *
+5
+* * *
+0	0.0000000000
+300	0.0000051389
+600	0.0000086667
+900	0.0000068611
+1200	0.0000000000</pre>
+<ul class="checks">
+<li>Blank lines are ignored. Lines 1–3 and 5 are free-text header lines, conventionally <code>* * *</code>.</li>
+<li>Line 4 is a whole number giving the count of data rows that follow. It must equal the actual number of rows, and <code>5.0</code> is not accepted.</li>
+<li>From line 6, each row holds two values separated by spaces or a tab (not a comma): elapsed time in seconds and rainfall intensity in <strong>metres per second</strong>. To convert, divide mm/hr by 3,600,000.</li>
+<li>Time must increase strictly from row to row, and intensity cannot be negative.</li>
+</ul>
+<div class="note warn"><strong>Only one rainfall file is used</strong><p>If a dataset contains several <code>.csv</code> or <code>.txt</code> files, one of them is used without warning and in no guaranteed order. It is picked before it is checked, so a stray text file such as a readme can be taken as the rainfall. Supply exactly one rainfall file in the dataset and use a separate, clearly named dataset for each event. The workflow’s return-period parameter labels the run; it does not scale or otherwise modify the supplied rainfall values.</p></div>
 </section>
 
 <section class="subsection" id="dem-data">
 <p class="label">Mandatory input</p>
 <h3>3.4 Digital elevation model and study area boundary</h3>
 <div class="prose">
-<p>The terrain dataset may contain an ESRI ASCII raster (<code>.asc</code>) or GeoTIFF (<code>.tif</code>). A single raster can be supplied directly, or several tiles can be packaged together in an archive. When multiple tiles are present, the tool mosaics them using the highest available resolution and bilinear resampling.</p>
-<p>The raster must include valid coordinate-reference-system metadata. During preprocessing, it is converted to British National Grid (<strong>EPSG:27700</strong>), assigned a NoData value of <code>-99999</code>, and written as the ESRI ASCII terrain file required by CityCAT.</p>
+<p>The terrain dataset may contain an ESRI ASCII raster (<code>.asc</code>) or GeoTIFF (<code>.tif</code>; the <code>.tiff</code> extension is not recognised). A single raster can be supplied directly, or several tiles can be packaged together in an archive. Every <code>.tif</code> or <code>.asc</code> in the dataset is used, and multiple tiles are mosaicked using the highest available resolution and bilinear resampling, so the dataset should hold only the intended tiles, all in the same coordinate system.</p>
+<p>The raster must include valid coordinate-reference-system metadata; an <code>.asc</code> file takes its coordinate system from the <code>.prj</code> file beside it. During preprocessing, it is converted to British National Grid (<strong>EPSG:27700</strong>), assigned a NoData value of <code>-99999</code>, and written as the ESRI ASCII terrain file required by CityCAT. If the source raster declares no NoData value, its empty cells are treated as real ground levels, so declare one before upload.</p>
 </div>
 <ul class="checks">
 <li>Cover the complete model domain, including all candidate interventions and outlets.</li>
@@ -457,7 +479,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Check for seams, duplicated coverage and unexpected resolution changes before upload.</li>
 </ul>
 <h4 class="minor-heading">Study Area Boundary</h4>
-<div class="prose"><p>Use this optional polygon dataset to define the area you want to model. Without it, the full extent of the terrain dataset is modelled. With it, the tool crops the terrain grid and excludes cells outside the boundary from the simulation. A smaller modelled area can substantially reduce the work repeated for every design, but the boundary must still include the flow paths and surrounding catchment needed for a sound flood study.</p><p>The boundary must overlap the terrain data. Only the part covered by the terrain can be modelled, so supplying a larger boundary does not fill gaps in terrain coverage.</p><p>Background topography and existing permeable-area features wholly outside the modelled area are dropped; features crossing its edge are kept whole. Paving candidates derived automatically from topography are cut back to the modelled area. In contrast, all supplied intervention features, offline-basin inlets, supplied paving polygons and outlet lines must lie wholly inside it. The tool stops and identifies features extending outside, rather than silently removing or cutting your proposed designs.</p></div>
+<div class="prose"><p>Use this optional polygon dataset to define the area you want to model. Without it, the full extent of the terrain dataset is modelled. With it, the tool crops the terrain grid and excludes cells outside the boundary from the simulation. A smaller modelled area can substantially reduce the work repeated for every design, but the boundary must still include the flow paths and surrounding catchment needed for a sound flood study.</p><p>The boundary must overlap the terrain data. Only the part covered by the terrain can be modelled, so supplying a larger boundary does not fill gaps in terrain coverage.</p><p>Background topography and existing permeable-area features wholly outside the modelled area are dropped; features crossing its edge are kept whole. Paving candidates derived automatically from topography are cut back to the modelled area. In contrast, all supplied intervention features, offline-basin inlets, supplied paving polygons and outlet lines must lie wholly inside it. The tool stops and identifies features extending outside, rather than silently removing or cutting your proposed designs. Without a boundary, the same check is made against the rectangular extent of the terrain data.</p></div>
 <div class="note"><strong>Reprojection is automatic, quality control is not</strong><p>The tool standardises the coordinate system and output format, but it cannot determine whether the surface is hydrologically suitable. Review sinks, bridges, walls, buildings and other elevation treatments as part of the CityCAT model setup.</p></div>
 </section>
 
@@ -476,8 +498,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td><strong>Baseline permeable areas</strong></td><td><code>make</code> is “Natural” and <code>theme</code> is “Land” or “Roads Tracks And Paths”.</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The fields <code>theme</code> and <code>descriptivegroup</code> are required. The <code>make</code> field is also required when a separate Permeable Areas dataset is not provided. Attribute names and values should be checked carefully after any GIS export or conversion.</p></div>
-<div class="note warn"><strong>Buildings and permeable areas cannot be empty</strong><p>The current workflow expects both a usable building layer and a usable baseline permeable-area layer. If the topography cannot supply permeable areas, provide them through the dedicated Permeable Areas data slot.</p></div>
+<div class="prose"><p>The fields <code>theme</code> and <code>descriptivegroup</code> are required. The <code>make</code> field is also required when a separate Permeable Areas dataset is not provided. Attribute names and values are matched without regard to case, but otherwise exactly: combined values such as “Path,Structure” do not match. Check them carefully after any GIS export or conversion.</p></div>
+<div class="note warn"><strong>Buildings and permeable areas cannot be empty</strong><p>The current workflow expects both a usable building layer and a usable baseline permeable-area layer. If the topography cannot supply permeable areas, provide them through the dedicated Permeable Areas data slot.</p><p>A missing topography field, or a topography layer yielding no buildings or permeable areas, is reported in <code>execution_log.txt</code> only as “The run stopped because of an unexpected problem”. The specific cause, such as “Required attributes ('theme', 'descriptivegroup') missing from input topography data.”, is given in <code>diagnostic_log.txt</code>.</p></div>
 </section>
 
 <section class="subsection" id="base-surfaces">
@@ -485,10 +507,10 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>3.6 Base permeable areas, pavement candidates and exclusion zones</h3>
 <div class="grid">
 <article class="card"><h4>Permeable Areas</h4><p>A polygon dataset describing the existing baseline infiltration surface used in every simulation. If it is omitted, the tool derives this surface from the topography attributes.</p></article>
-<article class="card"><h4>Permeable Paving</h4><p>A polygon dataset defining surfaces that the optimiser may convert to permeable paving. Each resolved polygon becomes one decision zone and <code>NO_ZONES</code> is ignored. If this dataset is omitted, candidates are derived from roadside and path features in the topography and divided using <code>NO_ZONES</code>.</p></article>
+<article class="card"><h4>Permeable Paving</h4><p>A polygon dataset defining surfaces that the optimiser may convert to permeable paving. Overlapping or touching polygons are merged and polygons with holes are split, and each resolved polygon becomes one decision zone. <code>NO_ZONES</code> and <code>PAV_MIN_ZONE_AREA</code> are not applied; only a polygon covering no grid cell is dropped. If this dataset is omitted, candidates are derived from roadside and path features in the topography and divided using <code>NO_ZONES</code>.</p></article>
 </div>
 <h4 class="minor-heading">Exclusion Zone</h4>
-<div class="prose"><p>This optional polygon dataset marks ground that must not be excavated for interventions. If it is omitted, the tool protects buildings, pavements and roads identified in the topography, including a 5-metre buffer around them.</p><p>A supplied Exclusion Zone <strong>replaces</strong> that automatic protection; it is not added to it. Your polygons are used as drawn, with no extra buffer. Include all areas and clearances you need to protect, not just additional restrictions. This setting does not remove ground from the flood model.</p><p>Study Area Boundary, Exclusion Zone, Permeable Areas and Permeable Paving accept Shapefile, GeoPackage or File Geodatabase data, optionally in a ZIP archive. Keep each dataset in its own data slot.</p></div>
+<div class="prose"><p>This optional polygon dataset marks ground that must not be excavated for interventions. If it is omitted, the tool protects buildings, pavements and roads identified in the topography, including a 5-metre buffer around them.</p><p>A supplied Exclusion Zone <strong>replaces</strong> that automatic protection; it is not added to it. Your polygons are used as drawn, with no extra buffer. Include all areas and clearances you need to protect, not just additional restrictions. This setting does not remove ground from the flood model. It limits where detention and offline basins may be excavated; engineered terrain features are applied across their drawn footprint regardless of it.</p><p>Study Area Boundary, Exclusion Zone, Permeable Areas and Permeable Paving accept Shapefile, GeoPackage or File Geodatabase data, optionally in a ZIP archive. Keep each dataset in its own data slot.</p></div>
 <div class="note"><strong>Baseline is different from an intervention</strong><p><strong>Permeable Areas</strong> describe existing conditions and are always included. <strong>Green-Area Interventions</strong> are optional candidates that the optimiser may select. Keep these datasets conceptually separate.</p></div>
 </section>
 
@@ -499,18 +521,18 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">DAFNI data slot</th><th scope="col">Geometry and key requirements</th></tr></thead>
 <tbody>
-<tr><td><strong>Green-Area Interventions</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Overlaps are merged and multipart areas are separated into valid candidate zones.</td></tr>
-<tr><td><strong>Rain Gardens</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Each processed area becomes a selectable zonal intervention.</td></tr>
-<tr><td><strong>Detention Basins</strong></td><td>Polygon, MultiPolygon, Point or MultiPoint in <code>.shp</code> or <code>.gpkg</code>. A polygon defines the area within which a circular basin may be sized and positioned; a point fixes its starting centre.</td></tr>
-<tr><td><strong>Engineered Terrain Features</strong></td><td>Line or narrow polygon geometry in <code>.shp</code> or <code>.gpkg</code>. The drawn footprint is fixed and the optimiser varies only its height.</td></tr>
-<tr><td><strong>Offline Detention Basins</strong></td><td>A basin polygon or point linked to a separate inlet point. Basins require <code>basin_id</code>; inlets require a matching <code>target_id</code>.</td></tr>
-<tr><td><strong>Outlet Lines</strong></td><td>LineString or MultiLineString in <code>.shp</code> or <code>.gpkg</code>. Required for the hydrograph objective; <code>outlet_id</code> is recommended.</td></tr>
+<tr><td><strong>Green-Area Interventions</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Overlapping or touching polygons are merged, polygons with holes are split, and multipart areas are separated; each resulting polygon is one selectable zone. Non-polygon features are ignored. Selected areas are modelled with the existing permeable-area (<code>PERMEABLE_...</code>) infiltration parameters.</td></tr>
+<tr><td><strong>Rain Gardens</strong></td><td>Polygon or MultiPolygon in <code>.shp</code> or <code>.gpkg</code>. Resolved in the same way as green areas; each resulting polygon becomes a selectable zonal intervention modelled with the <code>RG_...</code> infiltration parameters.</td></tr>
+<tr><td><strong>Detention Basins</strong></td><td>Polygon, MultiPolygon, Point or MultiPoint in <code>.shp</code> or <code>.gpkg</code>. A polygon defines the area within which a circular basin may be sized and positioned; a point fixes its starting centre. A MultiPolygon gives one basin, in the part that holds the largest circle, and a MultiPoint gives one basin at the centre of its points. Other geometry types are discarded with a warning.</td></tr>
+<tr><td><strong>Engineered Terrain Features</strong></td><td>Line or polygon geometry in <code>.shp</code> or <code>.gpkg</code>; each part of a multipart feature becomes its own feature. The drawn footprint is fixed and rasterised onto the DTM grid without buffering, so a line covers a strip about one cell wide. The optimiser varies only the height change, which raises the ground (a wall or bund) or, with negative <code>h_min</code>/<code>h_max</code>, lowers it (a channel).</td></tr>
+<tr><td><strong>Offline Detention Basins</strong></td><td>A basin polygon or point linked to a separate inlet point. Basins carry <code>basin_id</code>; inlets carry a matching <code>target_id</code>. Basins and inlets are told apart by which of these attributes they carry, so supply them as separate files or layers. Pairing is strictly one basin to one inlet: a missing, duplicated or unmatched identifier stops the run.</td></tr>
+<tr><td><strong>Outlet Lines</strong></td><td>LineString or MultiLineString in <code>.shp</code> or <code>.gpkg</code>. Required for the hydrograph objective. An optional whole-number <code>outlet_id</code> names each line’s discharge in the results; lines without one are numbered by their position in the file, counting from 0. No two lines may share an <code>outlet_id</code>, so draw several segments forming one outlet as a single MultiLineString.</td></tr>
 </tbody>
 </table></div>
 <div class="prose">
-<p>Detention basins, engineered terrain features and offline basins can use <code>h_min</code>, <code>h_max</code> and <code>h_len</code> to define their depth or height range. If these fields are absent, the defaults are 0 metres, 1.5 metres and 2 bits.</p>
-<p>For a polygon detention basin, the tool finds the largest circle that fits inside the drawn area, derives practical radius and movement limits, and uses the DTM cell size to decide how finely those ranges can be represented. Optional <code>r_min</code>, <code>r_max</code>, <code>dx_min</code>, <code>dx_max</code>, <code>dy_min</code> and <code>dy_max</code> values can narrow those limits but cannot expand them beyond the drawn area. Set both limits for an axis to zero to keep the basin centre fixed on that axis. A point-based basin defaults to a fixed centre and a radius of one DTM cell. Because a point has no enclosing area, provide defensible radius and movement limits explicitly where those defaults are not suitable.</p>
-<p>For offline storage, the tool joins each inlet to its basin where <code>target_id</code> equals <code>basin_id</code>. Inlets must be Point or MultiPoint geometry. Offline basins are not translated. Their maximum radius is restricted so that the basin does not reach its own inlet and at least two DTM-cell widths remain for the connection. Where the connecting pipe needs a deeper outfall, the tool charges the required sink cut against the basin’s drawn <code>h_max</code>. The remaining range is the storage depth the optimiser can select. If the sink leaves no depth above <code>h_min</code>, the run stops so that you can revise the basin depth or location or move the inlet.</p>
+<p>Detention basins, engineered terrain features and offline basins can use <code>h_min</code>, <code>h_max</code> and <code>h_len</code> to define their depth or height range. If these fields are absent, the defaults are 0 metres, 1.5 metres and 2 bits. Keep 0 at one end of the range, as in the default, so that the optimiser can choose not to build a feature. For engineered terrain features, positive values raise the ground and negative values lower it, for example <code>h_min</code> −1.5 and <code>h_max</code> 0 for a channel; either is costed on the size of the change.</p>
+<p>For a polygon detention basin, the tool finds the largest circle that fits inside the drawn area, derives practical radius and movement limits, and uses the DTM cell size to decide how finely those ranges can be represented. By default the radius ranges from one DTM cell to 60% of that largest circle’s radius, or to its whole radius when movement is switched off on both axes. Optional <code>r_min</code> and <code>r_max</code> may be set anywhere up to the largest circle’s radius. Optional <code>dx_min</code>, <code>dx_max</code>, <code>dy_min</code> and <code>dy_max</code> values can narrow the movement limits but cannot expand them beyond the drawn area. Set both limits for an axis to zero to keep the basin centre fixed on that axis. A point-based basin defaults to a fixed centre and a radius of one DTM cell. Because a point has no enclosing area, provide defensible radius and movement limits explicitly where those defaults are not suitable.</p>
+<p>For offline storage, the tool joins each inlet to its basin where <code>target_id</code> equals <code>basin_id</code>. Exact copies of a feature, such as the same basins supplied as both a GeoPackage and a shapefile, are treated as one; different features sharing an identifier, or a basin or inlet with no partner, stop the run. Inlets must be Point or MultiPoint geometry. Offline basins are not translated. Their maximum radius is restricted so that the basin does not reach its own inlet and at least two DTM-cell widths remain for the connection. Where the connecting pipe needs a deeper outfall, the tool charges the required sink cut against the basin’s drawn <code>h_max</code>. The remaining range is the storage depth the optimiser can select. If the sink leaves no depth above <code>h_min</code>, the run stops so that you can revise the basin depth or location or move the inlet.</p>
 </div>
 <div class="note warn"><strong>The uploaded data define the search space</strong><p>Check candidate locations for ownership, physical feasibility and meaningful separation before upload. The optimiser selects and configures the supplied candidates; it does not determine whether a location is buildable.</p></div>
 </section>
@@ -549,7 +571,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="prose"><p>Before optimisation begins, the container prepares a consistent CityCAT model and algorithm input set from the assigned datasets.</p></div>
 <ol class="process">
 <li><strong>Locate the mounted datasets.</strong> The tool reads the assigned files from the DAFNI input directories.</li>
-<li><strong>Extract archives.</strong> Supported ZIP packages and geodatabases are unpacked into the output workspace.</li>
+<li><strong>Extract archives.</strong> ZIP archives at the top level of each dataset are unpacked into a temporary folder; archives inside archives are not opened, and geodatabases are read in place.</li>
 <li><strong>Validate and standardise.</strong> Rainfall, raster and vector inputs are checked, converted and reprojected where required.</li>
 <li><strong>Apply the study boundary.</strong> Crop and mask the terrain, retain relevant background features, and check that supplied interventions and outlets lie inside the modelled area.</li>
 <li><strong>Derive CityCAT layers.</strong> Buildings, infiltration areas, intervention candidates and outlet points are constructed.</li>
@@ -571,7 +593,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Topography includes usable buildings and baseline permeable areas, with the required attributes.</li>
 <li>All spatial datasets have a defined coordinate system and align when inspected together.</li>
 <li>Candidate datasets contain only feasible, study-relevant intervention locations.</li>
-<li>Offline basins and inlets use matching identifiers; outlets are supplied for a hydrograph objective.</li>
+<li>Every offline basin has exactly one inlet with a matching identifier, and for a hydrograph objective no two outlet lines share an <code>outlet_id</code>.</li>
 <li>Each detention-basin footprint is large enough to contain a circle at least one DTM cell in radius.</li>
 <li>Shapefile packages contain every required component file.</li>
 <li>The selected DAFNI parameter set records the intended dataset versions.</li>
@@ -612,7 +634,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="prose"><p>Do not begin with a full production optimisation. First configure a small run that is sufficient to test the complete workflow.</p></div>
 <ol class="process">
 <li><strong>Confirm preprocessing.</strong> Check that every assigned input dataset is processed successfully.</li>
-<li><strong>Test the boundaries.</strong> Confirm that the do-minimum and do-maximum simulations complete.</li>
+<li><strong>Test the boundaries.</strong> Confirm that the do-nothing and do-everything simulations complete.</li>
 <li><strong>Inspect CityCAT results.</strong> Review depths and flows for obvious errors or implausible behaviour.</li>
 <li><strong>Check the objective.</strong> Confirm that the selected hydrograph or property-risk value can be calculated.</li>
 <li><strong>Review costs and records.</strong> Check intervention costs, encoded solutions and summary files.</li>
@@ -631,15 +653,15 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tbody>
 <tr><td><code>hydrograph</code></td><td>Minimises the simulated peak flow associated with the supplied outlet or outlets.</td><td>A valid Outlet Lines dataset must be assigned.</td></tr>
 <tr><td><code>risk</code></td><td>Minimises the number of buildings classified as being at high flood risk.</td><td>Valid building polygons must be derived from the topography.</td></tr>
-<tr><td><code>damages</code></td><td>Intended to minimise estimated economic flood damages.</td><td><strong>Not currently available.</strong></td></tr>
+<tr><td><code>damages</code></td><td>Intended to minimise estimated economic flood damages.</td><td><strong>Not currently available.</strong> Selecting it stops the run at start-up.</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>Enter the keyword exactly as shown. Use either <code>hydrograph</code> or <code>risk</code>.</p></div>
+<div class="prose"><p>Use either <code>hydrograph</code> or <code>risk</code>. The value is checked before any data is processed, ignoring capitals and surrounding spaces; any other value stops the run straight away with a message naming the accepted values.</p></div>
 <div class="grid">
 <article class="card"><h4>Property buffer · <code>BUFFER_VAL</code></h4><p>Controls the distance around each building used by the property-risk calculation. It is a percentage of one DEM cell: <code>50</code> is half a cell, <code>100</code> is one cell and <code>200</code> is two cells. The default is <code>100</code>.</p></article>
 <article class="card"><h4>Return period · <code>RETURN_PERIOD</code></h4><p>Records the nominal return period of the supplied event. The default is 30 years. It labels the processed rainfall and results; it does not generate, scale or modify the uploaded rainfall.</p></article>
 </div>
-<div class="note warn"><strong>Objective-data compatibility</strong><p>A hydrograph run will stop during preprocessing if no valid outlet geometry is supplied. Do not select <code>damages</code> until automated building-type assignment has been integrated.</p></div>
+<div class="note warn"><strong>Objective-data compatibility</strong><p>A hydrograph run stops during preprocessing if the Outlet Lines dataslot holds no <code>.shp</code> or <code>.gpkg</code> file, if the file contains no lines, or if two lines share an <code>outlet_id</code>. The <code>damages</code> objective is refused until automated building-type assignment has been integrated.</p></div>
 </section>
 
 <section class="subsection" id="pavement-zones">
@@ -647,13 +669,14 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>4.4 Configuring permeable-pavement zones</h3>
 <div class="prose"><p><code>NO_ZONES</code> specifies the requested number of permeable-pavement decision zones.</p></div>
 <ul class="checks">
-<li>Set it to <code>0</code> to exclude permeable paving from the optimisation.</li>
-<li>Set it to a positive integer to divide the available pavement surface into approximately grid-based zones.</li>
+<li>Set it to <code>0</code> to exclude the pavements found in the topography from the optimisation. Polygons supplied through the <strong>Permeable Paving</strong> data slot are still optimised.</li>
+<li>Set it to a positive integer to divide the pavement bounding box into a grid of equal rectangles, each becoming one zone.</li>
 <li>If you supply polygons through the <strong>Permeable Paving</strong> data slot, each resolved polygon becomes one zone and this parameter is ignored.</li>
-<li>If an odd number is entered, the current routine increases it by one.</li>
-<li>Empty zones and zones smaller than <code>PAV_MIN_ZONE_AREA</code> are removed, so the final number may be lower than requested.</li>
+<li>If an odd number is entered, it is increased by one, with a warning.</li>
+<li>The grid is made as square as possible, so it can hold more tiles than requested: 10 zones give a 4 × 3 grid of 12 tiles.</li>
+<li>Empty tiles and tiles whose paved area is no larger than <code>PAV_MIN_ZONE_AREA</code> are removed, so the final number of zones can be higher or lower than requested. Check the count in <code>parameters.txt</code>.</li>
 </ul>
-<div class="prose"><p>More zones give the optimiser finer spatial control but increase the chromosome length and search space. Each zone should represent a useful planning decision rather than an arbitrary subdivision.</p><p><code>PAV_MIN_ZONE_AREA</code> has a deployed default of 10 m². Increasing it removes small pavement fragments that may be impractical or contribute little to the study.</p></div>
+<div class="prose"><p>More zones give the optimiser finer spatial control but increase the chromosome length and search space. Each zone should represent a useful planning decision rather than an arbitrary subdivision.</p><p><code>PAV_MIN_ZONE_AREA</code> has a deployed default of 10 m². It applies only to grid zones cut from the topography pavements, where increasing it removes small fragments that may be impractical or contribute little to the study. Zone area is measured as the terrain-model cells the zone covers. Supplied paving polygons are never removed for being small.</p></div>
 </section>
 
 <section class="subsection" id="search-controls">
@@ -662,22 +685,21 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Parameter</th><th scope="col">Default</th><th scope="col">Purpose</th></tr></thead>
 <tbody>
-<tr><td><code>LAG</code></td><td>2</td><td>Number of generations across which improvement is assessed.</td></tr>
-<tr><td><code>DELTA_K</code></td><td>0.1</td><td>Convergence tolerance applied to improvement in normalised archive hypervolume.</td></tr>
-<tr><td><code>MAX_FRONT_SIZE</code></td><td>16</td><td>Controls the target density of the epsilon-grid approximation.</td></tr>
+<tr><td><code>LAG</code></td><td>2</td><td>Number of generations over which the change in archive hypervolume is measured.</td></tr>
+<tr><td><code>DELTA_K</code></td><td>0.1</td><td>Convergence tolerance: the run can stop once the normalised archive hypervolume has changed by no more than <code>DELTA_K</code> × (1/<code>MAX_FRONT_SIZE</code>)² over <code>LAG</code> generations. It also governs when the population is enlarged.</td></tr>
+<tr><td><code>MAX_FRONT_SIZE</code></td><td>16</td><td>Number of ε-grid divisions along each objective axis. It sets the approximate capacity of the archive and, through the box area, the convergence threshold.</td></tr>
 <tr><td><code>MIN_SIMS</code></td><td>10</td><td>Minimum number of unique simulations before convergence-based termination is allowed.</td></tr>
 <tr><td><code>MAX_SIMS</code></td><td>1000</td><td>Upper stopping threshold for unique simulations.</td></tr>
-<tr><td><code>BINARY_CODING</code></td><td><code>gray</code></td><td>Selects <code>gray</code>, <code>standard</code> or <code>unary</code> coding. Gray is recommended for routine studies.</td></tr>
 <tr><td><code>LOG_LEVEL</code></td><td><code>INFO</code></td><td>Keeps the execution log concise. Use <code>DEBUG</code> only when a full technical trace is needed in the visible log.</td></tr>
 </tbody>
 </table></div>
 <div class="grid">
 <article class="card"><h4>Lag and threshold</h4><p>A larger <code>LAG</code> examines progress over a longer period. A smaller <code>DELTA_K</code> imposes a stricter stopping condition and will generally allow the search to continue longer; a larger value makes termination easier to satisfy.</p></article>
-<article class="card"><h4>Maximum front size</h4><p>A larger value can retain a more detailed front approximation, but can increase the initial population, number of evaluations and runtime. Use a small value for workflow validation.</p></article>
+<article class="card"><h4>Maximum front size</h4><p>A larger value gives a finer ε-grid and a stricter convergence threshold, which usually means a larger archive, larger later populations, more evaluations and a longer run. The initial population is always five designs. Use a small value for workflow validation.</p></article>
 <article class="card"><h4>Simulation limits</h4><p><code>MIN_SIMS</code> prevents very early self-termination. <code>MAX_SIMS</code> provides the principal computational budget. For a new optimisation, use positive values and keep the maximum above the minimum. In a multistage run, both values describe additional simulations and may be zero.</p></article>
 <article class="card"><h4>Production budget</h4><p>Choose the budget using validation-run timings, design-space complexity and the number of trade-off solutions required. Convergence does not prove that the global Pareto front has been found.</p></article>
 </div>
-<div class="note plan"><strong>Recommended coding and log settings</strong><p>Use <code>gray</code> and <code>INFO</code> unless the study is deliberately comparing coding methods or diagnosing a problem. The selected coding is retained in <code>parameters.txt</code> and reused by a compatible multistage continuation.</p></div>
+<div class="note plan"><strong>Recommended log setting</strong><p>Use <code>INFO</code> unless you are diagnosing a problem. The complete technical trace is always written to <code>diagnostic_log.txt</code>, whatever this setting. Leave the Binary Coding Scheme parameter at its default; it is not a study choice.</p></div>
 </section>
 
 <section class="subsection" id="simulation-controls">
@@ -692,7 +714,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td><code>PERMEABLE_ROUGHNESS</code></td><td>0.035</td><td>Manning’s n</td><td>Surface roughness for permeable areas.</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p><code>SIM_RUNTIME</code> must cover the full rainfall event and enough time for the relevant flood response or hydrograph to develop. Ending a simulation too early can truncate the peak flow or maximum flood extent. For a hydrograph study, the runtime estimator checks every outlet for both boundary designs. If a flow is still rising at the end, it completes so that you can inspect the outputs, but warns that the estimate must not be used. Increase the simulation duration and rerun the estimator.</p><p><code>OUTPUT_FREQUENCY</code> controls temporal output resolution. A shorter interval provides more detailed results but creates more data and can increase processing and storage requirements.</p></div>
+<div class="prose"><p><code>SIM_RUNTIME</code> must cover the full rainfall event and enough time for the relevant flood response or hydrograph to develop. Ending a simulation too early can truncate the peak flow or maximum flood extent. For a hydrograph study, the runtime estimator checks every outlet for both boundary designs. If a flow is still rising at the end, it completes so that you can inspect the outputs, but warns that the estimate must not be used. Increase the simulation duration and rerun the estimator. If <code>OUTPUT_FREQUENCY</code> is so long that CityCAT reports the outlet flows only once, a hydrograph study stops with an error, because no peak can be identified.</p><p><code>OUTPUT_FREQUENCY</code> controls temporal output resolution. A shorter interval provides more detailed results but creates more data and can increase processing and storage requirements.</p></div>
 <ul class="checks">
 <li>Use positive values and make output frequency shorter than simulation runtime so that more than one result is written.</li>
 <li>Extend the runtime beyond the final rainfall timestep where the flood response requires it.</li>
@@ -704,16 +726,16 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="subsection" id="hydraulic-properties">
 <p class="label">Infiltration assumptions</p>
 <h3>4.7 Hydraulic properties</h3>
-<div class="prose"><p>The workflow uses Green–Ampt infiltration parameters for existing permeable areas, permeable paving and rain gardens.</p></div>
+<div class="prose"><p>The workflow uses Green–Ampt infiltration parameters for existing permeable areas, permeable paving and rain gardens. Selected green-area interventions are modelled as permeable ground, so they use the same parameters as existing permeable areas.</p></div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Surface</th><th scope="col">Hydraulic conductivity</th><th scope="col">Suction head</th><th scope="col">Effective porosity</th><th scope="col">Effective saturation</th></tr></thead>
 <tbody>
-<tr><td>Existing permeable areas</td><td>1.09 cm/hr</td><td>11.01 cm</td><td>0.412</td><td>0.30</td></tr>
+<tr><td>Existing permeable areas and green-area interventions</td><td>1.09 cm/hr</td><td>11.01 cm</td><td>0.412</td><td>0.30</td></tr>
 <tr><td>Permeable paving</td><td>4.421 cm/hr</td><td>19.123 cm</td><td>0.345</td><td>0.30</td></tr>
 <tr><td>Rain gardens</td><td>10.8 cm/hr</td><td>4.55 cm</td><td>0.34</td><td>0.20</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The parameter prefixes are <code>PERMEABLE_...</code> for baseline permeable areas, <code>PAV_...</code> for permeable paving and <code>RG_...</code> for rain gardens. These defaults provide an initial model configuration; they are not universal values. Where possible, use site-specific information, calibrated CityCAT parameters, soil data or defensible literature values.</p><p>Effective porosity and saturation are ratios rather than percentages. For example, enter <code>0.30</code>, not <code>30</code>.</p></div>
+<div class="prose"><p>The parameter prefixes are <code>PERMEABLE_...</code> for baseline permeable areas and green-area interventions, <code>PAV_...</code> for permeable paving and <code>RG_...</code> for rain gardens. There is no separate set for green-area interventions. These defaults provide an initial model configuration; they are not universal values. Where possible, use site-specific information, calibrated CityCAT parameters, soil data or defensible literature values.</p><p>Effective porosity and saturation are ratios rather than percentages. For example, enter <code>0.30</code>, not <code>30</code>.</p></div>
 <div class="note"><strong>Maintain model consistency</strong><p>A change to a hydraulic parameter alters every simulation containing the relevant surface type. Complete hydraulic calibration or sensitivity testing outside the production optimisation where possible.</p></div>
 </section>
 
@@ -765,13 +787,14 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Parameter</th><th scope="col">Default</th></tr></thead>
 <tbody>
-<tr><td>Construction rate · <code>FF_UNIT_COST</code></td><td>33.6 £ per metre of feature length per metre raised</td></tr>
+<tr><td>Construction rate · <code>FF_UNIT_COST</code></td><td>33.6 £ per metre of feature length per metre of height change, raised or lowered</td></tr>
 <tr><td>Annual maintenance · <code>FF_ANN_MAINT_COST</code></td><td>280 £/active feature/year</td></tr>
 <tr><td>Minor / major maintenance · <code>FF_MIN_MAINT_COST</code> / <code>FF_MAJ_MAINT_COST</code></td><td>840 / 8400 £/active feature/event</td></tr>
 <tr><td>Minor / major periods · <code>FF_MIN_MAINT_PERIOD</code> / <code>FF_MAJ_MAINT_PERIOD</code></td><td>3 / 10 years</td></tr>
 <tr><td>Design life · <code>FF_DESIGN_LIFE</code></td><td>50 years</td></tr>
 </tbody>
 </table></div>
+<div class="prose"><p>Engineered terrain features are costed on the size of their height change, so a channel lowered by 1 m costs the same as an embankment raised by 1 m, and a feature counts as active whenever its height change is not zero. Feature length is measured on the DTM grid as the number of cells the feature covers multiplied by the cell width. That equals the drawn length for a line one cell wide; a polygon is effectively charged for its area divided by the cell width.</p></div>
 
 <h4 class="minor-heading">Offline storage</h4>
 <div class="table-wrap"><table class="guide-table">
@@ -827,7 +850,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Design life · <code>RG_DESIGN_LIFE</code></td><td>50 years</td></tr>
 </tbody>
 </table></div>
-<div class="note warn"><strong>Periods and design lives must be positive</strong><p>A zero maintenance period will cause the cost calculation to fail. Review every cost value for the study context before using it in a production optimisation.</p></div>
+<div class="note warn"><strong>Periods and design lives are whole years</strong><p>Costs are discounted year by year, so maintenance periods and design lives are counted in whole years. A value entered as a fraction of a year, such as <code>12.5</code>, is rounded up to the next whole year and a warning records the change. A period or design life below one year stops the run at start-up. Where minor and major maintenance fall in the same year, only the major maintenance is charged. Review every cost value for the study context before using it in a production optimisation.</p></div>
 </section>
 
 <section class="subsection" id="unused-parameters">
@@ -837,7 +860,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <ul class="checks">
 <li>Retain the displayed defaults for any intervention type that has no candidate dataset.</li>
 <li>Do not interpret those values as adding the intervention to the study.</li>
-<li>The corresponding assumptions do not affect solutions when no candidates of that type exist.</li>
+<li>The corresponding assumptions do not affect solutions when no candidates of that type exist, but they are still checked, so they must remain valid numbers and periods must be at least one year.</li>
 </ul>
 <div class="note"><strong>Why the fields still need values</strong><p>Keeping the defaults avoids unnecessary configuration changes while ensuring the parameter set passes DAFNI validation.</p></div>
 </section>
@@ -850,7 +873,6 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>The parameter-set name identifies the study, rainfall event and purpose.</li>
 <li>Rainfall, DEM and topography datasets are assigned.</li>
 <li>The objective matches the available supporting data.</li>
-<li><code>BINARY_CODING</code> is <code>gray</code> unless another scheme is an intentional study choice.</li>
 <li><code>LOG_LEVEL</code> is <code>INFO</code> unless technical diagnostics are required.</li>
 <li>Return period matches the uploaded rainfall event.</li>
 <li>Simulation runtime covers the event and flood response.</li>
@@ -859,7 +881,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>Pavement zoning is intentional and proportionate.</li>
 <li>Hydraulic parameters use the correct units.</li>
 <li>Percentages have been entered as decimal ratios.</li>
-<li>Maintenance periods and design lives are positive.</li>
+<li>Maintenance periods and design lives are whole numbers of years, at least one.</li>
 <li>Cost assumptions share a consistent and documented price basis.</li>
 <li>A small validation run will be completed before production.</li>
 </ul>
@@ -886,8 +908,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li>The validation parameter set has a clear, unique name.</li>
 <li>Rainfall, DEM and topography datasets are assigned.</li>
 <li>The objective is either <code>hydrograph</code> or <code>risk</code>.</li>
-<li>Outlet lines are assigned when using <code>hydrograph</code>.</li>
-<li><code>BINARY_CODING</code> is <code>gray</code> unless another coding scheme is an intentional study choice.</li>
+<li>Outlet lines, with no <code>outlet_id</code> shared between them, are assigned when using <code>hydrograph</code>.</li>
 <li>Simulation runtime covers the rainfall and subsequent flood response.</li>
 <li>Maximum front size and simulation budget are deliberately small.</li>
 <li>Candidate interventions and their cost assumptions have been reviewed.</li>
@@ -945,7 +966,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <li><strong>Evolutionary search.</strong> New strategies are generated and simulated. At the end of each round, the readable log reports how many designs have been simulated and how many are currently worth keeping.</li>
 <li><strong>Final plotting.</strong> The final solutions are decoded and spatial or objective-space plots are produced.</li>
 <li><strong>Packaging.</strong> The processed algorithm inputs and CityCAT working directory are compressed.</li>
-<li><strong>Normal termination.</strong> A successful readable log ends with the run duration, a warning-and-error count and the location of the results.</li>
+<li><strong>Normal termination.</strong> The readable log ends with “Run finished in …”, a warning-and-error count (or “No problems were reported.”) and, only when the run succeeded, “Results have been written to …”. All three workflows end this way.</li>
 </ol>
 <div class="note"><strong>A quiet period can be normal</strong><p>A single CityCAT simulation may take a substantial amount of time. The absence of a new generation message does not necessarily mean the instance has stalled.</p></div>
 <div class="note plan"><strong>The runtime estimator follows a shorter route</strong><p>It completes the same input and CityCAT setup, then simulates only the do-nothing and do-everything boundary designs. It checks the hydrographs when <code>OBJECTIVE=hydrograph</code>, plots the measured objective range, writes the runtime reports and packages both simulations. It does not start the evolutionary search or create final solution maps.</p></div>
@@ -955,7 +976,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <p class="label">Progress indicators</p>
 <h3>5.5 Monitoring progress</h3>
 <div class="prose"><p>Start with <code>execution_log.txt</code>. At the default <code>INFO</code> setting it gives a short, plain-English account of input preparation, the current search round, completed design count, number of retained options, plotting and packaging. The closing lines state whether warnings or errors occurred. Use <code>diagnostic_log.txt</code> only when you need the full technical trace or are preparing a support request.</p><p>The generation plots produced by a completed run also report the archive size, population size and cumulative number of unique simulations.</p></div>
-<div class="note warn"><strong>Runtime estimates are approximate</strong><p>Candidate strategies can differ in processing time, and final plotting and compression add overhead. The maximum-simulation setting is checked between generations, so the final number of unique simulations may pass the specified threshold.</p></div>
+<div class="note warn"><strong>Runtime estimates are approximate</strong><p>Candidate strategies can differ in processing time, and final plotting and compression add overhead. The maximum-simulation setting is checked between generations, so the final number of unique simulations can pass the specified threshold by up to one generation’s worth of new designs. No separate message marks this stop; the final round’s design count shows it.</p></div>
 </section>
 
 <section class="subsection" id="common-failures">
@@ -964,24 +985,26 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Message or symptom</th><th scope="col">Likely cause</th><th scope="col">First check</th></tr></thead>
 <tbody>
-<tr><td>A model parameter could not be read as a number</td><td>A numeric field contains text, an invalid decimal or an empty value.</td><td>Review every page of the parameter table.</td></tr>
-<tr><td>No valid rainfall data found</td><td>The dataset is missing, assigned to the wrong slot or uses an unsupported format.</td><td>Check the Rainfall Data assignment and archive contents.</td></tr>
-<tr><td>Rainfall CSV contains invalid data</td><td>Incorrect columns, units, ordering, missing values or negative intensity.</td><td>Validate the CSV against Section 3.</td></tr>
-<tr><td>No valid DEM data found</td><td>The DEM is missing, incorrectly packaged or assigned to the wrong slot.</td><td>Check the Terrain Data slot and filename extension.</td></tr>
-<tr><td>Spatial integrity cannot be verified</td><td>Raster or vector data have no coordinate-system information.</td><td>Restore valid CRS metadata or the Shapefile <code>.prj</code> component.</td></tr>
-<tr><td>No valid topography data found</td><td>Unsupported format, packaging problem or incorrect data slot.</td><td>Inspect the Topography assignment and archive structure.</td></tr>
-<tr><td>Required topography field is missing</td><td><code>theme</code>, <code>descriptivegroup</code> or the necessary <code>make</code> field was lost or renamed.</td><td>Inspect the exported attribute table.</td></tr>
-<tr><td>No outlet line data found</td><td><code>hydrograph</code> was selected without a valid outlet dataset.</td><td>Assign LineString or MultiLineString outlet data.</td></tr>
-<tr><td>No interventions were found</td><td>The runtime estimator cannot create different do-nothing and do-everything designs.</td><td>Assign at least one valid candidate-intervention dataset.</td></tr>
-<tr><td>The flood peak was not captured</td><td>At least one outlet hydrograph was still rising when a boundary simulation ended.</td><td>Increase <code>SIM_RUNTIME</code> and rerun the estimator before optimising.</td></tr>
-<tr><td>CityCAT reported its results only once</td><td><code>OUTPUT_FREQUENCY</code> is not shorter than <code>SIM_RUNTIME</code>, so the hydrodynamic solve cannot be timed reliably.</td><td>Reduce <code>OUTPUT_FREQUENCY</code> and rerun the estimator.</td></tr>
-<tr><td>Offline basin or inlet cannot be matched</td><td><code>basin_id</code> and <code>target_id</code> do not correspond.</td><td>Check identifiers and inlet geometry.</td></tr>
+<tr><td>N model parameter(s) could not be used</td><td>The listed parameters contain text, an empty value, a decimal where a whole number is required, or a maintenance period or design life below one year.</td><td>Correct each parameter named in the message; every one at fault is listed.</td></tr>
+<tr><td>The Flood Objective '…' is not recognised / 'damages' is not yet available</td><td>An unsupported objective was entered.</td><td>Set the objective to <code>hydrograph</code> or <code>risk</code>.</td></tr>
+<tr><td>No rainfall data was found in the 'rainfall' data slot</td><td>The dataset is missing, assigned to the wrong slot or uses an unsupported format.</td><td>Check the Rainfall Data assignment and archive contents.</td></tr>
+<tr><td>CSV must contain exactly two columns / CSV contains non-numeric data or missing values / Time series error / Physical constraint error</td><td>Incorrect columns, missing or non-numeric values, times that do not increase strictly, or negative intensity.</td><td>Validate the CSV against Section 3.3; see Section 10.5.</td></tr>
+<tr><td>No terrain model was found in the 'dem' data slot</td><td>The DEM is missing, incorrectly packaged, uses an unrecognised extension or is assigned to the wrong slot.</td><td>Check the Terrain Data slot and that files end in <code>.tif</code> or <code>.asc</code>.</td></tr>
+<tr><td>Spatial integrity cannot be verified / Spatial integrity failure</td><td>Raster or vector data have no coordinate-system information.</td><td>Restore valid CRS metadata or the Shapefile <code>.prj</code> component.</td></tr>
+<tr><td>No topography data was found in the 'topography' data slot</td><td>Unsupported format, packaging problem or incorrect data slot.</td><td>Inspect the Topography assignment and archive structure.</td></tr>
+<tr><td>The run stopped because of an unexpected problem (during input checks)</td><td>Often a missing <code>theme</code>, <code>descriptivegroup</code> or <code>make</code> field, or topography yielding no buildings or permeable areas.</td><td>Open <code>diagnostic_log.txt</code> and read the error at the end of its trace.</td></tr>
+<tr><td>No outlet lines were found in the 'outlets' data slot / The outlet data holds no lines</td><td><code>hydrograph</code> was selected without a usable outlet dataset.</td><td>Assign LineString or MultiLineString outlet data.</td></tr>
+<tr><td>Each outlet line must have its own outlet_id, but outlet_id … is used by more than one line</td><td>Two or more outlet lines share an identifier. Lines without an <code>outlet_id</code> are numbered by file position from 0, which can clash with a supplied value.</td><td>Give each line its own <code>outlet_id</code>, or draw one outlet as a single MultiLineString.</td></tr>
+<tr><td>… footprints you supplied are not wholly inside the modelled area</td><td>An intervention, inlet, supplied paving polygon or outlet line extends beyond the boundary or terrain.</td><td>Correct the listed features or enlarge the boundary; see Section 10.6.</td></tr>
+<tr><td>No interventions were found in the input data</td><td>The runtime estimator cannot create different do-nothing and do-everything designs.</td><td>Assign at least one valid candidate-intervention dataset.</td></tr>
+<tr><td>THIS ESTIMATE CANNOT BE USED: the flood peak was not captured</td><td>At least one outlet hydrograph was still rising when a boundary simulation ended.</td><td>Increase <code>SIM_RUNTIME</code> and rerun the estimator before optimising.</td></tr>
+<tr><td>CityCAT reported the flow at the outlet lines only once during the simulation</td><td>In a hydrograph study, <code>OUTPUT_FREQUENCY</code> is not short enough for more than one output, so no peak can be identified.</td><td>Reduce <code>OUTPUT_FREQUENCY</code> well below <code>SIM_RUNTIME</code> and rerun.</td></tr>
+<tr><td>CityCAT reported its results only once per simulation (warning)</td><td>In a risk study, <code>OUTPUT_FREQUENCY</code> is not shorter than <code>SIM_RUNTIME</code>, so the estimator cannot time the hydrodynamic solve.</td><td>Reduce <code>OUTPUT_FREQUENCY</code> and rerun the estimator.</td></tr>
+<tr><td>Offline detention basin input data is unusable</td><td><code>basin_id</code> or <code>target_id</code> is missing, duplicated or unmatched.</td><td>Give every basin exactly one inlet with a matching identifier.</td></tr>
 <tr><td>A basin cannot be represented or has no admissible radius</td><td>The drawn area is too small for the DTM grid, or an offline basin is too close to its inlet.</td><td>Enlarge or move the basin footprint, or provide a point with suitable radius limits.</td></tr>
-<tr><td>An engineered terrain feature has critical overlap</td><td>Most of the footprint lies on protected or invalid ground.</td><td>Revise the geometry and its relationship to buildings, pavements, roads or domain boundaries.</td></tr>
-<tr><td>Minimum and maximum risk are both zero</td><td>The event produces no measured reduction, or the interventions have no effect on the objective.</td><td>Check rainfall severity, objective evaluation and intervention behaviour.</td></tr>
-<tr><td>Do-nothing risk is lower than do-everything risk</td><td>The maximum intervention strategy worsens the selected objective.</td><td>Inspect intervention representation, DEM modifications and objective location.</td></tr>
-<tr><td>Minimum and maximum costs are both zero</td><td>No active candidates exist, or all applicable costs are zero.</td><td>Check candidate datasets, pavement zoning and cost parameters.</td></tr>
-<tr><td>CityCAT exits with an error</td><td>Invalid model inputs, numerical failure or an incompatible generated configuration.</td><td>Identify the final successful setup message and inspect the prepared CityCAT files.</td></tr>
+<tr><td>Engineered terrain feature N shares …% of its grid cells with engineered terrain features listed before it</td><td>Engineered terrain features overlap or are duplicated. Over 75% overlap stops the run.</td><td>Remove the duplicate or redraw the features so that they do not overlap.</td></tr>
+<tr><td>The 'do nothing' baseline scenario has a lower risk … than the 'do everything' scenario</td><td>The maximum intervention strategy worsens the selected objective, so the optimisation stops.</td><td>Inspect intervention representation, DEM modifications and objective location.</td></tr>
+<tr><td>The run stopped because of an unexpected problem (during the search)</td><td>CityCAT exited with an error, or another unforeseen failure occurred.</td><td>Read the error at the end of <code>diagnostic_log.txt</code> and inspect the prepared CityCAT files.</td></tr>
 <tr><td>Failure during final plotting</td><td>The optimisation may have finished, but result generation or packaging is incomplete.</td><td>Do not treat the instance as successful; inspect its final status and available files.</td></tr>
 </tbody>
 </table></div>
@@ -991,8 +1014,8 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <section class="subsection" id="stop-run">
 <p class="label">Early termination</p>
 <h3>5.7 When should a run be stopped?</h3>
-<div class="prose"><p>DAFNI provides a <strong>Stop Workflow</strong> control on the workflow-instance page. Stop an active validation run when the wrong rainfall, objective or dataset version was selected; an inappropriate simulation budget was entered; status information confirms a non-recoverable setup problem; the observed runtime makes the study impractical; or DAFNI support advises termination.</p><p>When the container receives a normal stop request, it attempts to finish the design currently being simulated and then save the useful results found so far. Platform-level termination can still interrupt that process, so never assume a stopped instance contains a complete package. Avoid stopping merely because one CityCAT simulation is taking longer than previous candidates.</p></div>
-<div class="note warn"><strong>Continuation depends on a complete hand-off</strong><p>A stopped or failed instance can be continued only when its published output contains a valid parameter file, processed-input archive and CityCAT-setup archive. Supply the complete output dataset directly or all three components as individual datasets. If any component is missing, incomplete or from a different run, correct the cause and launch a new standard or runtime-estimator instance.</p></div>
+<div class="prose"><p>DAFNI provides a <strong>Stop Workflow</strong> control on the workflow-instance page. Stop an active validation run when the wrong rainfall, objective or dataset version was selected; an inappropriate simulation budget was entered; status information confirms a non-recoverable setup problem; the observed runtime makes the study impractical; or DAFNI support advises termination.</p><p>Stopping an instance ends the container without saving: the design being simulated is not finished, and no results, archives or continuation files are produced. Treat a stopped instance as having no usable output. Avoid stopping merely because one CityCAT simulation is taking longer than previous candidates.</p></div>
+<div class="note warn"><strong>Only completed runs can be continued</strong><p>The processed-input archive and CityCAT-setup archive are written only when a run completes normally, so a stopped or failed instance cannot be continued. Continue from a completed instance by supplying its complete output dataset directly or all three components as individual datasets. If any component is missing, incomplete or from a different run, correct the cause and launch a new standard or runtime-estimator instance. To limit how long a run takes, set <code>MAX_SIMS</code> rather than stopping it.</p></div>
 </section>
 
 <section class="subsection" id="successful-outputs">
@@ -1041,7 +1064,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h4 class="minor-heading">Completion checks</h4>
 <ul class="checks">
 <li>Every workflow step reports successful completion.</li>
-<li><code>execution_log.txt</code> reaches the normal termination message.</li>
+<li><code>execution_log.txt</code> ends with “Results have been written to …”, which is written only by a run that succeeded.</li>
 <li><code>parameters.txt</code> matches the intended parameter set.</li>
 <li><code>Solutions.txt</code> exists, is non-empty and contains finite cost and selected-objective values.</li>
 <li>Each final solution has a readable summary, GeoPackage and maximum-depth raster, or a clearly marked <code>Export_Failed.txt</code> report that must be investigated.</li>
@@ -1149,7 +1172,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <div class="prose">
 <p><code>Generation N.png</code> shows the ε-MOEA archive at a particular stage of the search. Each blue cross is an archive solution. The number printed beside a point is its position within that generation’s archive; it is not a permanent solution identifier. Archive membership and ordering can change, so a point labelled <code>3</code> in one generation should not be assumed to be the same strategy as point <code>3</code> in another.</p>
 <p>The title reports the generation number and cumulative number of unique simulations, followed by the <strong>current number of best solutions</strong> and the <strong>number of candidate solutions being tested</strong>. The blue points are labelled <strong>Current best solutions</strong>. These counts distinguish retained options from designs being explored.</p>
-<p>When the configured maximum front size is 18 or fewer, the plot also shows a dotted epsilon grid. Labels such as <code>(2, 4)</code> identify the cost and flood-performance epsilon box occupied by a solution. They are grid indices, not solution numbers, ranks or uncertainty ranges. The grid and its labels are suppressed for larger fronts to preserve readability.</p>
+<p>When the configured maximum front size is 18 or fewer, the plot also shows a dotted epsilon grid. Every box is labelled with its cost and flood-performance indices, such as <code>(2, 4)</code>, so a solution’s box can be read from the label of the cell it sits in. They are grid indices, not solution numbers, ranks or uncertainty ranges. The grid and its labels are suppressed for larger fronts to preserve readability.</p>
 </div>
 <h4 class="minor-heading">What to look for</h4>
 <ul class="checks">
@@ -1172,7 +1195,7 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <p>Use the figure to identify a shortlist rather than immediately choosing one point. Useful candidates commonly include the least-cost non-dominated strategy, one or more intermediate strategies around the bend in the curve, the best-performing strategy, and any strategy close to an explicit budget or performance threshold.</p>
 </div>
 <h4 class="minor-heading">Compare with the baseline</h4>
-<div class="prose"><p>Where the do-nothing objective value is greater than zero, relative improvement can be calculated as:</p></div>
+<div class="prose"><p>The do-nothing design is not always kept in the final archive, so take its objective value from the runtime estimator’s report or from the <code>Sim_1</code> results rather than from <code>Solutions.txt</code>. Where the do-nothing objective value is greater than zero, relative improvement can be calculated as:</p></div>
 <code class="code-block">Improvement (%) = 100 × (do-nothing objective − solution objective)
                           ÷ do-nothing objective</code>
 <div class="prose"><p>When comparing two increasingly expensive strategies, also consider the additional flood benefit gained for the additional cost. A very small improvement associated with a large cost increase may indicate diminishing returns.</p></div>
@@ -1185,13 +1208,14 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <ul class="checks">
 <li><code>Solution N.png</code> corresponds to row <code>N</code> of <code>Solutions.txt</code>.</li>
 <li>Solution numbering begins at zero in the current output.</li>
-<li>The number in parentheses in the image title is the integer identifier derived from the solution genotype.</li>
-<li>That identifier also corresponds to the associated <code>CityCAT_setup/Sim_&lt;identifier&gt;</code> directory.</li>
+<li>The code in parentheses in the image title, such as <code>26zkpqo4etnv</code>, is the base-36 simulation identifier derived from the solution genotype.</li>
+<li>That identifier is identical to the associated <code>CityCAT_setup/Sim_&lt;identifier&gt;</code> directory name.</li>
 <li><code>Cost</code> records the cost-objective value.</li>
 <li>The third column is named for the selected flood objective and includes its unit, for example <code>Combined peak flow at outlets (m³/s)</code>.</li>
 <li>The remaining columns describe the selected zones and decoded characteristics of individual interventions.</li>
+<li>In <code>Solutions.txt</code>, feature columns share one index running across all feature types from zero, for example <code>FeatureID0</code> and <code>FeatureID1</code> for two detention basins, then <code>FeatureID_F2</code> for the first engineered terrain feature. <code>Summary.txt</code> and the GeoPackage instead number features from 1 within each type, so “Engineered terrain features: Feature 1” corresponds to <code>FeatureID_F2</code> in that example.</li>
 </ul>
-<div class="note warn"><strong>Two different numbering systems</strong><p>Do not use the numbered labels in a generation plot to locate a final <code>Solution N.png</code>. Generation-archive labels and final solution numbers have different purposes.</p></div>
+<div class="note warn"><strong>Two different numbering systems</strong><p>Do not use the numbered labels in an intermediate generation plot to locate a final <code>Solution N.png</code>. Archive membership and order change between generations. Only the last generation plot is drawn from the final archive, in the same order as <code>Solutions.txt</code>.</p></div>
 <div class="note plan"><strong>Use the solution package for onward review</strong><p>The matching <code>solution_exports/Solution_N</code> folder contains <code>Summary.txt</code>, <code>Solution_N.gpkg</code> and <code>Maximum_Flood_Depth.tif</code>. Open the GeoPackage and raster together in QGIS or equivalent GIS software to compare the option with land ownership, utilities, environmental constraints and other local evidence.</p></div>
 </section>
 
@@ -1200,26 +1224,27 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <h3>6.6 Reading an individual solution flood map</h3>
 <div class="prose">
 <p>Each <code>Solution N.png</code> is titled with the solution number, simulation identifier, estimated whole-life cost and the selected objective value. The map covers the full DTM extent and combines maximum simulated flood depth with the intervention layout.</p>
-<p>Flood depth is displayed in blue using boundaries of 0.01, 0.05, 0.10, 0.15, 0.30, 0.50 and 0.80 m. The darkest category represents depths greater than 0.80 m.</p>
+<p>Flood depth is displayed in blue using boundaries of 0.01, 0.05, 0.10, 0.15, 0.30, 0.50 and 0.80 m. Depths from 0.01 to 0.05 m appear almost white, and all depths of 0.50 m or more share the darkest blue.</p>
 <p>The map represents maximum water depth over the simulated event. It is not a snapshot at a particular time and does not directly show velocity, duration, arrival time or hazard rating.</p>
 </div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Map symbol</th><th scope="col">Meaning</th></tr></thead>
 <tbody>
-<tr><td>Grey polygons</td><td>Base pavement surface and, for hydrograph runs, buildings. With a baseline comparison available in risk runs, grey buildings are not at high risk in either design.</td></tr>
+<tr><td>Light translucent grey polygons</td><td>Candidate permeable-paving surface (no legend entry).</td></tr>
+<tr><td>Solid grey polygons</td><td>Buildings in hydrograph runs, or in risk runs where no risk categories can be drawn. With a baseline comparison available in risk runs, grey buildings are not at high risk in either design.</td></tr>
 <tr><td>Translucent red area</td><td>Exclusion zone.</td></tr>
 <tr><td>Spring-green polygons</td><td>Selected permeable-paving zones.</td></tr>
 <tr><td>Brown-orange polygons</td><td>Selected rain gardens.</td></tr>
 <tr><td>Dark olive-green polygons</td><td>Selected green areas.</td></tr>
 <tr><td>Black circular outline with a red centre marker</td><td>Detention-basin footprint, decoded radius and shifted centre.</td></tr>
-<tr><td>Purple dashed polygon with an elevation label</td><td>Engineered terrain feature and its decoded elevation change.</td></tr>
+<tr><td>Purple dashed line or outline with an elevation label</td><td>Engineered terrain feature, drawn as supplied, and its decoded elevation change (positive raised, negative lowered).</td></tr>
 <tr><td>Dark-blue dash-dot circle and centre marker</td><td>Offline storage basin.</td></tr>
 <tr><td>Dark-blue triangle joined to the basin by a dotted line</td><td>Offline-feature inlet and its connection to the basin.</td></tr>
 <tr><td>Coloured semi-transparent squares</td><td>Hydrograph outlet cells.</td></tr>
 </tbody>
 </table></div>
 <div class="prose"><p>For a <code>risk</code> run, the map normally colours buildings using the exposure results for the selected design and the do-nothing baseline. The building legend sits beside the map: red means high risk in both designs, green means no longer at high risk, and orange means newly at high risk. Grey means not at high risk in either design. These categories show changes in the tool’s high-risk classification, not the size of each building’s flood-depth change.</p><p>If baseline exposure results are missing or empty, the legend shows only grey buildings that are not at high risk and red buildings that are at high risk in the selected design. If the selected design’s exposure results are missing, empty or lack the required columns, or building identifiers are unavailable, its buildings are drawn grey without risk categories. Check the legend and run log before interpreting the colours.</p></div>
-<div class="prose"><p>Detention basins, engineered terrain features and offline basins whose decoded depth or elevation change is zero are omitted because they are inactive in that strategy.</p></div>
+<div class="prose"><p>Detention basins, engineered terrain features and offline basins whose decoded depth or elevation change is zero are omitted because they are inactive in that strategy; their legend entry still appears. The example images in this guide were produced by an earlier version, so some legend labels differ from current output, for example “Flexible Feature” is now “Detention Basin” and “Fixed Feature” is now “Engineered Terrain Feature”.</p></div>
 <h4 class="minor-heading">Questions to ask</h4>
 <ul class="checks">
 <li>Are the selected interventions located where expected?</li>
@@ -1356,7 +1381,6 @@ header{position:sticky;top:0;z-index:10;border-bottom:1px solid var(--line);back
 <tr><td>Instance start and completion times</td><td>Distinguishes repeated or similarly named runs.</td></tr>
 <tr><td>Input dataset and version IDs</td><td>Identifies the precise rainfall, DEM, topography and intervention data supplied.</td></tr>
 <tr><td>Output dataset and version ID</td><td>Identifies the published results package.</td></tr>
-<tr><td>Source-code release or commit</td><td>Links the deployed model version to its source, where available.</td></tr>
 <tr><td>Guide version</td><td>Records the instructions used to configure and interpret the run.</td></tr>
 </tbody>
 </table></div>
@@ -1506,7 +1530,20 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="multistage-status">
 <p class="label">Multistage continuation</p>
 <h3>7.10 Continue and extend an optimisation</h3>
-<div class="prose"><p><strong>CityCAT Optimisation Tool: Multistage Optimisation</strong> continues a compatible runtime-estimator package or an earlier complete or incomplete optimisation. It restores the original scientific, representation and economic settings, reuses an existing CityCAT mesh where available, reconstructs valid simulations and resumes the search from a reduced nondominated archive. For offline basins, it also retains the recorded pipe lengths needed to reconstruct connection costs and verifies that the stored storage-depth limits still match the earlier stage.</p></div>
+<div class="prose"><p><strong>CityCAT Optimisation Tool: Multistage Optimisation</strong> continues a compatible runtime-estimator package or an earlier optimisation that completed normally. It restores the original objective, intervention, economic and hydrodynamic settings from the previous stage’s parameter file and CityCAT setup, reuses an existing CityCAT mesh where available, reconstructs valid simulations and rebuilds a nondominated archive from all of them before resuming the search. For offline basins, it also retains the recorded pipe lengths needed to reconstruct connection costs and verifies that the stored storage-depth limits still match the earlier stage.</p></div>
+<div class="table-wrap"><table class="guide-table">
+<caption>Multistage dataslots and parameters</caption>
+<thead><tr><th scope="col">Dataslot or parameter</th><th scope="col">Use</th></tr></thead>
+<tbody>
+<tr><td><strong>Complete Previous-Stage Output</strong></td><td>The whole output dataset of one previous stage. Use on its own, leaving the three slots below empty.</td></tr>
+<tr><td><strong>Optimisation Parameters</strong></td><td>A dataset holding exactly one <code>.txt</code> file: the previous stage’s <code>parameters.txt</code> (top level for the estimator, <code>summary/parameters.txt</code> for an optimisation or multistage stage).</td></tr>
+<tr><td><strong>Processed Algorithm Inputs</strong></td><td>A dataset holding exactly one <code>.zip</code> file: the previous stage’s <code>alg_inputs.zip</code>.</td></tr>
+<tr><td><strong>CityCAT Setup and Simulations</strong></td><td>A dataset holding exactly one <code>.zip</code> file: the previous stage’s <code>CityCAT_setup.zip</code>.</td></tr>
+<tr><td><code>LAG</code>, <code>DELTA_K</code>, <code>MAX_FRONT_SIZE</code></td><td>Search controls for this stage; defaults 2, 0.1 and 16.</td></tr>
+<tr><td><code>MIN_SIMS</code>, <code>MAX_SIMS</code></td><td>Additional unique simulations for this stage; defaults 10 and 25, and zero is allowed.</td></tr>
+<tr><td><code>LOG_LEVEL</code></td><td>Log detail, as for the other workflows.</td></tr>
+</tbody>
+</table></div>
 <ul class="checks">
 <li>Select the complete output dataset from one previous stage, or create three individual datasets containing one parameter <code>.txt</code> file and the two required <code>.zip</code> archives.</li>
 <li>Populate only one input mode. Supplying both the complete dataset and any individual hand-off dataset causes validation to fail.</li>
@@ -1516,7 +1553,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <li>Preserve the outputs from every stage; the next multistage run can use the complete newly published output dataset directly.</li>
 </ul>
 <div class="note"><strong>Previous-stage simulations still count</strong><p>If <code>R</code> valid simulations exist in earlier stages, the absolute stopping counters become <code>R + MIN_SIMS</code> and <code>R + MAX_SIMS</code>. A successful runtime-estimator package contributes two retained boundary simulations: do nothing and do everything.</p></div>
-<div class="note warn"><strong>Keep offline-basin geometry consistent</strong><p>A continuation verifies the effective <code>h_max</code> recorded with the previous stage’s processed inputs when the original drawn budget was retained. Changes to the terrain, exclusion zone, <code>INLET_DROP</code> or <code>MIN_PIPE_GRADIENT</code> that would change the required sink cut then stop the run. Older packages without a recorded drawn budget retain their stored <code>h_max</code>, so preserving the complete original package and configuration is especially important. Start a separate study if these design assumptions must change.</p></div>
+<div class="note warn"><strong>Keep offline-basin geometry consistent</strong><p>The terrain, exclusion zone, <code>INLET_DROP</code> and <code>MIN_PIPE_GRADIENT</code> are all restored from the previous stage and cannot be changed on the multistage workflow. A continuation still recalculates each offline basin’s sink cut and checks it against the effective <code>h_max</code> recorded with the previous stage. The run stops if they disagree, which indicates hand-off files that were edited or taken from different instances. Older packages without a recorded drawn budget retain their stored <code>h_max</code>, so preserving the complete original package is especially important. Start a separate study if these design assumptions must change.</p></div>
 <div class="note warn"><strong>Do not mix stages or substitute <code>Solutions.txt</code></strong><p>The multistage workflow requires the complete three-file model state. A solution table alone cannot restore the prepared geometry, candidate ordering, mesh and simulation evidence needed for a safe continuation.</p></div>
 <div class="key-point"><p class="label">Key point</p><p><strong>Reproducibility depends on the complete chain of evidence.</strong> Preserve the workflow, model, parameter set, input-dataset versions, workflow instance and output-dataset version alongside the downloaded results and interpretation record. A final plot without this provenance cannot fully describe or reproduce the modelling experiment.</p></div>
 </section>
@@ -1593,7 +1630,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <h4 class="minor-heading">Outlet hydrograph</h4>
 <div class="prose"><p>The hydrograph objective sums the separately calculated peak discharges from all configured outlets. This aggregation can conceal different behaviour at individual locations. One outlet may improve while another worsens even if the summed objective decreases. Time to peak, discharge volume and duration are useful for interpretation but are not separate objectives.</p></div>
 <h4 class="minor-heading">Economic damages</h4>
-<div class="prose"><p>The damages objective is not currently available for routine use. Although damage-calculation components exist, a reliable automated method for assigning building types has not yet been integrated. Do not select or report this objective until the required building-classification workflow has been completed and validated.</p></div>
+<div class="prose"><p>The damages objective is not currently available. Although a damage calculation has been developed, a reliable automated method for assigning building types has not yet been integrated, so selecting this objective stops the run at start-up. It will be enabled once the required building-classification workflow has been completed and validated.</p></div>
 <h4 class="minor-heading">Cost</h4>
 <div class="prose"><p>The cost objective is an estimate based on the configured unit costs, maintenance assumptions, design lives, discount rate, professional fees and decommissioning terms. It is not a supplier quotation or detailed cost plan. Site-specific land, utility, ground, inflation, optimism-bias, consenting or construction-risk costs are omitted unless they have been incorporated explicitly.</p></div>
 </section>
@@ -1613,7 +1650,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <li>One intervention’s benefit may depend on the presence of others.</li>
 <li>Increasing intervention provision does not guarantee monotonic improvement.</li>
 </ul>
-<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. The final number of unique simulations can therefore exceed the specified value slightly while the active generation completes.</p></div>
+<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. The final number of unique simulations can therefore exceed the specified value by up to one generation’s worth of new designs while the active generation completes.</p></div>
 <h4 class="minor-heading">When the precise archive matters</h4>
 <ul class="checks">
 <li>Repeat the optimisation with the same configuration.</li>
@@ -1628,19 +1665,22 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="implementation-issues">
 <p class="label">Version-specific notes</p>
 <h3>8.6 Current implementation and presentation issues</h3>
-<div class="prose"><p>The following points apply to the source version inspected for this guide. Confirm the selected DAFNI model version before relying on version-specific behaviour.</p></div>
+<div class="prose"><p>The following points apply to the model version described by this guide. Confirm the selected DAFNI model version before relying on version-specific behaviour.</p></div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Current issue</th><th scope="col">User implication</th></tr></thead>
 <tbody>
-<tr><td>Rainfall, DEM and topography may not all appear as required in the DAFNI interface.</td><td>They remain functionally mandatory and the run will fail without valid files.</td></tr>
-<tr><td>The damages objective appears in parts of the code.</td><td>It is not currently available for routine DAFNI studies.</td></tr>
+<tr><td>Rainfall, DEM and topography do not appear as required in the DAFNI interface.</td><td>They remain functionally mandatory and the run will fail without valid files.</td></tr>
+<tr><td>The damages objective is listed in the Flood Objective description.</td><td>It is not yet available; selecting it stops the run at start-up.</td></tr>
+<tr><td>The Binary Coding Scheme parameter is visible in DAFNI.</td><td>Leave it at its default; Gray coding is the only scheme supported.</td></tr>
 <tr><td>All multistage dataslots are optional in DAFNI.</td><td>Supply either one complete previous-stage output dataset or all three individual hand-off datasets. The model validates missing, ambiguous and mixed inputs.</td></tr>
-<tr><td>The final comparison legend includes objective vectors and a reference Pareto front.</td><td>Those datasets are not populated; the blue ε-MOEA archive is the operative result.</td></tr>
+<tr><td>A stopped or failed instance publishes no continuation archives.</td><td>Only a completed instance can be continued through Multistage Optimisation.</td></tr>
+<tr><td>A multistage stage writes its parameter file only as <code>summary/parameters.txt</code>.</td><td>Use that file, or the complete output dataset, for the next stage.</td></tr>
 <tr><td>Final solution numbering begins at zero.</td><td>Match <code>Solution N.png</code> to row <code>N</code> of <code>Solutions.txt</code>.</td></tr>
 <tr><td>Generation labels are temporary archive indices.</td><td>Do not use them as persistent solution identifiers.</td></tr>
 <tr><td>Risk-map colours depend on readable exposure results and building identifiers.</td><td>Check the building legend and log. Where the required data are missing, maps may show only current risk or leave buildings grey.</td></tr>
-<tr><td>The simulation limit is evaluated between generations.</td><td>The completed run can contain slightly more unique simulations than <code>MAX_SIMS</code>.</td></tr>
+<tr><td>The simulation limit is evaluated between generations.</td><td>The completed run can contain up to one generation more unique simulations than <code>MAX_SIMS</code>.</td></tr>
 <tr><td>Some solution exports use idealised geometry.</td><td>Circular basin footprints and inlet-connection lines describe the decoded design; the exact CityCAT cells still depend on the DTM grid and exclusion mask.</td></tr>
+<tr><td>Overlapping engineered terrain features add their height changes together where they overlap.</td><td>Avoid drawing engineered terrain features on top of one another; overlap above 75% stops the run.</td></tr>
 </tbody>
 </table></div>
 <div class="note"><strong>Interpret rather than ignore</strong><p>These issues do not necessarily invalidate a run, but they must be understood when configuring, interpreting and reporting it.</p></div>
@@ -1727,7 +1767,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <div class="prose"><p>The following are potential directions rather than commitments of the current version.</p></div>
 <ul class="checks">
 <li>Stable identifiers linking generation plots, final archives and simulations.</li>
-<li>Clearer final comparison legends.</li>
+<li>Saving partial results and continuation files when a run is stopped.</li>
 <li>Automated baseline and relative-improvement tables.</li>
 <li>Scenario and sensitivity-analysis support.</li>
 <li>Multi-event robustness assessment.</li>
@@ -1818,7 +1858,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="tutorial-assets">
 <p class="label">Workflow inputs</p>
 <h3>9.4 Locate the workflow and datasets</h3>
-<div class="prose"><p>Open the tool using the <strong>Open in DAFNI</strong> link at the top of this guide. Before configuring an instance, record the workflow name and version, the versions of all input datasets, the model versions used by the workflow and the date on which you accessed them.</p><p>DAFNI datasets are versioned. If a catalogue entry has been updated, use the dataset version selector to choose the version specified by this tutorial. Do not assume that the most recently published version is identical to the reference data.</p><p>Locate the following tutorial datasets:</p></div>
+<div class="prose"><p>Open the tool using the <strong>Optimisation Tool</strong> button at the top of this guide. Before configuring an instance, record the workflow name and version, the versions of all input datasets, the model versions used by the workflow and the date on which you accessed them.</p><p>DAFNI datasets are versioned. If a catalogue entry has been updated, use the dataset version selector to choose the version specified by this tutorial. Do not assume that the most recently published version is identical to the reference data.</p><p>Locate the following tutorial datasets:</p></div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Workflow input</th><th scope="col">Dataset to select</th></tr></thead>
 <tbody>
@@ -1832,7 +1872,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <tr><td>Outlet Lines</td><td><code>&lt;quick-start outlet dataset and version&gt;</code></td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>Leave green-area and permeable-paving inputs empty unless the published tutorial package explicitly provides them.</p><p>If you are preparing your own copy of the example data, it must first be uploaded and published as a DAFNI dataset before it can be assigned to the workflow. See DAFNI’s official guidance on <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-upload-data-and-use">uploading and using data</a>.</p></div>
+<div class="prose"><p>Leave green-area and permeable-paving inputs empty unless the published tutorial package explicitly provides them. The two outlet lines must not share an <code>outlet_id</code>, and the offline basin and its inlet must share one identifier (<code>basin_id</code> and <code>target_id</code>).</p><p>If you are preparing your own copy of the example data, it must first be uploaded and published as a DAFNI dataset before it can be assigned to the workflow. See DAFNI’s official guidance on <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-upload-data-and-use">uploading and using data</a>.</p></div>
 </section>
 
 <section class="subsection" id="tutorial-parameters">
@@ -1846,11 +1886,10 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <tbody>
 <tr><td><code>OBJECTIVE</code></td><td><code>hydrograph</code></td><td>Minimise summed outlet peak discharge.</td></tr>
 <tr><td><code>RETURN_PERIOD</code></td><td><code>30</code></td><td>Label the rainfall event.</td></tr>
-<tr><td><code>BINARY_CODING</code></td><td><code>gray</code></td><td>Encode intervention decisions using Gray code.</td></tr>
 <tr><td><code>NO_ZONES</code></td><td><code>0</code></td><td>Disable permeable-paving zoning.</td></tr>
 <tr><td><code>LAG</code></td><td><code>2</code></td><td>Compare recent generational fronts.</td></tr>
 <tr><td><code>DELTA_K</code></td><td><code>0.1</code></td><td>Set the convergence threshold.</td></tr>
-<tr><td><code>MAX_FRONT_SIZE</code></td><td><code>16</code></td><td>Set the target population/front size.</td></tr>
+<tr><td><code>MAX_FRONT_SIZE</code></td><td><code>16</code></td><td>Set the number of ε-grid divisions, and so the target front size.</td></tr>
 <tr><td><code>MIN_SIMS</code></td><td><code>1</code></td><td>Permit early convergence checking.</td></tr>
 <tr><td><code>MAX_SIMS</code></td><td><code>25</code></td><td>Limit the validation-run simulation budget.</td></tr>
 <tr><td><code>BUFFER_VAL</code></td><td><code>100</code></td><td>Retained but inactive for this hydrograph objective.</td></tr>
@@ -1874,7 +1913,6 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <li>All selected datasets use the tutorial versions.</li>
 <li>The rainfall duration is covered by <code>SIM_RUNTIME</code>.</li>
 <li><code>OUTPUT_FREQUENCY</code> is appropriate for the rainfall time step.</li>
-<li><code>BINARY_CODING</code> is <code>gray</code> for the reference configuration.</li>
 <li>No permeable-paving zones are requested.</li>
 <li>The parameter set has been saved under a unique name.</li>
 <li>Only one validation instance will be submitted.</li>
@@ -1897,7 +1935,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <li><strong>Export final solutions.</strong> A readable summary, GeoPackage and maximum-depth raster are created for each retained option.</li>
 <li><strong>Publish results.</strong> The result files are passed to the workflow’s publishing stage.</li>
 </ol>
-<div class="note"><strong>Why the final count may exceed 25</strong><p>The optimisation budget is checked between generations. With <code>MAX_SIMS = 25</code>, the current generation may finish with a slightly higher number of unique simulations; this is expected behaviour rather than evidence that the parameter was ignored.</p></div>
+<div class="note"><strong>Why the final count may exceed 25</strong><p>The optimisation budget is checked between generations, and the population grows as the search proceeds. With <code>MAX_SIMS = 25</code>, the count typically runs 6, 11, 16 and then 26 or more; the generation that passes 25 is always completed. This is expected behaviour rather than evidence that the parameter was ignored.</p></div>
 <div class="prose"><p>Use DAFNI’s official instructions for <a href="https://docs.secure.dafni.rl.ac.uk/docs/How%20to/how-to-execute-the-model-in-dafni">executing a model or workflow</a> if you need assistance locating the execution controls or instance logs.</p><p>A successful instance does not necessarily mean the results have already appeared in the Data catalogue. The workflow’s publishing stage must also complete successfully before the output dataset can be retrieved through the catalogue.</p></div>
 </section>
 
@@ -2059,34 +2097,38 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Message or symptom</th><th scope="col">Likely cause</th><th scope="col">Corrective action</th></tr></thead>
 <tbody>
-<tr><td>A model parameter could not be read as a number</td><td>A numeric parameter contains text, is empty or uses an invalid format.</td><td>Review every page of the parameter table.</td></tr>
-<tr><td>Unknown objective or objective setup fails</td><td>An unsupported objective was entered.</td><td>Use exactly <code>hydrograph</code> or <code>risk</code>.</td></tr>
-<tr><td>Unknown binary coding method</td><td>The coding value is incorrect.</td><td>Set <code>BINARY_CODING</code> to <code>gray</code>.</td></tr>
+<tr><td>N model parameter(s) could not be used</td><td>Each listed parameter is empty, is not a number, is a decimal where a whole number is required, or is a maintenance period or design life below one year.</td><td>Correct every parameter named in the message.</td></tr>
+<tr><td>… was entered as 12.5 years … rounded up to 13 (warning)</td><td>A maintenance period or design life was entered as a fraction of a year.</td><td>No action is needed if the rounded value is acceptable; otherwise enter a whole number.</td></tr>
+<tr><td>The Flood Objective '…' is not recognised</td><td>An unsupported objective was entered.</td><td>Use <code>hydrograph</code> or <code>risk</code>.</td></tr>
+<tr><td>The Flood Objective 'damages' is not yet available</td><td>The damages objective was selected.</td><td>Use <code>hydrograph</code> or <code>risk</code>.</td></tr>
+<tr><td>The Binary Coding Scheme '…' is not available</td><td>The Binary Coding Scheme parameter was changed from its default.</td><td>Restore the default, <code>gray</code>.</td></tr>
 <tr><td>No interventions are represented</td><td>Candidate datasets are absent or their configured counts are zero.</td><td>Check dataslot assignments and preprocessing summaries.</td></tr>
 <tr><td>Costs are unexpectedly zero</td><td>No active candidates exist or applicable unit costs are zero.</td><td>Review candidate counts and cost parameters.</td></tr>
 <tr><td>Run ends much sooner than expected</td><td>Validation limits or convergence settings were retained.</td><td>Check <code>MIN_SIMS</code>, <code>MAX_SIMS</code>, <code>LAG</code> and <code>DELTA_K</code>.</td></tr>
 <tr><td>Run is much larger than intended</td><td>Production settings or an excessive front size were selected.</td><td>Review <code>MAX_FRONT_SIZE</code> and <code>MAX_SIMS</code>.</td></tr>
 </tbody>
 </table></div>
-<div class="note warn"><strong>Unsupported objective</strong><p>The <code>damages</code> objective must not currently be selected because automated building-type assignment is not yet available.</p></div>
+<div class="note warn"><strong>Unsupported objective</strong><p>The <code>damages</code> objective is refused at start-up because automated building-type assignment is not yet available. Objective and parameter problems are all reported within seconds of the run starting, before any input data is processed.</p></div>
 <div class="prose"><p>Parameters for an unused intervention type may remain present in the model definition, but they do not activate that intervention. Activation is determined by the supplied candidate data and relevant configuration.</p></div>
 </section>
 
 <section class="subsection" id="rainfall-problems">
 <p class="label">Time-series inputs</p>
 <h3>10.5 Rainfall-data problems</h3>
-<h4 class="minor-heading">No valid rainfall data found</h4>
+<h4 class="minor-heading">No rainfall data was found in the 'rainfall' data slot</h4>
 <ul class="checks">
-<li>Confirm that the rainfall dataset is assigned to the rainfall dataslot.</li><li>Check that the selected version contains the expected file.</li><li>Use a <code>.csv</code> or <code>.txt</code> rainfall file.</li><li>Confirm that any ZIP archive is valid and contains the rainfall file.</li><li>Check that the file is not empty.</li>
+<li>Confirm that the rainfall dataset is assigned to the rainfall dataslot.</li><li>Check that the selected version contains the expected file.</li><li>Use a <code>.csv</code> or <code>.txt</code> rainfall file.</li><li>Confirm that any ZIP archive is valid and contains the rainfall file. A damaged archive is skipped with a warning.</li><li>Check that the file is not empty; a file that cannot be read at all gives “Failed to read CSV: …”, and a CSV holding only a header gives “CSV contains no rainfall data rows.”</li>
 </ul>
-<h4 class="minor-heading">CSV must contain exactly two columns</h4>
+<h4 class="minor-heading">CSV must contain exactly two columns. Found N.</h4>
 <div class="prose"><p>The CSV reader expects time in seconds followed by rainfall intensity. Remove index columns, explanatory text and additional metadata columns from the data table.</p></div>
-<h4 class="minor-heading">Non-numeric or missing data</h4>
-<div class="prose"><p>Every time and intensity value must be numeric. Check for blank cells, unit text inside data rows, thousands separators, repeated header rows, spreadsheet error values and trailing notes below the time series.</p></div>
-<h4 class="minor-heading">Time steps must strictly increase</h4>
-<div class="prose"><p>Sort the rainfall rows into chronological order and remove duplicate time values. A zero starting time is acceptable, but every subsequent value must be greater than the previous one.</p></div>
-<h4 class="minor-heading">Rainfall intensity cannot be negative</h4>
+<h4 class="minor-heading">CSV contains non-numeric data or missing values.</h4>
+<div class="prose"><p>Every time and intensity value must be numeric. Check for blank cells, unit text inside data rows, thousands separators, repeated header rows, spreadsheet error values and trailing notes below the time series. A single header row is accepted and ignored.</p></div>
+<h4 class="minor-heading">Time series error: time steps must strictly increase.</h4>
+<div class="prose"><p>Sort the rainfall rows into chronological order and remove duplicate time values. The series may start at any time, including zero, but every subsequent value must be greater than the previous one.</p></div>
+<h4 class="minor-heading">Physical constraint error: rainfall intensity cannot be negative.</h4>
 <div class="prose"><p>Correct negative values in the source rainfall series. Do not use negative values to represent abstraction or drainage.</p></div>
+<h4 class="minor-heading">Errors in a CityCAT rainfall text file</h4>
+<div class="prose"><p>A <code>.txt</code> file reports “Text file is too short to contain standard CityCAT headers.”, “Line 4 must be an integer defining the data point count.”, “Header defines N points, but M rows exist.” or “Data row N is malformed” when it departs from the layout in Section 3.3.</p></div>
 <h4 class="minor-heading">The rainfall event is cut short</h4>
 <div class="prose"><p>Check that <code>SIM_RUNTIME</code> covers the full rainfall series and any required post-rainfall drainage period. Also verify that <code>OUTPUT_FREQUENCY</code> provides sufficient temporal resolution for the intended objective.</p></div>
 <div class="note"><strong>Return period does not repair rainfall</strong><p>Changing <code>RETURN_PERIOD</code> only changes the event label recorded by the workflow. It does not alter the supplied hyetograph or correct its units.</p></div>
@@ -2095,20 +2137,20 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <section class="subsection" id="spatial-problems">
 <p class="label">Terrain and topography</p>
 <h3>10.6 DEM, topography and spatial-data problems</h3>
-<h4 class="minor-heading">No valid DEM data found</h4>
-<div class="prose"><p>Check that the terrain dataset contains one or more valid GeoTIFF files and that any archive can be opened. Confirm that the raster covers the complete study area, contains embedded CRS information, has a valid resolution and transform, uses numeric elevation values and can be opened independently in GIS software.</p><p>The preprocessing stage can mosaic multiple GeoTIFFs, but the tiles must be mutually compatible.</p></div>
+<h4 class="minor-heading">No terrain model was found in the 'dem' data slot</h4>
+<div class="prose"><p>Check that the terrain dataset contains one or more valid <code>.tif</code> or <code>.asc</code> rasters (the <code>.tiff</code> extension is not recognised, and an <code>.asc</code> needs its <code>.prj</code>) and that any archive can be opened. A raster that cannot be opened gives “Failed to open/mosaic GeoTIFFs”, whatever its format. Confirm that the raster covers the complete study area, contains embedded CRS information, has a valid resolution and transform, uses numeric elevation values and can be opened independently in GIS software.</p><p>The preprocessing stage can mosaic multiple rasters, but the tiles must be mutually compatible and share one coordinate system.</p></div>
 <h4 class="minor-heading">Spatial integrity cannot be verified</h4>
-<div class="prose"><p>A raster or vector file has no coordinate-reference metadata. Restore the correct CRS rather than merely assigning EPSG:27700 without confirming the coordinates actually use British National Grid.</p><p>For Shapefiles, ensure the <code>.prj</code> file is included. For GeoPackages and GeoTIFFs, confirm that CRS metadata is embedded in the file.</p></div>
+<div class="prose"><p>A raster or vector file has no coordinate-reference metadata. Rasters report “Spatial integrity cannot be verified without embedded coordinate metadata.” and vector files “Spatial integrity failure: '&lt;file&gt;' lacks coordinate reference metadata.” Inputs in any other defined coordinate system are reprojected to British National Grid automatically. Restore the correct CRS rather than merely assigning EPSG:27700 without confirming the coordinates actually use British National Grid.</p><p>For Shapefiles, ensure the <code>.prj</code> file is included. For GeoPackages and GeoTIFFs, confirm that CRS metadata is embedded in the file.</p></div>
 <h4 class="minor-heading">DEM no-data value is undefined or incorrect</h4>
-<div class="prose"><p>CityCAT’s processed ASCII DEM requires the no-data value <code>-99999</code>. If this error occurs after preprocessing, inspect the DEM stored in <code>alg_inputs.zip</code> or <code>CityCAT_setup.zip</code> and check whether the source raster’s no-data metadata was interpreted correctly.</p></div>
-<h4 class="minor-heading">No valid topography data found</h4>
-<div class="prose"><p>Confirm that the topography dataset is assigned to the correct dataslot, uses a supported vector format, contains at least one valid feature, is not hidden inside a damaged archive and overlaps the DEM domain.</p></div>
+<div class="prose"><p>CityCAT’s processed ASCII DEM requires the no-data value <code>-99999</code>, which preprocessing always sets. This error (“DEM no-data value is undefined in the file header” or “must be equal to -99,999”) therefore normally arises only in a multistage run whose <code>CityCAT_setup.zip</code> has been altered. Restore the unaltered archive from the previous stage.</p></div>
+<h4 class="minor-heading">No topography data was found in the 'topography' data slot</h4>
+<div class="prose"><p>Confirm that the topography dataset is assigned to the correct dataslot, uses a supported vector format, contains at least one valid feature (“Input topography vector data is empty.” otherwise), is not hidden inside a damaged archive and overlaps the DEM domain.</p></div>
 <h4 class="minor-heading">Required topography attributes are missing</h4>
-<div class="prose"><p>Check the field names described in Section 3, including the required <code>theme</code>, <code>descriptivegroup</code> and, where applicable, <code>make</code> information. Export processes may truncate, rename or remove fields.</p></div>
+<div class="prose"><p>This problem, and topography that yields no buildings or no permeable areas, is reported in <code>execution_log.txt</code> only as “The run stopped because of an unexpected problem”. Open <code>diagnostic_log.txt</code> and read the error at the end of its trace, for example “Required attributes ('theme', 'descriptivegroup') missing from input topography data.”, “The 'make' attribute is required …”, “Topography contains no valid building polygons.” or “No valid permeable areas derived from inputs.” Then check the field names described in Section 3.5. Export processes may truncate, rename or remove fields.</p></div>
 <h4 class="minor-heading">The boundary or exclusion zone cannot be used</h4>
 <div class="prose"><p>Check that the dataset contains usable polygons and has the correct coordinate system. A Study Area Boundary must overlap the terrain. An Exclusion Zone must contain polygons overlapping the modelled area: wholly external polygons are ignored, crossing polygons are kept whole, and an entirely external dataset stops the run. If it protects the whole modelled area, the log warns that excavation is prevented everywhere. Correct the dataset or leave its slot empty only if the default behaviour is appropriate.</p></div>
 <h4 class="minor-heading">An intervention or outlet lies outside the modelled area</h4>
-<div class="prose"><p>The log names the affected features and describes how far they extend outside. Inspect them alongside the boundary and terrain in GIS. Correct the location, enlarge the boundary with adequate terrain coverage, or remove the feature if it is not part of the study. Include offline-basin inlet points and the complete outlet lines in this check.</p></div>
+<div class="prose"><p>The run stops with “N of the M &lt;feature type&gt; footprints you supplied are not wholly inside the modelled area”, followed by up to five of the affected features. Each is listed as, for example, “detention basin 2: 12.000 m2 of 300.000 m2 (4.0%) lies outside, centred on (x, y)” or “lies wholly outside”, and the message ends with the extent of the modelled area. Offline basins are named by <code>basin_id</code> and outlet lines by <code>outlet_id</code>. Inspect them alongside the boundary and terrain in GIS. Correct the location, enlarge the boundary with adequate terrain coverage, or remove the feature if it is not part of the study. Include offline-basin inlet points and the complete outlet lines in this check.</p></div>
 <h4 class="minor-heading">Features appear displaced</h4>
 <div class="prose"><p>The most likely cause is an incorrect or missing CRS. Compare the bounds of the DEM, topography, outlets and candidate interventions. All layers should overlap when displayed using their declared coordinate systems.</p></div>
 </section>
@@ -2119,27 +2161,27 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Message or symptom</th><th scope="col">Interpretation</th><th scope="col">Action</th></tr></thead>
 <tbody>
-<tr><td>Candidate feature is out of bounds</td><td>Its representative location lies outside the DEM extent.</td><td>Correct or remove the geometry.</td></tr>
-<tr><td>An engineered terrain feature overlaps protected ground</td><td>Between 50% and 75% of its footprint was excluded.</td><td>Review the feature; the run continues using the remaining area.</td></tr>
-<tr><td>An engineered terrain feature has critical overlap</td><td>More than 75% of its footprint was removed.</td><td>Redesign or remove the invalid feature.</td></tr>
-<tr><td>Offline basin and inlet cannot be matched</td><td><code>basin_id</code> and <code>target_id</code> do not correspond.</td><td>Correct the identifiers and republish the dataset.</td></tr>
+<tr><td>… footprints you supplied are not wholly inside the modelled area</td><td>An intervention, inlet, supplied paving polygon or outlet line extends beyond the boundary, or beyond the terrain extent when no boundary is supplied. The run stops.</td><td>Correct or remove the listed geometry, or enlarge the boundary; see Section 10.6.</td></tr>
+<tr><td>Engineered terrain feature N shares 50–75% of its grid cells with engineered terrain features listed before it (warning)</td><td>Features overlap; their height changes are added together where they do.</td><td>Check for duplicated or overlapping features.</td></tr>
+<tr><td>Engineered terrain feature N shares more than 75% of its grid cells …</td><td>The feature largely duplicates an earlier one. The run stops.</td><td>Remove the duplicate or redraw the features so that they do not overlap.</td></tr>
+<tr><td>Offline detention basin input data is unusable</td><td>A basin or inlet has no identifier, two different features share one, or a <code>basin_id</code> or <code>target_id</code> has no partner. The message lists the values at fault.</td><td>Give every basin exactly one inlet with a matching identifier and republish the dataset.</td></tr>
 <tr><td>Detention basin cannot be represented</td><td>The largest circle that fits in the drawn area is smaller than one DTM cell.</td><td>Enlarge the footprint or provide a point with suitable radius limits.</td></tr>
 <tr><td>Offline basin has no admissible radius</td><td>The basin cannot fit while leaving the required clearance to its inlet.</td><td>Enlarge or move the basin, or move the inlet farther away.</td></tr>
 <tr><td>Offline basin cannot be fed by gravity within its depth budget</td><td>The sink cut needed to reach the pipe outfall consumes the drawn <code>h_max</code>, leaving no storage depth above <code>h_min</code>.</td><td>Increase the basin’s allowed depth, move the inlet to lower ground or resite the basin.</td></tr>
 <tr><td>Resuming would change an offline basin’s <code>h_max</code></td><td>The recalculated pipe sink differs from the depth budget used for archived simulations.</td><td>Check that the original terrain, exclusion zone, inlet drop and minimum pipe gradient were preserved. Start a separate study if the design assumptions have changed.</td></tr>
 <tr><td>Offline basin has no recorded pipe length</td><td>An active connection cannot be costed from its stored feature table.</td><td>Inspect the previous-stage package and logs; restore the complete matching <code>CityCAT_setup.zip</code> and <code>alg_inputs.zip</code> from one instance.</td></tr>
-<tr><td>Outlet cell is outside the DEM</td><td>The outlet geometry does not lie within the hydraulic domain.</td><td>Move the outlet or extend the DEM.</td></tr>
-<tr><td>No intersecting outlet cells were found</td><td>The line does not cross usable model cells.</td><td>Inspect its position, CRS and length.</td></tr>
-<tr><td>Minimum and maximum costs are both zero</td><td>No active, costed candidates were created.</td><td>Review candidate inputs and cost parameters.</td></tr>
+<tr><td>The outlet data holds no lines</td><td>The outlet file contains no LineString or MultiLineString features.</td><td>Supply outlet lines drawn across the flow paths.</td></tr>
+<tr><td>Each outlet line must have its own outlet_id, but outlet_id … is used by more than one line</td><td>Two or more lines share an identifier. Lines without an <code>outlet_id</code> are numbered by file position from 0.</td><td>Merge lines forming one outlet into a single MultiLineString, or give each its own <code>outlet_id</code>.</td></tr>
+<tr><td>Outlet cell at (x, y) for outlet ID n is outside the DEM extent</td><td>The processed outlet does not lie within the hydraulic domain; normally caught earlier by the modelled-area check.</td><td>Move the outlet or extend the DEM.</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>For the <code>hydrograph</code> objective, a valid outlet dataset is mandatory. Outlet features must use LineString or MultiLineString geometry and intersect the model grid.</p><p>Warnings about out-of-bounds candidates should not be ignored simply because the workflow continues. They indicate that the optimisation may be searching a different design space from the one intended.</p></div>
+<div class="prose"><p>For the <code>hydrograph</code> objective, a valid outlet dataset is mandatory. Outlet features must use LineString or MultiLineString geometry, must not share an <code>outlet_id</code>, and must lie wholly inside the modelled area. Discharge is summed over every cell a line crosses, whatever the flow direction, so draw outlet lines across the flow rather than along it.</p></div>
 </section>
 
 <section class="subsection" id="citycat-problems">
 <p class="label">Hydrodynamic model</p>
 <h3>10.8 CityCAT execution problems</h3>
-<div class="prose"><p>If CityCAT exits with an error, identify whether the failure affects the do-nothing baseline, the do-everything strategy, every candidate simulation or only a particular intervention combination.</p><p>A failure during the baseline usually indicates a problem with the fundamental model setup. A failure limited to certain candidates more strongly suggests an invalid intervention modification or numerical instability introduced by that strategy.</p><p>Inspect <code>CityCAT_setup.zip</code> where available and check:</p></div>
+<div class="prose"><p>If CityCAT exits with an error, identify whether the failure affects the do-nothing baseline, the do-everything strategy, every candidate simulation or only a particular intervention combination.</p><p>A failure during the baseline usually indicates a problem with the fundamental model setup. A failure limited to certain candidates more strongly suggests an invalid intervention modification or numerical instability introduced by that strategy.</p><p>A CityCAT failure appears in <code>execution_log.txt</code> as “The run stopped because of an unexpected problem”, and the failing command is recorded in <code>diagnostic_log.txt</code>. A failed run does not produce <code>CityCAT_setup.zip</code>. Use the diagnostic log to identify the failing design. If the prepared model itself needs inspecting, run the runtime estimator: when its two boundary simulations succeed, its <code>CityCAT_setup.zip</code> holds the prepared model. Check:</p></div>
 <ul class="checks">
 <li>The processed DEM and its no-data value.</li><li>The generated rainfall files.</li><li>The simulation duration and output interval.</li><li>Topography and surface files.</li><li>Outlet locations.</li><li>Generated intervention modifications.</li><li>The CityCAT configuration file.</li><li>The last output written before termination.</li>
 </ul>
@@ -2154,7 +2196,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <p class="label">Search behaviour</p>
 <h3>10.9 Unexpected optimisation behaviour</h3>
 <h4 class="minor-heading">The run exceeds <code>MAX_SIMS</code></h4>
-<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. A generation already in progress may take the unique-simulation count slightly beyond the requested limit. This is expected and does not mean the setting was ignored.</p></div>
+<div class="prose"><p><code>MAX_SIMS</code> is checked between generations. A generation already in progress may take the unique-simulation count beyond the requested limit by up to one generation’s worth of new designs. This is expected and does not mean the setting was ignored.</p></div>
 <h4 class="minor-heading">The final archive contains fewer members than <code>MAX_FRONT_SIZE</code></h4>
 <div class="prose"><p><code>MAX_FRONT_SIZE</code> is a capacity or target size, not a guarantee that the final archive will contain that many distinct non-dominated solutions. Dominance, ε-box membership and duplicate simulations can produce a smaller archive.</p></div>
 <h4 class="minor-heading">Two identical configurations were evaluated only once</h4>
@@ -2166,7 +2208,7 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <h4 class="minor-heading">The runtime-estimator boundary points are very close together</h4>
 <div class="prose"><p>The configured interventions create little modelled improvement between doing nothing and installing everything at its largest setting. Before committing to an optimisation, check whether the intervention locations and ranges can influence the flooded area or outlets, whether the event is appropriate and whether the selected objective measures the intended benefit.</p></div>
 <h4 class="minor-heading">Do-everything performs worse than do-nothing</h4>
-<div class="prose"><p>This is not automatically a software error. An intervention can redirect water or adversely affect a particular objective location. However, a large or implausible deterioration warrants checking the DEM modifications, feature depths, outlet placement and objective calculation.</p></div>
+<div class="prose"><p>The optimisation stops at initialisation with “The 'do nothing' baseline scenario has a lower risk … than the 'do everything' scenario”, because the search space assumes that installing everything is at least as effective as doing nothing. The result may be genuine hydraulic behaviour, since an intervention can redirect water or adversely affect a particular objective location. Revise the interventions or objective before optimising, and check the DEM modifications, feature depths, outlet placement and objective calculation. The runtime estimator reports both values without stopping, which makes it a convenient way to investigate.</p></div>
 <h4 class="minor-heading">A repeated run produces a different Pareto front</h4>
 <div class="prose"><p>The ε-MOEA search is stochastic. Two runs can produce different archives even when their inputs and parameters match. Use repeated runs and adequate simulation budgets when solution stability matters.</p></div>
 </section>
@@ -2192,17 +2234,17 @@ newcastle-rp30-hydrograph-high-storage-r01</code>
 <h4 class="minor-heading">Can I run the tool without intervention datasets?</h4>
 <div class="prose"><p>Rainfall, DEM and topography are always required. Individual intervention types can be omitted if they are not part of the study, but at least one valid, costed candidate is needed for a meaningful optimisation. A <code>hydrograph</code> run additionally requires outlet lines.</p></div>
 <h4 class="minor-heading">Can I use the damages objective?</h4>
-<div class="prose"><p>No. Automated building-type assignment is not yet integrated, so the damages objective should not be selected.</p></div>
+<div class="prose"><p>No. Automated building-type assignment is not yet integrated, so selecting the damages objective stops the run at start-up with an explanation.</p></div>
 <h4 class="minor-heading">Can I restart a stopped optimisation?</h4>
-<div class="prose"><p>Yes, through <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong>, provided the source instance produced a valid parameter file, processed-input archive and CityCAT-setup archive. Select the complete previous-stage output dataset directly, or supply all three components as individual datasets from the same instance, then set the new stage’s additional simulation limits. If the source failed before creating a complete package, begin a corrected new instance.</p></div>
+<div class="prose"><p>No. A stopped or failed instance does not write the processed-input and CityCAT-setup archives, so it cannot be continued; begin a corrected new instance. A run that completed normally can be extended through <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong>. Select the complete previous-stage output dataset directly, or supply all three components as individual datasets from the same instance, then set the new stage’s additional simulation limits. To keep individual runs short, use a modest <code>MAX_SIMS</code> and extend the search in further stages.</p></div>
 <h4 class="minor-heading">Does a successful DAFNI status prove the study is valid?</h4>
 <div class="prose"><p>No. It confirms workflow execution, not hydrodynamic validity, adequate optimisation convergence or decision suitability. Complete the validation checks in Sections 5, 6 and 9.</p></div>
 <h4 class="minor-heading">Why does technical documentation sometimes call the second objective “risk”?</h4>
-<div class="prose"><p><code>Risk</code> remains an internal generic variable name in parts of the code. User-facing plots, summaries and current solution tables name the selected measure explicitly. For a hydrograph run, it is the combined peak flow at the outlets in m³/s.</p></div>
+<div class="prose"><p>“Risk” is used as a generic name for the flood objective in some technical messages and in the diagnostic log, whichever objective is selected. User-facing plots, summaries and current solution tables name the selected measure explicitly. For a hydrograph run, it is the combined peak flow at the outlets in m³/s.</p></div>
 <h4 class="minor-heading">Can I compare solutions from different rainfall events on one Pareto front?</h4>
 <div class="prose"><p>Not directly. Different events represent different objective contexts. Report their fronts separately and compare common strategies using a controlled scenario or robustness analysis.</p></div>
-<h4 class="minor-heading">Should I edit the container code to correct my study?</h4>
-<div class="prose"><p>Ordinary DAFNI users should correct study inputs and parameter sets. Changes to the container or workflow definition create a different software version and require separate testing, documentation and deployment.</p></div>
+<h4 class="minor-heading">Are CityCAT and the optimisation tool open source?</h4>
+<div class="prose"><p>No. Neither CityCAT nor the optimisation tool is open source, and their code is not available to users. Studies are configured entirely through the input datasets and parameter sets described in this guide. For questions about the tool’s methods or behaviour, contact the model contact listed in Section 12.2.</p></div>
 <h4 class="minor-heading">Should I delete a failed instance?</h4>
 <div class="prose"><p>Retain it until the problem is understood and the evidence has been recorded. Its identifier, logs and configuration may be essential for support or audit.</p></div>
 </section>
@@ -2244,8 +2286,8 @@ Does the problem recur in the quick-start validation run?:</code>
 <p class="label">Section 11 · Technical reference</p>
 <h2>The deployed interface, data flow and output contract</h2>
 <hr class="rule">
-<div class="prose"><p>This section is intended as a lookup resource. For step-by-step instructions, use Sections 3–10. Parameter defaults and economic assumptions are documented in Section 4.</p><p>The reference describes the current implementation inspected for this guide. Always record the DAFNI workflow and model versions used for a study because later deployments may change the interface or behaviour.</p></div>
-<div class="note"><strong>Reference hierarchy</strong><p>The DAFNI catalogue records which model version was executed. The parameter set records the values supplied to it. The model definition describes the visible interface, while the container implementation determines the effective runtime behaviour. Preserve all four elements when documenting a study.</p></div>
+<div class="prose"><p>This section is intended as a lookup resource. For step-by-step instructions, use Sections 3–10. Parameter defaults and economic assumptions are documented in Section 4.</p><p>The reference describes the deployed implementation described by this guide. Always record the DAFNI workflow and model versions used for a study because later deployments may change the interface or behaviour.</p></div>
+<div class="note"><strong>Reference hierarchy</strong><p>The DAFNI catalogue records which model version was executed. The parameter set records the values supplied to it. The model definition describes the visible interface. Preserve all three when documenting a study, together with this guide’s edition.</p></div>
 <section class="subsection" id="model-runtime">
 <p class="label">Implementation identity</p>
 <h3>11.1 Model identity and runtime</h3>
@@ -2253,16 +2295,15 @@ Does the problem recur in the quick-start validation run?:</code>
 <thead><tr><th scope="col">Property</th><th scope="col">Current implementation</th></tr></thead>
 <tbody>
 <tr><td>DAFNI workflows</td><td><strong>CityCAT Optimisation Tool</strong>; <strong>CityCAT Optimisation Tool: Runtime Estimator</strong>; <strong>CityCAT Optimisation Tool: Multistage Optimisation</strong></td></tr>
-<tr><td>DAFNI model display names</td><td><code>CityCAT_Optimisation</code>; <code>CityCAT Runtime Estimator</code>; <code>CityCAT Multistage Optimisation</code></td></tr>
+<tr><td>DAFNI model display names</td><td><code>CityCAT Optimisation</code>; <code>CityCAT Runtime Estimator</code>; <code>CityCAT Multistage Optimisation</code></td></tr>
 <tr><td>Internal model names</td><td><code>citycat-opti</code>; <code>citycat-runtime-estimator</code>; <code>citycat-multistage-optimisation</code></td></tr>
 <tr><td>Publisher</td><td>Newcastle University</td></tr>
 <tr><td>Model-definition API</td><td><code>v1beta3</code></td></tr>
-<tr><td>Principal entry points</td><td><code>run.py</code> through <code>entrypoint.sh</code>; <code>run_benchmark.py</code>; <code>multistage_run.py</code></td></tr>
 <tr><td>Optimisation method</td><td>ε-dominance multi-objective evolutionary algorithm</td></tr>
 <tr><td>Hydrodynamic model</td><td>CityCAT</td></tr>
 <tr><td>Python version</td><td>3.11</td></tr>
 <tr><td>Spatial reference used internally</td><td>British National Grid, EPSG:27700</td></tr>
-<tr><td>Binary coding</td><td>Gray coding by default; standard and unary coding are also supported</td></tr>
+<tr><td>Genotype encoding</td><td>Gray coding</td></tr>
 <tr><td>CityCAT configuration number</td><td>6</td></tr>
 </tbody>
 </table></div>
@@ -2308,7 +2349,7 @@ Objective, cost and final reporting
        │
        ▼
 /data/outputs/</pre>
-<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. The runtime estimator simulates and retains both boundary designs before compressing the prepared algorithm inputs and CityCAT working directory. The direct route creates the same continuation archives after its search. The multistage route restores those archives, preserves completed features’ excavation-volume and offline pipe-length tables while rebuilding the algorithm, verifies offline depth budgets, recovers valid simulations and produces a fresh package for another stage if required.</p></div>
+<div class="prose"><p>The source datasets are not modified. Standardised copies and generated model files are written into the output workspace. The runtime estimator simulates and retains both boundary designs before compressing the prepared algorithm inputs and CityCAT working directory. The direct route creates the same continuation archives after its search, provided the run completes normally. The multistage route restores those archives, preserves completed features’ excavation-volume and offline pipe-length tables while rebuilding the algorithm, verifies offline depth budgets, recovers valid simulations and produces a fresh package for another stage if required.</p></div>
 </section>
 
 <section class="subsection" id="dataslot-reference">
@@ -2327,14 +2368,24 @@ Objective, cost and final reporting
 <tr><td>Green-Area Interventions</td><td><code>inputs/green-areas</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
 <tr><td>Detention Basins</td><td><code>inputs/flexible-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
 <tr><td>Engineered Terrain Features</td><td><code>inputs/fixed-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
-<tr><td>Offline Detention Basins</td><td><code>inputs/offline-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
+<tr><td>Offline Detention Basins</td><td><code>inputs/offline-features</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention; every basin paired with exactly one inlet</td></tr>
 <tr><td>Rain Gardens</td><td><code>inputs/rain-gardens</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Optional candidate intervention</td></tr>
-<tr><td>Outlet Lines</td><td><code>inputs/outlets</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Required when <code>OBJECTIVE=hydrograph</code></td></tr>
+<tr><td>Outlet Lines</td><td><code>inputs/outlets</code></td><td><code>.shp</code>, <code>.gpkg</code></td><td>Required when <code>OBJECTIVE=hydrograph</code>; no shared <code>outlet_id</code></td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>ZIP archives can be supplied to these dataslots. The model extracts archives and searches their directories recursively for accepted files.</p></div>
-<div class="note warn"><strong>Model-definition discrepancy</strong><p>The current DAFNI model definition marks all dataslots as optional. The runtime nevertheless enforces rainfall, DEM and topography, and conditionally enforces outlet lines for the hydrograph objective. Follow the effective requirements in this guide.</p></div>
-<div class="prose"><p>If several valid rainfall files are found, the first discovered file is used. Publish each rainfall event as a separate, clearly identified dataset rather than placing several events in one dataslot.</p></div>
+<div class="prose"><p>The Runtime Estimator uses the same dataslots as the CityCAT Optimisation Tool. Multistage Optimisation uses its own four:</p></div>
+<div class="table-wrap"><table class="guide-table">
+<thead><tr><th scope="col">Multistage dataslot</th><th scope="col">Container path</th><th scope="col">Contents</th></tr></thead>
+<tbody>
+<tr><td>Complete Previous-Stage Output</td><td><code>inputs/previous-run</code></td><td>The whole output dataset of one previous stage</td></tr>
+<tr><td>Optimisation Parameters</td><td><code>inputs/parameters</code></td><td>Exactly one parameter <code>.txt</code> file</td></tr>
+<tr><td>Processed Algorithm Inputs</td><td><code>inputs/alg-inputs</code></td><td>Exactly one <code>.zip</code>: <code>alg_inputs.zip</code></td></tr>
+<tr><td>CityCAT Setup and Simulations</td><td><code>inputs/citycat-setup</code></td><td>Exactly one <code>.zip</code>: <code>CityCAT_setup.zip</code></td></tr>
+</tbody>
+</table></div>
+<div class="prose"><p>ZIP archives can be supplied to the study dataslots. Archives at the top level of a dataset are extracted and searched recursively, together with the dataset itself, for accepted files; archives inside archives are not opened, and geodatabases are read in place.</p></div>
+<div class="note warn"><strong>Model-definition discrepancy</strong><p>The current DAFNI model definitions mark all dataslots as optional. The runtime nevertheless enforces rainfall, DEM and topography, conditionally enforces outlet lines for the hydrograph objective, and requires exactly one multistage input mode. Follow the effective requirements in this guide.</p></div>
+<div class="prose"><p>If several <code>.csv</code> or <code>.txt</code> files are found in the rainfall dataslot, one is used without warning and in no guaranteed order. Publish each rainfall event as a separate, clearly identified dataset containing only that file.</p></div>
 </section>
 
 <section class="subsection" id="input-schema-reference">
@@ -2345,9 +2396,9 @@ Objective, cost and final reporting
 <thead><tr><th scope="col">Column position</th><th scope="col">Content</th><th scope="col">Unit</th></tr></thead>
 <tbody><tr><td>1</td><td>Elapsed time</td><td>seconds</td></tr><tr><td>2</td><td>Rainfall intensity</td><td>millimetres per hour</td></tr></tbody>
 </table></div>
-<div class="prose"><p>The table must contain exactly two columns. Values must be numeric and complete, time must increase strictly and rainfall intensity cannot be negative.</p><p>A <code>.txt</code> rainfall file must use the CityCAT rainfall structure described in Section 3. The declared number of data points must equal the number of data rows.</p></div>
+<div class="prose"><p>The table must contain exactly two columns, with an optional header row. Values must be numeric and complete, time must increase strictly and rainfall intensity cannot be negative.</p><p>A <code>.txt</code> rainfall file must use the CityCAT rainfall structure described in Section 3.3, with intensity in metres per second. The declared number of data points must equal the number of data rows.</p></div>
 <h4 class="minor-heading">DEM</h4>
-<ul class="checks"><li>Use GeoTIFF or ESRI ASCII format.</li><li>Include valid CRS information.</li><li>Use metres for elevation.</li><li>Cover all interventions and outlets.</li><li>Provide compatible metadata when several tiles are supplied.</li></ul>
+<ul class="checks"><li>Use GeoTIFF (<code>.tif</code>) or ESRI ASCII (<code>.asc</code> with its <code>.prj</code>) format.</li><li>Include valid CRS information.</li><li>Use metres for elevation.</li><li>Cover all interventions and outlets.</li><li>Provide compatible metadata when several tiles are supplied.</li></ul>
 <div class="prose"><p>Processing creates a British National Grid ESRI ASCII raster with a no-data value of <code>-99999</code>.</p></div>
 <h4 class="minor-heading">Topography</h4>
 <div class="prose"><p>Required attribute names are interpreted case-insensitively after conversion to lower case.</p></div>
@@ -2361,10 +2412,10 @@ Objective, cost and final reporting
 <thead><tr><th scope="col">Feature type</th><th scope="col">Principal fields</th></tr></thead>
 <tbody>
 <tr><td>Detention basin</td><td>Optional <code>h_min</code>, <code>h_max</code>, <code>h_len</code>, <code>r_min</code>, <code>r_max</code> and <code>dx</code>/<code>dy</code> movement limits</td></tr>
-<tr><td>Engineered terrain feature</td><td>Optional <code>h_min</code>, <code>h_max</code> and <code>h_len</code> controls</td></tr>
-<tr><td>Offline basin</td><td><code>basin_id</code> and optional depth and radius controls; translation is disabled</td></tr>
-<tr><td>Offline inlet</td><td><code>target_id</code> matching the associated basin’s <code>basin_id</code></td></tr>
-<tr><td>Outlet</td><td><code>outlet_id</code> recommended</td></tr>
+<tr><td>Engineered terrain feature</td><td>Optional <code>h_min</code>, <code>h_max</code> and <code>h_len</code> controls; negative values lower the ground</td></tr>
+<tr><td>Offline basin</td><td>Unique <code>basin_id</code> and optional depth and radius controls; translation is disabled</td></tr>
+<tr><td>Offline inlet</td><td>Unique <code>target_id</code> matching exactly one basin’s <code>basin_id</code></td></tr>
+<tr><td>Outlet</td><td>Optional whole-number <code>outlet_id</code>, unique across lines; otherwise numbered by file position from 0</td></tr>
 <tr><td>Zonal interventions</td><td>Geometry defines the selectable area</td></tr>
 </tbody>
 </table></div>
@@ -2374,14 +2425,13 @@ Objective, cost and final reporting
 <section class="subsection" id="parameter-family-index">
 <p class="label">Configuration dictionary</p>
 <h3>11.5 Parameter-family index</h3>
-<div class="prose"><p>All DAFNI parameters are passed into the container as text environment variables and converted to their required numeric types at startup. Invalid values therefore commonly produce an environment-variable casting error.</p></div>
+<div class="prose"><p>All DAFNI parameters are passed into the container as text environment variables and checked at start-up, before any data is processed. Every value that cannot be used is reported at once in a single message, “N model parameter(s) could not be used”, naming each parameter and the value supplied. Whole numbers may be written with a decimal point, such as <code>10.0</code>. Maintenance periods and design lives are rounded up to whole years, with a warning.</p></div>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Family</th><th scope="col">Parameters</th><th scope="col">Reference</th></tr></thead>
 <tbody>
 <tr><td>Study definition</td><td><code>OBJECTIVE</code>, <code>RETURN_PERIOD</code>, <code>BUFFER_VAL</code></td><td>Section 4.3</td></tr>
 <tr><td>Pavement zoning</td><td><code>NO_ZONES</code>, <code>PAV_MIN_ZONE_AREA</code></td><td>Section 4.4</td></tr>
 <tr><td>Optimisation</td><td><code>LAG</code>, <code>DELTA_K</code>, <code>MAX_FRONT_SIZE</code>, <code>MIN_SIMS</code>, <code>MAX_SIMS</code>, <code>LOG_LEVEL</code></td><td>Section 4.5</td></tr>
-<tr><td>Coding</td><td><code>BINARY_CODING</code></td><td>Section 4.5</td></tr>
 <tr><td>Simulation timing</td><td><code>SIM_RUNTIME</code>, <code>OUTPUT_FREQUENCY</code></td><td>Section 4.6</td></tr>
 <tr><td>Surface roughness</td><td><code>IMPERMEABLE_ROUGHNESS</code>, <code>PERMEABLE_ROUGHNESS</code></td><td>Section 4.6</td></tr>
 <tr><td>Baseline infiltration</td><td><code>PERMEABLE_HYDRAULIC_CONDUCTIVITY</code> and other <code>PERMEABLE_...</code> fields</td><td>Section 4.7</td></tr>
@@ -2392,7 +2442,7 @@ Objective, cost and final reporting
 <tr><td>Intervention costs</td><td><code>GA_...</code>, <code>FEAT_...</code>, <code>FF_...</code>, <code>OFF_...</code>, <code>PAV_...</code>, <code>RG_...</code></td><td>Section 4.8</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>Most parameters are displayed as required by DAFNI, including parameters associated with intervention types that are absent from a study. Retain their defaults when they are not applicable. <code>LOG_LEVEL</code> is optional and defaults to <code>INFO</code>.</p><p><code>BINARY_CODING</code> is read by the current main execution path. Gray coding is recommended; standard and unary coding are available for intentional method comparisons.</p></div>
+<div class="prose"><p>Most parameters are displayed as required by DAFNI, including parameters associated with intervention types that are absent from a study. Retain their defaults when they are not applicable. <code>LOG_LEVEL</code> is optional and defaults to <code>INFO</code>. The Binary Coding Scheme parameter must be left at its default.</p></div>
 </section>
 
 <section class="subsection" id="objective-definitions">
@@ -2406,20 +2456,20 @@ Objective, cost and final reporting
   + professional fees
   + discounted annual and scheduled maintenance
   + discounted end-of-life decommissioning</pre>
-<div class="prose"><p>The final strategy cost is the sum of the active zonal and feature costs. The calculation is a comparative whole-life estimate rather than a detailed project quotation.</p></div>
+<div class="prose"><p>Construction is charged in year 0 without discounting. Annual and scheduled maintenance are charged in years 1 to the design life, discounted by (1 + <code>DISCOUNT_RATE</code>)<sup>year</sup>, with major maintenance replacing minor maintenance in years when both fall due. Decommissioning, charged as <code>DECOMM_RATE</code> × the construction cost before fees, falls in the final year. Offline inlet connections use their own design, overhead, contingency and decommissioning rates instead of <code>PROFESSIONAL_FEES</code> and <code>DECOMM_RATE</code>. Engineered terrain features are costed on the magnitude of their height change.</p><p>The final strategy cost is the sum of the active zonal and feature costs. The calculation is a comparative whole-life estimate rather than a detailed project quotation.</p></div>
 <h4 class="minor-heading">Hydrograph objective</h4>
 <div class="prose"><p>For each supplied outlet, the tool derives a discharge time series and identifies its maximum discharge. The objective is:</p></div>
 <pre class="code-block" aria-label="Hydrograph objective formula">hydrograph objective =
     sum of the maximum discharge at each outlet</pre>
 <div class="prose"><p>The objective is minimised and its correct unit is m³/s. This is an absolute summed peak value, not the reduction from baseline. Any improvement must be calculated by comparing a solution with the relevant baseline result.</p></div>
 <h4 class="minor-heading">Property-risk objective</h4>
-<div class="prose"><p>The <code>risk</code> objective minimises the number of buildings classified as high risk within the exposure-analysis buffer. For each building, the analysis calculates mean and 90th-percentile flood depth from intersecting model cells. A building is assigned to the current high-risk class when:</p></div>
+<div class="prose"><p>The <code>risk</code> objective minimises the number of buildings classified as high risk within the exposure-analysis buffer. For each building, the analysis calculates the mean and 90th-percentile of the maximum flood depth over the model cells whose centres fall within the building footprint buffered by <code>BUFFER_VAL</code> per cent of a grid cell. A building is assigned to the current high-risk class when:</p></div>
 <pre class="code-block" aria-label="Property-risk classification">mean depth ≥ 0.10 m
 and
 90th-percentile depth ≥ 0.30 m</pre>
 <div class="prose"><p>The reported objective is the count of buildings meeting both conditions.</p></div>
 <h4 class="minor-heading">Damages objective</h4>
-<div class="prose"><p>The codebase contains damage-calculation components, but <code>damages</code> is not available in the deployed user workflow because building types cannot yet be assigned automatically and reliably.</p></div>
+<div class="prose"><p>A damage calculation has been developed, but <code>damages</code> is not available in the deployed workflows because building types cannot yet be assigned automatically and reliably. Selecting it stops the run at start-up.</p></div>
 </section>
 <section class="subsection" id="genotype-identifiers">
 <p class="label">Encoded strategies</p>
@@ -2431,7 +2481,7 @@ Green-area interventions
 Detention basins
 Engineered terrain features
 Offline detention basins</pre>
-<div class="prose"><p>Zonal interventions use one decision bit per candidate or zone. Detention basins, engineered terrain features and offline basins use groups of bits to encode their design characteristics.</p><p>The coding selected through <code>BINARY_CODING</code> is used consistently when simulating, plotting and exporting a strategy. With the recommended Gray coding, adjacent encoded values generally differ by one bit, reducing disruptive jumps between neighbouring design values during mutation.</p><p>Each unique genotype also receives a simulation-directory identifier:</p></div>
+<div class="prose"><p>Zonal interventions use one decision bit per candidate or zone. Detention basins, engineered terrain features and offline basins use groups of bits to encode their design characteristics.</p><p>Multi-bit characteristics use Gray coding, applied consistently when simulating, plotting and exporting a strategy. Adjacent encoded values differ by one bit, reducing disruptive jumps between neighbouring design values during mutation.</p><p>Each unique genotype also receives a simulation-directory identifier:</p></div>
 <code class="code-block">Sim_&lt;base36 identifier&gt;</code>
 <div class="prose"><p>The identifier is produced by interpreting the complete bit string as an integer, adding one and encoding the result in base 36. It shortens directory names for large search spaces.</p></div>
 <div class="note"><strong>Identifier meaning</strong><p>A <code>Sim_...</code> identifier is a storage key for an evaluated genotype. It is not a solution rank, generation number or measure of performance. Final <code>Solution N</code> numbers are assigned separately when the retained archive is reported.</p></div>
@@ -2449,14 +2499,19 @@ Offline detention basins</pre>
 <tr><td>Objective vector</td><td>The cost and flood-performance values belonging to one strategy</td></tr>
 <tr><td>Dominance</td><td>One solution is no worse in either objective and better in at least one</td></tr>
 <tr><td>ε-box</td><td>A discretised region of normalised objective space</td></tr>
-<tr><td>Generation</td><td>One cycle of selection, recombination, mutation and evaluation</td></tr>
+<tr><td>Generation</td><td>One cycle in which every population member produces an offspring by selection, recombination and mutation, new designs are evaluated, and the archive, ε-grid and population size are updated; reported as a “Round” in the execution log</td></tr>
 <tr><td>Unique simulation</td><td>A genotype for which a new CityCAT execution was required</td></tr>
 <tr><td>Hypervolume</td><td>A measure of the objective space covered by the archive</td></tr>
 <tr><td>Convergence</td><td>Insufficient archive improvement over the configured lag</td></tr>
 <tr><td>Pareto front</td><td>The set of non-dominated cost–performance trade-offs</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The run can terminate when either improvement remains within <code>DELTA_K</code> over the configured <code>LAG</code>, after <code>MIN_SIMS</code> has been reached, or the unique-simulation count reaches the <code>MAX_SIMS</code> stopping threshold.</p><p>Stopping is checked between generations, so the final count can exceed <code>MAX_SIMS</code> slightly.</p></div>
+<div class="prose"><p>The run terminates when either of two conditions is met:</p></div>
+<pre class="code-block" aria-label="Stopping conditions">|HV(now) − HV(LAG generations earlier)| ≤ DELTA_K × (1 / MAX_FRONT_SIZE)²
+    and unique simulations ≥ MIN_SIMS
+or
+unique simulations ≥ MAX_SIMS</pre>
+<div class="prose"><p>HV is the hypervolume of the archive in objective space normalised to the current cost and flood-performance bounds, so the threshold is <code>DELTA_K</code> of the area of one ε-box. Once convergence has been detected it is not reset, so a run that converges before <code>MIN_SIMS</code> stops as soon as that minimum is reached.</p><p>Stopping is checked between generations, so the final count can exceed <code>MAX_SIMS</code> by up to one generation’s worth of new designs. The generation that initialises the search is always completed, evaluating six designs.</p></div>
 </section>
 
 <section class="subsection" id="output-reference">
@@ -2475,7 +2530,7 @@ Offline detention basins</pre>
 <tr><td><code>solution_exports/</code></td><td>One readable and GIS-ready package for each final solution</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The bundled CityCAT executable is removed before <code>CityCAT_setup.zip</code> is created.</p></div>
+<div class="prose"><p>The bundled CityCAT executable is removed before <code>CityCAT_setup.zip</code> is created. Both archives are written only when a run completes normally.</p></div>
 <h4 class="minor-heading">Workflow-specific and continuation outputs</h4>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Path</th><th scope="col">Workflow and purpose</th></tr></thead>
@@ -2484,7 +2539,7 @@ Offline detention basins</pre>
 <tr><td><code>plots/Boundary_Hydrographs.png</code></td><td>Runtime Estimator: per-outlet comparison and peak check for both boundary designs; produced only for <code>hydrograph</code></td></tr>
 <tr><td><code>runtime_estimate.csv</code></td><td>Runtime Estimator: timing components and measured cost–performance span for quick review</td></tr>
 <tr><td><code>runtime_estimate.json</code></td><td>Runtime Estimator: full objective bounds, runtime components, assumptions and outlet-peak information</td></tr>
-<tr><td><code>parameters.txt</code></td><td>Runtime Estimator and Multistage Optimisation: top-level continuation copy of the archived configuration</td></tr>
+<tr><td><code>parameters.txt</code></td><td>Runtime Estimator: top-level continuation copy of the configuration. The CityCAT Optimisation Tool and Multistage Optimisation record theirs as <code>summary/parameters.txt</code>.</td></tr>
 <tr><td><code>alg_inputs.zip</code></td><td>All routes: processed inputs retained for subsequent optimisation stages</td></tr>
 <tr><td><code>CityCAT_setup.zip</code></td><td>All routes: prepared model, mesh and retained simulations for continuation; the estimator retains both boundary designs</td></tr>
 </tbody>
@@ -2492,12 +2547,12 @@ Offline detention basins</pre>
 <div class="prose"><p>For a measured hydrograph run, both reports include <code>flood_peak_captured</code>: <code>yes</code> or <code>no</code> in the CSV, and <code>true</code> or <code>false</code> in the JSON. If false, the JSON also names <code>outlets_still_rising</code> and includes a <code>flood_peak_warning</code>. Outputs are still packaged, but the estimate must not be used until the simulation duration is corrected and the estimator rerun.</p></div>
 <h4 class="minor-heading">How the runtime estimate is formed</h4>
 <div class="prose"><p>The estimator reads timings from CityCAT’s own log. The first boundary simulation includes the one-off mesh generation. The second reuses the mesh, while the time between the simulations captures objective analysis and preparation of the next design. The first design is charged at its measured duration; each later design is estimated from the between-design processing, second-run preparation and the average hydrodynamic duration of the two boundary simulations.</p><p>The total assumes that the optimisation reaches <code>MAX_SIMS</code>. It excludes evolutionary selection and recombination, plots produced during the search, final maps and GIS exports, and DAFNI queue time.</p></div>
-<div class="note warn"><strong>Use exactly one input mode</strong><p>For a multistage hand-off, select the complete previous-stage output dataset or supply the parameter file and two archives as three individual inputs. Never populate both modes. Individual filenames may vary, but each dataslot must contain exactly one file with the required extension.</p></div>
+<div class="note warn"><strong>Use exactly one input mode</strong><p>For a multistage hand-off, select the complete previous-stage output dataset or supply the parameter file and two archives as three individual inputs. Never populate both modes. In the individual mode, filenames may vary, but each dataslot must contain exactly one file with the required extension. In the complete-dataset mode, the parameter file is recognised by its contents, but the archives are recognised by name first, so keep <code>alg_inputs.zip</code> and <code>CityCAT_setup.zip</code> under their original names.</p></div>
 <h4 class="minor-heading">Plot files</h4>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">File</th><th scope="col">Content</th></tr></thead>
 <tbody>
-<tr><td><code>Generation N.png</code></td><td>Population, archive and objective-space state for generation N</td></tr>
+<tr><td><code>Generation N.png</code></td><td>Archive (current best solutions) and ε-grid for generation N; the population is shown only as a count in the title</td></tr>
 <tr><td><code>Final Solutions.png</code></td><td>Final retained cost–performance solutions</td></tr>
 <tr><td><code>Solution N.png</code></td><td>Flood map and selected interventions, with hydrographs for the <code>hydrograph</code> objective or building-risk categories for the <code>risk</code> objective when exposure data are available</td></tr>
 <tr><td><code>Objective_Space.png</code></td><td>Runtime-estimator boundary designs and shaded objective range</td></tr>
@@ -2546,16 +2601,16 @@ Offline detention basins</pre>
 <div class="table-wrap"><table class="guide-table">
 <thead><tr><th scope="col">Column pattern</th><th scope="col">Meaning</th></tr></thead>
 <tbody>
-<tr><td><code>FeatureID&lt;n&gt;</code></td><td>Encoded detention-basin configuration</td></tr>
-<tr><td><code>h&lt;n&gt;</code></td><td>Decoded height or depth</td></tr>
-<tr><td><code>r&lt;n&gt;</code></td><td>Decoded basin radius</td></tr>
-<tr><td><code>dx&lt;n&gt;</code>, <code>dy&lt;n&gt;</code></td><td>Decoded spatial translation</td></tr>
-<tr><td><code>FeatureID_F&lt;n&gt;</code></td><td>Encoded engineered-terrain-feature configuration</td></tr>
-<tr><td><code>h_F&lt;n&gt;</code></td><td>Engineered terrain elevation change</td></tr>
-<tr><td><code>FeatureID_OFF&lt;n&gt;</code></td><td>Encoded offline-detention-basin configuration</td></tr>
+<tr><td><code>FeatureID&lt;n&gt;</code></td><td>Detention-basin configuration as step indices, for example <code>h3r0x29y10</code>: depth step 3, radius step 0 and movement steps 29 and 10</td></tr>
+<tr><td><code>h&lt;n&gt;</code></td><td>Decoded depth (m) of a detention or offline basin</td></tr>
+<tr><td><code>r&lt;n&gt;</code></td><td>Decoded basin radius (m)</td></tr>
+<tr><td><code>dx&lt;n&gt;</code>, <code>dy&lt;n&gt;</code></td><td>Decoded translation (m) in the basin’s local frame; always 0 for offline basins</td></tr>
+<tr><td><code>FeatureID_F&lt;n&gt;</code></td><td>Engineered-terrain-feature configuration as a step index, for example <code>h2</code></td></tr>
+<tr><td><code>h_F&lt;n&gt;</code></td><td>Engineered terrain elevation change (m): positive raised, negative lowered</td></tr>
+<tr><td><code>FeatureID_OFF&lt;n&gt;</code></td><td>Offline-detention-basin configuration as step indices, followed by its own <code>h&lt;n&gt;</code>, <code>r&lt;n&gt;</code>, <code>dx&lt;n&gt;</code> and <code>dy&lt;n&gt;</code> columns</td></tr>
 </tbody>
 </table></div>
-<div class="prose"><p>The table width therefore changes between studies. Analyse columns by their headers rather than assuming a fixed position.</p></div>
+<div class="prose"><p>The index <code>n</code> runs across all feature types in genotype order, starting from 0. With two detention basins, two engineered terrain features and one offline basin, the feature columns are <code>FeatureID0</code>, <code>FeatureID1</code>, <code>FeatureID_F2</code>, <code>FeatureID_F3</code> and <code>FeatureID_OFF4</code>. <code>Summary.txt</code> numbers features from 1 within each type instead. The table width therefore changes between studies. Analyse columns by their headers rather than assuming a fixed position.</p></div>
 </section>
 
 <section class="subsection" id="technical-glossary">
@@ -2569,7 +2624,7 @@ Offline detention basins</pre>
 <tr><td>Chromosome or genotype</td><td>The encoded representation of one complete intervention strategy</td></tr>
 <tr><td>Dataslot</td><td>A named DAFNI input through which a dataset is mounted into the container</td></tr>
 <tr><td>Decision variable</td><td>An encoded intervention choice or characteristic</td></tr>
-<tr><td>Do-everything</td><td>Boundary strategy selecting the maximum encoded intervention configuration</td></tr>
+<tr><td>Do-everything</td><td>Boundary strategy selecting every zonal candidate and giving each feature its largest depth, height change and radius, with basins at their drawn positions</td></tr>
 <tr><td>DAFNI instance</td><td>One execution of a particular workflow configuration</td></tr>
 <tr><td>Non-dominated</td><td>Not outperformed by another solution in all optimisation objectives</td></tr>
 <tr><td>Parameter set</td><td>The DAFNI record containing model parameters and dataset assignments</td></tr>
